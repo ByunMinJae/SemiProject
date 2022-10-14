@@ -13,6 +13,7 @@ $(document).ready(function() {
 		
 // 	})
 	
+	
 	$("#btnReqAuth").click(function() {
 		console.log("#btnReqAuth 클릭")
 		
