@@ -48,7 +48,7 @@ public class JavaMail {
 			String msgText = "<h1>코딩산악회 아이디 찾기 인증번호</h1>";
 			msgText += "<hr><br>";
 			msgText += "<p>인증번호 - " + userfind.getAuthno() + "</p>";
-			System.out.println(userfind.getAuthno());
+//			System.out.println(userfind.getAuthno());
 //			message.setText("test");
 			message.setContent(msgText, "text/html; charset=utf-8");
 			
