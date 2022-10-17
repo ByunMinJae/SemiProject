@@ -34,12 +34,12 @@ $(document).ready(function() {
 		} else {
 			
 			$.ajax({
-				type: "post"					//요청 메소드
-				, url: "/find/findid"			//요청 URL
-				, data: {						//요청 파라미터
+				type: "post"					
+				, url: "/find/findid"			
+				, data: {						
 					userEmail: $("#userEmail").val()
 				}
-				, dataType: "html"				//응답 데이터 형식
+				, dataType: "html"				
 				, success: function( res ) {
 					console.log("AJAX 성공")
 					
@@ -52,6 +52,7 @@ $(document).ready(function() {
 		
 	})
 	
+	/* 생년월일 Select Box 만들기 */
 	var now = new Date();
     var year = now.getFullYear();
     var mon = (now.getMonth() + 1) > 9 ? ''+(now.getMonth() + 1) : '0'+(now.getMonth() + 1); 
@@ -78,6 +79,7 @@ $(document).ready(function() {
 	
 })
 
+/*  */
 function hiddenForm() {
 	
 	if ( $("#hid1").is(":checked") ) {
@@ -197,7 +199,7 @@ select {
 
 <!-- sms 인증 -->
 <div id="smsType" >
-	<input type="text" id="userName" name="userName" placeholder="성명"><br>
+	<input type="text" id="userName" name="userName" placeholder="이름"><br>
 	
 	<div id="selectBox">
 		생년월일
@@ -206,7 +208,7 @@ select {
 		<select name="dd" id="day"></select>일
 	</div>
 	
-	<input type="text" id="userPhone" name="userPhone" placeholder="전화번호" style="margin-top: 11px;"><br>
+	<input type="text" id="userPhone" name="userPhone" placeholder="휴대전화(-없이)" style="margin-top: 11px;"><br>
 	<button class="btnReqAuth">인증 요청</button>
 	<div id="resSms"></div>
 </div>
