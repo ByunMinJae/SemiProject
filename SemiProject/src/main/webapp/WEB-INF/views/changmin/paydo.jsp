@@ -1,14 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
 <style type="text/css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/css.jsp">
+</style>
+
+<style type="text/css">
+body {
+	position:relative;
+	top: 170px;
+}
 </style>
 
 <script>
@@ -36,15 +39,15 @@
             rsp.error_msg;
             
         }
+        $(".paydo").submit();
     });
     
+
 
 
 	
 	
 </script>
-</head>
-<body style="position: relative; top: 150px;">
 
 <h1>주문 / 결제</h1>
 <hr>
@@ -79,9 +82,7 @@
 	<hr>
 	<br>
 	
-	<button id="paydo" onclick()="">결제하기</button>
+	<button id="paydo">결제하기</button>
 	<br><br><br>
 </form>
-</body>
 <%@ include file="../layout/footer.jsp" %>
-</html>
