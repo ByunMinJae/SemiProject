@@ -1,6 +1,13 @@
+<%@page import="changmin.dto.User"%>
+<%@page import="java.util.List"%>
+<%@page import="changmin.dto.Pay"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp"%>
+<% Pay pay = (Pay) request.getAttribute("pay"); %>
+<%-- <% List<User> list = (List<User>) request.getAttribute("list"); %> --%>
+<% User loginUser = (User) request.getAttribute("loginUser"); %>
+
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
 <style type="text/css">
@@ -54,9 +61,9 @@ body {
 <!-- 구매자 정보 -->
 <form class="pay">
 	<div id="buy_info">
-		<p>이름 : </p>
-		<p>이메일 : </p>
-		<p>휴대폰 번호 : </p>
+		<p>이름 : <%=loginUser.getUsername() %></p>
+		<p>이메일 : <%=loginUser.getEmail() %></p>
+		<p>휴대폰 번호 : <%=loginUser.getPhone() %> </p>
 	</div>
 	<br>
 	<hr>

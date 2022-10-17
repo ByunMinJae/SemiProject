@@ -9,7 +9,6 @@ public class Pay {
 	private Date paydate;
 	
 	public Pay() {
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
