@@ -4,8 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import changmin.dao.face.PayDoDao;
 import changmin.dto.User;
@@ -16,8 +16,10 @@ public class PayDoDaoImpl implements PayDoDao{
 	private PreparedStatement ps = null;
 	private ResultSet rs;
 	
+
+
 	@Override
-	public List<User> selectUser(Connection conn) {
+	public User getUserInfo(Connection conn, int userno) {
 		System.out.println("DAO - 시작");
 		
 		String sql = "";
@@ -25,16 +27,19 @@ public class PayDoDaoImpl implements PayDoDao{
 		sql+="SELECT";
 		sql+="	userno, username, address, phone, email ";
 		sql+="	FROM user_info";
+		sql+="	WHERE userno=?";
 
-		List<User> list = new ArrayList<>();
-		
+		User user = new User();
+
 		try {
 			ps = conn.prepareStatement(sql);
 			
+			ps.setInt(1, userno);
+			 
 			rs = ps.executeQuery();
 			
+			
 			while( rs.next() ) {
-				User user = new User();
 				
 				user.setUserno( rs.getInt("userno"));
 				user.setUsername( rs.getString("username"));
@@ -42,7 +47,6 @@ public class PayDoDaoImpl implements PayDoDao{
 				user.setPhone( rs.getString("phone"));
 				user.setEmail( rs.getString("email"));
 				
-				list.add(user);
 				
 			}
 		} catch (SQLException e) {
@@ -53,7 +57,8 @@ public class PayDoDaoImpl implements PayDoDao{
 		}
 		
 		System.out.println("DAO - 끝");
-		return list;
+		
+		return user;
 	}
 
 }

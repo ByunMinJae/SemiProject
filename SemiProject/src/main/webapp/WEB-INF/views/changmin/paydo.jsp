@@ -14,66 +14,104 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/css.jsp">
 </style>
 
+<script>
+	var IMP = window.iMP;
+	
+	IMP.init('imp88224386');
+	   IMP.request_pay({
+	   	pg : "kakaopay", 
+	       pay_method : 'card',
+	       merchant_uid : 'merchant_' + new Date().getTime(),
+	       name : '결제',
+	       amount : 주문개수,
+	       buyer_email : '구매자 이메일',
+	       buyer_name : '구매자 이름',
+	       buyer_tel : '구매자 번호',
+	       buyer_addr : '구매자 주소',
+	       buyer_postcode : '구매자 주소',
+	       m_redirect_url : 'redirect url'
+	   }, function(rsp) {
+	       if ( rsp.success ) {
+		       $(".paydo").submit();
+	           var msg = '결제가 완료되었습니다.';
+	           location.href='결제완료후 갈 url';
+	       } else {
+	           var msg = '결제에 실패하였습니다.';
+	           rsp.error_msg;
+	           
+	       }
+	   });
+   
+	
+	
+</script>
+
 <style type="text/css">
 body {
 	position:relative;
 	top: 170px;
 }
+
+button {
+	margin: 10px;
+}
+
+#paydo {
+	text-align: center;
+	width: 300px;
+	height: 50px;
+}
+
+.info {
+	background-color: #EEEEEE;
+	border-collapse: collapse;
+	padding: 10px;
+}
+
+.info_detail{
+}
+
+#pay {
+	display:table;
+	width:90%;
+	border:1px solid #DDD;
+}
+
 </style>
 
-<script>
-	var IMP = window.iMP;
 
-	IMP.init('imp88224386');
-    IMP.request_pay({
-    	pg : "kakaopay", 
-        pay_method : 'card',
-        merchant_uid : 'merchant_' + new Date().getTime(),
-        name : '결제',
-        amount : 주문개수,
-        buyer_email : '구매자 이메일',
-        buyer_name : '구매자 이름',
-        buyer_tel : '구매자 번호',
-        buyer_addr : '구매자 주소',
-        buyer_postcode : '구매자 주소',
-        m_redirect_url : 'redirect url'
-    }, function(rsp) {
-        if ( rsp.success ) {
-            var msg = '결제가 완료되었습니다.';
-            location.href='결제완료후 갈 url';
-        } else {
-            var msg = '결제에 실패하였습니다.';
-            rsp.error_msg;
-            
-        }
-        $(".paydo").submit();
-    });
-    
-
-
-
-	
-	
-</script>
 
 <h1>주문 / 결제</h1>
 <hr>
 <!-- 구매자 정보 -->
 <form class="pay">
 	<div id="buy_info">
-		<p>이름 : <%=loginUser.getUsername() %></p>
-		<p>이메일 : <%=loginUser.getEmail() %></p>
-		<p>휴대폰 번호 : <%=loginUser.getPhone() %> </p>
+		<h3>구매자 정보</h3>
+		
+		<span class="info">&ensp;&emsp;&emsp;&emsp;이름</span>
+		<span class="info_detail"> <%=loginUser.getUsername() %></span><br><br>
+		
+		<span class="info">&ensp;&emsp;&emsp;이메일</span>
+		<span class="info_detail"> <%=loginUser.getEmail() %></span><br><br>
+		
+		<span class="info">&ensp;&emsp;&emsp;연락처</span>
+		<span class="info_detail"> <%=loginUser.getPhone() %> </span><br>
 	</div>
 	<br>
 	<hr>
-	<br>
 	
 	<!-- 받는사람 정보 -->
 	<div id="receivcer_info">
-		<p>이름 : </p>
-		<p>배송주소 : </p>
-		<p>연락처 : </p>
+		<h3>받는사람 정보<button>배송지 변경</button></h3>
+		
+		<span class="info">&ensp;&emsp;&emsp;&emsp;이름</span>
+		<span class="info_detail"><%=loginUser.getUsername() %></span><br><br>
+		 
+		<span class="info">&ensp;&emsp;배송주소</span>
+		<span class="info_detail"><%=loginUser.getAddress() %></span><br><br>
+		
+		<span class="info">&ensp;&emsp;&emsp;연락처</span>
+		<span class="info_detail"><%=loginUser.getPhone() %></span><br>
 	</div>
 	<br>
 	<hr>

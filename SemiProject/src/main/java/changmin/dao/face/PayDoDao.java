@@ -1,12 +1,11 @@
 package changmin.dao.face;
 
 import java.sql.Connection;
-import java.util.List;
 
 import changmin.dto.User;
 
 public interface PayDoDao {
 
-	public List<User> selectUser(Connection conn);
+	public User getUserInfo(Connection conn, int userno);
 
 }

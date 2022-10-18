@@ -15,16 +15,18 @@ import common.JDBCTemplate;
 public class PayDoServiceImpl implements PayDoService{
 
 	private PayDoDao payDoDao = new PayDoDaoImpl();
+
+
 	@Override
-	public List<User> userList() {
+	public User getUserInfo(int userno) {
 		Connection conn = JDBCTemplate.getConnection();
 		
-		return payDoDao.selectUser(conn);
+		return payDoDao.getUserInfo(conn, userno);
 	}
+
 
 	@Override
 	public Pay paydo(HttpServletRequest req) {
-
 		return null;
 	}
 
