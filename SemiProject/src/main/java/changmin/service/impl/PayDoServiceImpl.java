@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import changmin.dao.face.PayDoDao;
 import changmin.dao.impl.PayDoDaoImpl;
 import changmin.dto.Pay;
+import changmin.dto.Product;
 import changmin.dto.User;
 import changmin.service.face.PayDoService;
 import common.JDBCTemplate;
@@ -28,6 +29,14 @@ public class PayDoServiceImpl implements PayDoService{
 	@Override
 	public Pay paydo(HttpServletRequest req) {
 		return null;
+	}
+
+
+	@Override
+	public Product getProdInfo(int prodno) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		return payDoDao.getProdInfo(conn, prodno);
 	}
 
 

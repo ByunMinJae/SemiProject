@@ -1,3 +1,4 @@
+<%@page import="changmin.dto.Product"%>
 <%@page import="changmin.dto.User"%>
 <%@page import="java.util.List"%>
 <%@page import="changmin.dto.Pay"%>
@@ -7,6 +8,7 @@
 <% Pay pay = (Pay) request.getAttribute("pay"); %>
 <%-- <% List<User> list = (List<User>) request.getAttribute("list"); %> --%>
 <% User loginUser = (User) request.getAttribute("loginUser"); %>
+<% Product prod = (Product) request.getAttribute("prod"); %>
 
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
@@ -14,35 +16,38 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/css.jsp">
 </style>
 
-<script>
-	var IMP = window.iMP;
-	
-	IMP.init('imp88224386');
-	   IMP.request_pay({
-	   	pg : "kakaopay", 
-	       pay_method : 'card',
-	       merchant_uid : 'merchant_' + new Date().getTime(),
-	       name : '결제',
-	       amount : 주문개수,
-	       buyer_email : '구매자 이메일',
-	       buyer_name : '구매자 이름',
-	       buyer_tel : '구매자 번호',
-	       buyer_addr : '구매자 주소',
-	       buyer_postcode : '구매자 주소',
-	       m_redirect_url : 'redirect url'
-	   }, function(rsp) {
-	       if ( rsp.success ) {
-		       $(".paydo").submit();
-	           var msg = '결제가 완료되었습니다.';
-	           location.href='결제완료후 갈 url';
-	       } else {
-	           var msg = '결제에 실패하였습니다.';
-	           rsp.error_msg;
-	           
-	       }
-	   });
-   
-	
+<script> 
+//카카오 결제 API
+var IMP = window.IMP; // 생략가능
+IMP.init('imp88224386');  // 가맹점 식별코드
+// IMP.request_pay(param, callback) 결제창 호출
+function payDo(){
+    IMP.request_pay({ // param
+
+    pg: "html5_inicis",
+    pay_method: "card",
+    merchant_uid: "ORD20180131-0000011",
+    name: "노르웨이 회전 의자",
+    amount: 1,
+    buyer_email: "gildong@gmail.com",
+    buyer_name: "홍길동",
+    buyer_tel: "010-4242-4242",
+    buyer_addr: "서울특별시 강남구 신사동",
+    buyer_postcode: "01181"
+	}, function(rsp) { //callback
+	    if ( rsp.success ) {
+	      console.log('빌링키 발급 성공', rsp)
+	      //빌링키 발급이 완료되었으므로, 서버에 결제 요청
+	      alert('예약 결제가 완료되었습니다!');
+	    } else {
+	      var msg = '결제에 실패하였습니다.\n';
+	      msg += rsp.error_msg;
+	      alert(msg);
+	      return false;
+	    }
+	});
+}	
+	 
 	
 </script>
 
@@ -118,16 +123,17 @@ button {
 	<br>
 	<!-- 결제정보 -->
 	<div id="pay_info">
-		<p>상품 가격 : </p>
+		<p>상품 가격 : <%=prod.getProdprice() %> </p>
 		<p>결제 방법 : </p>
 		<button>신용카드</button>
 		<button>계좌이체</button>	
-	</div>
+	</div> 
 	<br>
 	<hr>
 	<br>
-	
-	<button id="paydo">결제하기</button>
-	<br><br><br>
+	<div>
+		<button id="paydo" type="button" onclick="payDo();">결제하기</button>
+	</div>
 </form>
+<br><br><br>
 <%@ include file="../layout/footer.jsp" %>
