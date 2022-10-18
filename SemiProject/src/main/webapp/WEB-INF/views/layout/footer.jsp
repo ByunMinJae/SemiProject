@@ -6,7 +6,7 @@
 
 
 
-<footer id="footer">
+<footer id="footer" class="footer">
 	<div class="footer-wrap">
 		<p class="footerlist-wrap">
 			<span class="footerlist">

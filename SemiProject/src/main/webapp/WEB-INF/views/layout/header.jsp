@@ -30,7 +30,7 @@ li {
 	overflow: hidden;
 }
 
-#header {
+.header {
 	position: fixed;
     width: 100%;
     min-width: 1048px;
@@ -49,24 +49,21 @@ li {
 	margin: 0 auto;
 }
 
-.container-wrap {
+.container {
 	position: relative;
-	top: 0;
+	top: 150px;
+	margin-bottom: 150px;
+}
+
+.container-wrap {
 	width: 75%;
 	margin: 0 auto;
 }
 
-.footer-wrap {
-	position: relative;
-	bottom: 0;
-	width: 75%;
-	margin: 0 auto;
-}
 
 .top-wrap {
 	position: absolute;
 	top: 0;
-	right: 10px;
 	width: 100%;
 	height: 38px;
 	background:  #E1FFB1;
@@ -117,31 +114,37 @@ li {
 }
 
 .header-menu .hmenulist {
+	display: block;
 	margin-left: 500px;
 	width: 50%;
+	height: auto:
 } 
 
 .header-menu .hmenulist li {
 	float: left;
 	margin-left: 70px;
-	padding-bottom: 20px;
 	font-size: x-large;
 	font-style: bold;
 }
 
 .header-menu .hmenulist li a {
+	width: 100px;
 	color: black;
 	text-decoration: none;
 }
 
-.header-menu .weather {
+.header-menu .weather-wrap {
+	display: inline-block;
 	float: left;
-	margin-left: 200px;
+	margin-left: 5%;
+}
+
+.header-menu .weather-wrap .weather {
+	position: relative;
 }
 
 
-#footer {
-	position: relative;
+.footer {
     width: 100%;
     min-width: 1048px;
 	bottom: 0;
@@ -150,6 +153,13 @@ li {
 	border-top: 1px solid #ddd;
 	background: #fff;
 	z-index: 99;
+}
+
+.footer-wrap {
+	position: relative;
+	bottom: 0;
+	width: 75%;
+	margin: 0 auto;
 }
 
 .footerlist-wrap {
@@ -184,7 +194,7 @@ li {
 </head>
 <body>
 <div id="wrapper">
-<header id="header">
+<header id="header" class="header">
 	<div class="top-wrap">
 		<div class="header-wrap">
 			<div class="top">
@@ -203,19 +213,16 @@ li {
 		<div class="header-menu">
 			<ul class="hmenulist">
 				<li><a href="<%-- 게시판 목록 링크--%>">게시판</a></li>
-				<li><a href="<%-- 게시판 목록 링크--%>">등산 도우미</a></li>
-				<li><a href="<%-- 게시판 목록 링크--%>">굿즈샵</a></li>
+				<li><a href="<%-- 등산 도우미 링크--%>">등산 도우미</a></li>
+				<li><a href="<%-- 굿즈샵 링크--%>">굿즈샵</a></li>
 			</ul>
-				<div class="weather">
-					<ul>
+				<div class="weather-wrap">
+					<ul class="">
 						<li><a href="<%-- 날씨 위젯 --%>" id="wethwidget">날씨위젯</a>					
 					</ul>
-				</div> <!-- .weather end -->
+				</div> <!-- .weather-wrap end -->
 		</div> <!-- .header-menu end -->
 	</div> <!-- .header-wrap end -->
-	
-	
-	
 </header>	
 
 <div class="container">
