@@ -22,7 +22,7 @@
 }
 
 h3 {
-	background: #ccf5cc;
+	background: #C7F2A4;
     width: 304px;
     display: inline-block;
 	margin: 50px 0 30px;

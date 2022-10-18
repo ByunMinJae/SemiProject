@@ -1,42 +1,23 @@
-package minjae.dto;
+package donghyun.dto;
 
 import java.util.Date;
 
 public class UserInfo {
-	
 	private int userno;
-	private String userid;
-	private String userpw;
+	private String userid; 
+	private String userpw; 
 	private String username;
-	private String gender;
+	private String gender; 
 	private String address;
-	private String phone;
-	private Date birth;
-	private String email;
-	private String nick;
+	private String phone ;
+	private Date birth ;
+	private String email ;
+	private String nick ;
 	private Date joinday;
 	private Date userupdate;
-	private int gradeno;
+	private int gradeno ;
 	
 	public UserInfo() {}
-
-	public UserInfo(int userno, String userid, String userpw, String username, String gender, String address,
-			String phone, Date birth, String email, String nick, Date joinday, Date userupdate, int gradeno) {
-		super();
-		this.userno = userno;
-		this.userid = userid;
-		this.userpw = userpw;
-		this.username = username;
-		this.gender = gender;
-		this.address = address;
-		this.phone = phone;
-		this.birth = birth;
-		this.email = email;
-		this.nick = nick;
-		this.joinday = joinday;
-		this.userupdate = userupdate;
-		this.gradeno = gradeno;
-	}
 
 	@Override
 	public String toString() {
@@ -149,5 +130,6 @@ public class UserInfo {
 	public void setGradeno(int gradeno) {
 		this.gradeno = gradeno;
 	}
+	
 	
 }

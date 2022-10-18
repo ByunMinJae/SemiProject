@@ -201,7 +201,14 @@ li {
 				<ul class="toplist">
 					<li><a href="<%-- 마이페이지 링크 --%>" class="">마이페이지</a></li>
 					<li><a href="<%-- 회원가입 링크 --%>">회원가입</a></li>
-					<li><a href="<%-- 로그인 링크 --%>">로그인</a></li>
+					<%if ( session.getAttribute("userid") == null){ %>
+					<li><a href="/cmc/login">로그인</a></li>
+					<% } else { %>
+					<li><a href="/cmc/logout">로그아웃</a></li>
+					<% } %>
+					
+					
+					
 				</ul>
 			</div> <!-- .top end -->
 		</div> <!-- .header-wrap end -->

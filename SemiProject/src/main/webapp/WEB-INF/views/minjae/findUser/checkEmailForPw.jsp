@@ -3,6 +3,7 @@
     pageEncoding="UTF-8"%>
 <%	UserFind userFind = (UserFind)request.getAttribute("userFind"); %>
 
+<!-- 이메일 입력/이메일 인증으로 비밀번호 찾는 Version -->
 <script type="text/javascript">
 $(document).ready(function() {
 	
@@ -19,10 +20,10 @@ $(document).ready(function() {
 	})
 	
 	//아이디 찾기 버튼 클릭시 이벤트
-	$("#btnFindIdByEmail").click(function() {
+	$("#btnFindPwByEmail").click(function() {
 		
 		if($("#authnoE").val() == <%=userFind.getAuthno() %>) { //입력한 인증번호가 일치할 때
-			location.href = "/find/checkid?id=" + $("#hiddenIdForEmail").val()
+			location.href = "/find/change_pw?pw=" + $("#hiddenPwForEmail").val()
 
 		} else { //입력한 인증번호가 불일치 할 때
 			$("#checkEmail").html("<p id='disEmailAuth' >인증번호가 틀렸습니다 다시 확인해 주세요</p>")
@@ -44,11 +45,7 @@ $(document).ready(function() {
     color: red;
 }
 
-/* #btnReqAuth { */
-/* 	display: none; */
-/* } */
-
-#btnFindIdByEmail {
+#btnFindPwByEmail {
 	width: 304px;
     height: 35px;
     background-color: #555;
@@ -59,7 +56,7 @@ $(document).ready(function() {
 #agreeMsgE {
     position: absolute;
     color: lime;
-    top: 229px;
+    top: 161px;
     right: 54px;
 }
 #checkMark {
@@ -75,7 +72,7 @@ $(document).ready(function() {
 
 <div id="checkEmail"><p>이메일로 인증번호를 발송했습니다. 인증번호를 확인해 주세요!</p></div>
 
-<button id="btnFindIdByEmail">아이디 찾기</button>
+<button id="btnFindPwByEmail">비밀번호 찾기</button>
 
 <!-- 아이디 찾기 버튼 클릭시 넘겨줄 아이디저장 input -->
-<input type="hidden" id="hiddenIdForEmail" value="<%=userFind.getId() %>"> 
+<input type="hidden" id="hiddenPwForEmail" value="<%=userFind.getPw() %>"> 
