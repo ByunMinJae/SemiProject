@@ -27,12 +27,12 @@ function payDo(){
     pg: "html5_inicis",
     pay_method: "card",
     merchant_uid: "ORD20180131-0000011",
-    name: "노르웨이 회전 의자",
-    amount: 1,
-    buyer_email: "gildong@gmail.com",
-    buyer_name: "홍길동",
-    buyer_tel: "010-4242-4242",
-    buyer_addr: "서울특별시 강남구 신사동",
+    name: "<%=prod.getProdname()%>",
+    amount: <%=prod.getProdprice()%>,
+    buyer_email: "<%=loginUser.getEmail()%>",
+    buyer_name: "<%=loginUser.getUsername()%>",
+    buyer_tel: "<%=loginUser.getPhone()%>",
+    buyer_addr: "<%=loginUser.getAddress()%>",
     buyer_postcode: "01181"
 	}, function(rsp) { //callback
 	    if ( rsp.success ) {
@@ -62,18 +62,17 @@ button {
 }
 
 #paydo {
-	text-align: center;
-	width: 300px;
-	height: 50px;
+	position: relative;
+	left: 500px;
+	border: none;
+	background-color: white;
+	cursor: pointer;
 }
 
 .info {
 	background-color: #EEEEEE;
 	border-collapse: collapse;
 	padding: 10px;
-}
-
-.info_detail{
 }
 
 #pay {
@@ -123,16 +122,14 @@ button {
 	<br>
 	<!-- 결제정보 -->
 	<div id="pay_info">
-		<p>상품 가격 : <%=prod.getProdprice() %> </p>
-		<p>결제 방법 : </p>
-		<button>신용카드</button>
-		<button>계좌이체</button>	
+		<h3>결제 정보</h3>
+		<p>총결제금액 : <%=prod.getProdprice() %> </p>
 	</div> 
 	<br>
 	<hr>
 	<br>
 	<div>
-		<button id="paydo" type="button" onclick="payDo();">결제하기</button>
+		<button id="paydo" type="button" onclick="payDo();"><img src="/resources/image/btn_payment.gif"></button>
 	</div>
 </form>
 <br><br><br>
