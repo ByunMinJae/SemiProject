@@ -294,3 +294,4 @@ input, button {
 		</form>
 
 		<%@ include file="./layout/footer.jsp"%>
+
