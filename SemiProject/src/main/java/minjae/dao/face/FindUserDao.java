@@ -61,6 +61,16 @@ public interface FindUserDao {
 	 */
 	public UserInfo selectId(Connection conn, String id);
 	
+	/**
+	 * 전달 받은 정보를 이용하여 DB에 Update를 수행한다
+	 * 
+	 * @param conn - DB 연결 객체
+	 * @param id - 아이디
+	 * @param upw - 비밀번호
+	 * @return 수행 결과 (성공 - 1, 실패 - 0)
+	 */
+	public int updatePwById(Connection conn, String id, String upw);
+	
 
 
 }

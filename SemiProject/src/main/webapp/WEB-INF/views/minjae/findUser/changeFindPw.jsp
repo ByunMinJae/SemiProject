@@ -131,6 +131,7 @@ h4 {
 <input type="text" id="upw_check" placeholder="비밀번호 확인"><br>
 <span id="upw_check_msg" class="msg"></span><br><br>
 
+<!-- 비밀번호를 변경하는 유저의 아이디 전달용 input -->
 <input type="text" hidden="" name="id" value="<%=request.getParameter("id") %>">
 
 <button id="btnChangePw">비밀번호 변경</button>

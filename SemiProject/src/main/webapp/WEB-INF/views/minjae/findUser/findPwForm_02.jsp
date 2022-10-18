@@ -38,12 +38,13 @@ $(document).ready(function() {
 					IMP.certification({
 
 					}, function(rsp) { // callback
+						
 						if (rsp.success) { // 인증 성공 시
 							
 							//form태그 submit 시키기
-							$("#f").html("<input type='text' name='id' value='" + res + "'>");
+							$("#f").html("<input type='text' hidden='' name='id' value='" + res + "'>");
 							$("#f").trigger("submit");
-						
+							
 						} else {
 							alert("인증에 실패하였습니다. 에러 내용: " + rsp.error_msg);
 						}
@@ -58,9 +59,9 @@ $(document).ready(function() {
 			}
 
 		})
-
+	
 	})/* End of click event */
-
+	
 })
 </script>
 

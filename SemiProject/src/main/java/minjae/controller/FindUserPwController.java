@@ -23,7 +23,10 @@ public class FindUserPwController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("/find/findpw [GET]");
 		
+		//--- 이메일 입력/이메일 인증으로 비밀번호 찾기 ---
 //		req.getRequestDispatcher("/WEB-INF/views/minjae/findUser/findPwForm.jsp").forward(req, resp);
+		
+		//--- 아이디 입력/KG이니시스 통합인증으로 비밀번호 찾기 ---
 		req.getRequestDispatcher("/WEB-INF/views/minjae/findUser/findPwForm_02.jsp").forward(req, resp);
 	}
 	
@@ -43,15 +46,16 @@ public class FindUserPwController extends HttpServlet {
 		System.out.println("해당 유저 정보 : " + user);
 		
 		if( user == null ) { //해당 아이디로 가입한 유저가 없을 때
-			resp.getWriter().print(""); //false 반환
+//			resp.getWriter().print("false"); //
+			resp.getWriter().print(""); //빈 문자열 반환
 			
 		} else { //해당 아이디로 가입한 유저가 있을 때
 //			resp.getWriter().print("true"); //true 반환
-			resp.getWriter().print(id); //true 반환
+			resp.getWriter().print(id); //id 반환
 			
 		}
 		
-		// email 인증으로 할 경우 주석 해제
+		//--- 이메일 인증으로 할 경우 주석 해제 ---
 		//요청 이메일이 빈 칸일 경우
 //		if( "".equals(email) ) {
 //			//확인 메세지 반환

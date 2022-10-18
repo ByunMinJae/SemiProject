@@ -59,41 +59,60 @@ public class FindUserServiceImpl implements FindUserService {
 	
 	@Override
 	public void sendEmail(UserFind userFind) {
-		System.out.println("FindUserService sendEmail - 시작");
+		System.out.println("FindUserService sendEmail() - 시작");
 		javaMail.sendAuthEmail(userFind);
-		System.out.println("FindUserService sendEmail - 끝");
+		System.out.println("FindUserService sendEmail() - 끝");
 	}
 	
 	@Override
 	public UserInfo getUserInfoByPhone(String name, String phone, String birth) {
-		System.out.println("FindUserService getUserInfoByPhone - 시작");
+		System.out.println("FindUserService getUserInfoByPhone() - 시작");
 		
 		Connection conn = JDBCTemplate.getConnection();
 		
 		UserInfo userInfo = findUserDao.selectPhone(conn, name, phone, birth);
 		
-		System.out.println("FindUserService getUserInfoByPhone - 끝");
+		System.out.println("FindUserService getUserInfoByPhone() - 끝");
 		return userInfo;
 	}
 	
 	@Override
 	public void sendSms(UserInfo user, UserFind userFind) {
-		System.out.println("FindUserService sendSms - 시작");
+		System.out.println("FindUserService sendSms() - 시작");
 		coolsms.sendAuthSms(user, userFind);
-		System.out.println("FindUserService sendSms - 끝");
+		System.out.println("FindUserService sendSms() - 끝");
 	}
 
 	@Override
 	public UserInfo checkId(String id) {
-		System.out.println("FindUserService checkId - 시작");
+		System.out.println("FindUserService checkId() - 시작");
 
 		Connection conn = JDBCTemplate.getConnection();
 		
 		UserInfo userInfo = findUserDao.selectId(conn, id);
 		
-		System.out.println("FindUserService checkId - 끝");
-		
+		System.out.println("FindUserService checkId() - 끝");
 		return userInfo;
+	}
+
+	@Override
+	public boolean updateUserPw(String id, String upw) {
+		System.out.println("FindUserService updateUserPw() - 시작");
+		
+		Connection conn = JDBCTemplate.getConnection();
+
+		int res = findUserDao.updatePwById(conn, id, upw);
+		
+		if( res > 0 ) {
+			JDBCTemplate.commit(conn);
+			System.out.println("FindUserService updateUserPw() - 끝");
+			return true;
+		} else {
+			JDBCTemplate.rollback(conn);
+			System.out.println("FindUserService updateUserPw() - 끝");
+			return false;
+		}
+		
 	}
 	
 }

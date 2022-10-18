@@ -3,6 +3,7 @@
     pageEncoding="UTF-8"%>
 <%	UserFind userFind = (UserFind)request.getAttribute("userFind"); %>
 
+<!-- 이메일 입력/이메일 인증으로 비밀번호 찾는 Version -->
 <script type="text/javascript">
 $(document).ready(function() {
 	

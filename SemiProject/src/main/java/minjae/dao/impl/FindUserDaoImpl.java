@@ -208,7 +208,34 @@ public class FindUserDaoImpl implements FindUserDao {
 		return user;
 	}
 	
-	
+	@Override
+	public int updatePwById(Connection conn, String id, String upw) {
+		System.out.println("FindUserDao updatePwById() - 시작");
+		
+		String sql = "";
+		sql += "UPDATE user_info SET userpw = ?";
+		sql += " WHERE userid = ?";
+		
+		//수행 결과를 저장할 변수
+		int res = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, upw);
+			ps.setString(2, id);
+			
+			res = ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("FindUserDao updatePwById() - 끝");
+		return res;
+		
+	}
 	
 }
 

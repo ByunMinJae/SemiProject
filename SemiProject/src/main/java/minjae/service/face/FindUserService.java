@@ -1,7 +1,5 @@
 package minjae.service.face;
 
-import java.util.Date;
-
 import minjae.dto.UserFind;
 import minjae.dto.UserInfo;
 
@@ -68,6 +66,16 @@ public interface FindUserService {
 	 * @return UserInfo DTO
 	 */
 	public UserInfo checkId(String id);
+	
+	/**
+	 *  전달 받은 id에 해당하는 유저의
+	 * 비밀번호를 upw로 변경한다
+	 * 
+	 * @param id - 아이디
+	 * @param upw - 비밀번호
+	 * @return 성공 - true, 실패 - false
+	 */
+	public boolean updateUserPw(String id, String upw);
 	
 	
 	// --- 비밀번호 찾기 ---
