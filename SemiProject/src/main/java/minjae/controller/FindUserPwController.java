@@ -34,6 +34,8 @@ public class FindUserPwController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("/find/findpw [POST]");
 		
+//		System.out.println("아임포트 : " + req.getParameter("imp_uid"));
+		
 		//요청 정보 한글인코딩 설정
 		req.setCharacterEncoding("UTF-8");
 		
