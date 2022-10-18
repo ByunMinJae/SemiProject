@@ -60,6 +60,15 @@ public interface FindUserService {
 	 */
 	public void sendSms(UserInfo user, UserFind userFind);
 	
+	/**
+	 *  전달 받은 아이디를 가진 유저가 있는지 확인 후 
+	 * 해당 유저의 정보를 반환한다
+	 * 
+	 * @param id - 아이디
+	 * @return UserInfo DTO
+	 */
+	public UserInfo checkId(String id);
+	
 	
 	// --- 비밀번호 찾기 ---
 	

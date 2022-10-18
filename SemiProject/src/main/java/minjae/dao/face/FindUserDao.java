@@ -52,6 +52,15 @@ public interface FindUserDao {
 	 */
 	public UserInfo selectPhone(Connection conn, String name, String phone, String birth);
 	
+	/**
+	 * 해당 아이디를 조회하고 유저 정보를 반환한다
+	 * 
+	 * @param conn - DB 연결 객체
+	 * @param id - 유저 아이디
+	 * @return UserInfo DTO
+	 */
+	public UserInfo selectId(Connection conn, String id);
+	
 
 
 }

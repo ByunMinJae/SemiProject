@@ -82,5 +82,18 @@ public class FindUserServiceImpl implements FindUserService {
 		coolsms.sendAuthSms(user, userFind);
 		System.out.println("FindUserService sendSms - 끝");
 	}
+
+	@Override
+	public UserInfo checkId(String id) {
+		System.out.println("FindUserService checkId - 시작");
+
+		Connection conn = JDBCTemplate.getConnection();
+		
+		UserInfo userInfo = findUserDao.selectId(conn, id);
+		
+		System.out.println("FindUserService checkId - 끝");
+		
+		return userInfo;
+	}
 	
 }

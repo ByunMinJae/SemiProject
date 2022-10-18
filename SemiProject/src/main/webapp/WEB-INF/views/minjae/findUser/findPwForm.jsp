@@ -7,7 +7,7 @@
 $(document).ready(function() {
 	
 	$(".btnReqAuth").click(function() {
-		console.log("#btnReqAuth 클릭")
+		console.log(".btnReqAuth 클릭")
 			
 		$.ajax({
 			type: "post"					

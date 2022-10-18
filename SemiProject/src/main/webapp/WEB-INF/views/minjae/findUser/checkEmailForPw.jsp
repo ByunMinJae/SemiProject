@@ -22,7 +22,7 @@ $(document).ready(function() {
 	$("#btnFindPwByEmail").click(function() {
 		
 		if($("#authnoE").val() == <%=userFind.getAuthno() %>) { //입력한 인증번호가 일치할 때
-			location.href = "/find/checkPw?pw=" + $("#hiddenPwForEmail").val()
+			location.href = "/find/change_pw?pw=" + $("#hiddenPwForEmail").val()
 
 		} else { //입력한 인증번호가 불일치 할 때
 			$("#checkEmail").html("<p id='disEmailAuth' >인증번호가 틀렸습니다 다시 확인해 주세요</p>")

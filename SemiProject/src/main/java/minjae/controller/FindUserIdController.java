@@ -30,6 +30,9 @@ public class FindUserIdController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("/find/userid [POST]");
 		
+		//요청 정보 한글인코딩 설정
+		req.setCharacterEncoding("UTF-8");
+		
 		if( null == req.getParameter("userName") ) { // 이메일로 아이디 찾기
 			
 			//요청 이메일 정보
