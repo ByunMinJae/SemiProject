@@ -123,7 +123,8 @@ button {
 	<!-- 결제정보 -->
 	<div id="pay_info">
 		<h3>결제 정보</h3>
-		<p>총결제금액 : <%=prod.getProdprice() %> </p>
+		<span class="info">&nbsp;총결제금액</span>
+		<span class="info_detail"><%=prod.getProdprice() %></span>
 	</div> 
 	<br>
 	<hr>
