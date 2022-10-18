@@ -5,28 +5,28 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-
-	//입력중인 인증번호 확인
-	$("#authno").keyup(function() {
+	
+	$("#authnoE").keyup(function() {
 		
 		//입력중인 인증번호가 일치할 때
-		if($("#authno").val() == <%=userFind.getAuthno() %>) {
-			$("#agreeMsg").html("<div id='checkMark'></div>");
-			$("#result2").html("<p>&nbsp;</p>"); //틀렸을때 나오는 메시지 지우기
+		if($("#authnoE").val() == <%=userFind.getAuthno() %>) {
+			$("#agreeMsgE").html("<div id='checkMark'></div>");
+			$("#checkEmail").html("<p>&nbsp;</p>"); //틀렸을때 나오는 메시지 지우기
 		} else {
-			$("#agreeMsg").html('');
+			$("#agreeMsgE").html('');
 		}
 		
 	})
 	
 	//아이디 찾기 버튼 클릭시 이벤트
-	$("#btnFindId").click(function() {
+	$("#btnFindIdByEmail").click(function() {
 		
-		if($("#authno").val() == <%=userFind.getAuthno() %>) { //입력한 인증번호가 일치할 때
-			location.href = "/find/checkid?id=" + $("#hiddenId").val()
-// 			$(location).attr("href", "/find/checkid?id=" + $("#hiddenId").val())
+		if($("#authnoE").val() == <%=userFind.getAuthno() %>) { //입력한 인증번호가 일치할 때
+			location.href = "/find/checkid?id=" + $("#hiddenIdForEmail").val()
+
 		} else { //입력한 인증번호가 불일치 할 때
-			$("#result2").html("<p id='disAuth' >인증번호가 틀렸습니다 다시 확인해 주세요</p>")
+			$("#checkEmail").html("<p id='disEmailAuth' >인증번호가 틀렸습니다 다시 확인해 주세요</p>")
+		
 		}
 		
 	})
@@ -35,27 +35,20 @@ $(document).ready(function() {
 </script>
 
 <style type="text/css">
-#result2 {
+#checkEmail {
     font-size: 5px;
     color: blue;
 }
 
-p#disAuth {
+#disEmailAuth {
     color: red;
 }
 
-#btnReqAuth {
-	display: none;
-}
+/* #btnReqAuth { */
+/* 	display: none; */
+/* } */
 
-#authno {
-	width: 296px;
-    height: 38px;
-    padding-left: 10px;
-    margin: 9px 0 5px
-}
-
-#btnFindId {
+#btnFindIdByEmail {
 	width: 304px;
     height: 35px;
     background-color: #555;
@@ -63,13 +56,12 @@ p#disAuth {
     color: #fff;
 }
 
-#agreeMsg {
+#agreeMsgE {
     position: absolute;
     color: lime;
-    top: 171px;
-    right: 62px;
+    top: 229px;
+    right: 54px;
 }
-
 #checkMark {
 	background: url("/resources/image/check-mark.png") no-repeat 0 0;
 	width: 20px;
@@ -77,13 +69,13 @@ p#disAuth {
 }
 </style>
 
-<input type="text" style="display: none;">
-<input type="text" id="authno" name="authno" placeholder="인증 번호">
-<div id="agreeMsg"></div>
+<!-- <input type="text" style="display: none;"> -->
+<input type="text" id="authnoE" name="authnoE" placeholder="인증 번호" style="margin: 10px -73px 0 0;">
+<div id="agreeMsgE"></div>
 
-<div id="result2"><p>이메일로 인증번호를 발송했습니다. 인증번호를 입력해 주세요!</p></div>
+<div id="checkEmail"><p>이메일로 인증번호를 발송했습니다. 인증번호를 확인해 주세요!</p></div>
 
-<button id="btnFindId">아이디 찾기</button>
+<button id="btnFindIdByEmail">아이디 찾기</button>
 
 <!-- 아이디 찾기 버튼 클릭시 넘겨줄 아이디저장 input -->
-<input type="hidden" id="hiddenId" value="<%=userFind.getId() %>"> 
+<input type="hidden" id="hiddenIdForEmail" value="<%=userFind.getId() %>"> 

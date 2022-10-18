@@ -7,9 +7,10 @@ public class UserInfo {
 	private int userno;
 	private String userid;
 	private String userpw;
+	private String username;
 	private String gender;
 	private String address;
-	private int phone;
+	private String phone;
 	private Date birth;
 	private String email;
 	private String nick;
@@ -19,12 +20,13 @@ public class UserInfo {
 	
 	public UserInfo() {}
 
-	public UserInfo(int userno, String userid, String userpw, String gender, String address, int phone, Date birth,
-			String email, String nick, Date joinday, Date userupdate, int gradeno) {
+	public UserInfo(int userno, String userid, String userpw, String username, String gender, String address,
+			String phone, Date birth, String email, String nick, Date joinday, Date userupdate, int gradeno) {
 		super();
 		this.userno = userno;
 		this.userid = userid;
 		this.userpw = userpw;
+		this.username = username;
 		this.gender = gender;
 		this.address = address;
 		this.phone = phone;
@@ -38,9 +40,10 @@ public class UserInfo {
 
 	@Override
 	public String toString() {
-		return "UserInfo [userno=" + userno + ", userid=" + userid + ", userpw=" + userpw + ", gender=" + gender
-				+ ", address=" + address + ", phone=" + phone + ", birth=" + birth + ", email=" + email + ", nick="
-				+ nick + ", joinday=" + joinday + ", userupdate=" + userupdate + ", gradeno=" + gradeno + "]";
+		return "UserInfo [userno=" + userno + ", userid=" + userid + ", userpw=" + userpw + ", username=" + username
+				+ ", gender=" + gender + ", address=" + address + ", phone=" + phone + ", birth=" + birth + ", email="
+				+ email + ", nick=" + nick + ", joinday=" + joinday + ", userupdate=" + userupdate + ", gradeno="
+				+ gradeno + "]";
 	}
 
 	public int getUserno() {
@@ -67,6 +70,14 @@ public class UserInfo {
 		this.userpw = userpw;
 	}
 
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 	public String getGender() {
 		return gender;
 	}
@@ -83,11 +94,11 @@ public class UserInfo {
 		this.address = address;
 	}
 
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
