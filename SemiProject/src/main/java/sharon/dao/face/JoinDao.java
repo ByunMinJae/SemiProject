@@ -6,10 +6,15 @@ import java.util.List;
 import sharon.dto.User;
 
 public interface JoinDao {
+	
+	public User selectMemberByUserpw(Connection connection, User user);
+
+	public User selectMemberByUserid(Connection connection, User user);
 
 	public int selectNextUserno(Connection conn);
 	
 	public int insert(Connection conn, User user);
+	
 	
 	/*
 	 * //---10/14추가 ->회원목록조회 public List<User> selectAll(Connection conn);

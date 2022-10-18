@@ -8,15 +8,11 @@ import sharon.dto.User;
 
 public interface JoinService {
 
-	public static User getParam(HttpServletRequest req) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public User getParam(HttpServletRequest req);
 	
-	public static User join(User user) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public User info(User user);
+
+	public void join(User user);
 	
 /*
  * //10/14 ->회원목록조회 public List<User> list();

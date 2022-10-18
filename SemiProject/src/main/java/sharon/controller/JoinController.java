@@ -20,7 +20,7 @@ public class JoinController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("/user/join [GET]");
 		
-		req.getRequestDispatcher("/WEB-INF/views/user/joinForm.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/sharon/user/joinForm.jsp").forward(req, resp);
 	}
 
 
@@ -30,15 +30,11 @@ public class JoinController extends HttpServlet {
 		
 		req.setCharacterEncoding("UTF-8");
 		
-		User user = JoinService.getParam(req);
-		System.out.println("JoinController doPost() - user : " + user);
+		User user = joinService.getParam(req);
 		
-		User result = JoinService.join(user);
-		System.out.println("JoinController doPost() - result : " + result);
+		joinService.join(user);
 		
-		req.setAttribute("result", result);
-		
-		req.getRequestDispatcher("/WEB-INF/views/user/result.jsp").forward(req, resp);
+		resp.sendRedirect("https://naver.com/");
 	}
 
 }
