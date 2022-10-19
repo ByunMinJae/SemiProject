@@ -7,20 +7,27 @@ public class Pay {
 	private int payno;
 	private String payoption;
 	private Date paydate;
+	private int orderno;
 	
 	public Pay() {
 	}
+	
+	
 
-	@Override
-	public String toString() {
-		return "Pay [payno=" + payno + ", payoption=" + payoption + ", paydate=" + paydate + "]";
-	}
-
-	public Pay(int payno, String payoption, Date paydate) {
+	public Pay(int payno, String payoption, Date paydate, int orderno) {
 		super();
 		this.payno = payno;
 		this.payoption = payoption;
 		this.paydate = paydate;
+		this.orderno = orderno;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "Pay [payno=" + payno + ", payoption=" + payoption + ", paydate=" + paydate + ", orderno=" + orderno
+				+ "]";
 	}
 
 	public int getPayno() {
@@ -46,6 +53,15 @@ public class Pay {
 	public void setPaydate(Date paydate) {
 		this.paydate = paydate;
 	}
+
+	public int getOrderno() {
+		return orderno;
+	}
+
+	public void setOrderno(int orderno) {
+		this.orderno = orderno;
+	}
+	
 	
 	
 }

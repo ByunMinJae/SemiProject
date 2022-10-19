@@ -21,7 +21,7 @@ public class PayDoDaoImpl implements PayDoDao{
 
 	@Override
 	public User getUserInfo(Connection conn, int userno) {
-		System.out.println("DAO - 시작");
+		System.out.println("UserDAO - 시작");
 		
 		String sql = "";
 		
@@ -57,7 +57,7 @@ public class PayDoDaoImpl implements PayDoDao{
 			JDBCTemplate.close(ps);
 		}
 		
-		System.out.println("DAO - 끝");
+		System.out.println("UserDAO - 끝");
 		
 		return user;
 	}
@@ -102,6 +102,38 @@ public class PayDoDaoImpl implements PayDoDao{
 		System.out.println("ProdDao - End");
 		
 		return prod;
+	}
+
+
+
+	@Override
+	public User updateUser(Connection conn, int userno) {
+		System.out.println("Update - Start");
+		
+		String sql = "";
+		
+		sql+="UPDATE user_info";
+		sql+="SET address = ?";
+		sql+="WHERE userno = ?";
+		
+		User user = new User();
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setString(1, user.getAddress());
+			ps.setInt(2, userno);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		
+		
+		System.out.println("Update - End");
+		return user;
 	}
 
 }
