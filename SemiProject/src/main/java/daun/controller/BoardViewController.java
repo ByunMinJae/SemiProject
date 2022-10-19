@@ -37,7 +37,7 @@ public class BoardViewController extends HttpServlet {
 		req.setAttribute("viewBoard", viewBoard);
 		
 		//View 지정 및 응답
-		req.getRequestDispatcher("/WEB-INF/views/board/view.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/daun/boardview.jsp").forward(req, resp);
 		
 	}
 	

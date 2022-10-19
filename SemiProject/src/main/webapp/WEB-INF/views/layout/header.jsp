@@ -10,9 +10,9 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 <!-- 부트스트랩 Bootstrap 3 -->
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script> -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 <style type="text/css">
 
@@ -215,7 +215,7 @@ li {
 	</div> <!-- .top-wrap end -->	
 	<div class="header-wrap">
 		<div class="header-title">
-			<p><img src="/resources/image/logo.png" id="logo"></p>
+			<p><a href="/"><img src="/resources/image/logo.png" id="logo"></a></p>
 		</div> <!--.header-title end -->
 		<div class="header-menu">
 			<ul class="hmenulist">

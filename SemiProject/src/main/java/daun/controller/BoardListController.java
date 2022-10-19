@@ -25,7 +25,6 @@ public class BoardListController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("/WEB-INF/views/daun/test.jsp").forward(req, resp);
 		
 		
 		System.out.println("/board/list [GET]");
@@ -36,11 +35,6 @@ public class BoardListController extends HttpServlet {
 		
 		//페이징 객체를 MODEL값 전달
 		req.setAttribute("paging", paging);
-		
-		
-		
-		//게시글 전체 조회
-//		List<Board> boardList = boardService.getList();
 
 		//페이징 전체 조회
 		List<Board> boardList = boardService.getList( paging );
@@ -53,7 +47,7 @@ public class BoardListController extends HttpServlet {
 		req.setAttribute("boardList", boardList );
 	
 		//View 지정 및 응답
-		req.getRequestDispatcher("/WEB-INF/views/board/list.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/daun/boardlist.jsp").forward(req, resp);
 		
 		
 	}
