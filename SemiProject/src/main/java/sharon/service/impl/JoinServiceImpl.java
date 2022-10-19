@@ -12,8 +12,11 @@ import sharon.service.face.JoinService;
 
 public class JoinServiceImpl implements JoinService {
 
-private JoinDao joinDao = new JoinDaoImpl();
+	private JoinDao joinDao = new JoinDaoImpl();
 	
+	public User info(User user) {
+		return joinDao.selectMemberByUserid(JDBCTemplate.getConnection(), user);
+	}
 
 	public User getParam(HttpServletRequest req) {
 		
@@ -21,18 +24,15 @@ private JoinDao joinDao = new JoinDaoImpl();
 		
 		user.setUserid(req.getParameter("userid"));
 		user.setUserpw(req.getParameter("userpw"));
-//		user.setUsername(req.getParameter("username"));
+		user.setUsername(req.getParameter("username"));
 		user.setGender( req.getParameter("gender") );
 		user.setAddress( req.getParameter("address") );
-//		user.setPhone( req.getParameter("phone") );
-//		user.setBirth( req.getParameter("birth") );
+		user.setPhone( req.getParameter("phone") );
+		user.setBirth( req.getParameter("birth") );
 		user.setEmail( req.getParameter("email") );
 		user.setNick( req.getParameter("nick") );
 		
 		return user;
-	}
-	public User info(User user) {
-		return joinDao.selectMemberByUserid(JDBCTemplate.getConnection(), user);
 	}
 
 	public void join(User user) {

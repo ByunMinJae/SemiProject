@@ -64,7 +64,7 @@ public class JoinDaoImpl implements JoinDao {
 				
 				result.setUserid( rs.getString("userid") );
 				result.setUserpw( rs.getString("userpw") );
-//				result.setUsername( rs.getString("username") );
+				result.setUsername( rs.getString("username") );
 			}
 			
 		} catch (SQLException e) {
@@ -82,9 +82,9 @@ public class JoinDaoImpl implements JoinDao {
 	public int insert(Connection conn, User user) {
 		
 		String sql = "";
-		sql += "INSERT INTO user_info ( userid, userpw, username, nick, birth, gender, email, phone, address )";
-		sql += " VALUES ( ?, ?, ? ,? ,? ,? ,? ,? ,?)";
-		
+		sql += "INSERT INTO user_info ( userno, userid, userpw, username, gender, address, phone, birth, email, nick ,joinday,userupdate)";
+		sql += " VALUES ( user_info_seq.nextval, ?, ?, ? ,? ,? ,?, ?, ?, ?, sysdate ,sysdate)";
+
 		int res = 0;
 		
 		try {
@@ -92,16 +92,14 @@ public class JoinDaoImpl implements JoinDao {
 			
 			ps.setString(1, user.getUserid());
 			ps.setString(2, user.getUserpw());
-//			ps.setString(3, user.getUsername());
-			ps.setString(4, user.getNick());
-			ps.setDate(5, user.getBirth());
-			ps.setString(6, user.getGender());
-			ps.setString(7, user.getEmail());
-			ps.setInt(8, user.getPhone());
-			ps.setString(9, user.getAddress());
-//			ps.setDate(10, user.getJoinday());
-//			ps.setDate(11, user.getUserupdate());
-//			ps.setInt(12, user.getGradeno());
+			ps.setString(3, user.getUsername());
+			ps.setString(4, user.getGender());
+			ps.setString(5, user.getAddress());
+			ps.setString(6, user.getPhone());
+			ps.setString(7, user.getBirth());
+			ps.setString(8, user.getEmail());
+			ps.setString(9, user.getNick());
+			
 			
 			res = ps.executeUpdate();
 			
@@ -147,15 +145,5 @@ public class JoinDaoImpl implements JoinDao {
 			 * Auto-generated method stub return null; }
 			 */
 
-	@Override
-	public User selectMemberByUserpw(Connection connection, User user) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public int selectNextUserno(Connection conn) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 }
