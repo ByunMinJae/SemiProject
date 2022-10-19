@@ -94,7 +94,19 @@ public class FindUserServiceImpl implements FindUserService {
 		System.out.println("FindUserService checkId() - 끝");
 		return userInfo;
 	}
+	
+	@Override
+	public UserInfo checkIdPhone(String id, String phone) {
+		System.out.println("FindUserService checkIdPhone() - 시작");
 
+		Connection conn = JDBCTemplate.getConnection();
+		
+		UserInfo userInfo = findUserDao.selectIdPhone(conn, id, phone);
+		
+		System.out.println("FindUserService checkIdPhone() - 끝");
+		return userInfo;
+	}
+	
 	@Override
 	public boolean updateUserPw(String id, String upw) {
 		System.out.println("FindUserService updateUserPw() - 시작");
@@ -114,5 +126,7 @@ public class FindUserServiceImpl implements FindUserService {
 		}
 		
 	}
+
+	
 	
 }

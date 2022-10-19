@@ -14,6 +14,20 @@ $(document).ready(function() {
 		
 	})
 	
+	//비밀번호 확인 입력 keyup 이벤트
+	$("#upw_check").keyup(function() {
+		
+		if( $("#upw_check").val() == $("#upw").val() ) {
+			$("#agreeMsgS").html("<div id='checkMark'></div>");
+			$("#upw_check_msg").html("")
+			
+		} else {
+			$("#agreeMsgS").html("");
+			$("#upw_check_msg").html("비밀번호 확인 입력이 동일하지 않습니다!")
+		}
+		
+	})
+	
 })
 
 function validatePW( pw ) {
@@ -28,8 +42,6 @@ function validatePW( pw ) {
 	//비밀번호 입력값 검증
 	if( !/^[a-zA-Z0-9]{6,12}$/.test( pw ) ) {
 		$("#upw_msg").html("비밀번호는 영어대소문자, 숫자 6~12자만 입력하세요!")
-		$("#upw_msg").attr("style", "color: red")
-		
 		return false;
 	} else {
 		$("#upw_msg").html("")
@@ -38,7 +50,6 @@ function validatePW( pw ) {
 	//비밀번호와 확인 입력값이 같은 지 검증
 	if( pw != $("#upw_check").val() ) {
 		$("#upw_check_msg").html("비밀번호 확인 입력이 동일하지 않습니다!")
-		
 		return false;
 	}
 	
@@ -109,6 +120,21 @@ h4 {
     color: #fff;
     position: relative;
     top: -16px;
+    cursor: pointer;
+    border-radius: 7px;
+}
+#btnChangePw:hover {
+	background-color: #333;
+}
+#checkMark {
+	background: url("/resources/image/check-mark.png") no-repeat 0 0;
+	width: 20px;
+    height: 20px;
+}
+#agreeMsgS {
+	position: absolute;
+    top: 202px;
+    right: 54px;
 }
 </style>
 
@@ -128,8 +154,9 @@ h4 {
 <input type="text" id="upw" name="upw" placeholder="비밀번호"><br>
 <span id="upw_msg" class="msg"></span><br>
 
-<input type="text" id="upw_check" placeholder="비밀번호 확인"><br>
+<input type="password" id="upw_check" placeholder="비밀번호 확인"><br>
 <span id="upw_check_msg" class="msg"></span><br><br>
+<div id="agreeMsgS"></div>
 
 <!-- 비밀번호를 변경하는 유저의 아이디 전달용 input -->
 <input type="text" hidden="" name="id" value="<%=request.getParameter("id") %>">

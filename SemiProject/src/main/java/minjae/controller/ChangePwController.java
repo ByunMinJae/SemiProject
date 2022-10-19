@@ -19,9 +19,7 @@ public class ChangePwController extends HttpServlet {
 		//요청 정보 한글인코딩 설정
 		req.setCharacterEncoding("UTF-8");
 		
-		String id = req.getParameter("id");
-		System.out.println(id);
-		req.setAttribute("id", id);
+		//View 지정 및 포워드
 		req.getRequestDispatcher("/WEB-INF/views/minjae/findUser/changeFindPw.jsp").forward(req, resp);
 	}
 	
