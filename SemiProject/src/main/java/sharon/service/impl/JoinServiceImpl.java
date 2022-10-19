@@ -13,6 +13,7 @@ import sharon.service.face.JoinService;
 public class JoinServiceImpl implements JoinService {
 
 private JoinDao joinDao = new JoinDaoImpl();
+
 	
 
 	public User getParam(HttpServletRequest req) {
@@ -49,3 +50,4 @@ private JoinDao joinDao = new JoinDaoImpl();
 	}
 
 }
+
