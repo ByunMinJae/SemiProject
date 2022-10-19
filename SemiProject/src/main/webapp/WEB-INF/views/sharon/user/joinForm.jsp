@@ -56,11 +56,10 @@ function validatePW( pw ) {
 	}
 	
 	//패스워드 입력값 검증
-	if( !/^[a-zA-Z]{4,8}$/.test( pw ) ) {
-		$("#upw_msg").html("패스워드는 영어 대소문자 4~8자만 입력하세요!")
-		
-		return false;
-	}
+	if( !/^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{6,12}$/.test( pw ) ) {
+	      $("#upw_msg").html("비밀번호는 영어대소문자, 숫자 6~12자만 입력하세요!")
+	      return   false;
+	   }
 	
 	//패스워드와 확인 입력값이 같은 지 검증
 	if( pw != $("#pwCk").val() ) {
