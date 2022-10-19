@@ -40,7 +40,7 @@ function validatePW( pw ) {
 	}
 	
 	//비밀번호 입력값 검증
-	if( !/^[a-zA-Z0-9]{6,12}$/.test( pw ) ) {
+	if( !/^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{6,12}$/.test( pw ) ) {
 		$("#upw_msg").html("비밀번호는 영어대소문자, 숫자 6~12자만 입력하세요!")
 		return false;
 	} else {
