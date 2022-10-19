@@ -10,7 +10,6 @@ public interface PayDoService {
 	
 	/**
 	 * 유저 정보 조회
-	 * @param req 
 	 * 
 	 * @param userno
 	 * @return - 유저번호 반환
@@ -31,6 +30,13 @@ public interface PayDoService {
 	 * @return - 상품정보 조회
 	 */
 	public Product getProdInfo(int prodno);
+
+	/**
+	 * 배송지 변경기능
+	 * @param userno
+	 * @return - 유저정보 수정결과 반환
+	 */
+	public User updateUser(int userno);
 
 
 
