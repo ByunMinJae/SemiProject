@@ -48,6 +48,13 @@ public interface BoardService {
 	 * @return Board - 조회된 게시글 정보
 	 */
 	public Board view(Board boardno);
+
+	/**
+	 * 
+	 * @param board
+	 * @return
+	 */
+	public int insertBoard(Board board);
 	
 	
 }

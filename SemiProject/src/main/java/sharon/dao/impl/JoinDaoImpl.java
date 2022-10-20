@@ -10,6 +10,7 @@ import sharon.dao.face.JoinDao;
 import sharon.dto.User;
 
 public class JoinDaoImpl implements JoinDao {
+
 	
 	private PreparedStatement ps;
 	private ResultSet rs;
@@ -147,3 +148,4 @@ public class JoinDaoImpl implements JoinDao {
 
 
 }
+

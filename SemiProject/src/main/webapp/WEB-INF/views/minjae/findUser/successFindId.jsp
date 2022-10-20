@@ -18,7 +18,11 @@
     background-color: #555;
     border: none;
     color: #fff;
-    border-radius: 7px
+    border-radius: 7px;
+    cursor: pointer;
+}
+#btnLogin:hover {
+	background-color: #444;
 }
 
 h3 {
@@ -66,7 +70,7 @@ h3 {
 
 <h3><%=request.getParameter("id") %></h3>
 
-<a href=""><button id="btnLogin">로그인</button></a>
+<a href="/cmc/login"><button id="btnLogin">로그인</button></a>
 </div>
 
 <jsp:include page="../../layout/footer.jsp"/>

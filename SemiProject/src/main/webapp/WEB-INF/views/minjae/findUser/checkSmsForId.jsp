@@ -55,6 +55,10 @@ $(document).ready(function() {
     background-color: #555;
     border: none;
     color: #fff;
+    border-radius: 7px;
+}
+#btnFindIdBySms:hover {
+	background-color: #333;
 }
 
 #agreeMsgS {

@@ -8,19 +8,20 @@ $(document).ready(function() {
 	
 	$(".btnReqAuth").click(function() {
 		console.log(".btnReqAuth 클릭")
-			
+		
 		$.ajax({
 			type: "post"					
 			, url: "/find/findpw"			
 			, data: {						
-				userEmail: $("#userEmail").val()
+				userId: $("#userId").val(),
+				userPhone: $("#userPhone").val()
 			}
 			, dataType: "html"				
 			, success: function( res ) {
 				console.log("AJAX 성공")
 				
 				//응답 데이터 반영
-				$("#resEmail").html( res )
+				$("#resSms").html( res )
 			}
 			
 		})
@@ -39,11 +40,17 @@ $(document).ready(function() {
     position: relative;
 }
 
-#userEmail, #authnoE {
+#userId {
 	width: 288px;
     height: 32px;
     padding-left: 10px;
     margin-top: 30px;
+}
+#userPhone {
+	width: 288px;
+    height: 32px;
+    padding-left: 10px;
+    margin-top: 17px;
 }
 
 .btnReqAuth {
@@ -93,22 +100,15 @@ $(document).ready(function() {
 
 <!-- email 인증 -->
 <div id="emailType">
-	<input type="text" id="userEmail" name="userEmail" placeholder="이메일"><br>
+	<input type="text" id="userId" name="userId" placeholder="아이디"><br>
+	<input type="text" id="userPhone" name="userPhone" placeholder="휴대전화(-없이)"><br>
 	<button class="btnReqAuth">인증 요청</button>
-	<div id="resEmail"></div>
+	<div id="resSms"></div>
 </div>
 
 </div><!-- End of .fupWrap -->
 
 <jsp:include page="../../layout/footer.jsp"/>
-
-
-
-
-
-
-
-
 
 
 

@@ -5,7 +5,6 @@ import minjae.dto.UserInfo;
 
 public interface FindUserService {
 	
-	// --- 아이디 찾기 ---
 	/**
 	 *  전달받은 이메일로 가입한 유저가 있는지 확인 후
 	 * 해당 유저의 정보를 반환
@@ -63,10 +62,20 @@ public interface FindUserService {
 	 * 해당 유저의 정보를 반환한다
 	 * 
 	 * @param id - 아이디
-	 * @return UserInfo DTO
+	 * @return 해당 유저의 UserInfo DTO
 	 */
 	public UserInfo checkId(String id);
 	
+	/**
+	 *  전달 받은 아이디, 전화번호를 가진 유저가 있는지 확인 후 
+	 * 해당 유저의 정보를 반환한다
+	 * 
+	 * @param id - 아이디
+	 * @param phone - 전화번호
+	 * @return 해당 유저의 UserInfo DTO
+	 */
+	public UserInfo checkIdPhone(String id, String phone);
+
 	/**
 	 *  전달 받은 id에 해당하는 유저의
 	 * 비밀번호를 upw로 변경한다
@@ -77,7 +86,5 @@ public interface FindUserService {
 	 */
 	public boolean updateUserPw(String id, String upw);
 	
-	
-	// --- 비밀번호 찾기 ---
 	
 }
