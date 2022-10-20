@@ -89,19 +89,23 @@ function hiddenImg( btnCateg, mi ) {
 <style type="text/css">
 #mpmWrap {
 	width: 1100px;
-    height: 500px;
-    margin: 100px auto;
+    height: 600px;
+    margin: 0px auto;
     text-align: center;
     position: relative;
 }
 #mpmLeft {
 	width: 40%;
-	height: 80%;
+	height: 100%;
 	float: left;
+	background: #ddd;
+}
+#userInfo {
+	padding-top: 66px;
 }
 #mpmRight {
+	margin-top: 88px;
 	width: 55%;
-	height: 80%;
 	float: right;
 	position: relative;
     top: -28px;
@@ -111,21 +115,13 @@ function hiddenImg( btnCateg, mi ) {
 	height: 200px;
 	background: url("/resources/image/user_profile.png") no-repeat 0 0;
 }
-#md {
+.md {
 	text-decoration: none;
 	color: #555;
 }
-#md:hover {
+.md:hover {
 	cursor: pointer;
 	color: #54abdf;
-}
-#ropeImg {
-	background: url(/resources/image/rope.png) no-repeat 0 0;
-    width: 40px;
-    height: 150px;
-    position: absolute;
-    top: 107px;
-    left: 447px;
 }
 ul#ul_left {
 	margin: 68px 71px;
@@ -136,6 +132,14 @@ li.info_left {
 	font-size: 40px;
 	font-weight: bold;
 	color: #555;
+}
+#ropeImg {
+	background: url(/resources/image/rope.png) no-repeat 0 0;
+    width: 40px;
+    height: 150px;
+    position: absolute;
+    top: 107px;
+    left: 447px;
 }
 .rope1, .rope2 {
 	border-right: 2px solid #444;
@@ -263,14 +267,14 @@ li.info_left {
 	<div id="userInfo">
 		<ul id="ul_left">
 			<li><div id="userImg"></div></li>
-			<li class="info_left"><a id="md" href="/mypage/detail"><%=mpMain.getNick() %></a></li>
+			<li class="info_left"><a class="md" href="/mypage/detail"><%=mpMain.getNick() %></a></li>
 			<li class="info_left" style="font-size: 15px;"><%=mpMain.getGradename() %></li>
 		</ul>
 	</div>
 	<!-- 중간 이미지 -->
-	<div id="ropeImg"></div>
-	<div class="rope1"></div>
-	<div class="rope2"></div>
+<!-- 	<div id="ropeImg"></div> -->
+<!-- 	<div class="rope1"></div> -->
+<!-- 	<div class="rope2"></div> -->
 </div>
 
 <!-- 오른쪽 영역 -->

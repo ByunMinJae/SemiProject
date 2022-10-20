@@ -2,6 +2,7 @@ package minjae.dao.face;
 
 import java.sql.Connection;
 
+import minjae.dto.BoardInfoCate;
 import minjae.dto.MpMain;
 import minjae.dto.MpMainRight;
 
@@ -37,5 +38,13 @@ public interface MypageDao {
 	 * @return MpMainRight DTO - 처리상태를 종류별로 count()한 결과값이 저장된 DTO
 	 */
 	public MpMainRight selectOIByDate(Connection conn, int userno, String startDate, String endDate);
+	
+	/**
+	 *  userno에 해당하는 유저의 게시글 정보와 카테고리 정보를 반환한다
+	 * 
+	 * @param userno - 유저번호
+	 * @return BoardInfoCate DTO - 게시글, 카테고리 정보
+	 */
+	public BoardInfoCate selectBoardIC(Connection conn, int userno);
 
 }

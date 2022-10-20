@@ -5,6 +5,7 @@ import java.sql.Connection;
 import common.JDBCTemplate;
 import minjae.dao.face.MypageDao;
 import minjae.dao.impl.MypageDaoImpl;
+import minjae.dto.BoardInfoCate;
 import minjae.dto.MpMain;
 import minjae.dto.MpMainRight;
 import minjae.service.face.MypageService;
@@ -47,6 +48,18 @@ public class MypageServiceImpl implements MypageService {
 		
 		System.out.println("/mypage/main getOrderInfoByDate() - 끝");
 		return mpMR;
+	}
+	
+	@Override
+	public BoardInfoCate getBoardInfoCate(int userno) {
+		System.out.println("/mypage/main getBoardInfoCate() - 시작");
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		BoardInfoCate boardIC = mypageDao.selectBoardIC(conn, userno);
+		
+		System.out.println("/mypage/main getBoardInfoCate() - 끝");
+		return boardIC;
 	}
 	
 }

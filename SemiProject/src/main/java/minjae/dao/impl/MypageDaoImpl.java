@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import common.JDBCTemplate;
 import minjae.dao.face.MypageDao;
+import minjae.dto.BoardInfoCate;
 import minjae.dto.MpMain;
 import minjae.dto.MpMainRight;
 
@@ -153,6 +154,48 @@ public class MypageDaoImpl implements MypageDao {
 		
 		System.out.println("/mypage/main selectOIByDate() - 끝");
 		return mpMR;
+	}
+	
+	@Override
+	public BoardInfoCate selectBoardIC(Connection conn, int userno) {
+		System.out.println("/mypage/main selectBoardIC() - 시작");
+		
+		String sql = "";
+		sql += "SELECT a.*, b.categoryname FROM board_info a";
+		sql += " INNER JOIN Board_Category b";
+		sql += "	ON a.categoryno = b.categoryno";
+		sql += " WHERE a.userno = ?";
+
+		BoardInfoCate boardIC = null;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, userno);
+			
+			rs = ps.executeQuery();
+			
+			while( rs.next() ) {
+				boardIC = new BoardInfoCate();
+				
+				boardIC.setBoardno(rs.getInt("boardno"));
+				boardIC.setBoardtitle(rs.getString("boardtitle"));
+				boardIC.setBoardcon(rs.getString("bardcon"));
+				boardIC.setBoarddate(rs.getDate("boarddate"));
+				boardIC.setUserno(rs.getInt("userno"));
+				boardIC.setCategoryno(rs.getInt("categoryno"));
+				boardIC.setCategoryname(rs.getString("categoryname"));
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("/mypage/main selectBoardIC() - 끝");
+		return boardIC;
 	}
 	
 }

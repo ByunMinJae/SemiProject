@@ -1,5 +1,6 @@
 package minjae.service.face;
 
+import minjae.dto.BoardInfoCate;
 import minjae.dto.MpMain;
 import minjae.dto.MpMainRight;
 
@@ -31,6 +32,15 @@ public interface MypageService {
 	 * @return MpMainRight DTO
 	 */
 	public MpMainRight getOrderInfoByDate(int userno, String startDate, String endDate);
+	
+	/**
+	 *  해당 userno를 이용해 해당 유저의
+	 * 게시글 정보와 카테고리 정보를 Join하여 가져온다
+	 * 
+	 * @param userno
+	 * @return
+	 */
+	public BoardInfoCate getBoardInfoCate(int userno);
 
 }
 
