@@ -71,12 +71,6 @@ public class PayDoController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("/pay/do [POST]");
 
-		req.getSession().setAttribute("userno", 2323);
-		int userno = (int) req.getSession().getAttribute("userno");
-		
-		User updateUser = payDoService.updateUser(userno);
-		
-		req.setAttribute("updateUser", updateUser);
 		req.getRequestDispatcher("/WEB-INF/views/changmin/paydo.jsp").forward(req, resp);
 	}
 	

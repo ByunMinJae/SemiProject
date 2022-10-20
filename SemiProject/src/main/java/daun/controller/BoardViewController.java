@@ -12,7 +12,6 @@ import daun.dto.Board;
 import daun.service.face.BoardService;
 import daun.service.impl.BoardServiceImpl;
 
-@WebServlet("/board/view")
 public class BoardViewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
