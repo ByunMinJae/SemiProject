@@ -10,9 +10,9 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 <!-- 부트스트랩 Bootstrap 3 -->
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script> -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 <style type="text/css">
 
@@ -51,7 +51,7 @@ li {
 
 .container {
 	position: relative;
-	top: 150px;
+	top: 110px;
 	margin-bottom: 150px;
 }
 
@@ -100,7 +100,7 @@ li {
 
 .header-title {
 	padding: 0;
-	height: 15px;
+	height: 20px;
 	margin-top: 30px;
 }
 
@@ -117,7 +117,7 @@ li {
 	display: block;
 	margin-left: 500px;
 	width: 50%;
-	height: auto:
+	height: auto;
 } 
 
 .header-menu .hmenulist li {
@@ -125,6 +125,7 @@ li {
 	margin-left: 70px;
 	font-size: x-large;
 	font-style: bold;
+	margin-bottom: 15px;
 }
 
 .header-menu .hmenulist li a {
@@ -215,7 +216,7 @@ li {
 	</div> <!-- .top-wrap end -->	
 	<div class="header-wrap">
 		<div class="header-title">
-			<p><img src="/resources/image/logo.png" id="logo"></p>
+			<p><a href="/"><img src="/resources/image/logo.png" id="logo"></a></p>
 		</div> <!--.header-title end -->
 		<div class="header-menu">
 			<ul class="hmenulist">
