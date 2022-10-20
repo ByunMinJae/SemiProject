@@ -64,6 +64,8 @@ public class LoginController extends HttpServlet {
     		
     		//req.getRequestDispatcher("/WEB-INF/views/donghyun/loginSuccess.jsp").forward(req, resp);
     		resp.sendRedirect("/");
+    	} else {
+    		req.getRequestDispatcher("/WEB-INF/views/donghyun/loginFail.jsp").forward(req, resp);
     	}
     	
     	
