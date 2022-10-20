@@ -1,20 +1,23 @@
 package jeonghwa.dto;
 
-public class ProdManage {
+import java.sql.Blob;
+import java.util.Date;
+
+public class Product {
 	
 	private int prodno;
 	private String prodname;
 	private int prodprice;
-	private int prodimage;
-	private int prodcon;
-	private int proddate;
+	private Blob prodimage;
+	private String prodcon;
+	private Date prodDate;
 	private int prodpop;
 	
 	
-	public ProdManage() {}
+	public Product() {}
 
 
-	public ProdManage(int prodno, String prodname, int prodprice, int prodimage, int prodcon, int proddate,
+	public Product(int prodno, String prodname, int prodprice, Blob prodimage, String prodcon, Date prodDate,
 			int prodpop) {
 		super();
 		this.prodno = prodno;
@@ -22,15 +25,15 @@ public class ProdManage {
 		this.prodprice = prodprice;
 		this.prodimage = prodimage;
 		this.prodcon = prodcon;
-		this.proddate = proddate;
+		this.prodDate = prodDate;
 		this.prodpop = prodpop;
 	}
 
 
 	@Override
 	public String toString() {
-		return "ProdManage [prodno=" + prodno + ", prodname=" + prodname + ", prodprice=" + prodprice + ", prodimage="
-				+ prodimage + ", prodcon=" + prodcon + ", proddate=" + proddate + ", prodpop=" + prodpop + "]";
+		return "Product [prodno=" + prodno + ", prodname=" + prodname + ", prodprice=" + prodprice + ", prodimage="
+				+ prodimage + ", prodcon=" + prodcon + ", prodDate=" + prodDate + ", prodpop=" + prodpop + "]";
 	}
 
 
@@ -64,33 +67,33 @@ public class ProdManage {
 	}
 
 
-	public int getProdimage() {
+	public Blob getProdimage() {
 		return prodimage;
 	}
 
 
-	public void setProdimage(int prodimage) {
+	public void setProdimage(Blob prodimage) {
 		this.prodimage = prodimage;
 	}
 
 
-	public int getProdcon() {
+	public String getProdcon() {
 		return prodcon;
 	}
 
 
-	public void setProdcon(int prodcon) {
+	public void setProdcon(String prodcon) {
 		this.prodcon = prodcon;
 	}
 
 
-	public int getProddate() {
-		return proddate;
+	public Date getProdDate() {
+		return prodDate;
 	}
 
 
-	public void setProddate(int proddate) {
-		this.proddate = proddate;
+	public void setProdDate(Date prodDate) {
+		this.prodDate = prodDate;
 	}
 
 
