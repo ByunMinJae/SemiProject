@@ -12,7 +12,9 @@ import sharon.service.face.JoinService;
 
 public class JoinServiceImpl implements JoinService {
 
-	private JoinDao joinDao = new JoinDaoImpl();
+
+private JoinDao joinDao = new JoinDaoImpl();
+
 	
 	public User info(User user) {
 		return joinDao.selectMemberByUserid(JDBCTemplate.getConnection(), user);
@@ -49,3 +51,4 @@ public class JoinServiceImpl implements JoinService {
 	}
 
 }
+
