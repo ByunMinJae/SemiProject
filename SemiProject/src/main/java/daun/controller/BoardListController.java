@@ -14,8 +14,6 @@ import daun.service.face.BoardService;
 import daun.service.impl.BoardServiceImpl;
 import daun.util.Paging;
 
-
-
 @WebServlet("/board/list")
 public class BoardListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;

@@ -89,6 +89,23 @@ public class BoardServiceImpl implements BoardService {
 		return board;
 	}
 	
+	@Override
+	public int insertBoard(Board board) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+
+		int res = boardDao.insertBoard(conn, board);
+		
+		if( res > 0 ) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		return res;
+		
+	}
+	
 }
 
 

@@ -207,6 +207,29 @@ public class BoardDaoImpl implements BoardDao {
 		return board;
 	}
 	
+	@Override
+	public int insertBoard(Connection conn, Board board) {
+		
+		String sql = "";
+		sql += "INSERT INTO board_info";
+		sql += "	(boardno, boardtitle, boardcon, boardDate)";
+		sql += "VALUES( (";
+		sql += "	SELECT DECODE(MAX(boardno), NULL, 0, MAX(boardno)) + 1 FROM board), ?, ?, ?)";
+		
+		int res = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			res = ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+	
 }
 
 

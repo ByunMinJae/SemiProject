@@ -51,7 +51,7 @@ li {
 
 .container {
 	position: relative;
-	top: 150px;
+	top: 110px;
 	margin-bottom: 150px;
 }
 
@@ -100,7 +100,7 @@ li {
 
 .header-title {
 	padding: 0;
-	height: 15px;
+	height: 20px;
 	margin-top: 30px;
 }
 
@@ -117,7 +117,7 @@ li {
 	display: block;
 	margin-left: 500px;
 	width: 50%;
-	height: auto:
+	height: auto;
 } 
 
 .header-menu .hmenulist li {
@@ -125,6 +125,7 @@ li {
 	margin-left: 70px;
 	font-size: x-large;
 	font-style: bold;
+	margin-bottom: 15px;
 }
 
 .header-menu .hmenulist li a {
