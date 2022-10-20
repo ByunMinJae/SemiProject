@@ -20,11 +20,11 @@ $(document).ready(function() {
 	})
 	
 	//아이디 찾기 버튼 클릭시 이벤트
-	$("#btnFindIdBySms").click(function() {
+	$("#btnFindPwBySms").click(function() {
 		
 		if($("#authnoS").val() == <%=userFind.getAuthno() %>) { //입력한 인증번호가 일치할 때
-			location.href = "/find/checkid?id=" + $("#hiddenIdForSms").val()
-					
+			//form태그 submit 시키기
+			$("#f").trigger("submit");				
 		} else { //입력한 인증번호가 불일치 할 때
 			$("#checkSms").html("<p id='disSmsAuth' >인증번호가 틀렸습니다 다시 확인해 주세요</p>")
 			
@@ -45,32 +45,35 @@ $(document).ready(function() {
     color: red;
 }
 
-/* #btnReqAuth { */
-/* 	display: none; */
-/* } */
-
-#btnFindIdBySms {
+#btnFindPwBySms {
 	width: 304px;
     height: 35px;
     background-color: #555;
     border: none;
     color: #fff;
+    cursor: pointer;
     border-radius: 7px;
 }
-#btnFindIdBySms:hover {
+#btnFindPwBySms:hover {
 	background-color: #333;
 }
 
 #agreeMsgS {
     position: absolute;
     color: lime;
-    top: 325px;
+    top: 216px;
     right: 54px;
 }
 #checkMark {
 	background: url("/resources/image/check-mark.png") no-repeat 0 0;
 	width: 20px;
     height: 20px;
+}
+#authnoS {
+	width: 288px;
+    height: 32px;
+    padding-left: 10px;
+    margin-top: 30px;
 }
 </style>
 
@@ -80,7 +83,9 @@ $(document).ready(function() {
 
 <div id="checkSms"><p>문자로 인증번호를 발송했습니다. 인증번호를 확인해 주세요!</p></div>
 
-<button id="btnFindIdBySms">아이디 찾기</button>
+<button id="btnFindPwBySms">비밀번호 찾기</button>
 
-<!-- 아이디 찾기 버튼 클릭시 넘겨줄 아이디저장 input -->
-<input type="hidden" id="hiddenIdForSms" value="<%=userFind.getId() %>"> 
+<!-- 아이디 찾기 버튼 클릭시 넘겨줄 아이디저장 -->
+<form action="/find/change_pw" method="post" id="f">
+<input type="hidden" id="hiddenIdForSms" name="id" value="<%=userFind.getId() %>"> 
+</form> 

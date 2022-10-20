@@ -31,19 +31,18 @@ $(document).ready(function() {
 			dataType : "html",
 			success : function(res) { // id - 아이디 확인됨, "" - 아이디 미확인
 				console.log("AJAX 성공")
-
+					
 				if (res != "") {
 
 					//KG이니시스 통합인증
 					IMP.certification({
-
-					}, function(rsp) { // callback
 						
+					}, function(rsp) { // callback
 						if (rsp.success) { // 인증 성공 시
-							
+							console.log(rsp)
 							//form태그 submit 시키기
 							$("#f").html("<input type='text' hidden='' name='id' value='" + res + "'>");
-							$("#f").trigger("submit");
+// 							$("#f").trigger("submit");
 							
 						} else {
 							alert("인증에 실패하였습니다. 에러 내용: " + rsp.error_msg);
@@ -61,59 +60,6 @@ $(document).ready(function() {
 		})
 	
 	})/* End of click event */
-//-------------------------------------------------
-// 	$(".btnReqAuth").click(function() {
-// 		console.log("IMP 실행")
-		
-// 		//입력 아이디 값이 공백일 경우 처리
-// 		if ($("#userid").val() == "") {
-// 			console.log("stop")
-// 			return;
-// 		}
-		
-// 		// "/find/findpw"에 POST로 아이디값 넘겨주고 유효한 아이디 인지 확인 
-// 		$.ajax({
-// 			type : "post",
-// 			url : "/find/findpw",
-// 			data : {
-// 				userid : $("#userid").val()
-// 			},
-// 			dataType : "html",
-// 			success : function(res) { // id - 아이디 확인됨, "" - 아이디 미확인
-// 				console.log("AJAX 성공")
-
-// 				if (res != "") {
-
-// 					//KG이니시스 통합인증
-// 					IMP.certification({
-
-// 					}, function(rsp) { // callback
-						
-// 						if (rsp.success) { // 인증 성공 시
-							
-// 						 // jQuery로 HTTP 요청
-// 					      jQuery.ajax({
-// 					        url: "http://localhost:8888/find/findpw", // 예: https://www.myservice.com/certifications
-// 					        method: "POST",
-// 					        headers: { "Content-Type": "application/json" },
-// 					        data: { imp_uid: rsp.imp_uid }
-// 					      });
-// 						} else {
-// 							alert("인증에 실패하였습니다. 에러 내용: " + rsp.error_msg);
-// 						}
-// 					});
-
-// 					//msg 지우기
-// 					$("#resid").html("")
-
-// 				} else {
-// 					$("#resid").html("<p>해당 아이디로 가입된 유저가 없습니다</p>")
-// 				}
-// 			}
-
-// 		})
-	
-// 	})/* End of click event */
 	
 })
 </script>
