@@ -56,11 +56,10 @@ function validatePW( pw ) {
 	}
 	
 	//패스워드 입력값 검증
-	if( !/^[a-zA-Z]{4,8}$/.test( pw ) ) {
-		$("#upw_msg").html("패스워드는 영어 대소문자 4~8자만 입력하세요!")
-		
-		return false;
-	}
+	if( !/^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{6,12}$/.test( pw ) ) {
+	      $("#upw_msg").html("비밀번호는 영어대소문자, 숫자 6~12자만 입력하세요!")
+	      return   false;
+	   }
 	
 	//패스워드와 확인 입력값이 같은 지 검증
 	if( pw != $("#pwCk").val() ) {
@@ -73,10 +72,38 @@ function validatePW( pw ) {
 	return true;
 }
 
+
+//postcode, addredss, detailadress가 합쳐져서 sql에 하나의 데이터로 들어감(10/19 선생님께 확인)
+$(document).ready(function () {
+
+	$("form").submit(function() {
+		$("#addressSubmit").val( $("#postcode").val() + " " + $("#address").val() + " " + $("#detailAddress").val() )
+// 		return false;
+	})
+	
+})
+
+//테스트데이터
+function data() {
+	userid.value = 'abcd';
+	userpw.value = 'Abc1234';
+	pwCk.value = 'Abc1234';
+	username.value = 'testname';
+	nick.value = 'testnick';
+	birth.value = '2022-10-11';
+	$("input[name='gender'][value='남자']").prop('checked', true);
+	email.value = 'asdf@naver.com';
+	phone.value = '01012345678';
+	postcode.value = '12345';
+	address.value = '테스트 주소';
+	detailAddress.value = '테스트 주소2';
+	extraAddress.value = '테스트 주소3';
+}
+
 //-----------------10/13추가 메시지 삭제가 안되고 그대로 남아있음
 
 //--- 유효성 검증 에러 메시지 초기화 ---
-
+/* 
 //아이디 입력 시도할 때 아이디메시지 삭제
 $("#userid").focus(function() {
 	$('#uid_msg').html("")
@@ -90,7 +117,7 @@ $("#userpw").focus(function() {
 //패스워드 확인 입력 시도할 때 패스워드체크 메시지 삭제
 $("#pwCk").focus(function() {
 	$("#pwCk_msg").html("")
-})
+}) */
 
 </script>
 
@@ -136,10 +163,13 @@ $("#pwCk").focus(function() {
 <input type="password" name="pwCk" id="pwCk" ><br>
 <span id="pwCk_msg" class="msg"></span><br>
 
+<label for="username">이름</label>
+<input type="text" name="username" id="username" ><br>
+<span id="name_msg" class="msg"></span><br>
+
 <label for="nick">닉네임</label>
 <input type="text" name="nick" id="nick" ><br>
 <span id="nick_msg" class="msg"></span><br>
-
 
 <label for="birth">생년월일</label>
 <input type="date" name="birth" id="birth" ><br>
@@ -147,8 +177,8 @@ $("#pwCk").focus(function() {
 <!-- <select id="mm" class="sel" aria-label="월"></select><br> -->
 
 <label for="gender">성별</label>
-<input type="radio" name="gender" value="M">남
-<input type="radio" name="gender" id="F">여<br>
+<input type="radio" name="gender" value="남자">남
+<input type="radio" name="gender" id="여자">여<br>
 <span id="gender_msg" class="msg"></span><br>
 
 <label for="email">이메일</label>
@@ -167,6 +197,10 @@ $("#pwCk").focus(function() {
 <input type="text" id="address" placeholder="주소"><br>
 <input type="text" id="detailAddress" placeholder="상세주소">
 <input type="text" id="extraAddress" placeholder="참고항목">
+<span id="address_msg" class="msg"></span><br>
+
+<input type="hidden" name="address" id="addressSubmit">
+
 <span id="address_msg" class="msg"></span><br>
 
 <button>가입</button>

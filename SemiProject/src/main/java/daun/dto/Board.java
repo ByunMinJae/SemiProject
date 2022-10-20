@@ -5,28 +5,28 @@ import java.util.Date;
 public class Board {
 
 	private int boardno;
-	private String title;
-	private String userid;
-	private String content;
-	private int hit;
-	private Date writeDate;
+	private String boardtitle;
+	private String boardcon;
+	private Date boarddate;
+	private int userno;
+	private int categoryno;
 	
 	public Board() {}
 
-	public Board(int boardno, String title, String userid, String content, int hit, Date writeDate) {
-		super();
-		this.boardno = boardno;
-		this.title = title;
-		this.userid = userid;
-		this.content = content;
-		this.hit = hit;
-		this.writeDate = writeDate;
-	}
-
 	@Override
 	public String toString() {
-		return "Board [boardno=" + boardno + ", title=" + title + ", userid=" + userid + ", content=" + content
-				+ ", hit=" + hit + ", writeDate=" + writeDate + "]";
+		return "Board [boardno=" + boardno + ", boardtitle=" + boardtitle + ", boardcon=" + boardcon + ", boarddate="
+				+ boarddate + ", userno=" + userno + ", categoryno=" + categoryno + "]";
+	}
+
+	public Board(int boardno, String boardtitle, String boardcon, Date boarddate, int userno, int categoryno) {
+		super();
+		this.boardno = boardno;
+		this.boardtitle = boardtitle;
+		this.boardcon = boardcon;
+		this.boarddate = boarddate;
+		this.userno = userno;
+		this.categoryno = categoryno;
 	}
 
 	public int getBoardno() {
@@ -37,45 +37,47 @@ public class Board {
 		this.boardno = boardno;
 	}
 
-	public String getTitle() {
-		return title;
+	public String getBoardtitle() {
+		return boardtitle;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setBoardtitle(String boardtitle) {
+		this.boardtitle = boardtitle;
 	}
 
-	public String getUserid() {
-		return userid;
+	public String getBoardcon() {
+		return boardcon;
 	}
 
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public void setBoardcon(String boardcon) {
+		this.boardcon = boardcon;
 	}
 
-	public String getContent() {
-		return content;
+	public Date getBoarddate() {
+		return boarddate;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
+	public void setBoarddate(Date boarddate) {
+		this.boarddate = boarddate;
 	}
 
-	public int getHit() {
-		return hit;
+	public int getUserno() {
+		return userno;
 	}
 
-	public void setHit(int hit) {
-		this.hit = hit;
+	public void setUserno(int userno) {
+		this.userno = userno;
 	}
 
-	public Date getWriteDate() {
-		return writeDate;
+	public int getCategoryno() {
+		return categoryno;
 	}
 
-	public void setWriteDate(Date writeDate) {
-		this.writeDate = writeDate;
+	public void setCategoryno(int categoryno) {
+		this.categoryno = categoryno;
 	}
+
+	
 	
 	
 	

@@ -22,11 +22,12 @@ public class UpdatePwController extends HttpServlet {
 		
 		String id = req.getParameter("id");
 		String upw = req.getParameter("upw");
+		System.out.println("업데이트 : " + id + " :  " + upw);
 		
-		//아이디를 이용해 패스워드 변경
+		//아이디를 이용해 패스워드 변경 후 결과 반환
 		boolean isComp = findUserService.updateUserPw(id, upw);
 		
-		//변경 완료를 알려주는 페이지
+		//View 지정 및 포워드
 		req.getRequestDispatcher("/WEB-INF/views/minjae/findUser/successFindPw.jsp").forward(req, resp);
 	}
 }

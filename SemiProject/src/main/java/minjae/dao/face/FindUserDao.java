@@ -62,6 +62,16 @@ public interface FindUserDao {
 	public UserInfo selectId(Connection conn, String id);
 	
 	/**
+	 * 해당 아이디를 조회하고 유저 정보를 반환한다
+	 * 
+	 * @param conn - DB 연결 객체
+	 * @param id - 유저 아이디
+	 * @param phone - 유저 전화번호
+	 * @return UserInfo DTO
+	 */
+	public UserInfo selectIdPhone(Connection conn, String id, String phone);
+	
+	/**
 	 * 전달 받은 정보를 이용하여 DB에 Update를 수행한다
 	 * 
 	 * @param conn - DB 연결 객체
@@ -70,6 +80,7 @@ public interface FindUserDao {
 	 * @return 수행 결과 (성공 - 1, 실패 - 0)
 	 */
 	public int updatePwById(Connection conn, String id, String upw);
+
 	
 
 

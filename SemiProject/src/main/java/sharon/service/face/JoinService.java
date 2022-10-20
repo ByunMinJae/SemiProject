@@ -1,6 +1,5 @@
 package sharon.service.face;
 
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,9 +13,5 @@ public interface JoinService {
 
 	public void join(User user);
 	
-/*
- * //10/14 ->회원목록조회 public List<User> list();
- * 
- * public User info(int userno); 
- */
+
 }
