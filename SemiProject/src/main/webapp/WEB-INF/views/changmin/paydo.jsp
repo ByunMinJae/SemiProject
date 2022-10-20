@@ -23,16 +23,17 @@ IMP.init('imp88224386');  // 가맹점 식별코드
 // IMP.request_pay(param, callback) 결제창 호출
 function payDo(){
     IMP.request_pay({ // param
-
+ 
     pg: "html5_inicis",
     pay_method: "card",
     merchant_uid: "ORD20180131-0000011",
     name: "<%=prod.getProdname()%>",
-    amount: <%-- <%=prod.getProdprice()%> --%>100,
+    amount: $("#prodpricevalue").val(),
     buyer_email: "<%=loginUser.getEmail()%>",
     buyer_name: "<%=loginUser.getUsername()%>",
     buyer_tel: "<%=loginUser.getPhone()%>",
-    buyer_addr: "<%=loginUser.getAddress()%>",
+    <%-- buyer_addr: "<%=loginUser.getAddress()%>", --%>
+    buyer_addr: $("#addressvalue").val(),
     buyer_postcode: "01181"
 	}, function (rsp) { // callback
         if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
@@ -55,8 +56,50 @@ function payDo(){
     
 }	
 
-//배송지 변경
+$(document).ready(function() {
+	
+	$("#addressSubmitButton").click(function(){
+// 	    $.ajax({
+// 	      type: "POST",
+// 	      url: "/address/change",
+// 	      dataType: "text",
+//  	      data: {
+	    	  
+// 	      },
+// //  	      data: {
+// // 	    	  postcode: $("#postcode").value
+// // 	      },
+// 	      contentType : "application/x-www-form-urlencoded;charset=UTF-8",
+// 	      error: function() {
+// 	        console.log('통신실패!!');
+// 	      },
+// 	      success: function(data) {
+// 	        console.log("통신데이터 값 : " + data);
+// 	        $("#info_addressdetail").html(data);
+	        
+// 	      }
+// 	    });
+	    
+//       return false;//화면이동 막기
+      
+      $('#info_addressdetail').html($("#postcode").val() + " " + $("#address").val() + " " + $("#detailAddress").val())
+      
+	}); //funciton End
+	
+}); //ready End  */
 
+/* $(document).ready(function () {
+
+	   $("#addressSubmitButton").click(function() {
+   			$("#info_addressdetail").val( $("#postcode").val() + " " + $("#address").val() + " " + $("#detailAddress").val() )
+	      	$("#info_addressdetail").html();
+//	       return false;
+	   })
+	   
+}) */
+
+
+//배송지 변경
 function execDaumPostcode() {
     new daum.Postcode({
         oncomplete: function(data) {
@@ -109,6 +152,9 @@ function execDaumPostcode() {
 
 <style type="text/css">
 
+.addressChange {
+	float:left;
+}
 button {
 	margin: 10px;
 }
@@ -133,6 +179,30 @@ button {
 	border:1px solid #DDD;
 }
 
+#addressChange {
+	height: 155px;
+}
+
+#addressChange input {
+	float: left;
+	position: relative;
+	top: -35px;
+	left: 80px; 
+}
+
+#addressChange input:not(#postbutton){
+	height: 18px;
+}
+
+#address {
+	width: 345px;
+}
+
+ 
+
+
+
+ 
 </style>
 
 
@@ -140,7 +210,7 @@ button {
 <h1>주문 / 결제</h1>
 <hr>
 <!-- 구매자 정보 -->
-<form class="pay">
+<form class="pay" method="post">
 	<div id="buy_info">
 		<h3>구매자 정보</h3>
 		
@@ -158,22 +228,35 @@ button {
 	
 	<!-- 받는사람 정보 -->
 	<div id="receivcer_info">
-		<h3>받는사람 정보<button id="change" type="button" onclick="execDaumPostcode();">배송지 변경</button></h3>
-		
+		<h3>받는사람 정보</h3>
 		<span class="info">&ensp;&emsp;&emsp;&emsp;이름</span>
 		<span class="info_detail"><%=loginUser.getUsername() %></span><br><br>
+		
+		<div id="addressChange">
+			<label for="postcode"><span class="info" id="change">&ensp;배송지변경</span></label>
+			<ul class="address_A">
+				<li><input type="text" name="postcode" id="postcode" placeholder="우편번호"></li>
+			</ul>
+				<input type="button" id="postbutton" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
+			<ul class="address_B"> 
+				<li><input type="text" id="address" placeholder="주소"><br></li>
+			</ul>
+			<ul class="address_C">
+				<li><input type="text" id="detailAddress" placeholder="상세주소"></li>
+				<li><input type="text" id="extraAddress" placeholder="참고항목"></li>
+			</ul>
+			<input type="hidden" name="address" id="addressSubmit">
+
+			<button type="button" id="addressSubmitButton">주소변경</button>
+			<span id="address_msg" class="msg"></span><br>
+		</div>
+	</div>
+		
+	<div> 
 		 
 		<span class="info">&ensp;&emsp;배송주소</span>
-		<span class="info_detail"><%=loginUser.getAddress() %></span><br><br>
-<!-- 		<input type="text" id="postcode" placeholder="우편번호">
-		<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
-		<input type="text" id="address" placeholder="주소"><br>
-		<input type="text" id="detailAddress" placeholder="상세주소">
-		<input type="text" id="extraAddress" placeholder="참고항목"> -->
-<!-- 		
-		<input type="hidden" name="address" id="addressSubmit">
-		 -->
-<!-- 		<span id="address_msg" class="msg"></span><br> -->
+		<input type="hidden" id="addressvalue" value="<%=loginUser.getAddress()%>">
+		<span class="info_detail" id="info_addressdetail"><%=loginUser.getAddress() %></span><br><br>
 		
 		<span class="info">&ensp;&emsp;&emsp;연락처</span>
 		<span class="info_detail"><%=loginUser.getPhone() %></span><br>
@@ -184,6 +267,7 @@ button {
 	<div id="pay_info">
 		<h3>결제 정보</h3>
 		<span class="info">&nbsp;총결제금액</span>
+		<input type="hidden" id="prodpricevalue" value="<%=prod.getProdprice()%>">
 		<span class="info_detail"><%=prod.getProdprice() %></span>
 	</div> 
 	<br>
