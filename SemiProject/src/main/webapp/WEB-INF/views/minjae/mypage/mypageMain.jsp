@@ -1,10 +1,35 @@
+<%@page import="minjae.dto.MpMainRight"%>
 <%@page import="minjae.dto.MpMain"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
 <%	MpMain mpMain = (MpMain)request.getAttribute("mpMain"); %>
+<%	MpMainRight mpMR = (MpMainRight)request.getAttribute("mpMR"); %>
 
 <%@	include file="../../layout/header.jsp" %>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+$( function() {
+	//datepicker 설정
+	$( "#startDate" ).datepicker({
+		 showMonthAfterYear: true
+		 , dateFormat: "yy/mm/dd"
+		 , dayNamesMin: ['월', '화', '수', '목', '금', '토', '일']
+		 , monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
+		 , monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
+	});
+	$( "#endDate" ).datepicker({
+		 showMonthAfterYear: true
+		 , dateFormat: "yy/mm/dd"
+		 , dayNamesMin: ['월', '화', '수', '목', '금', '토', '일']
+		 , monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
+		 , monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
+	});
+} );
+</script>
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -13,6 +38,38 @@ $(document).ready(function() {
 	hiddenImg("#btnCateg1", "#mi1")
 	hiddenImg("#btnCateg2", "#mi2")
 	hiddenImg("#btnCateg3", "#mi3")
+	
+	//기간별 조회 기능
+	$("#btnSelect").click(function() {
+		
+		if( $("#startDate").val() == "" || $("#endDate").val() == "" ) {
+			$("#checkMsg").html("기간을 선택해 주세요!")
+		} else if( $("#startDate").val() > $("#endDate").val() ) {
+			$("#checkMsg").html("시작 날짜가 더 클 수 없습니다!")
+		} else {
+			
+			$("#checkMsg").html("")
+			
+			$.ajax({
+				type: "post"					//요청 메소드
+				, url: "/mypage/main"			//요청 URL
+				, data: {						//요청 파라미터
+					userno: <%=mpMain.getUserno() %>
+					, startDate: $("#startDate").val()
+					, endDate: $("#endDate").val()
+				}
+				, dataType: "html"				//응답 데이터 형식
+				, success: function( res ) {
+					console.log("AJAX 성공")
+					
+					//응답 데이터 반영
+					$("#result").html( res )
+				}
+			})
+			
+		}
+		
+	})/* end of click event */
 	
 })
 
@@ -46,11 +103,21 @@ function hiddenImg( btnCateg, mi ) {
 	width: 55%;
 	height: 80%;
 	float: right;
+	position: relative;
+    top: -28px;
 }
 #userImg {
 	width: 300px;
 	height: 200px;
 	background: url("/resources/image/user_profile.png") no-repeat 0 0;
+}
+#md {
+	text-decoration: none;
+	color: #555;
+}
+#md:hover {
+	cursor: pointer;
+	color: #54abdf;
 }
 #ropeImg {
 	background: url(/resources/image/rope.png) no-repeat 0 0;
@@ -70,23 +137,19 @@ li.info_left {
 	font-weight: bold;
 	color: #555;
 }
-li.info_left a:hover {
-	cursor: pointer;
-	color: #54abdf;
-}
 .rope1, .rope2 {
 	border-right: 2px solid #444;
     position: absolute;
 }
 .rope1 {
     width: 5px;
-    height: 193px;
-    top: 0px;
+    height: 215px;
+    top: -22px;
     left: 458px;
 }
 .rope2 {
 	width: 5px;
-    height: 186px;
+    height: 204px;
     top: 215px;
     left: 451px;
 }
@@ -116,22 +179,79 @@ li.info_left a:hover {
 }
 #contents {
 	width: 500px;
-    height: 300px;
+    height: 336px;
     background: #ddd;
     margin-left: 53px;
     border-radius: 14px;
 }
+.cir_img {
+	margin: 88px 19px;
+    width: 123px;
+    height: 123px; 
+	background: linear-gradient(#69a9eb, #0156ef);
+	border-radius: 60px; 
+	display: inline-block;
+}
+.ci {
+	display: inline-block;
+	margin: 100px 29px;
+    position: absolute;
+}
 .cont_img1 {
+	width: 100px;
+	height: 100px;	
 	background: url("/resources/image/mypage_car.png") no-repeat 0 0;
-	
 }
 .cont_img2 {
+	width: 100px;
+	height: 100px;
 	background: url("/resources/image/mypage_box.png") no-repeat 0 0;
-
 }
 .cont_img3 {
+	width: 100px;
+	height: 100px;
 	background: url("/resources/image/mypage_arrow.png") no-repeat 0 0;
-
+}
+.con_text {
+	background: linear-gradient(#2c8aeb, #0046c3);
+	color: transparent;
+	-webkit-background-clip: text;
+	position: absolute;
+    font-size: 20px;
+    font-weight: bold;
+}
+.cnt_no {
+	display: inline-block;
+    position: absolute;
+    top: 236px;
+    font-size: 50px;
+    color: #444;
+}
+#datepicker {
+	font-weight: bold;
+    margin: 0 auto;
+    position: relative;
+    bottom: 34px;
+}
+#startDate, #endDate {
+	width: 100px;
+}
+#btnSelect {
+	width: 71px;
+    font-weight: bold;
+    background: linear-gradient(#9ca19a, #7a8577);;
+    border-radius: 5px;
+    border: 1px solid #718173;
+    cursor: pointer;
+}
+#btnSelect:hover {
+    background: linear-gradient(#57fb22, #3e9521);
+}
+#checkMsg {
+	color: red;
+    font-size: 10px;
+    position: relative;
+    bottom: 49px;
 }
 </style>
 
@@ -143,7 +263,7 @@ li.info_left a:hover {
 	<div id="userInfo">
 		<ul id="ul_left">
 			<li><div id="userImg"></div></li>
-			<li class="info_left"><a><%=mpMain.getNick() %></a></li>
+			<li class="info_left"><a id="md" href="/mypage/detail"><%=mpMain.getNick() %></a></li>
 			<li class="info_left" style="font-size: 15px;"><%=mpMain.getGradename() %></li>
 		</ul>
 	</div>
@@ -164,9 +284,31 @@ li.info_left a:hover {
 	<a href=""><button class="btnCateg" id="btnCateg3">장바구니</button></a>
 	<!-- contents 영역 -->
 	<div id="contents">
-		<div class="cont_img1"></div>
-		<div class="cont_img2"></div>
-		<div class="cont_img3"></div>
+		<!-- delivery -->
+		<span class="con_text" style="margin: 55px 0 0 50px;">배송중</span>
+		<div class="cont_img1 ci"></div>
+		<div class="cir_img"></div>
+		
+		<!-- delivery complete -->
+		<span class="con_text" style="margin: 55px 0 0 41px;">배송완료</span>
+		<div class="cont_img2 ci"></div>
+		<div class="cir_img"></div>
+		
+		<!-- exchange -->
+		<span class="con_text" style="margin: 55px 0 0 13px;">교환/반품/취소</span>
+		<div class="cont_img3 ci"></div>
+		<div class="cir_img"></div>
+		<div id="result">
+			<div class="cnt_no" style="right: 455px;"><p><%=mpMR.getDelCnt() %></p></div>
+			<div class="cnt_no" style="right: 286px;"><p><%=mpMR.getDelComCnt() %></p></div>
+			<div class="cnt_no" style="right: 120px;"><p><%=mpMR.getExchanCnt() %></p></div>
+		</div>
+	</div>
+	<!-- datepicker API -->
+	<div id="datepicker">
+		기간별 조회: <input type="text" id="startDate" name="startDate"> ~ <input type="text" id="endDate" name="endDate">
+		<button id="btnSelect">조 회</button>
+		<p id="checkMsg"></p>
 	</div>
 	
 </div>

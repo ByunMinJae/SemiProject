@@ -5,8 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import common.JDBCTemplate;
 import minjae.dao.face.MypageDao;
 import minjae.dto.MpMain;
+import minjae.dto.MpMainRight;
 
 public class MypageDaoImpl implements MypageDao {
 	
@@ -15,7 +17,8 @@ public class MypageDaoImpl implements MypageDao {
 	
 	@Override
 	public MpMain selectUserInfo(Connection conn, int userno) {
-		
+		System.out.println("/mypage/main selectUserInfo() - 시작");
+
 		String sql = "";
 		sql += "SELECT a.*, b.gradename FROM user_info a";
 		sql += " INNER JOIN user_level b";
@@ -52,9 +55,104 @@ public class MypageDaoImpl implements MypageDao {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
 		}
 		
+		System.out.println("/mypage/main selectUserInfo() - 끝");
 		return mpMain;
+	}
+	
+	@Override
+	public MpMainRight selectOrderInfo(Connection conn, int userno) {
+		System.out.println("/mypage/main selectOrderInfo() - 시작");
+		
+		String sql = "";
+		sql += "SELECT count(DECODE(orderprocess,'배송중', 1)) cnt1";
+		sql += " , count(DECODE(orderprocess,'배송완료', 1)) cnt2";
+		sql += " , count(DECODE(orderprocess,'교환/반품/취소', 1)) cnt3";
+		sql += " FROM";
+		sql += " 	(SELECT a.*, b.payno, c.orderafterno, c.orderprocess FROM user_orderbefore a";
+		sql += " 	INNER JOIN pay b";
+		sql += " 	ON a.orderno = b.orderno";
+		sql += " 	INNER JOIN user_orderafter c";
+		sql += "	ON b.payno = c.payno";
+		sql += "	WHERE a.userno = ?)";
+		
+		MpMainRight mpMR = null;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, userno);
+			
+			rs = ps.executeQuery();
+			
+			while( rs.next() ) {
+				mpMR = new MpMainRight();
+				
+				mpMR.setUserno(userno);
+				mpMR.setDelCnt(rs.getInt("cnt1"));
+				mpMR.setDelComCnt(rs.getInt("cnt2"));
+				mpMR.setExchanCnt(rs.getInt("cnt3"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("/mypage/main selectOrderInfo() - 끝");
+		return mpMR;
+	}
+	
+	@Override
+	public MpMainRight selectOIByDate(Connection conn, int userno, String startDate, String endDate) {
+		System.out.println("/mypage/main selectOIByDate() - 시작");
+		
+		String sql = "";
+		sql += "SELECT count(DECODE(orderprocess,'배송중', 1)) cnt1";
+		sql += " , count(DECODE(orderprocess,'배송완료', 1)) cnt2";
+		sql += " , count(DECODE(orderprocess,'교환/반품/취소', 1)) cnt3";
+		sql += " FROM";
+		sql += " 	(SELECT a.*, b.payno, c.orderafterno, c.orderprocess FROM user_orderbefore a";
+		sql += " 	INNER JOIN pay b";
+		sql += " 	ON a.orderno = b.orderno";
+		sql += " 	INNER JOIN user_orderafter c";
+		sql += "	ON b.payno = c.payno";
+		sql += "	WHERE a.userno = ?";
+		sql += "	AND trunc(b.paydate) BETWEEN to_date(?, 'YY/MM/DD') AND to_date(?, 'YY/MM/DD'))";
+
+		MpMainRight mpMR = null;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, userno);
+			ps.setString(2, startDate);
+			ps.setString(3, endDate);
+			
+			rs = ps.executeQuery();
+			
+			while( rs.next() ) {
+				mpMR = new MpMainRight();
+				
+				mpMR.setUserno(userno);
+				mpMR.setDelCnt(rs.getInt("cnt1"));
+				mpMR.setDelComCnt(rs.getInt("cnt2"));
+				mpMR.setExchanCnt(rs.getInt("cnt3"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("/mypage/main selectOIByDate() - 끝");
+		return mpMR;
 	}
 	
 }
