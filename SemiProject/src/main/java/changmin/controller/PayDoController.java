@@ -55,10 +55,26 @@ public class PayDoController extends HttpServlet {
 		req.setAttribute("prod", orderlist);
 		
 		//-------------------------------------------------------------------
+
+		//------------------------[기능]-----------------------------
+		//-------------------------------------------------------------------
+		
+		//------------------------[기능]-----------------------------
+		//-------------------------------------------------------------------
+
 		
 		req.getRequestDispatcher("/WEB-INF/views/changmin/paydo.jsp").forward(req, resp);
 	
 	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		System.out.println("/pay/do [POST]");
+
+		req.getRequestDispatcher("/WEB-INF/views/changmin/paydo.jsp").forward(req, resp);
+	}
+	
+	
 	
 	
 }

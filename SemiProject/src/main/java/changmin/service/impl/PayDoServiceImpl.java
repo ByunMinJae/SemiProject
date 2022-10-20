@@ -16,11 +16,10 @@ import common.JDBCTemplate;
 public class PayDoServiceImpl implements PayDoService{
 
 	private PayDoDao payDoDao = new PayDoDaoImpl();
-
+	private Connection conn = JDBCTemplate.getConnection();
 
 	@Override
 	public User getUserInfo(int userno) {
-		Connection conn = JDBCTemplate.getConnection();
 		
 		return payDoDao.getUserInfo(conn, userno);
 	}
@@ -34,9 +33,16 @@ public class PayDoServiceImpl implements PayDoService{
 
 	@Override
 	public Product getProdInfo(int prodno) {
-		Connection conn = JDBCTemplate.getConnection();
 		
 		return payDoDao.getProdInfo(conn, prodno);
+	}
+
+
+	@Override
+	public User updateUser(int userno) {
+
+		
+		return payDoDao.updateUser(conn, userno);
 	}
 
 

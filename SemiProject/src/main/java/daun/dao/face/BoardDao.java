@@ -53,5 +53,14 @@ public interface BoardDao {
 	 */
 	public Board selectBoardByBoardno(Connection conn, Board boardno);
 
+	/**
+	 * 
+	 * 
+	 * @param conn
+	 * @param board
+	 * @return board - 
+	 */
+	public int insertBoard(Connection conn, Board board);
+
 
 }

@@ -11,4 +11,6 @@ public interface PayDoDao {
 
 	public Product getProdInfo(Connection conn, int prodno);
 
+	public User updateUser(Connection conn, int userno);
+
 }

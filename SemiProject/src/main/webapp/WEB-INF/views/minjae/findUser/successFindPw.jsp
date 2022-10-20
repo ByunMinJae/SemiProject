@@ -20,13 +20,18 @@
     color: #fff;
     position: relative;
     top: 34px;
+    cursor: pointer;
+    border-radius: 7px;
+}
+#goToLoginPage:hover {
+	background-color: #333;
 }
 </style>
 
 <div class="gtlWrap">
 	<h1>완료!!</h1>
 	<hr>
-	<a href="{로그인 페이지 url 추후 수정}"><button id="goToLoginPage">로그인하러 가기</button></a>
+	<a href="/cmc/login"><button id="goToLoginPage">로그인하러 가기</button></a>
 </div>
 
 <jsp:include page="../../layout/footer.jsp"/>

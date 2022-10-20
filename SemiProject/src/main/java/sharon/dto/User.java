@@ -7,10 +7,11 @@ public class User {
 	private int userno;
 	private String userid;
 	private String userpw;
+	private String username;
 	private String gender;
 	private String address;
-	private int phone;
-	private Date birth;
+	private String phone;
+	private String birth;
 	private String email;
 	private String nick;
 	private Date joinday;
@@ -19,7 +20,7 @@ public class User {
 	
 	public User() {}
 	
-	public User(int userno, String userid, String userpw, String gender, String address, int phone, Date birth,
+	public User(int userno, String userid, String userpw, String gender, String address, String phone, String birth,
 			String email, String nick, Date joinday, Date userupdate, int gradeno) {
 		super();
 		this.userno = userno;
@@ -67,6 +68,15 @@ public class User {
 		this.userpw = userpw;
 	}
 
+	
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 	public String getGender() {
 		return gender;
 	}
@@ -83,19 +93,19 @@ public class User {
 		this.address = address;
 	}
 
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
-	public Date getBirth() {
+	public String getBirth() {
 		return birth;
 	}
 
-	public void setBirth(Date birth) {
+	public void setBirth(String birth) {
 		this.birth = birth;
 	}
 
@@ -138,5 +148,7 @@ public class User {
 	public void setGradeno(int gradeno) {
 		this.gradeno = gradeno;
 	}
+
+	
 
 }

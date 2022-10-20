@@ -1,22 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>코딩 산악회</title>
-
-<!-- jQeury 2.2.4 -->
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-
-<!-- 부트스트랩 Bootstrap 3 -->
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script> -->
-
+<%-- <%@ include file="./layout/header.jsp"%> --%>
+<jsp:include page="./layout/header.jsp"/>
 <style type="text/css">
+<<<<<<< HEAD
 p {
 	position: relative;
 }
@@ -230,11 +217,20 @@ li {
 
 		</header>
 		<style type="text/css">
+=======
+>>>>>>> refs/remotes/origin/terminal
 .back {
-	position: relatvie;
-	top: 250px;
-	width: 100vw;
-	height: 100vh;
+	position: relative;
+	top: -50px; 
+	right: 270px;
+	overflow: hidden;
+	width:2000px;
+}
+
+
+.back img {
+	width: 100%;
+	height: 1000px;
 }
 
 .login {
@@ -261,7 +257,9 @@ input, button {
 
 
 </style>
-		<img src="/resources/image/unit-sunrise-md.png" class="back">
+		<div class="back">
+			<img src="/resources/image/unit-sunrise-md.png">
+		</div>
 		<form class="login">
 			<p style="font-size:30px;">코딩 산악회</p>
 			<div class="panel_inner" role="tabpanel" aria-controls="loinid">
@@ -294,8 +292,7 @@ input, button {
 					</button>
 
 				</div>
-			</div>
 		</form>
 
-		<%@ include file="./layout/footer.jsp"%>
+<%@ include file="./layout/footer.jsp"%>
 
