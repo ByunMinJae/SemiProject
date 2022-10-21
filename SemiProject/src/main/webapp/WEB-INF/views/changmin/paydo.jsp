@@ -10,13 +10,13 @@
 <% Product prod = (Product) request.getAttribute("prod"); %>
 <% User updateUser = (User) request.getAttribute("updateUser"); %>
 
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style type="text/css">
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/css.jsp">
 </style>
 
-<script> 
+<script type="text/javascript">
 //카카오 결제 API
 var IMP = window.IMP; // 생략가능
 IMP.init('imp88224386');  // 가맹점 식별코드
@@ -27,12 +27,11 @@ function payDo(){
     pg: "html5_inicis",
     pay_method: "card",
     merchant_uid: "ORD20180131-0000011",
-    name: "<%=prod.getProdname()%>",
+    name: $("#prodnamevalue").val(),
     amount: $("#prodpricevalue").val(),
-    buyer_email: "<%=loginUser.getEmail()%>",
-    buyer_name: "<%=loginUser.getUsername()%>",
-    buyer_tel: "<%=loginUser.getPhone()%>",
-    <%-- buyer_addr: "<%=loginUser.getAddress()%>", --%>
+    buyer_email: $("#emailvalue").val(),
+    buyer_name: $("#prodpricevalue").val(),
+    buyer_tel: $("#phonevalue").val(),
     buyer_addr: $("#addressvalue").val(),
     buyer_postcode: "01181"
 	}, function (rsp) { // callback
@@ -198,7 +197,9 @@ button {
 	width: 345px;
 }
 
- 
+.widthcontainer {
+	width: 75%;
+}
 
 
 
@@ -206,76 +207,81 @@ button {
 </style>
 
 
-
-<h1>주문 / 결제</h1>
-<hr>
-<!-- 구매자 정보 -->
-<form class="pay" method="post">
-	<div id="buy_info">
-		<h3>구매자 정보</h3>
-		
-		<span class="info">&ensp;&emsp;&emsp;&emsp;이름</span>
-		<span class="info_detail"> <%=loginUser.getUsername() %></span><br><br>
-		
-		<span class="info">&ensp;&emsp;&emsp;이메일</span>
-		<span class="info_detail"> <%=loginUser.getEmail() %></span><br><br>
-		
-		<span class="info">&ensp;&emsp;&emsp;연락처</span>
-		<span class="info_detail"> <%=loginUser.getPhone() %> </span><br>
-	</div>
-	<br>
+<div class="widthcontainer">
+	<h1>주문 / 결제</h1>
 	<hr>
-	
-	<!-- 받는사람 정보 -->
-	<div id="receivcer_info">
-		<h3>받는사람 정보</h3>
-		<span class="info">&ensp;&emsp;&emsp;&emsp;이름</span>
-		<span class="info_detail"><%=loginUser.getUsername() %></span><br><br>
-		
-		<div id="addressChange">
-			<label for="postcode"><span class="info" id="change">&ensp;배송지변경</span></label>
-			<ul class="address_A">
-				<li><input type="text" name="postcode" id="postcode" placeholder="우편번호"></li>
-			</ul>
-				<input type="button" id="postbutton" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
-			<ul class="address_B"> 
-				<li><input type="text" id="address" placeholder="주소"><br></li>
-			</ul>
-			<ul class="address_C">
-				<li><input type="text" id="detailAddress" placeholder="상세주소"></li>
-				<li><input type="text" id="extraAddress" placeholder="참고항목"></li>
-			</ul>
-			<input type="hidden" name="address" id="addressSubmit">
-
-			<button type="button" id="addressSubmitButton">주소변경</button>
-			<span id="address_msg" class="msg"></span><br>
+	<!-- 구매자 정보 -->
+	<form class="pay" method="post">
+		<div id="buy_info">
+			<h3>구매자 정보</h3>
+			
+			<span class="info">&ensp;&emsp;&emsp;&emsp;이름</span>
+			<span class="info_detail"> <%=loginUser.getUsername() %></span><br><br>
+			
+			<span class="info">&ensp;&emsp;&emsp;이메일</span>
+			<input type="hidden" id="emailvalue" value="<%=loginUser.getEmail()%>">
+			<span class="info_detail"> <%=loginUser.getEmail() %></span><br><br>
+			
+			<span class="info">&ensp;&emsp;&emsp;연락처</span>
+			<span class="info_detail"> <%=loginUser.getPhone() %> </span><br>
 		</div>
-	</div>
+		<br>
+		<hr>
 		
-	<div> 
-		 
-		<span class="info">&ensp;&emsp;배송주소</span>
-		<input type="hidden" id="addressvalue" value="<%=loginUser.getAddress()%>">
-		<span class="info_detail" id="info_addressdetail"><%=loginUser.getAddress() %></span><br><br>
-		
-		<span class="info">&ensp;&emsp;&emsp;연락처</span>
-		<span class="info_detail"><%=loginUser.getPhone() %></span><br>
-	</div>
-	<br>
-	<hr>
-	<!-- 결제정보 -->
-	<div id="pay_info">
-		<h3>결제 정보</h3>
-		<span class="info">&nbsp;총결제금액</span>
-		<input type="hidden" id="prodpricevalue" value="<%=prod.getProdprice()%>">
-		<span class="info_detail"><%=prod.getProdprice() %></span>
-	</div> 
-	<br>
-	<hr>
-	<br>
-	<div>
-		<button id="paydo" type="button" onclick="payDo();"><img src="/resources/image/btn_payment.gif"></button>
-	</div>
-</form>
-<br><br><br>
+		<!-- 받는사람 정보 -->
+		<div id="receivcer_info">
+			<h3>받는사람 정보</h3>
+			<span class="info">&ensp;&emsp;&emsp;&emsp;이름</span>
+			<input type="hidden" id="usernamevalue" value="<%=loginUser.getUsername()%>">
+			<span class="info_detail"><%=loginUser.getUsername() %></span><br><br>
+			
+			<div id="addressChange">
+				<label for="postcode"><span class="info" id="change">&ensp;배송지변경</span></label>
+				<ul class="address_A">
+					<li><input type="text" name="postcode" id="postcode" placeholder="우편번호"></li>
+				</ul>
+					<input type="button" id="postbutton" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
+				<ul class="address_B"> 
+					<li><input type="text" id="address" placeholder="주소"><br></li>
+				</ul>
+				<ul class="address_C">
+					<li><input type="text" id="detailAddress" placeholder="상세주소"></li>
+					<li><input type="text" id="extraAddress" placeholder="참고항목"></li>
+				</ul>
+				<input type="hidden" name="address" id="addressSubmit">
+	
+				<button type="button" id="addressSubmitButton">주소변경</button>
+				<span id="address_msg" class="msg"></span><br>
+			</div>
+		</div>
+			
+		<div> 
+			 
+			<span class="info">&ensp;&emsp;배송주소</span>
+			<input type="hidden" id="addressvalue" value="<%=loginUser.getAddress()%>">
+			<span class="info_detail" id="info_addressdetail"><%=loginUser.getAddress() %></span><br><br>
+			
+			<span class="info">&ensp;&emsp;&emsp;연락처</span>
+			<input type="hidden" id="phonevalue" value="<%=loginUser.getAddress()%>">
+			<span class="info_detail"><%=loginUser.getPhone() %></span><br>
+		</div>
+		<br>
+		<hr>
+		<!-- 결제정보 -->
+		<div id="pay_info">
+			<h3>결제 정보</h3>
+			<span class="info">&nbsp;총결제금액</span>
+			<input type="hidden" id="prodnamevalue" value="<%=prod.getProdname() %>">
+			<input type="hidden" id="prodpricevalue" value="<%=prod.getProdprice()%>">
+			<span class="info_detail"><%=prod.getProdprice() %></span>
+		</div> 
+		<br>
+		<hr>
+		<br>
+		<div>
+			<button id="paydo" type="button" onclick="payDo();"><img src="/resources/image/btn_payment.gif"></button>
+		</div>
+	</form>
+	<br><br><br>
+</div>
 <%@ include file="../layout/footer.jsp" %>

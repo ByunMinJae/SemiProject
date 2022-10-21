@@ -38,12 +38,5 @@ public class PayDoServiceImpl implements PayDoService{
 	}
 
 
-	@Override
-	public User updateUser(int userno) {
-
-		
-		return payDoDao.updateUser(conn, userno);
-	}
-
 
 }

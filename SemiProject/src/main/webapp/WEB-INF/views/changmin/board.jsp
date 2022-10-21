@@ -66,5 +66,5 @@
 	</div>
 </form>
 
-</body>
+</body> 
 <%@ include file="../layout/footer.jsp"%>

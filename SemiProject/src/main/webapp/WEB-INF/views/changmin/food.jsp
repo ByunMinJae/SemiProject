@@ -8,14 +8,19 @@ th, td {
 td:nth-child(2) {
 	text-align: justify;
 }
+
+table {
+	margin: 20px auto 0 auto;
+	width: 1400px;
+}
 </style>
 <table border="1">
 	<tr>
-		<th width="5%">번호</th>
-		<th width="64%">제목</th>
-		<th width="16%">글쓴이</th>
-		<th width="10%">등록일</th>
-		<th width="5%">조회수</th>
+		<th width="8%">번호</th>
+		<th width="60%">제목</th>
+		<th width="18%">글쓴이</th>
+		<th width="8%">등록일</th>
+		<th width="8%">조회수</th>
 	</tr>
 	<tr>
 		<td>1</td>
