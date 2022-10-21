@@ -17,6 +17,12 @@ public class BoardServiceImpl implements BoardService{
 	private Connection conn = JDBCTemplate.getConnection();
 	
 	@Override
+	public List<Board> getList(Paging paging) {
+		
+		return boardDao.selectAll(conn, paging);
+	}
+	
+	@Override
 	public Board getBoardno(HttpServletRequest req) {
 		
 		Board board = new Board();
@@ -61,9 +67,6 @@ public class BoardServiceImpl implements BoardService{
 		return paging;
 	}
 
-	@Override
-	public List<Board> getList(Paging paging) {
-		return null;
-	}
+	
 
 }

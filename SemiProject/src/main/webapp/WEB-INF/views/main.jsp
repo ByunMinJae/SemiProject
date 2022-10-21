@@ -63,21 +63,18 @@ input, button {
 	left: 200px;
 }
  
-.text-static{
-	position: absolute;
-	top: 340px;
-	left: 483px;
-	width: 1000px;
- 
-}
 
 .textst{
 	font-family: 'dalseo';
 	font-size: 60px;
 	text-align: center;
 	padding: 0;
+	padding-left: 183px;
 	margin: 0;
 	margin-left: 50%;
+	transform: translateX(-200%);
+	opacity: 0;
+	animation: slide-in-anim 0s ease-out forwards;
 }
 :is(.one, .two, .three, .four){
 	color: white;
@@ -131,10 +128,6 @@ input, button {
 	color: #00CC88;
 }
 
-.time {
-	position: absolute;
-	background-color: white;
-}
 
 </style>
 <div class="back">
@@ -147,9 +140,6 @@ input, button {
 		<p class="two"><span class="agent">친구</span><span class="together">와 함께</span></p>
 		<p class="three"><span class="agent">연인</span><span class="together">과 함께</span></p>
 		<p class="four"><span class="agent">혼자</span><span class="together">서도</span></p>
-	</div>
-		
-	<div class="text-static">
 		<p class="textst">즐길수 있는 스포츠</p>
 	</div>
 </label>
@@ -196,7 +186,7 @@ input, button {
 
 
 
-<footer id="footer" class="footer" style="position:absolute; bottom:-185px;">
+<footer id="footer" class="footer" style="position:absolute; bottom:-210px;">
 	<div class="footer-wrap">
 		<p class="footerlist-wrap">
 			<span class="footerlist">

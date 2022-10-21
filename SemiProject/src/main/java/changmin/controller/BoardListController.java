@@ -29,7 +29,9 @@ public class BoardListController extends HttpServlet {
 		req.setAttribute("paging", paging);
 		
 		List<Board> list = boardService.getList(paging);
-		
+		for(Board b : list)
+		System.out.println(b);
+		req.setAttribute("list", list);
 		
 		req.getRequestDispatcher("/WEB-INF/views/changmin/board.jsp").forward(req, resp);
 	}
