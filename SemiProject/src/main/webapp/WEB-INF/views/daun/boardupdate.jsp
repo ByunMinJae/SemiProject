@@ -1,7 +1,10 @@
+<%@page import="daun.dto.Board"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
 <%@ include file="../layout/header.jsp" %>
+
+<%	Board updateBoard = (Board) request.getAttribute("updateBoard");  %>
 
 <script type="text/javascript" src="/resources/se2/js/service/HuskyEZCreator.js"></script>
 
@@ -88,7 +91,7 @@ td {
 			
 		<tr>
 			<td>제목</td>
-			<td><input type="text" id="title" name="title"></td>
+			<td><input type="text" id="title" name="title" value="<%-- <%=updateBoard.getboardtitle() %> --%>"></td>
 		</tr>
 		
 		<tr>
