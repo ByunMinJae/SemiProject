@@ -1,6 +1,7 @@
 package minjae.service.impl;
 
 import java.sql.Connection;
+import java.util.List;
 
 import common.JDBCTemplate;
 import minjae.dao.face.MypageDao;
@@ -51,15 +52,33 @@ public class MypageServiceImpl implements MypageService {
 	}
 	
 	@Override
-	public BoardInfoCate getBoardInfoCate(int userno) {
+	public List<BoardInfoCate> getBoardInfoCate(int userno) {
 		System.out.println("/mypage/main getBoardInfoCate() - 시작");
 		
 		Connection conn = JDBCTemplate.getConnection();
 		
-		BoardInfoCate boardIC = mypageDao.selectBoardIC(conn, userno);
+		List<BoardInfoCate> boardICList = mypageDao.selectBoardIC(conn, userno);
 		
 		System.out.println("/mypage/main getBoardInfoCate() - 끝");
-		return boardIC;
+		return boardICList;
+	}
+	
+	@Override
+	public boolean checkUserpw(int userno, String pw) {
+		System.out.println("/mypage/main checkUserpw() - 시작");
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int res = mypageDao.selectUserpw(conn, userno, pw);
+		
+		if( res > 0 ) {
+			System.out.println("/mypage/main checkUserpw() - 끝");
+			return true;
+		} else {
+			System.out.println("/mypage/main checkUserpw() - 끝");
+			return false;
+		}
+		
 	}
 	
 }

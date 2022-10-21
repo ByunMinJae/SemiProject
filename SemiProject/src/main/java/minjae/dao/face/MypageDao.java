@@ -1,6 +1,7 @@
 package minjae.dao.face;
 
 import java.sql.Connection;
+import java.util.List;
 
 import minjae.dto.BoardInfoCate;
 import minjae.dto.MpMain;
@@ -40,11 +41,22 @@ public interface MypageDao {
 	public MpMainRight selectOIByDate(Connection conn, int userno, String startDate, String endDate);
 	
 	/**
-	 *  userno에 해당하는 유저의 게시글 정보와 카테고리 정보를 반환한다
+	 * userno에 해당하는 유저의 게시글 정보와 카테고리 정보를  List로 반환한다
 	 * 
 	 * @param userno - 유저번호
-	 * @return BoardInfoCate DTO - 게시글, 카테고리 정보
+	 * @return List<BoardInfoCate> - 게시글, 카테고리 정보 List
 	 */
-	public BoardInfoCate selectBoardIC(Connection conn, int userno);
+	public List<BoardInfoCate> selectBoardIC(Connection conn, int userno);
+	
+	/**
+	 *  userno에 해당하는 회원의 패스워드가 pw인
+	 * 회원이 있는지 count()로 조회한다
+	 * 
+	 * @param conn - DB 연결 객체
+	 * @param userno - 유저번호
+	 * @param pw - 패스워드
+	 * @return count() 결과 값
+	 */
+	public int selectUserpw(Connection conn, int userno, String pw);
 
 }

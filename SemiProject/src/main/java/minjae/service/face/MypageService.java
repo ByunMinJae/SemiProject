@@ -1,5 +1,7 @@
 package minjae.service.face;
 
+import java.util.List;
+
 import minjae.dto.BoardInfoCate;
 import minjae.dto.MpMain;
 import minjae.dto.MpMainRight;
@@ -34,13 +36,23 @@ public interface MypageService {
 	public MpMainRight getOrderInfoByDate(int userno, String startDate, String endDate);
 	
 	/**
-	 *  해당 userno를 이용해 해당 유저의
-	 * 게시글 정보와 카테고리 정보를 Join하여 가져온다
+	 *  세션에 저장된 userno를 이용해 해당 유저의
+	 * 게시글 정보와 카테고리 정보를 Join하여 List로 가져온다
 	 * 
-	 * @param userno
-	 * @return
+	 * @param userno - 유저번호
+	 * @return List<BoardInfoCate> - 게시글 정보, 카테고리정보
 	 */
-	public BoardInfoCate getBoardInfoCate(int userno);
+	public List<BoardInfoCate> getBoardInfoCate(int userno);
+	
+	/**
+	 *  입력받은 pw가 현재 로그인한 회원의 
+	 * 패스워드가 맞는지 확인 하고 결과 반환
+	 * 
+	 * @param userno - session의 회원 번호
+	 * @param pw - 입력 받은 패스워드
+	 * @return boolean 결과
+	 */
+	public boolean checkUserpw(int userno, String pw);
 
 }
 

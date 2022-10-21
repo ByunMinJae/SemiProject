@@ -96,15 +96,15 @@ function hiddenImg( btnCateg, mi ) {
 }
 #mpmLeft {
 	width: 40%;
-	height: 100%;
+	height: 640px;
 	float: left;
-	background: #ddd;
+	background: #c7f2a482;
 }
 #userInfo {
-	padding-top: 66px;
+	padding-top: 92px;
 }
 #mpmRight {
-	margin-top: 88px;
+	margin-top: 104px;
 	width: 55%;
 	float: right;
 	position: relative;
@@ -121,7 +121,7 @@ function hiddenImg( btnCateg, mi ) {
 }
 .md:hover {
 	cursor: pointer;
-	color: #54abdf;
+	color: #36871b;
 }
 ul#ul_left {
 	margin: 68px 71px;
@@ -184,7 +184,8 @@ li.info_left {
 #contents {
 	width: 500px;
     height: 336px;
-    background: #ddd;
+    background: #fcffb282;
+    border: 1px solid #ccc;
     margin-left: 53px;
     border-radius: 14px;
 }
@@ -192,7 +193,7 @@ li.info_left {
 	margin: 88px 19px;
     width: 123px;
     height: 123px; 
-	background: linear-gradient(#69a9eb, #0156ef);
+	background: linear-gradient(#d169eb6b, #b717dfb0);
 	border-radius: 60px; 
 	display: inline-block;
 }
@@ -217,7 +218,7 @@ li.info_left {
 	background: url("/resources/image/mypage_arrow.png") no-repeat 0 0;
 }
 .con_text {
-	background: linear-gradient(#2c8aeb, #0046c3);
+	background: linear-gradient(#d169ebd9, #b717dfb0);
 	color: transparent;
 	-webkit-background-clip: text;
 	position: absolute;
@@ -229,7 +230,7 @@ li.info_left {
     position: absolute;
     top: 236px;
     font-size: 50px;
-    color: #444;
+    color: #b321d7eb;
 }
 #datepicker {
 	font-weight: bold;
@@ -239,23 +240,29 @@ li.info_left {
 }
 #startDate, #endDate {
 	width: 100px;
+	height: 24px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    padding-left: 10px;
+    background-color: #fff;
 }
 #btnSelect {
 	width: 71px;
     font-weight: bold;
-    background: linear-gradient(#9ca19a, #7a8577);;
+    background: #fff;
     border-radius: 5px;
-    border: 1px solid #718173;
+    border: 1px solid #cfcfcf;
     cursor: pointer;
 }
 #btnSelect:hover {
-    background: linear-gradient(#57fb22, #3e9521);
+    background: linear-gradient(#c7f2a4, #88eb38);
 }
 #checkMsg {
 	color: red;
-    font-size: 10px;
+    font-size: 11px;
     position: relative;
-    bottom: 49px;
+    bottom: 55px;
 }
 </style>
 

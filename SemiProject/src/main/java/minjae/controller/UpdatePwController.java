@@ -27,7 +27,11 @@ public class UpdatePwController extends HttpServlet {
 		//아이디를 이용해 패스워드 변경 후 결과 반환
 		boolean isComp = findUserService.updateUserPw(id, upw);
 		
-		//View 지정 및 포워드
-		req.getRequestDispatcher("/WEB-INF/views/minjae/findUser/successFindPw.jsp").forward(req, resp);
+		if( isComp ) {
+			//View 지정 및 포워드
+			req.getRequestDispatcher("/WEB-INF/views/minjae/findUser/successFindPw.jsp").forward(req, resp);
+		} else {
+			req.getRequestDispatcher("/WEB-INF/views/minjae/findUser/failUpdatePw.jsp").forward(req, resp);
+		}
 	}
 }

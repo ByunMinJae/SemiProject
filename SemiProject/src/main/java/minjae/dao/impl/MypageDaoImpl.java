@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import common.JDBCTemplate;
 import minjae.dao.face.MypageDao;
@@ -21,7 +23,9 @@ public class MypageDaoImpl implements MypageDao {
 		System.out.println("/mypage/main selectUserInfo() - 시작");
 
 		String sql = "";
-		sql += "SELECT a.*, b.gradename FROM user_info a";
+		sql += "SELECT a.USERNO, a.USERID, a.USERNAME, a.GENDER, a.ADDRESS";
+		sql += " , a.PHONE, a.BIRTH, a.EMAIL, a.NICK, a.JOINDAY, a.USERUPDATE";
+		sql += " , a.GRADENO, b.gradename FROM user_info a";
 		sql += " INNER JOIN user_level b";
 		sql += " ON a.gradeno = b.gradeno";
 		sql += " WHERE userno = ?";
@@ -39,7 +43,6 @@ public class MypageDaoImpl implements MypageDao {
 				
 				mpMain.setUserno(rs.getInt("userno"));
 				mpMain.setUserid(rs.getString("userid"));
-				mpMain.setUserpw(rs.getString("userpw"));
 				mpMain.setUsername(rs.getString("username"));
 				mpMain.setGender(rs.getString("gender"));
 				mpMain.setAddress(rs.getString("address"));
@@ -157,7 +160,7 @@ public class MypageDaoImpl implements MypageDao {
 	}
 	
 	@Override
-	public BoardInfoCate selectBoardIC(Connection conn, int userno) {
+	public List<BoardInfoCate> selectBoardIC(Connection conn, int userno) {
 		System.out.println("/mypage/main selectBoardIC() - 시작");
 		
 		String sql = "";
@@ -165,8 +168,9 @@ public class MypageDaoImpl implements MypageDao {
 		sql += " INNER JOIN Board_Category b";
 		sql += "	ON a.categoryno = b.categoryno";
 		sql += " WHERE a.userno = ?";
+		sql += " ORDER BY boardno DESC";
 
-		BoardInfoCate boardIC = null;
+		List<BoardInfoCate> boardICList = new ArrayList<>();
 		
 		try {
 			ps = conn.prepareStatement(sql);
@@ -175,16 +179,17 @@ public class MypageDaoImpl implements MypageDao {
 			rs = ps.executeQuery();
 			
 			while( rs.next() ) {
-				boardIC = new BoardInfoCate();
+				BoardInfoCate bic = new BoardInfoCate(); 
 				
-				boardIC.setBoardno(rs.getInt("boardno"));
-				boardIC.setBoardtitle(rs.getString("boardtitle"));
-				boardIC.setBoardcon(rs.getString("bardcon"));
-				boardIC.setBoarddate(rs.getDate("boarddate"));
-				boardIC.setUserno(rs.getInt("userno"));
-				boardIC.setCategoryno(rs.getInt("categoryno"));
-				boardIC.setCategoryname(rs.getString("categoryname"));
+				bic.setBoardno(rs.getInt("boardno"));
+				bic.setBoardtitle(rs.getString("boardtitle"));
+				bic.setBoardcon(rs.getString("boardcon"));
+				bic.setBoarddate(rs.getDate("boarddate"));
+				bic.setUserno(rs.getInt("userno"));
+				bic.setCategoryno(rs.getInt("categoryno"));
+				bic.setCategoryname(rs.getString("categoryname"));
 				
+				boardICList.add(bic);
 			}
 			
 		} catch (SQLException e) {
@@ -195,7 +200,40 @@ public class MypageDaoImpl implements MypageDao {
 		}
 		
 		System.out.println("/mypage/main selectBoardIC() - 끝");
-		return boardIC;
+		return boardICList;
+	}
+	
+	@Override
+	public int selectUserpw(Connection conn, int userno, String pw) {
+		System.out.println("/mypage/main selectUserpw() - 시작");
+		
+		String sql = "";
+		sql += "SELECT count(*) FROM user_info";
+		sql += " WHERE userno = ? AND userpw = ?";
+		
+		int res = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, userno);
+			ps.setString(2, pw);
+			
+			rs = ps.executeQuery();
+			
+			while( rs.next() ) {
+				res = rs.getInt("count(*)");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+			
+		System.out.println(res);
+		System.out.println("/mypage/main selectUserpw() - 끝");
+		return res;
 	}
 	
 }
