@@ -10,19 +10,29 @@ import util.Paging;
 public interface BoardService {
 
 	/**
-	 * 게시글 목록 조회 
-	 * @param paging
-	 * @return - paging된 게시글 목록 반환 
+	 * 게시글 전체 조회
+	 * 
+	 * @return List<Board> - 게시글 전체 조회 목록
 	 */
-	public List<Board> getList(Paging paging);
+	public List<Board> getList();
+
 	
+	/**
+	 * 페이징 객체
+	 * 
+	 * @param req
+	 * @return Paging - 페이징 계산 완료 객체
+	 */
+	public Paging getPaging(HttpServletRequest req);
+
+
+	public List<Board> getList(Paging paging);
+
+
 	public Board getBoardno(HttpServletRequest req);
 
+
 	public Board view(Board boardno);
-
-	public String getWriteNick(Board viewBoard);
-
-	public Paging getPaging(HttpServletRequest req);
 
 	
 	

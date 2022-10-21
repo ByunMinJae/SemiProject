@@ -8,8 +8,24 @@ import util.Paging;
 
 public interface BoardDao {
 
-	List<Board> selectAll(Connection conn, Paging paging);
+	/**
+	 * 게시글 테이블 전체 조회
+	 * 
+	 * @param conn
+	 * @return List<Board> - 테이블 전체 조회 목록
+	 */
+	public List<Board> selectAll(Connection conn);
 
-	int selectCntAll(Connection connection);
+	public List<Board> selectAll(Connection conn, Paging paging);
+	
+	public int selectCntAll(Connection conn);
+
+	public int updateHit(Connection conn, Board boardno);
+
+	public Board selectBoardByBoardno(Connection conn, Board boardno);
+
+	
+
+	
 
 }

@@ -23,15 +23,30 @@ public class NoticeController extends HttpServlet {
 		protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("/board/notice [GET]");
 	
+		//----------------------게시글 전체 조회-------------------------------
+		
+		//전달파라미터에서 현재 페이징 객체 계산하기
 		Paging paging = boardService.getPaging(req);
+		System.out.println("[TEST] " + paging);
 		
 		req.setAttribute("paging", paging);
 		
-		List<Board> list = boardService.getList(paging);
-		for(Board b : list)
-		System.out.println(b);
 		
-		req.setAttribute("list", list);
+		//게시글 페이징 목록 조회
+		List<Board> boardList = boardService.getList( paging );
+//		for( int i=0; i<5; i++) {
+//			int abc = boardList.get(i).getCategoryno();
+//			System.out.println(abc);
+//		}
+		
+		//[TEST] 조회결과 확인
+		for(Board b : boardList)	System.out.println(b);
+		
+		req.setAttribute("boardList", boardList);
+		
+		//----------------------게시글 전체 조회-------------------------------
+		
+	
 		
 		req.getRequestDispatcher("/WEB-INF/views/changmin/notice.jsp").forward(req, resp);
 	}

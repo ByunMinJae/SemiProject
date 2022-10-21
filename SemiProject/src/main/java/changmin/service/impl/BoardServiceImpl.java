@@ -13,39 +13,22 @@ import daun.dto.Board;
 import util.Paging;
 
 public class BoardServiceImpl implements BoardService{
+	
 	private BoardDao boardDao = new BoardDaoImpl();
 	private Connection conn = JDBCTemplate.getConnection();
-	
+
+	@Override
+	public List<Board> getList() {
+		System.out.println("getList - Start");
+		
+		return boardDao.selectAll(conn);
+	}
+
 	@Override
 	public List<Board> getList(Paging paging) {
-		
-		return boardDao.selectAll(conn, paging);
+		return boardDao.selectAll(JDBCTemplate.getConnection(), paging);
 	}
 	
-	@Override
-	public Board getBoardno(HttpServletRequest req) {
-		
-		Board board = new Board();
-		
-		String param = req.getParameter("boardno");
-		
-		if( null != param && !"".equals(param) ) { //전달파라미터가 null 또는 ""빈문자열이 아닐 때 처리 
-			board.setBoardno( Integer.parseInt(param) );
-		}
-		
-		return board;
-	}
-
-	@Override
-	public Board view(Board boardno) {
-		return null;
-	}
-
-	@Override
-	public String getWriteNick(Board viewBoard) {
-		return null;
-	}
-
 	@Override
 	public Paging getPaging(HttpServletRequest req) {
 		
@@ -66,6 +49,45 @@ public class BoardServiceImpl implements BoardService{
 		
 		return paging;
 	}
+
+	@Override
+	public Board getBoardno(HttpServletRequest req) {
+//		Connection conn = JDBCTemplate.getConnection();
+		
+		//전달파라미터를 저장할 객체 생성
+		Board board = new Board();
+		
+		//전달파라미터 boardno 추출(파싱)
+		String param = req.getParameter("boardno");
+		
+		if( param != null && !"".equals(param) ) { //전달파라미터가 null 또는 ""빈문자열이 아닐 때 처리
+			board.setBoardno( Integer.parseInt(param) );
+		}
+		
+		
+		return board;
+	}
+
+	@Override
+	public Board view(Board boardno) {
+		
+		//DB연결 객체
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//조회수 증가
+		if( boardDao.updateHit(conn, boardno)>0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		//게시글 조회
+		Board board = boardDao.selectBoardByBoardno(conn, boardno);
+		
+		//조회된 게시글 리턴
+		return board;
+	}
+
 
 	
 
