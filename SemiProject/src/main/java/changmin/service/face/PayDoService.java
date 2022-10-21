@@ -1,5 +1,7 @@
 package changmin.service.face;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import changmin.dto.Pay;
@@ -31,12 +33,7 @@ public interface PayDoService {
 	 */
 	public Product getProdInfo(int prodno);
 
-	/**
-	 * 배송지 변경기능
-	 * @param userno
-	 * @return - 유저정보 수정결과 반환
-	 */
-	public User updateUser(int userno);
+
 
 
 

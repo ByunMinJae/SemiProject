@@ -2,7 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%-- <%@ include file="./layout/header.jsp"%> --%>
 <jsp:include page="./layout/header.jsp"/>
+<script type="text/javascript">
 
+
+
+</script>
 <style type="text/css">
 
 
@@ -127,10 +131,16 @@ input, button {
 	color: #00CC88;
 }
 
+.time {
+	position: absolute;
+	background-color: white;
+}
+
 </style>
 <div class="back">
 	<img src="/resources/image/unit-sunrise-md.png">
 </div>
+
 <label>
 	<div class="text-slide">
 		<p class="one"><span class="agent">가족</span><span class="together">과 함께</span></p>
@@ -145,11 +155,6 @@ input, button {
 </label>
 
 
-		
-		
-		
-		
-		
 		
 <!-- 		<form class="login">
 			<p style="font-size:30px;">코딩 산악회</p>

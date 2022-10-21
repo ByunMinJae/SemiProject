@@ -27,12 +27,11 @@ function payDo(){
     pg: "html5_inicis",
     pay_method: "card",
     merchant_uid: "ORD20180131-0000011",
-    name: "<%=prod.getProdname()%>",
+    name: $("#prodnamevalue").val(),
     amount: $("#prodpricevalue").val(),
-    buyer_email: "<%=loginUser.getEmail()%>",
-    buyer_name: "<%=loginUser.getUsername()%>",
-    buyer_tel: "<%=loginUser.getPhone()%>",
-    <%-- buyer_addr: "<%=loginUser.getAddress()%>", --%>
+    buyer_email: $("#emailvalue").val(),
+    buyer_name: $("#prodpricevalue").val(),
+    buyer_tel: $("#phonevalue").val(),
     buyer_addr: $("#addressvalue").val(),
     buyer_postcode: "01181"
 	}, function (rsp) { // callback
@@ -220,6 +219,7 @@ button {
 			<span class="info_detail"> <%=loginUser.getUsername() %></span><br><br>
 			
 			<span class="info">&ensp;&emsp;&emsp;이메일</span>
+			<input type="hidden" id="emailvalue" value="<%=loginUser.getEmail()%>">
 			<span class="info_detail"> <%=loginUser.getEmail() %></span><br><br>
 			
 			<span class="info">&ensp;&emsp;&emsp;연락처</span>
@@ -232,6 +232,7 @@ button {
 		<div id="receivcer_info">
 			<h3>받는사람 정보</h3>
 			<span class="info">&ensp;&emsp;&emsp;&emsp;이름</span>
+			<input type="hidden" id="usernamevalue" value="<%=loginUser.getUsername()%>">
 			<span class="info_detail"><%=loginUser.getUsername() %></span><br><br>
 			
 			<div id="addressChange">
@@ -261,6 +262,7 @@ button {
 			<span class="info_detail" id="info_addressdetail"><%=loginUser.getAddress() %></span><br><br>
 			
 			<span class="info">&ensp;&emsp;&emsp;연락처</span>
+			<input type="hidden" id="phonevalue" value="<%=loginUser.getAddress()%>">
 			<span class="info_detail"><%=loginUser.getPhone() %></span><br>
 		</div>
 		<br>
@@ -269,6 +271,7 @@ button {
 		<div id="pay_info">
 			<h3>결제 정보</h3>
 			<span class="info">&nbsp;총결제금액</span>
+			<input type="hidden" id="prodnamevalue" value="<%=prod.getProdname() %>">
 			<input type="hidden" id="prodpricevalue" value="<%=prod.getProdprice()%>">
 			<span class="info_detail"><%=prod.getProdprice() %></span>
 		</div> 
