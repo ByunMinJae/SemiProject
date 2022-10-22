@@ -2,6 +2,8 @@ package minjae.service.face;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import minjae.dto.BoardInfoCate;
 import minjae.dto.MpMain;
 import minjae.dto.MpMainRight;
@@ -53,7 +55,35 @@ public interface MypageService {
 	 * @return boolean 결과
 	 */
 	public boolean checkUserpw(int userno, String pw);
-
+	
+	/**
+	 * 변경하려는 닉네임이 DB에 존재하는지 조회
+	 * 
+	 * @param nick - 닉네임
+	 * @return 조회결과
+	 */
+	public int existNick(String nick);
+	
+	/**
+	 * 변경하려는 전화번호가 DB에 존재하는지 조회
+	 * 
+	 * @param phone - 전화번호
+	 * @return 조회결과
+	 */
+	public int existPhone(String phone);
+	
+	/**
+	 *  세션에 저장된 userno을 가진 회원의 닉네임을 변경한다
+	 * 
+	 * @param userno - 회원 번호
+	 * @param nick - 변경 닉네임
+	 * @return update 수행 결과
+	 */
+	public int updateUserNick(int userno, String nick);
+	
+	
+	
+	
 }
 
 

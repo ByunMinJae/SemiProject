@@ -124,6 +124,7 @@ function hiddenImg( btnCateg, mi ) {
 	color: #36871b;
 }
 ul#ul_left {
+	list-style: none;
 	margin: 68px 71px;
     padding: 0;
     text-align: -webkit-center;

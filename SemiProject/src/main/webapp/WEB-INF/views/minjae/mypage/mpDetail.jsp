@@ -111,6 +111,7 @@ $(document).ready(function() {
 	color: #36871b;
 }
 ul#ul_left {
+	list-style: none;
 	margin: 68px 71px;
     padding: 0;
     text-align: -webkit-center;
@@ -145,6 +146,7 @@ li.info_left {
     color: #3fbf28;
 }
 .rContant {
+	list-style: none;
 	margin: 0 auto;
 	font-size: 18px;
     font-weight: bold;

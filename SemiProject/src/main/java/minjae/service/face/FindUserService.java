@@ -1,5 +1,7 @@
 package minjae.service.face;
 
+import javax.servlet.http.HttpServletRequest;
+
 import minjae.dto.UserFind;
 import minjae.dto.UserInfo;
 
@@ -85,6 +87,14 @@ public interface FindUserService {
 	 * @return 성공 - true, 실패 - false
 	 */
 	public boolean updateUserPw(String id, String upw);
+	
+	/**
+	 *  해당 요청 비밀번호가 이미 가입된 비밀번호 인지 확인 한다
+	 * 
+	 * @param req - 요청 비밀번호 정보
+	 * @return 조회 결과
+	 */
+	public int existPw(HttpServletRequest req);
 	
 	
 }

@@ -7,11 +7,45 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	
+	/* 비밀번호는 중복 가능인데 실수함 나중에 필요하면 그때 사용 */
+	//입력한 비밀번호로 가입한 유저가 있는지 확인
+// 	$("#btnChangePw").click(function() {
+		
+// 		$.ajax({
+// 			type: "post"					//요청 메소드
+// 			, url: "/find/existpw"			//요청 URL
+// 			, data: {						//요청 파라미터
+// 				pw: $("#upw").val()
+// 			}
+// 			, dataType: "html"				//응답 데이터 형식
+// 			, success: function( res ) {
+// 				console.log("AJAX 성공")
+// 				console.log(res)
+				
+// 				if( $.trim(res) == "true" ) {
+// 					console.log('존재하지 않는 패스워드(변경 가능)')
+					
+// 					//비밀번호 유효성 검사가 true일 때 submit()
+// 					if( validatePW( $("#upw").val() ) ) {
+// 						$("#form").submit();
+// 					}
+					
+// 				} else {
+// 					console.log('존재하는 패스워드(변경 불가능)')
+// 					//아닐 때 확인 메시지 띄우기
+// 					$("#upw_check_msg").html(res);
+// 				}
+				
+// 			}
+			
+// 		})
+		
+// 	})
+	
+	//form submit 될 때 유효성 검사
 	$("#form").submit(function() {
-		
-		//true = submit
+		//true일 때 submit
 		return validatePW( $("#upw").val() );
-		
 	})
 	
 	//비밀번호 확인 입력 keyup 이벤트

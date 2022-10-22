@@ -35,7 +35,36 @@ public class MypageUpdateController extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		System.out.println("/mypage/update [POST]");
 		
+		//세션에서 userno 꺼내기
+		HttpSession session = req.getSession();
+		int userno = (int)session.getAttribute("userno");
+		
+		req.setCharacterEncoding("UTF-8");
+		
+		String btnName = req.getParameter("btnName");
+		
+		if( btnName.equals("nick") ) {
+			
+			String nick = req.getParameter("nick");
+			System.out.println("유저 번호 : " + userno);
+			int res = mypageService.updateUserNick(userno, nick);
+			
+			req.setAttribute("res", res);
+			req.getRequestDispatcher("/WEB-INF/views/minjae/mypage/mpUdtResult.jsp").forward(req, resp);
+			return;
+		} 
+		
+		if( btnName.equals("phone") ) {
+			
+			return;
+		} 
+		
+		if( btnName.equals("address") ) {
+			
+			return;
+		} 
 	}
 	
 }

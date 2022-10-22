@@ -3,6 +3,8 @@ package minjae.service.impl;
 import java.sql.Connection;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import common.JDBCTemplate;
 import minjae.dao.face.MypageDao;
 import minjae.dao.impl.MypageDaoImpl;
@@ -77,6 +79,51 @@ public class MypageServiceImpl implements MypageService {
 		} else {
 			System.out.println("/mypage/main checkUserpw() - 끝");
 			return false;
+		}
+		
+	}
+	
+	@Override
+	public int existNick(String nick) {
+		System.out.println("/mypage/main existNick() - 시작");
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int res = mypageDao.countNick(conn, nick);
+		
+		System.out.println("/mypage/main existNick() - 끝");
+		return res;
+		
+	}
+	
+	@Override
+	public int existPhone(String phone) {
+		System.out.println("/mypage/main existPhone() - 시작");
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int res = mypageDao.countPhone(conn, phone);
+		
+		System.out.println("/mypage/main existPhone() - 끝");
+		return res;
+	}
+	
+	@Override
+	public int updateUserNick(int userno, String nick) {
+		System.out.println("/mypage/main updateUserNick() - 시작");
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int res = mypageDao.updateUserNick(conn, userno, nick);
+		
+		if( res > 0 ) {
+			JDBCTemplate.commit(conn);
+			System.out.println("/mypage/main updateUserNick() - 끝");
+			return 1; //성공
+		} else {
+			JDBCTemplate.rollback(conn);
+			System.out.println("/mypage/main updateUserNick() - 끝");
+			return 0; //실패
 		}
 		
 	}

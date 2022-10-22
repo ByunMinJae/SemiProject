@@ -220,9 +220,9 @@ public class MypageDaoImpl implements MypageDao {
 			
 			rs = ps.executeQuery();
 			
-			while( rs.next() ) {
-				res = rs.getInt("count(*)");
-			}
+			rs.next();
+			res = rs.getInt("count(*)");
+			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -233,6 +233,94 @@ public class MypageDaoImpl implements MypageDao {
 			
 		System.out.println(res);
 		System.out.println("/mypage/main selectUserpw() - 끝");
+		return res;
+	}
+	
+	@Override
+	public int countNick(Connection conn, String nick) {
+		System.out.println("/mypage/main countNick() - 시작");
+		
+		String sql = "";
+		sql += "SELECT count(DECODE(nick, ?, 1)) cnt FROM user_info";
+		
+		int res = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, nick);
+			
+			rs = ps.executeQuery();
+			
+			rs.next();
+			res = rs.getInt("cnt");
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+			
+		System.out.println("/mypage/main countNick() - 끝");
+		return res;
+	}
+	
+	@Override
+	public int countPhone(Connection conn, String phone) {
+		System.out.println("/mypage/main countPhone() - 시작");
+		
+		String sql = "";
+		sql += "SELECT count(DECODE(phone, ?, 1)) cnt FROM user_info";
+		
+		int res = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, phone);
+			
+			rs = ps.executeQuery();
+			
+			rs.next();
+			res = rs.getInt("cnt");
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+			
+		System.out.println("/mypage/main countPhone() - 끝");
+		return res;
+	}
+	
+	@Override
+	public int updateUserNick(Connection conn, int userno, String nick) {
+		System.out.println("/mypage/main updateUserNick() - 시작");
+		
+		String sql = "";
+		sql += "UPDATE user_info";
+		sql += " SET nick = ?";
+		sql += " WHERE userno = ?";
+		
+		int res = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, nick);
+			ps.setInt(2, userno);
+			
+			res = ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("/mypage/main updateUserNick() - 끝");
 		return res;
 	}
 	
