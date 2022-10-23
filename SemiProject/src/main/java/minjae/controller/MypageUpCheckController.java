@@ -21,12 +21,14 @@ public class MypageUpCheckController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("/mypage/upcheck [POST]");
 		
+		req.setCharacterEncoding("UTF-8");
+		
 		//눌려진 수정버튼의 종류
 		String btnName = req.getParameter("btnName");
 		
 		//닉네임 수정일 때 검사
 		if( btnName.equals("nick") ) {
-			String nick = req.getParameter("nick");
+			String nick = req.getParameter("info");
 			int resNick = mypageService.existNick(nick);
 			
 			System.out.println(resNick);
@@ -37,7 +39,7 @@ public class MypageUpCheckController extends HttpServlet {
 		
 		//전화번호 수정일 때 검사
 		if( btnName.equals("phone") ) {
-			String phone = req.getParameter("phone");
+			String phone = req.getParameter("info");
 			int resPhone = mypageService.existPhone(phone);
 			
 			req.setAttribute("resPhone", resPhone);

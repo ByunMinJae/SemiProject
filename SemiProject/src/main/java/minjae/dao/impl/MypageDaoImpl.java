@@ -297,8 +297,36 @@ public class MypageDaoImpl implements MypageDao {
 	}
 	
 	@Override
+	public int updateUserName(Connection conn, int userno, String name) {
+		System.out.println("/mypage/main DAO updateUserName() - 시작");
+		
+		String sql = "";
+		sql += "UPDATE user_info";
+		sql += " SET username = ?";
+		sql += " WHERE userno = ?";
+		
+		int res = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, name);
+			ps.setInt(2, userno);
+			
+			res = ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("/mypage/main DAO updateUserName() - 끝");
+		return res;
+	}
+	
+	@Override
 	public int updateUserNick(Connection conn, int userno, String nick) {
-		System.out.println("/mypage/main updateUserNick() - 시작");
+		System.out.println("/mypage/main DAO updateUserNick() - 시작");
 		
 		String sql = "";
 		sql += "UPDATE user_info";
@@ -320,7 +348,63 @@ public class MypageDaoImpl implements MypageDao {
 			JDBCTemplate.close(ps);
 		}
 		
-		System.out.println("/mypage/main updateUserNick() - 끝");
+		System.out.println("/mypage/main DAO updateUserNick() - 끝");
+		return res;
+	}
+	
+	@Override
+	public int updateUserPhone(Connection conn, int userno, String phone) {
+		System.out.println("/mypage/main DAO updateUserPhone() - 시작");
+		
+		String sql = "";
+		sql += "UPDATE user_info";
+		sql += " SET phone = ?";
+		sql += " WHERE userno = ?";
+		
+		int res = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, phone);
+			ps.setInt(2, userno);
+			
+			res = ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("/mypage/main DAO updateUserPhone() - 끝");
+		return res;
+	}
+	
+	@Override
+	public int updateUserAddr(Connection conn, int userno, String address) {
+		System.out.println("/mypage/main DAO updateUserAddr() - 시작");
+		
+		String sql = "";
+		sql += "UPDATE user_info";
+		sql += " SET address = ?";
+		sql += " WHERE userno = ?";
+		
+		int res = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, address);
+			ps.setInt(2, userno);
+			
+			res = ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("/mypage/main DAO updateUserAddr() - 끝");
 		return res;
 	}
 	

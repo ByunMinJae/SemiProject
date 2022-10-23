@@ -45,10 +45,21 @@ public class MypageUpdateController extends HttpServlet {
 		
 		String btnName = req.getParameter("btnName");
 		
+		if( btnName.equals("name") ) {
+			
+			String name = req.getParameter("info");
+			System.out.println("수정 요청한 유저 번호 : " + userno);
+			int res = mypageService.updateUserName(userno, name);
+			
+			req.setAttribute("res", res);
+			req.getRequestDispatcher("/WEB-INF/views/minjae/mypage/mpUdtResult.jsp").forward(req, resp);
+			return;
+		} 
+		
 		if( btnName.equals("nick") ) {
 			
-			String nick = req.getParameter("nick");
-			System.out.println("유저 번호 : " + userno);
+			String nick = req.getParameter("info");
+			System.out.println("수정 요청한 유저 번호 : " + userno);
 			int res = mypageService.updateUserNick(userno, nick);
 			
 			req.setAttribute("res", res);
@@ -58,11 +69,23 @@ public class MypageUpdateController extends HttpServlet {
 		
 		if( btnName.equals("phone") ) {
 			
+			String phone = req.getParameter("info");
+			System.out.println("수정 요청한 유저 번호 : " + userno);
+			int res = mypageService.updateUserPhone(userno, phone);
+			
+			req.setAttribute("res", res);
+			req.getRequestDispatcher("/WEB-INF/views/minjae/mypage/mpUdtResult.jsp").forward(req, resp);
 			return;
 		} 
 		
 		if( btnName.equals("address") ) {
 			
+			String address = req.getParameter("info");
+			System.out.println("수정 요청한 유저 번호 : " + userno);
+			int res = mypageService.updateUserAddr(userno, address);
+			
+			req.setAttribute("res", res);
+			req.getRequestDispatcher("/WEB-INF/views/minjae/mypage/mpUdtResult.jsp").forward(req, resp);
 			return;
 		} 
 	}

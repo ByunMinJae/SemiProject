@@ -11,94 +11,85 @@
 
 <script>
 $(document).ready(function () {
+	
+// 	$("form").submit(function() {
+// 		$("#addressAll").val( $("#postcode").val() + " " + $("#address").val() + " " + $("#detailAddress").val() )
+// // 		return false;
+// 	})
 
-	$("form").submit(function() {
-		$("#addressSubmit").val( $("#postcode").val() + " " + $("#address").val() + " " + $("#detailAddress").val() )
-// 		return false;
+	//hidden 변경 폼 띄우기
+	showHiddenForm($("#btnChgName"), $("#btnCencelName"), $("#currName"), $("#hidName"), $("#name_msg"));
+	showHiddenForm($("#btnChgNick"), $("#btnCencelNick"), $("#currNick"), $("#hidNick"), $("#nick_msg"));
+	showHiddenForm($("#btnChgPhone"), $("#btnCencelPhone"), $("#currPhone"), $("#hidPhone"), $("#phone_msg"));
+	showHiddenForm($("#btnChgAddr"), $("#btnCencelAddr"), $("#currAddr"), $(".addr"), $("#address_msg"));
+	
+	//이름 변경 확인 버튼 클릭
+	$("#btnNameUdt").click(function() {
+		if($("#name").val() != "") {
+
+			if( confirm("이름을 변경하시겠습니까?") ) {
+				updateUserInfo($("#btnNameUdt").val(), $("#name").val());
+			} else {
+				location.reload();
+			}
+			
+		} else {
+			$("#name_msg").html("변경된 내용이 없습니다!")
+		}
 	})
 	
-	/* 닉네임 변경 시작 */
+	//닉네임 변경 확인 버튼 클릭
 	$("#btnNickUdt").click(function() {
-		
-		existNick()
-		
-// 		if( $("#nickFlag").val() == 'true' ) {
-// 			console.log("닉네임 검사 까지는 완료")
-// 			$.ajax({
-// 				type: "post"					//요청 메소드
-// 				, url: "/mypage/update"			//요청 URL
-// 				, data: {						//요청 파라미터
-// 					btnName: $("#btnNickUdt").val()
-// 					, nick: $("#nick").val()
-// 				}
-// 				, dataType: "html"				//응답 데이터 형식
-// 				, success: function( res ) {
-// 					console.log("AJAX 성공")
-// 					console.log(res)
-					
-// 					if( $.trim(res) == "true" ) {
-// 						alert("변경 완료!!")
-// 					} else {
-// 						alert("변경 실패!!")
-// 					}
-					
-// 				}
-				
-// 			})
-//  		}
+		existNick();
 	})
-	/* 닉네임 변경 끝 */
+
+	//전화번호 변경 확인 버튼 클릭
+	$("#btnPhoneUdt").click(function() {
+		existPhone();
+	})
+	
+	//주소 변경 확인 버튼 클릭
+	$("#btnAddrUdt").click(function() {
+		
+		$("#addressAll").val( $("#postcode").val() + " " + $("#address").val() + " " + $("#detailAddress").val() )
+		console.log($("#addressAll").val())
+		if($("#addressAll").val() != "" && $("#addressAll").val() != "  " ) {
+			if($("#detailAddress").val() != "") {
+
+				if( confirm("주소을 변경하시겠습니까?") ) {
+					updateUserInfo($("#btnAddrUdt").val(), $("#addressAll").val());
+				} else {
+					location.reload();
+				}
+			} else {
+				$("#address_msg").html("상세주소를 입력해 주세요!")
+			}
+		} else {
+			$("#address_msg").html("변경된 내용이 없습니다!")
+		}
+	})
 	
 })
+//변경 폼 띄우는 메소드
+function showHiddenForm(btnChg, btnCencel, curr, hidden, msg) {
+	btnChg.click(function() {
+		curr.attr("style", "display: none")
+		hidden.attr("style", "")
+	})
+	btnCencel.click(function() {
+		curr.attr("style", "")
+		hidden.attr("style", "display: none")
+		msg.html("");
+	})
+}
 
-/* 닉네임 검사 */
+//닉네임 중복 검사 메소드
 function existNick() {
 	
 	if($("#nick").val() != "") {
-		//닉네임 중복검사
-		$.ajax({
-			type: "post"				
-			, url: "/mypage/upcheck"		
-			, data: {						
-				btnName: $("#btnNickUdt").val()
-				, nick: $("#nick").val()
-			}
-			, dataType: "html"			
-			, success: function( res ) {
-				console.log("AJAX 성공")
-				console.log(res)
-				
-				if( $.trim(res) == "true" ) {// 중복이 아닐 경우
-					console.log("update ajax 실행");
-					//중첩 ajax
-					$.ajax({
-		 				type: "post"					
-		 				, url: "/mypage/update"			
-		 				, data: {						
-		 					btnName: $("#btnNickUdt").val()
-		 					, nick: $("#nick").val()
-		 				}
-		 				, dataType: "html"				
-		 				, success: function( res ) {
-		 					console.log("update AJAX 성공")
-		 					console.log(res)
-							
-		 					if( $.trim(res) == "true" ) {
-		 						alert("변경 완료!!")
-		 					} else {
-		 						alert("변경 실패!!")
-		 					}
-							
-		 				}
-		 			})//update ajax 끝
-					
-				} else {//중복되는 닉네임일 경우
-					$("#nick_msg").html(res);
-				}
-				
-			}
-			
-		})//닉네임 중복검사 ajax 끝
+		
+		//전화번호 중복 검사 & update수행
+		existVal($("#btnNickUdt").val(), $("#nick").val(), $("#nick_msg"), "닉네임");
 		
 	} else {
 		$("#nick_msg").html("변경된 내용이 없습니다!")
@@ -106,43 +97,86 @@ function existNick() {
 	
 }
 
+//전화번호 중복 검사 메소드
 function existPhone() {
 	
-	if($("#phone").val() != "") {
-		
-		//전화번호 검사
-		$.ajax({
-			type: "post"					//요청 메소드
-			, url: "/mypage/upcheck"			//요청 URL
-			, data: {						//요청 파라미터
-				btnName: $("#btnPhoneUdt").val()
-				, phone: $("#phone").val()
-			}
-			, dataType: "html"				//응답 데이터 형식
-			, success: function( res ) {
-				console.log("AJAX 성공")
-				console.log(res)
-				
-				if( $.trim(res) == "true" ) {
-					if(confirm("전화번호를 변경 하시겠습니까?") == true) {
-						console.log("완료되었습니다.");
-						return true;
-					} else {
-						console.log("최소되었습니다.");
-						return false;
-					}				
-				}
-				
-			}
+	if($("#phone").val() != "") { //입력한 값이 존재할 때
+		if( /^[0-9]{11}$/.test($("#phone").val()) ) { //입력한 값이 숫자일 때
 			
-		})
-		
-	} else {
-		$("#phone_msg").html("전화번호 입력란이 비워져 있습니다!")
+			//전화번호 중복 검사 & update수행
+			existVal($("#btnPhoneUdt").val(), $("#phone").val(), $("#phone_msg"), "전화번호");
+			
+		} else { //입력한 값이 숫자가 아닐때
+			$("#phone_msg").html("숫자 11자리만 입력하세요!");
+		}
+	} else { //입력한 전화번호가 없을 때
+		$("#phone_msg").html("변경된 내용이 없습니다!");
 	}
 	
 }
 
+//중복검사 메소드
+function existVal(btnName, info, msg, text) {
+	
+	$.ajax({
+		type: "post"					
+		, url: "/mypage/upcheck"			
+		, data: {						 
+			btnName: btnName
+			, info: info
+		}
+		, dataType: "html"				
+		, success: function( res ) {
+			console.log("AJAX 성공")
+			console.log(res)
+			
+			if( $.trim(res) == "true" ) {// 중복이 아닐 경우
+				console.log("update 메소드 실행");
+				
+				if( confirm("사용 가능한 " + text + "입니다. 변경하시겠습니까?") ) {
+					updateUserInfo(btnName, info);
+				} else {
+					location.reload();
+				}
+				
+			} else {//중복되는 닉네임일 경우
+				msg.html(res);
+			}
+			
+		}
+		
+	})
+	
+}
+
+//업데이트 시키는 메소드
+function updateUserInfo(btnName, info) {
+	
+	$.ajax({
+		type: "post"					
+		, url: "/mypage/update"			
+		, data: {						
+			btnName: btnName
+			, info: info
+		}
+		, dataType: "html"				
+		, success: function( res ) {
+			console.log("update AJAX 성공")
+			console.log(res)
+		
+			if( $.trim(res) == "true" ) {
+				alert("변경 되었습니다!!")
+				location.reload();
+			} else {
+				alert("변경에 실패하였습니다!!")
+				location.reload();
+			}
+		
+		}
+	})
+}
+
+//주소 API 메소드
 function execDaumPostcode() {
     new daum.Postcode({
         oncomplete: function(data) {
@@ -213,61 +247,129 @@ function execDaumPostcode() {
 	font-size: 12px;
 	color: red;
 }
+#mpuTable {
+	text-align: left;
+	margin: 70px 0 0 34px;
+}
+#mpuTable tr {
+	display: block;
+    margin: 15px 0 15px 51px;
+}
+#mpuTable tr td:first-child {
+	width: 103px;
+	margin-right: 65px;
+}
+#mpuTable tr td {
+    display: inline-block;
+}
+.addr {
+	margin: 0 0 0 51px !important;
+}
 </style>
 
 <div id="mpuWrap">
 
 <div id="mpuContents">
 
-<form action="/mypage/update" method="post" id="f">
+<table id="mpuTable">
+<tr>
+	<td>아이디</td>
+	<td><%=mpMain.getUserid() %></td>
+</tr>
+<tr>
+	<td>비밀번호</td>
+	<td>***********</td>
+</tr>
+<!-- 현재 이름 -->
+<tr id="currName">
+	<td>이름</td>
+	<td><%=mpMain.getUsername() %></td>
+	<td><button id="btnChgName">변 경</button></td>
+</tr>
+<!-- 변경 이름 -->
+<tr id="hidName" style="display: none;">
+	<td><label for="name">이름</label></td>
+	<td><input type="text" id="name" name="name" placeholder="<%=mpMain.getUsername() %>" onFocus="this.value=''; return true;"></td>
+	<td><button id="btnNameUdt" value="name" type="button">확 인</button></td>
+	<td><button id="btnCencelName" type="button">취 소</button></td>
+</tr>
+<tr>
+	<td><div id="name_msg" class="msg"></div></td>
+</tr>
+<!-- 현재 닉네임 -->
+<tr id="currNick">
+	<td>닉네임</td>
+	<td><%=mpMain.getNick() %></td>
+	<td><button id="btnChgNick">변 경</button></td>
+</tr>
+<!-- 변경 닉네임 -->
+<tr id="hidNick" style="display: none;">
+	<td><label for="nick">닉네임</label></td>
+	<td><input type="text" id="nick" name="nick" placeholder="<%=mpMain.getNick() %>" onFocus="this.value=''; return true;"></td>
+	<td><button id="btnNickUdt" value="nick" type="button">확 인</button></td>
+	<td><button id="btnCencelNick" type="button">취 소</button></td>
+</tr>
+<tr>
+	<td><div id="nick_msg" class="msg"></div></td>
+</tr>
+<tr>
+	<td>생년월일</td>
+	<td><%=mpMain.getBirth() %></td>
+</tr>
+<tr>
+	<td>성별</td>
+	<td><%=mpMain.getGender() %></td>
+</tr>
+<tr>
+	<td>이메일</td>
+	<td><%=mpMain.getEmail() %></td>
+</tr>
+<!-- 현재 전화번호 -->
+<tr id="currPhone">
+	<td>전화번호</td>
+	<td><%=mpMain.getPhone() %></td>
+	<td><button id="btnChgPhone">변 경</button></td>
+</tr>
+<!-- 변경 전화번호 -->
+<tr id="hidPhone" style="display: none;">
+	<td><label for="phone">전화번호</label></td>
+	<td><input type="text" id="phone" name="phone" placeholder="<%=mpMain.getPhone() %>" onFocus="this.value=''; return true;"></td>
+	<td><button id="btnPhoneUdt" value="phone" type="button">수정</button></td>
+	<td><button id="btnCencelPhone" type="button">취 소</button></td>
+</tr>
+<tr>
+	<td><div id="phone_msg" class="msg"></div></td>
+</tr>
+<!-- 현재 주소 -->
+<tr id="currAddr">
+	<td>주소</td>
+	<td><%=mpMain.getAddress() %></td>
+	<td><button id="btnChgAddr">변 경</button></td>
+</tr>
+<!-- 변경 주소 -->
+<tr class="addr" style="display: none;">
+	<td><label for="address">주소</label></td>
+	<td><input type="text" id="postcode" placeholder="우편번호"></td>
+	<td><input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"></td>
+</tr>
+<tr class="addr" style="display: none;">
+	<td><label for="address"></label></td><!-- 여백용 -->
+	<td><input type="text" id="address" placeholder="주소"></td>
+</tr>
+<tr class="addr" style="display: none;">
+	<td><label for="address"></label></td><!-- 여백용 -->
+	<td><input type="text" id="detailAddress" placeholder="상세주소"></td>
+	<td><input type="text" id="extraAddress" placeholder="참고항목"></td>
+	<td><button id="btnAddrUdt" value="address" type="button">확 인</button></td>
+	<td><button id="btnCencelAddr" type="button">취 소</button></td>
+</tr>
+<tr>
+	<td><span id="address_msg" class="msg"></span></td>
+	<!-- 따로 받아지는 주소를 하나로 DB에 저장하기 위한 태그 -->
+	<td><input type="hidden" name="address" id="addressAll"></td>
+</tr>
 
-<p>아이디</p>
-<p><%=mpMain.getUserid() %></p><br>
-
-<p>비밀번호</p>
-<p>점으로 채우기</p><br>
-
-<label for="name">이름</label>
-<input type="text" id="name" name="name" placeholder="<%=mpMain.getUsername() %>"><br>
-
-<!-- 중복검사 필요 -->
-<label for="nick">닉네임</label>
-<input type="text" id="nick" name="nick" placeholder="<%=mpMain.getNick() %>">
-<div id="nick_msg" class="msg"></div>
-<button id="btnNickUdt" value="nick" type="button">수정</button><br>
-<input type="hidden" id="nickFlag" value="">
-
-<p>생년월일</p>
-<p><%=mpMain.getBirth() %></p><br>
-
-<p>성별</p>
-<p><%=mpMain.getGender() %></p><br>
-
-<p>이메일</p>
-<p><%=mpMain.getEmail() %></p><br>
-
-<!-- 중복검사, 형식검사 필요 -->
-<label for="phone">전화번호</label>
-<input type="text" id="phone" name="phone" placeholder="<%=mpMain.getPhone() %>">
-<div id="phone_msg" class="msg"></div><br>
-<button id="btnPhoneUdt" value="phone" type="button">수정</button><br>
-
-
-<!-- 형식검사 필요 -->
-<label for="address">주소</label>
-<input type="text" id="postcode" placeholder="우편번호">
-<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
-<input type="text" id="address" placeholder="주소"><br>
-<input type="text" id="detailAddress" placeholder="상세주소">
-<input type="text" id="extraAddress" placeholder="참고항목">
-<span id="address_msg" class="msg"></span><br><br>
-<button id="btnAddrUdt" value="address" type="button">수 정</button>
-
-<!-- 따로 받아지는 주소를 하나로 DB에 저장하기 위한 태그 -->
-<input type="hidden" name="address" id="addressSubmit">
-
-
-</form>
+</table>
 
 </div>
 

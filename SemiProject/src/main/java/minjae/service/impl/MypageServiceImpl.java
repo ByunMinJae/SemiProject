@@ -109,6 +109,25 @@ public class MypageServiceImpl implements MypageService {
 	}
 	
 	@Override
+	public int updateUserName(int userno, String name) {
+		System.out.println("/mypage/main updateUserName() - 시작");
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int res = mypageDao.updateUserName(conn, userno, name);
+		
+		if( res > 0 ) {
+			JDBCTemplate.commit(conn);
+			System.out.println("/mypage/main updateUserName() - 끝");
+			return 1; //성공
+		} else {
+			JDBCTemplate.rollback(conn);
+			System.out.println("/mypage/main updateUserName() - 끝");
+			return 0; //실패
+		}
+	}
+	
+	@Override
 	public int updateUserNick(int userno, String nick) {
 		System.out.println("/mypage/main updateUserNick() - 시작");
 		
@@ -125,7 +144,44 @@ public class MypageServiceImpl implements MypageService {
 			System.out.println("/mypage/main updateUserNick() - 끝");
 			return 0; //실패
 		}
+	}
+	
+	@Override
+	public int updateUserPhone(int userno, String phone) {
+		System.out.println("/mypage/main updateUserPhone() - 시작");
 		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int res = mypageDao.updateUserPhone(conn, userno, phone);
+		
+		if( res > 0 ) {
+			JDBCTemplate.commit(conn);
+			System.out.println("/mypage/main updateUserPhone() - 끝");
+			return 1; //성공
+		} else {
+			JDBCTemplate.rollback(conn);
+			System.out.println("/mypage/main updateUserPhone() - 끝");
+			return 0; //실패
+		}
+	}
+	
+	@Override
+	public int updateUserAddr(int userno, String address) {
+		System.out.println("/mypage/main updateUserAddr() - 시작");
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int res = mypageDao.updateUserAddr(conn, userno, address);
+		
+		if( res > 0 ) {
+			JDBCTemplate.commit(conn);
+			System.out.println("/mypage/main updateUserAddr() - 끝");
+			return 1; //성공
+		} else {
+			JDBCTemplate.rollback(conn);
+			System.out.println("/mypage/main updateUserAddr() - 끝");
+			return 0; //실패
+		}
 	}
 	
 }

@@ -81,6 +81,18 @@ public interface MypageDao {
 	
 	/**
 	 *  해당 회원번호를 가진 회원의 
+	 * 이름을 전달받은 값으로 변경한 후
+	 * 수행 결과를 리턴한다
+	 * 
+	 * @param conn - DB 연결 객체
+	 * @param userno - 회원번호
+	 * @param name - 변경 이름
+	 * @return 수행결과 (1 - 성공, 0 - 실패)
+	 */
+	public int updateUserName(Connection conn, int userno, String name);
+	
+	/**
+	 *  해당 회원번호를 가진 회원의 
 	 * 닉네임을 전달받은 값으로 변경한 후
 	 * 수행 결과를 리턴한다
 	 * 
@@ -90,6 +102,31 @@ public interface MypageDao {
 	 * @return 수행결과 (1 - 성공, 0 - 실패)
 	 */
 	public int updateUserNick(Connection conn, int userno, String nick);
+	
+	/**
+	 *  해당 회원번호를 가진 회원의 
+	 * 전화번호를 전달받은 값으로 변경한 후
+	 * 수행 결과를 리턴한다
+	 * 
+	 * @param conn - DB 연결 객체
+	 * @param userno - 회원번호
+	 * @param phone - 변경 닉네임
+	 * @return 수행결과 (1 - 성공, 0 - 실패)
+	 */
+	public int updateUserPhone(Connection conn, int userno, String phone);
+	
+	/**
+	 *  해당 회원번호를 가진 회원의 
+	 * 주소를 전달받은 값으로 변경한 후
+	 * 수행 결과를 리턴한다
+	 * 
+	 * @param conn - DB 연결 객체
+	 * @param userno - 회원번호
+	 * @param address - 변경 주소
+	 * @return 수행결과 (1 - 성공, 0 - 실패)
+	 */
+	public int updateUserAddr(Connection conn, int userno, String address);
+
 	
 	
 	

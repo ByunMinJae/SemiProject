@@ -71,15 +71,43 @@ public interface MypageService {
 	 * @return 조회결과
 	 */
 	public int existPhone(String phone);
+
+	/**
+	 *  세션에 저장된 userno을 가진 회원의 이름을 변경한다
+	 * 
+	 * @param userno - 회원 번호
+	 * @param name - 변경 이름
+	 * @return update 수행 결과 (1 - 성공, 0 - 실패)
+	 */
+	public int updateUserName(int userno, String name);
 	
 	/**
 	 *  세션에 저장된 userno을 가진 회원의 닉네임을 변경한다
 	 * 
 	 * @param userno - 회원 번호
 	 * @param nick - 변경 닉네임
-	 * @return update 수행 결과
+	 * @return update 수행 결과 (1 - 성공, 0 - 실패)
 	 */
 	public int updateUserNick(int userno, String nick);
+	
+	/**
+	 *  세션에 저장된 userno을 가진 회원의 전화번호를 변경한다
+	 *  
+	 * @param userno - 회원 번호
+	 * @param phone - 변경 전화번호
+	 * @return update 수행 결과 (1 - 성공, 0 - 실패)
+	 */
+	public int updateUserPhone(int userno, String phone);
+	
+	/**
+	 *  세션에 저장된 userno을 가진 회원의 주소를 변경한다
+	 *  
+	 * @param userno - 회원 번호
+	 * @param address - 변경 주소
+	 * @return update 수행 결과 (1 - 성공, 0 - 실패)
+	 */
+	public int updateUserAddr(int userno, String address);
+	
 	
 	
 	
