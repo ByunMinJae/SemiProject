@@ -2,8 +2,8 @@ package changmin.dao.face;
 
 import java.sql.Connection;
 
-import changmin.dto.Product;
-import changmin.dto.User;
+import jeonghwa.dto.Product;
+import sharon.dto.User;
 
 public interface PayDoDao {
 
