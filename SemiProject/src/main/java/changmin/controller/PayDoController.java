@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import changmin.service.face.PayDoService;
 import changmin.service.impl.PayDoServiceImpl;
 import jeonghwa.dto.Product;
@@ -63,6 +65,14 @@ public class PayDoController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("/pay/do [POST]");
+		
+		Gson gson = new Gson();
+		String test = gson.fromJson( req.getParameter("pay_method").trim(), String.class);
+		System.out.println(test);
+		
+//		String regIdString = req.getParameter("pay_method").trim();
+//		System.out.println(regIdString);
+		
 		req.getRequestDispatcher("/WEB-INF/views/changmin/paydo.jsp").forward(req, resp);
 	}
 	

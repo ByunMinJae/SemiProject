@@ -18,7 +18,9 @@ public class OrderDaoImpl implements OrderDao{
 		System.out.println("OrderDaoImpl - Start");
 		
 		String sql="";
+		
 		sql+="INSERT INTO VALUES";
+		
 		
 		
 		return null;
