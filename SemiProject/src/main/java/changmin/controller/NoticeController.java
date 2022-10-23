@@ -45,8 +45,11 @@ public class NoticeController extends HttpServlet {
 		
 		//----------------------게시글 전체 조회-------------------------------
 		
+		
+		
 	
 		
 		req.getRequestDispatcher("/WEB-INF/views/changmin/notice.jsp").forward(req, resp);
 	}
+	
 }

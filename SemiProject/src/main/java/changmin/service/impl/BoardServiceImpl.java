@@ -71,9 +71,6 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public Board view(Board boardno) {
 		
-		//DB연결 객체
-		Connection conn = JDBCTemplate.getConnection();
-		
 		//조회수 증가
 		if( boardDao.updateHit(conn, boardno)>0) {
 			JDBCTemplate.commit(conn);
@@ -88,7 +85,13 @@ public class BoardServiceImpl implements BoardService{
 		return board;
 	}
 
-
-	
+	@Override
+	public void deleteboard(Board board) {
+		if(boardDao.delete(conn, board)>0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+	}
 
 }

@@ -35,6 +35,9 @@ public interface BoardService {
 
 	public Board view(Board boardno);
 
+
+	public void deleteboard(Board board);
+
 	
 	
 }

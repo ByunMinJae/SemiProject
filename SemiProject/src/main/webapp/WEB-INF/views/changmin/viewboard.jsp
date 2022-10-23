@@ -13,9 +13,26 @@
 $(document).ready(function() {
 	
 	$('#btnList').click(function() {
-		window.history.back();
+		window.history.back(); // 목록 버튼 클릭시 뒤로가기
 	})
+	
+
 })
+
+function deleteboard(){
+   $.ajax({
+        url:"./deleteboard?boardno=<%=viewBoard.getBoardno() %>",
+        type:'POST',
+        data: {boardno:<%=viewBoard.getBoardno()%>},
+        success:function(data){
+            location.href=('/board/notice'); //게시글 삭제시 default 게시글목록으로 이동
+            alert("삭제 완료!");
+        },
+        error:function(jqXHR, textStatus, errorThrown){
+            alert("에러 발생 \n" + textStatus + " : " + errorThrown);
+        }
+   });
+}
 </script>
 <style type="text/css">
 
@@ -54,7 +71,6 @@ img {
 
 </style>
 <div class="myContainer">
-	<form method="get">
 	<hr>
 		<div style="min-height: 500px;">
 			<div class="left">
@@ -69,7 +85,6 @@ img {
 			</div>
 			
 		</div>
-	</form>
 
 <div class="right">
 	<table class="table table-bordered">
@@ -110,7 +125,7 @@ img {
 	<div class="text-center">
 		<button id="btnList" class="btn btn-primary">목록</button>
 		<button id="btnUpdate" class="btn btn-info">수정</button>
-		<button id="btnDelete" class="btn btn-danger">삭제</button>
+		<button id="btnDelete" class="btn btn-danger" onClick="deleteboard();">삭제</button>
 	</div>
 </div>
 

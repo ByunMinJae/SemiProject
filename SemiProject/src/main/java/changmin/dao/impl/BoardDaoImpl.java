@@ -210,6 +210,31 @@ public class BoardDaoImpl implements BoardDao {
 		}
 		return board;
 	}
+
+	@Override
+	public int delete(Connection conn, Board board) {
+
+		String sql = "";
+		sql += "DELETE FROM board_info";
+		sql += "	WHERE boardno = ?";
+		
+		int res = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, board.getBoardno());
+			
+			res = ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		return res;
+	}
+	
 	
 
 
