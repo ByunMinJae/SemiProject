@@ -50,11 +50,11 @@ $(document).ready(function () {
 	
 	//주소 변경 확인 버튼 클릭
 	$("#btnAddrUdt").click(function() {
-		
+		//입력된 주소값 문자열 하나로 합치기
 		$("#addressAll").val( $("#postcode").val() + " " + $("#address").val() + " " + $("#detailAddress").val() )
-		console.log($("#addressAll").val())
-		if($("#addressAll").val() != "" && $("#addressAll").val() != "  " ) {
-			if($("#detailAddress").val() != "") {
+		
+		if($("#addressAll").val() != "" && $("#addressAll").val() != "  " ) { //주소를 입력한 경우
+			if($("#detailAddress").val() != "") { //상세주소까지 입력했는지 확인
 
 				if( confirm("주소을 변경하시겠습니까?") ) {
 					updateUserInfo($("#btnAddrUdt").val(), $("#addressAll").val());
@@ -64,12 +64,13 @@ $(document).ready(function () {
 			} else {
 				$("#address_msg").html("상세주소를 입력해 주세요!")
 			}
-		} else {
+		} else { //주소를 입력하지 않은 경우
 			$("#address_msg").html("변경된 내용이 없습니다!")
 		}
 	})
 	
 })
+
 //변경 폼 띄우는 메소드
 function showHiddenForm(btnChg, btnCencel, curr, hidden, msg) {
 	btnChg.click(function() {
@@ -228,14 +229,14 @@ function execDaumPostcode() {
 <style type="text/css">
 #mpuWrap {
 	width: 1100px;
-    height: 600px;
+    height: 644px;
     margin: 0px auto;
     text-align: center;
     position: relative;
 }
 #mpuContents {
-	width: 800px;
-	height: 639px;
+	width: 771px;
+	height: 693px;
     margin: 0px auto;
     background: #fcffb282;
     border: 1px solid #ccc;
@@ -246,14 +247,22 @@ function execDaumPostcode() {
 .msg {
 	font-size: 12px;
 	color: red;
+	width: 287px;
+}
+.tr_msg {
+	margin: -21px 0 0 231px !important;
+	border: none !important;
 }
 #mpuTable {
 	text-align: left;
-	margin: 70px 0 0 34px;
+	margin: 37px 0 0 55px;
+	font-size: 18px;
+	font-weight: bold;	
 }
 #mpuTable tr {
 	display: block;
     margin: 15px 0 15px 51px;
+    border-bottom: 1px solid #2d954d5c;;
 }
 #mpuTable tr td:first-child {
 	width: 103px;
@@ -265,11 +274,51 @@ function execDaumPostcode() {
 .addr {
 	margin: 0 0 0 51px !important;
 }
+.ad {
+	margin: 15px 0 0 51px !important;
+}
+input {
+	height: 20px;
+    font-size: 18px;
+    border-radius: 4px;
+    border: 1px solid #777;
+}
+#pc {
+	font-size: 13px;
+    height: 25px;
+}
+#goMp {
+	text-decoration: none;
+    color: #555;
+    float: left;
+    position: relative;
+    top: -60px;
+    left: 29px;
+	font-weight: bold;
+}
+#goMp:hover {
+	cursor: pointer;
+	color: #222;
+}
+#goImg {
+	background: url("/resources/image/left_arrow.png") no-repeat 0 0;
+	width: 20px;
+    height: 20px;
+    display: inline-block;
+    float: left;
+    position: relative;
+    top: -59px;
+    left: 26px;
+}
 </style>
 
 <div id="mpuWrap">
 
 <div id="mpuContents">
+
+<h1>회원정보 수정</h1>
+<div id="goImg"></div>
+<a href="/mypage/main" id="goMp">마이페이지</a>
 
 <table id="mpuTable">
 <tr>
@@ -284,7 +333,7 @@ function execDaumPostcode() {
 <tr id="currName">
 	<td>이름</td>
 	<td><%=mpMain.getUsername() %></td>
-	<td><button id="btnChgName">변 경</button></td>
+	<td style="margin-left: 131px;"><button id="btnChgName">변 경</button></td>
 </tr>
 <!-- 변경 이름 -->
 <tr id="hidName" style="display: none;">
@@ -293,14 +342,14 @@ function execDaumPostcode() {
 	<td><button id="btnNameUdt" value="name" type="button">확 인</button></td>
 	<td><button id="btnCencelName" type="button">취 소</button></td>
 </tr>
-<tr>
+<tr class="tr_msg">
 	<td><div id="name_msg" class="msg"></div></td>
 </tr>
 <!-- 현재 닉네임 -->
 <tr id="currNick">
 	<td>닉네임</td>
 	<td><%=mpMain.getNick() %></td>
-	<td><button id="btnChgNick">변 경</button></td>
+	<td style="margin-left: 111px;"><button id="btnChgNick">변 경</button></td>
 </tr>
 <!-- 변경 닉네임 -->
 <tr id="hidNick" style="display: none;">
@@ -309,7 +358,7 @@ function execDaumPostcode() {
 	<td><button id="btnNickUdt" value="nick" type="button">확 인</button></td>
 	<td><button id="btnCencelNick" type="button">취 소</button></td>
 </tr>
-<tr>
+<tr class="tr_msg">
 	<td><div id="nick_msg" class="msg"></div></td>
 </tr>
 <tr>
@@ -328,29 +377,29 @@ function execDaumPostcode() {
 <tr id="currPhone">
 	<td>전화번호</td>
 	<td><%=mpMain.getPhone() %></td>
-	<td><button id="btnChgPhone">변 경</button></td>
+	<td style="margin-left: 63px;"><button id="btnChgPhone">변 경</button></td>
 </tr>
 <!-- 변경 전화번호 -->
 <tr id="hidPhone" style="display: none;">
 	<td><label for="phone">전화번호</label></td>
 	<td><input type="text" id="phone" name="phone" placeholder="<%=mpMain.getPhone() %>" onFocus="this.value=''; return true;"></td>
-	<td><button id="btnPhoneUdt" value="phone" type="button">수정</button></td>
+	<td><button id="btnPhoneUdt" value="phone" type="button">확 인</button></td>
 	<td><button id="btnCencelPhone" type="button">취 소</button></td>
 </tr>
-<tr>
+<tr class="tr_msg">
 	<td><div id="phone_msg" class="msg"></div></td>
 </tr>
 <!-- 현재 주소 -->
 <tr id="currAddr">
 	<td>주소</td>
 	<td><%=mpMain.getAddress() %></td>
-	<td><button id="btnChgAddr">변 경</button></td>
+	<td class="btnChg"><button id="btnChgAddr">변 경</button></td>
 </tr>
 <!-- 변경 주소 -->
-<tr class="addr" style="display: none;">
+<tr class="addr ad" style="display: none; margin: 15px 0 0 51px !important;">
 	<td><label for="address">주소</label></td>
 	<td><input type="text" id="postcode" placeholder="우편번호"></td>
-	<td><input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"></td>
+	<td><input type="button" onclick="execDaumPostcode()" value="우편번호 찾기" id="pc"></td>
 </tr>
 <tr class="addr" style="display: none;">
 	<td><label for="address"></label></td><!-- 여백용 -->
@@ -360,11 +409,14 @@ function execDaumPostcode() {
 	<td><label for="address"></label></td><!-- 여백용 -->
 	<td><input type="text" id="detailAddress" placeholder="상세주소"></td>
 	<td><input type="text" id="extraAddress" placeholder="참고항목"></td>
+</tr>
+<tr class="addr" style="display: none;">
+	<td><label for="address"></label></td><!-- 여백용 -->
 	<td><button id="btnAddrUdt" value="address" type="button">확 인</button></td>
 	<td><button id="btnCencelAddr" type="button">취 소</button></td>
 </tr>
-<tr>
-	<td><span id="address_msg" class="msg"></span></td>
+<tr class="tr_msg" style="margin: -9px 0 0 231px !important;">
+	<td style="width: 200px;"><span id="address_msg" class="msg"></span></td>
 	<!-- 따로 받아지는 주소를 하나로 DB에 저장하기 위한 태그 -->
 	<td><input type="hidden" name="address" id="addressAll"></td>
 </tr>
