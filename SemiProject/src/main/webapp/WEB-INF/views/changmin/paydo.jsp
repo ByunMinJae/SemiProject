@@ -18,7 +18,7 @@
 
 <script type="text/javascript">
 //카카오 결제 API
-var IMP = window.IMP; // 생략가능
+/* var IMP = window.IMP; // 생략가능
 IMP.init('imp88224386');  // 가맹점 식별코드
 // IMP.request_pay(param, callback) 결제창 호출
 function payDo(){
@@ -53,14 +53,22 @@ function payDo(){
           }
      });
     
-}
+} */
 
-/* function payDo(){
+function payDo(){
 	$.ajax({
 		url: "/orderafterlist",//(action url),
 		type: "POST",//(get, post 방식),
 		data: {
-			pay_method: 'aqq232',	
+		    pg: "html5_inicis",
+		    pay_method: "card",
+		    merchant_uid: "ORD20180131-01234",
+		    name: $("#prodnamevalue").val(),
+		    amount: $("#prodpricevalue").val(),
+		    buyer_email: $("#emailvalue").val(),
+		    buyer_name: $("#prodpricevalue").val(),
+		    buyer_tel: $("#phonevalue").val(),
+		    buyer_addr: $("#addressvalue").val(),	
 		},
 		dataType: "text",
 		success: function(result){
@@ -70,7 +78,8 @@ function payDo(){
 			console.log(JSON.stringify(error));
 		}
 	});
-} */
+}
+
 
 $(document).ready(function() {
 	

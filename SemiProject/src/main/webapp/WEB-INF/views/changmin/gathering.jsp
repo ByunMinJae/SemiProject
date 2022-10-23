@@ -12,6 +12,18 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 <style type="text/css">
+@font-face {
+	font-family: 'dalseo';
+	src: url('/resources/css/DalseoHealingBold.ttf') format('truetype');
+}
+
+h1 {
+	font-family: 'dalseo';
+}
+#wrapper {
+	background-color: #BFDCFB; 
+}
+
 th, td {
 	text-align: center;
 }
@@ -23,12 +35,13 @@ td:nth-child(2) {
 .right {
 	position: relative;
 	float: right;
-	top: -500px;
+	top: -400px;
 	
 }
 
 .left{
 	position: absolute;
+	top: 150px;
 	left: -100px;
 }
 
@@ -61,9 +74,9 @@ img {
 	</form>
 	
 	<div class="right">
-	<h1>소모임게시판</h1>
-		<table class="table">
-			<tr>
+		<h1>소모임게시판</h1>
+		<table class="table table-hover">
+			<tr class="success">
 				<th width="8%">번호</th>
 				<th width="54%">제목</th>
 				<th width="15%">글쓴이</th>
@@ -72,7 +85,8 @@ img {
 			</tr>
 		
 		<% for(int i=0; i<boardList.size(); i++) {%>
-			<tr>
+			<% if(boardList.get(i).getCategoryno()==4){ %>
+			<tr class="active">
 				<td><%= boardList.get(i).getBoardno() %>
 				<td>
 					<a href="/board/view?boardno=<%=boardList.get(i).getBoardno() %>">
@@ -83,6 +97,7 @@ img {
 				<td><%= boardList.get(i).getBoarddate() %></td>
 				<td><%= boardList.get(i).getHit() %></td>
 			</tr>
+			<% } %>
 		<% } %>
 		</table>
 			<div class="text-center">
