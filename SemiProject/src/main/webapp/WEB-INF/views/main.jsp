@@ -260,6 +260,7 @@
 
 html {
 	overflow-x: hidden;
+	overflow-y: hidden;
 }
 
 .back {
@@ -272,7 +273,7 @@ html {
 
 .back img {
 	width: 100%;
-	height: 1000px;
+	height: 820px;
 	z-index: 1;
 }
 
@@ -368,7 +369,7 @@ html {
 
 
 
-<footer id="footer" class="footer" style="position:absolute; bottom:-210px;">
+<footer id="footer" class="footer" style="position:absolute;  max-height: 300px; background-color: white; z-index: 100;">
 	<div class="footer-wrap">
 		<p class="footerlist-wrap">
 			<span class="footerlist">

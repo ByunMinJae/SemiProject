@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
@@ -29,7 +30,10 @@ public class PayDoController extends HttpServlet {
 		//-----------------------회원 정보 조회------------------------------
 		
 		//테스트 용 데이터
-		req.getSession().setAttribute("userno", 2323);
+//		req.getSession().setAttribute("userid", "changmin");
+		
+		HttpSession session = req.getSession();
+		session.setAttribute("userno", 4);
 		
 		//로그인한 사람의 PK -> userno -> 2323
 		//	-> 이걸 이용하여 로그인한 사람의 정보 조회 - 서비스 이용
