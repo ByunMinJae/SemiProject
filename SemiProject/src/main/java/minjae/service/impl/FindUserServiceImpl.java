@@ -2,6 +2,8 @@ package minjae.service.impl;
 
 import java.sql.Connection;
 
+import javax.servlet.http.HttpServletRequest;
+
 import common.JDBCTemplate;
 import minjae._common.Coolsms;
 import minjae._common.JavaMail;
@@ -125,6 +127,20 @@ public class FindUserServiceImpl implements FindUserService {
 			return false;
 		}
 		
+	}
+
+	@Override
+	public int existPw(HttpServletRequest req) {
+		System.out.println("FindUserService updateUserPw() - 시작");
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		String pw = req.getParameter("pw");
+		
+		int res = findUserDao.selectExistPw(conn, pw);
+		
+		System.out.println("FindUserService updateUserPw() - 끝");
+		return res;
 	}
 
 	

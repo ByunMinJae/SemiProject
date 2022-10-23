@@ -6,13 +6,13 @@
 
 <style type="text/css">
 .gtlWrap {
-	width: 500px;
+	width: 436px;
     height: 500px;
-    margin: 200px auto 0;
+    margin: 100px auto 0;
     text-align: center;
     position: relative;
 }
-#goToLoginPage {
+#goToFindPw {
 	width: 304px;
     height: 35px;
     background-color: #555;
@@ -23,15 +23,16 @@
     cursor: pointer;
     border-radius: 7px;
 }
-#goToLoginPage:hover {
+#goToFindPw:hover {
 	background-color: #333;
 }
 </style>
 
 <div class="gtlWrap">
-	<h1>비밀번호 변경이 완료 되었습니다.</h1>
-	<hr>
-	<a href="/cmc/login"><button id="goToLoginPage">로그인하러 가기</button></a>
+	<h1>패스워드 변경 실패</h1>
+	<hr><br>
+	<strong style="color: red;">프로그램 오류로 인하여 패스워드 변경에 실패하였습니다. 다시 시도해 주세요.</strong>
+	<a href="/find/findpw"><button id="goToFindPw">비밀번호 찾기</button></a>
 </div>
 
 <jsp:include page="../../layout/footer.jsp"/>

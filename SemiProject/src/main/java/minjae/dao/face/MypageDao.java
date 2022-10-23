@@ -1,6 +1,7 @@
 package minjae.dao.face;
 
 import java.sql.Connection;
+import java.util.List;
 
 import minjae.dto.BoardInfoCate;
 import minjae.dto.MpMain;
@@ -40,11 +41,103 @@ public interface MypageDao {
 	public MpMainRight selectOIByDate(Connection conn, int userno, String startDate, String endDate);
 	
 	/**
-	 *  userno에 해당하는 유저의 게시글 정보와 카테고리 정보를 반환한다
+	 * userno에 해당하는 유저의 게시글 정보와 카테고리 정보를  List로 반환한다
 	 * 
 	 * @param userno - 유저번호
-	 * @return BoardInfoCate DTO - 게시글, 카테고리 정보
+	 * @return List<BoardInfoCate> - 게시글, 카테고리 정보 List
 	 */
-	public BoardInfoCate selectBoardIC(Connection conn, int userno);
+	public List<BoardInfoCate> selectBoardIC(Connection conn, int userno);
+	
+	/**
+	 *  userno에 해당하는 회원의 패스워드가 pw인
+	 * 회원이 있는지 count()로 조회한다
+	 * 
+	 * @param conn - DB 연결 객체
+	 * @param userno - 유저번호
+	 * @param pw - 패스워드
+	 * @return count() 결과 값
+	 */
+	public int selectUserpw(Connection conn, int userno, String pw);
+	
+	/**
+	 *  해당 닉네임이 이미 가입된 닉네임인지
+	 * DB에 조회한다
+	 * 
+	 * @param conn - DB 연결 객체
+	 * @param nick - 닉네임
+	 * @return 조회 결과 count()
+	 */
+	public int countNick(Connection conn, String nick);
+	
+	/**
+	 *  해당 전화번호가 이미 가입된 전화번호인지
+	 * DB에 조회한다
+	 * 
+	 * @param conn - DB 연결 객체
+	 * @param phone - 전화번호
+	 * @return 조회 결과 count()
+	 */
+	public int countPhone(Connection conn, String phone);
+	
+	/**
+	 *  해당 회원번호를 가진 회원의 
+	 * 이름을 전달받은 값으로 변경한 후
+	 * 수행 결과를 리턴한다
+	 * 
+	 * @param conn - DB 연결 객체
+	 * @param userno - 회원번호
+	 * @param name - 변경 이름
+	 * @return 수행결과 (1 - 성공, 0 - 실패)
+	 */
+	public int updateUserName(Connection conn, int userno, String name);
+	
+	/**
+	 *  해당 회원번호를 가진 회원의 
+	 * 닉네임을 전달받은 값으로 변경한 후
+	 * 수행 결과를 리턴한다
+	 * 
+	 * @param conn - DB 연결 객체
+	 * @param userno - 회원번호
+	 * @param nick - 변경 닉네임
+	 * @return 수행결과 (1 - 성공, 0 - 실패)
+	 */
+	public int updateUserNick(Connection conn, int userno, String nick);
+	
+	/**
+	 *  해당 회원번호를 가진 회원의 
+	 * 전화번호를 전달받은 값으로 변경한 후
+	 * 수행 결과를 리턴한다
+	 * 
+	 * @param conn - DB 연결 객체
+	 * @param userno - 회원번호
+	 * @param phone - 변경 닉네임
+	 * @return 수행결과 (1 - 성공, 0 - 실패)
+	 */
+	public int updateUserPhone(Connection conn, int userno, String phone);
+	
+	/**
+	 *  해당 회원번호를 가진 회원의 
+	 * 주소를 전달받은 값으로 변경한 후
+	 * 수행 결과를 리턴한다
+	 * 
+	 * @param conn - DB 연결 객체
+	 * @param userno - 회원번호
+	 * @param address - 변경 주소
+	 * @return 수행결과 (1 - 성공, 0 - 실패)
+	 */
+	public int updateUserAddr(Connection conn, int userno, String address);
+	
+	/**
+	 *  회원정보를 이용해
+	 * 해당 유저의 회원정보를 삭제한다
+	 * 
+	 * @param conn - DB 연결 객체
+	 * @param userno1 - 회원 번호
+	 * @return DELETE 수행 결과 (1 - 성공, 0 - 실패)
+	 */
+	public int deleteUser(Connection conn, int userno1);
 
+	
+	
+	
 }

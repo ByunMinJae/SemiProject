@@ -1,6 +1,7 @@
 package minjae.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,10 +29,10 @@ public class MypageDetailController extends HttpServlet {
 		int userno = (int)session.getAttribute("userno");
 		
 		MpMain mpMain = mypageService.getUserInfo(userno);
-		BoardInfoCate boardInfoCate = mypageService.getBoardInfoCate(userno); 
+		List<BoardInfoCate> boardICList = mypageService.getBoardInfoCate(userno); 
 		
 		req.setAttribute("mpMain", mpMain);
-		req.setAttribute("boardInfoCate", boardInfoCate);
+		req.setAttribute("boardICList", boardICList);
 		req.getRequestDispatcher("/WEB-INF/views/minjae/mypage/mpDetail.jsp").forward(req, resp);
 	}
 	

@@ -7,11 +7,45 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	
+	/* 비밀번호는 중복 가능인데 실수함 나중에 필요하면 그때 사용 */
+	//입력한 비밀번호로 가입한 유저가 있는지 확인
+// 	$("#btnChangePw").click(function() {
+		
+// 		$.ajax({
+// 			type: "post"					//요청 메소드
+// 			, url: "/find/existpw"			//요청 URL
+// 			, data: {						//요청 파라미터
+// 				pw: $("#upw").val()
+// 			}
+// 			, dataType: "html"				//응답 데이터 형식
+// 			, success: function( res ) {
+// 				console.log("AJAX 성공")
+// 				console.log(res)
+				
+// 				if( $.trim(res) == "true" ) {
+// 					console.log('존재하지 않는 패스워드(변경 가능)')
+					
+// 					//비밀번호 유효성 검사가 true일 때 submit()
+// 					if( validatePW( $("#upw").val() ) ) {
+// 						$("#form").submit();
+// 					}
+					
+// 				} else {
+// 					console.log('존재하는 패스워드(변경 불가능)')
+// 					//아닐 때 확인 메시지 띄우기
+// 					$("#upw_check_msg").html(res);
+// 				}
+				
+// 			}
+			
+// 		})
+		
+// 	})
+	
+	//form submit 될 때 유효성 검사
 	$("#form").submit(function() {
-		
-		//true = submit
+		//true일 때 submit
 		return validatePW( $("#upw").val() );
-		
 	})
 	
 	//비밀번호 확인 입력 keyup 이벤트
@@ -23,7 +57,7 @@ $(document).ready(function() {
 			
 		} else {
 			$("#agreeMsgS").html("");
-			$("#upw_check_msg").html("비밀번호 확인 입력이 동일하지 않습니다!")
+			$("#upw_check_msg").html("비밀번호 확인 입력이 동일하지 않습니다.")
 		}
 		
 	})
@@ -34,14 +68,14 @@ function validatePW( pw ) {
 	
 	//비밀번호를 입력하지 않았을 때
 	if( pw == '' ) {
-		$("#upw_msg").html("비밀번호를 입력해주세요!")
+		$("#upw_msg").html("비밀번호를 입력해주세요.")
 		
 		return false;
 	}
 	
 	//비밀번호 입력값 검증
 	if( !/^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{6,12}$/.test( pw ) ) {
-		$("#upw_msg").html("비밀번호는 영어대소문자, 숫자 6~12자만 입력하세요!")
+		$("#upw_msg").html("비밀번호는 영어대소문자, 숫자 6~12자만 입력하세요.")
 		return false;
 	} else {
 		$("#upw_msg").html("")
@@ -49,7 +83,7 @@ function validatePW( pw ) {
 	
 	//비밀번호와 확인 입력값이 같은 지 검증
 	if( pw != $("#upw_check").val() ) {
-		$("#upw_check_msg").html("비밀번호 확인 입력이 동일하지 않습니다!")
+		$("#upw_check_msg").html("비밀번호 확인 입력이 동일하지 않습니다.")
 		return false;
 	}
 	
@@ -63,7 +97,7 @@ function validatePW( pw ) {
 .sfPWrap {
 	width: 400px;
     height: 500px;
-    margin: 100px auto 0;
+    margin: 200px auto 0;
     text-align: center;
     position: relative;
 }

@@ -80,6 +80,15 @@ public interface FindUserDao {
 	 * @return 수행 결과 (성공 - 1, 실패 - 0)
 	 */
 	public int updatePwById(Connection conn, String id, String upw);
+	
+	/**
+	 *  해당 pw가 DB에 존재하는지 count()로 조회
+	 * 
+	 * @param conn - DB 연결 객체
+	 * @param pw - 요청 비밀번호
+	 * @return count(*) 조회 결과
+	 */
+	public int selectExistPw(Connection conn, String pw);
 
 	
 

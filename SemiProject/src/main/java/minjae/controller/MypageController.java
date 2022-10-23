@@ -24,8 +24,10 @@ public class MypageController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("/mypage/main [GET]");
 		
+		req.setCharacterEncoding("UTF-8");
+		
 		HttpSession session = req.getSession();
-		session.setAttribute("userno", 14);
+//		session.setAttribute("userno", 14); //테스트용
 		int userno = (int)session.getAttribute("userno");
 		
 		MpMain mpMain = mypageService.getUserInfo(userno);

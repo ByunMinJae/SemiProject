@@ -278,6 +278,37 @@ public class FindUserDaoImpl implements FindUserDao {
 		
 	}
 	
+	@Override
+	public int selectExistPw(Connection conn, String pw) {
+		System.out.println("FindUserDao selectExistPw() - 시작");
+		
+		String sql = "";
+		sql += "SELECT count(*) FROM user_info";
+		sql += " WHERE userpw = ?";
+		
+		//수행 결과를 저장할 변수
+		int res = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, pw);
+			
+			rs = ps.executeQuery();
+			
+			rs.next();
+			res = rs.getInt("count(*)");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("FindUserDao selectExistPw() - 끝");
+		return res;
+	}
+	
 }
 
 
