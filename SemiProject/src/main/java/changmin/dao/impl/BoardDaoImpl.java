@@ -177,7 +177,7 @@ public class BoardDaoImpl implements BoardDao {
 		
 		String sql = "";
 		sql += "SELECT";
-		sql += "	boardno, boardtitle, boarddate, userno, categoryno, hit";
+		sql += "	boardno, boardtitle, boarddate, boardcon, userno, categoryno, hit";
 		sql += " FROM board_info";
 		sql += " WHERE boardno = ?";
 		
@@ -196,6 +196,7 @@ public class BoardDaoImpl implements BoardDao {
 				board.setBoardno(rs.getInt("boardno"));
 				board.setBoardtitle(rs.getString("boardtitle"));
 				board.setBoarddate(rs.getDate("boarddate"));
+				board.setBoardcon(rs.getString("boardcon"));
 				board.setUserno(rs.getInt("userno"));
 				board.setCategoryno(rs.getInt("categoryno"));
 				board.setHit(rs.getInt("hit"));

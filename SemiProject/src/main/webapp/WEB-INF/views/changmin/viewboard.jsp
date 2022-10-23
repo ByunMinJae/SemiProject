@@ -36,11 +36,27 @@ function deleteboard(){
 </script>
 <style type="text/css">
 
-#wrapper {
-	margin: 0 20px 0 0;
+@font-face {
+	font-family: 'dalseo';
+	src: url('/resources/css/DalseoHealingBold.ttf') format('truetype');
 }
+
+#wrapper {
+	background-color: #BFDCFB;
+}
+
+#footer {
+	background-color: #BFDCFB;
+	border: none;
+	
+}
+
 th, td {
 	text-align: center;
+}
+td {
+	padding: 5 5 5 5;
+	background-color: white;
 }
 
 td:nth-child(2) {
@@ -51,12 +67,14 @@ td:nth-child(2) {
 	position: relative;
 	float: right;
 	width: 800px;
-	top: -500px;
+	top: -380px;
+	
 	
 }
 
 .left{
 	position: absolute;
+	top: 150px;
 	left: -100px;
 }
 
@@ -68,7 +86,20 @@ img {
 	float: right;
 }
 
+#title {
+	font-size: 34px; 
+}
 
+#boarddate, #boardhit {
+	font-size: 6px;
+}
+
+#content-detail {
+	min-height: 300px;
+}
+
+ 
+ 
 </style>
 <div class="myContainer">
 	<hr>
@@ -86,39 +117,28 @@ img {
 			
 		</div>
 
-<div class="right">
-	<table class="table table-bordered">
+<div class="right" >
+	<table class="table">
 	<tr>
-		<td class="info">글번호</td>
-		<td><%=viewBoard.getBoardno() %></td>
-		
-		<td class="info">작성일</td>
-		<td><%=viewBoard.getBoarddate() %></td>
+		<td colspan="4" class="text-left success" id="title">제목 : <%=viewBoard.getBoardtitle() %></td>
 	</tr>
 	
 	<tr>
-		<td class="info">회원번호</td>
-		<td><%=viewBoard.getUserno() %></td>
-		
-		<td class="info">닉네임</td>
-		<td>[추후 추가]</td>
 	</tr>
+	 
+	<tr>
+		<td class="text-left">
+		<span id="user">작성자 : <%=viewBoard.getUserno() %></span><br>
+		<span id="boarddate"><%=viewBoard.getBoarddate() %></span>
+		<span id="boardhit">&emsp;조회&nbsp;<%=viewBoard.getHit() %></span>
+		</td>
+	</tr> 
 	
 	<tr>
-		<td class="info">조회수</td>
-		<td colspan="4"><%=viewBoard.getHit() %>
+		<td class="success">본문</td>
 	</tr>
 	<tr>
-		<td class="info">제목</td>
-		<td colspan="3"><%=viewBoard.getBoardtitle() %></td>
-	</tr>
-	
-	<tr>
-		<td class="info" colspan="4">본문</td>
-	</tr>
-	
-	<tr>
-		<td colspan="4"><%=viewBoard.getBoardcon() %></td>
+		<td colspan="4" class="text-left"><p id="content-detail"><%=viewBoard.getBoardcon() %></p></td>
 	</tr>
 	
 	</table>

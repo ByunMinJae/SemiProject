@@ -102,9 +102,9 @@ img {
 			<div class="text-center">
 				<ul class="pagination">
 				
-					<%	if( paging.getCurPage() != 1) { %>
+<%-- 					<%	if( paging.getCurPage() != 1) { %>
 					<li><a href="./question">&larr; 처음</a></li>
-					<%	} %>
+					<%	} %> --%>
 				
 					<%	if( paging.getCurPage() != 1) { %>
 					<li><a href="./question?curPage=<%=paging.getCurPage() - 1 %>">&lt;</a></li>
@@ -123,9 +123,9 @@ img {
 					<%	} %>
 					
 					
-					<%	if( paging.getCurPage() != paging.getTotalPage() ) { %>
+<%-- 					<%	if( paging.getCurPage() != paging.getTotalPage() ) { %>
 					<li><a href="./question?curPage=<%=paging.getTotalPage() %>">&rarr; 끝</a></li>
-					<%	} %>
+					<%	} %> --%>
 					<a href="/board/insert"><button role="button" class="btn btn-success">글쓰기</button></a>
 				</ul>
 			</div>
