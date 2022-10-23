@@ -25,7 +25,7 @@ public class MypageController extends HttpServlet {
 		System.out.println("/mypage/main [GET]");
 		
 		HttpSession session = req.getSession();
-		session.setAttribute("userno", 14);
+		session.setAttribute("userno", 17);
 		int userno = (int)session.getAttribute("userno");
 		
 		MpMain mpMain = mypageService.getUserInfo(userno);

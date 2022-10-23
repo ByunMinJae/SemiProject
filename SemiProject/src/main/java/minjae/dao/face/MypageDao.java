@@ -126,6 +126,16 @@ public interface MypageDao {
 	 * @return 수행결과 (1 - 성공, 0 - 실패)
 	 */
 	public int updateUserAddr(Connection conn, int userno, String address);
+	
+	/**
+	 *  회원정보를 이용해
+	 * 해당 유저의 회원정보를 삭제한다
+	 * 
+	 * @param conn - DB 연결 객체
+	 * @param userno1 - 회원 번호
+	 * @return DELETE 수행 결과 (1 - 성공, 0 - 실패)
+	 */
+	public int deleteUser(Connection conn, int userno1);
 
 	
 	

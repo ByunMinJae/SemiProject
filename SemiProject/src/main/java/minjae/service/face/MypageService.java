@@ -108,6 +108,14 @@ public interface MypageService {
 	 */
 	public int updateUserAddr(int userno, String address);
 	
+	/**
+	 *  탈퇴를 요청한 회원의 회원정보를 삭제한다
+	 * 
+	 * @param userno1 - 회원 번호
+	 * @return 회원 탈퇴 결과
+	 */
+	public int deleteUserInfo(int userno1);
+	
 	
 	
 	

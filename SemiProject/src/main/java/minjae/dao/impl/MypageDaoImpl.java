@@ -408,6 +408,32 @@ public class MypageDaoImpl implements MypageDao {
 		return res;
 	}
 	
+	@Override
+	public int deleteUser(Connection conn, int userno1) {
+		System.out.println("/mypage/main deleteUser() - 시작");
+		
+		String sql = "";
+		sql += "DELETE FROM user_info";
+		sql += " WHERE userno = ?";
+		
+		int res = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, userno1);
+			
+			res = ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("/mypage/main deleteUser() - 끝");
+		return res;
+	}
+	
 }
 
 

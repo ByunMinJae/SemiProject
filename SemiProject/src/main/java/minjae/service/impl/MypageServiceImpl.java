@@ -184,6 +184,25 @@ public class MypageServiceImpl implements MypageService {
 		}
 	}
 	
+	@Override
+	public int deleteUserInfo(int userno1) {
+		System.out.println("/mypage/main deleteUserInfo() - 시작");
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		int res = mypageDao.deleteUser(conn, userno1);
+		
+		if( res > 0 ) {
+			JDBCTemplate.commit(conn);
+			System.out.println("/mypage/main deleteUserInfo() - 끝");
+			return 1; //성공
+		} else {
+			JDBCTemplate.rollback(conn);
+			System.out.println("/mypage/main deleteUserInfo() - 끝");
+			return 0; //실패
+		}
+	}
+	
 }
 
 

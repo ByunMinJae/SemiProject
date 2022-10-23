@@ -9,6 +9,12 @@
 <!-- 다음 주소 API -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
+<!-- + jQuery UI 1.13.2 CDN -->
+<script type="text/javascript" src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+
+<!-- + jQuery UI Base Theme CDN -->
+<link type="text/css" rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+
 <script>
 $(document).ready(function () {
 	
@@ -25,7 +31,7 @@ $(document).ready(function () {
 	
 	//이름 변경 확인 버튼 클릭
 	$("#btnNameUdt").click(function() {
-		if($("#name").val() != "") {
+		if($("#name").val() != "" ) {
 
 			if( confirm("이름을 변경하시겠습니까?") ) {
 				updateUserInfo($("#btnNameUdt").val(), $("#name").val());
@@ -67,6 +73,55 @@ $(document).ready(function () {
 		} else { //주소를 입력하지 않은 경우
 			$("#address_msg").html("변경된 내용이 없습니다!")
 		}
+	})
+	
+	//회원 탈퇴 버튼 클릭 시 다이얼로그 open
+	$("#btnDialog").click(function() {
+		$("#pwcheck").dialog( "open" );
+	})
+	
+	//다이얼로그 옵션 설정하기
+	$("#pwcheck").dialog({
+		autoOpen: false 	//기본 모습 숨기기 설정
+		, draggable: false 	//이동 불가 설정
+		, width: 360		//너비 지정
+		, height: 240		//높이 지정
+		, title: "본인확인"
+		, modal: true
+		, buttons: [
+			{
+				text:"확인"
+				, icon: "ui-icon-check"
+				, click: function() {
+					
+					$.ajax({
+						type: "post"					//요청 메소드
+						, url: "/mypage/pwcheck"			//요청 URL
+						, data: {						//요청 파라미터
+							pw: $("#pw").val()
+						}
+						, dataType: "html"				//응답 데이터 형식
+						, success: function( res ) {
+							console.log("AJAX 성공")
+							console.log(res)
+							
+							if( $.trim(res) == "true" ) {
+								//true일 때 회원 탈퇴 페이지로 이동
+								alert("확인 되었습니다!!")
+								location.href = "/mypage/delete";
+								
+							} else {
+								//아닐 때 확인 메시지 띄우기
+								$("#check_msg").html(res);
+							}
+							
+						}
+						
+					})
+					
+				}
+			}
+		]
 	})
 	
 })
@@ -226,17 +281,25 @@ function execDaumPostcode() {
 }
 </script>
 
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	
+	
+})
+</script>
+
 <style type="text/css">
 #mpuWrap {
 	width: 1100px;
-    height: 644px;
+    height: 705px;
     margin: 0px auto;
     text-align: center;
     position: relative;
 }
 #mpuContents {
-	width: 771px;
-	height: 693px;
+	width: 851px;
+	height: 754px;
     margin: 0px auto;
     background: #fcffb282;
     border: 1px solid #ccc;
@@ -262,7 +325,8 @@ function execDaumPostcode() {
 #mpuTable tr {
 	display: block;
     margin: 15px 0 15px 51px;
-    border-bottom: 1px solid #2d954d5c;;
+    border-bottom: 1px solid #2d954d5c;
+    width: 644px;
 }
 #mpuTable tr td:first-child {
 	width: 103px;
@@ -373,6 +437,10 @@ input {
 	<td>이메일</td>
 	<td><%=mpMain.getEmail() %></td>
 </tr>
+<tr>
+	<td>가입일</td>
+	<td><%=mpMain.getJoinday() %></td>
+</tr>
 <!-- 현재 전화번호 -->
 <tr id="currPhone">
 	<td>전화번호</td>
@@ -422,6 +490,20 @@ input {
 </tr>
 
 </table>
+
+<button id="btnDialog">회원 탈퇴</button>
+
+<!-- dialog DIV -->
+<div id="pwcheck" title="dialog test">
+
+	<p style="font-size: 14px;">회원정보 수정을 위해 본인확인을 해주세요!</p>
+	<label for="pw">비밀번호 : </label>
+	<input type="text" id="pw" name="pw" onFocus="this.value=''; return true;">
+	<input type="text"  hidden="">
+	<!-- 확인 메시지 태그 -->
+	<p id="check_msg" style="color: red; font-size: 12px; margin: 3px 0 0 74px;"></p>
+	
+</div>
 
 </div>
 
