@@ -101,7 +101,7 @@ function hiddenForm() {
 .fuiWrap {
 	width: 400px;
     height: 500px;
-    margin: 100px auto 0;
+    margin: 200px auto 0;
     text-align: center;
     position: relative;
 }

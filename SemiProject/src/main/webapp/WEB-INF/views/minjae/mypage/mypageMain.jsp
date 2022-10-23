@@ -43,9 +43,9 @@ $(document).ready(function() {
 	$("#btnSelect").click(function() {
 		
 		if( $("#startDate").val() == "" || $("#endDate").val() == "" ) {
-			$("#checkMsg").html("기간을 선택해 주세요!")
+			$("#checkMsg").html("기간을 선택해 주세요.")
 		} else if( $("#startDate").val() > $("#endDate").val() ) {
-			$("#checkMsg").html("시작 날짜가 더 클 수 없습니다!")
+			$("#checkMsg").html("시작 날짜가 더 클 수 없습니다.")
 		} else {
 			
 			$("#checkMsg").html("")

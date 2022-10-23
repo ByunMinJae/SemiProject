@@ -31,7 +31,7 @@
 <div class="gtlWrap">
 	<h1>패스워드 변경 실패</h1>
 	<hr><br>
-	<strong style="color: red;">프로그램 오류로 인하여 패스워드 변경에 실패하였습니다. 다시 시도해 주세요</strong>
+	<strong style="color: red;">프로그램 오류로 인하여 패스워드 변경에 실패하였습니다. 다시 시도해 주세요.</strong>
 	<a href="/find/findpw"><button id="goToFindPw">비밀번호 찾기</button></a>
 </div>
 

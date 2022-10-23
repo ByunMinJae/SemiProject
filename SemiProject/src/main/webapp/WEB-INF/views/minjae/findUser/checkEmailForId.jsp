@@ -25,7 +25,7 @@ $(document).ready(function() {
 			location.href = "/find/checkid?id=" + $("#hiddenIdForEmail").val()
 
 		} else { //입력한 인증번호가 불일치 할 때
-			$("#checkEmail").html("<p id='disEmailAuth' >인증번호가 틀렸습니다 다시 확인해 주세요</p>")
+			$("#checkEmail").html("<p id='disEmailAuth' >인증번호가 틀렸습니다 다시 확인해 주세요.</p>")
 		
 		}
 		
@@ -43,10 +43,6 @@ $(document).ready(function() {
 #disEmailAuth {
     color: red;
 }
-
-/* #btnReqAuth { */
-/* 	display: none; */
-/* } */
 
 #btnFindIdByEmail {
 	width: 304px;
@@ -74,7 +70,7 @@ $(document).ready(function() {
 <input type="text" id="authnoE" name="authnoE" placeholder="인증 번호" style="margin: 10px -73px 0 0;">
 <div id="agreeMsgE"></div>
 
-<div id="checkEmail"><p>이메일로 인증번호를 발송했습니다. 인증번호를 확인해 주세요!</p></div>
+<div id="checkEmail"><p>이메일로 인증번호를 발송했습니다 인증번호를 확인해 주세요.</p></div>
 
 <button id="btnFindIdByEmail">아이디 찾기</button>
 

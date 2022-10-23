@@ -57,7 +57,7 @@ $(document).ready(function() {
 			
 		} else {
 			$("#agreeMsgS").html("");
-			$("#upw_check_msg").html("비밀번호 확인 입력이 동일하지 않습니다!")
+			$("#upw_check_msg").html("비밀번호 확인 입력이 동일하지 않습니다.")
 		}
 		
 	})
@@ -68,14 +68,14 @@ function validatePW( pw ) {
 	
 	//비밀번호를 입력하지 않았을 때
 	if( pw == '' ) {
-		$("#upw_msg").html("비밀번호를 입력해주세요!")
+		$("#upw_msg").html("비밀번호를 입력해주세요.")
 		
 		return false;
 	}
 	
 	//비밀번호 입력값 검증
 	if( !/^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]{6,12}$/.test( pw ) ) {
-		$("#upw_msg").html("비밀번호는 영어대소문자, 숫자 6~12자만 입력하세요!")
+		$("#upw_msg").html("비밀번호는 영어대소문자, 숫자 6~12자만 입력하세요.")
 		return false;
 	} else {
 		$("#upw_msg").html("")
@@ -83,7 +83,7 @@ function validatePW( pw ) {
 	
 	//비밀번호와 확인 입력값이 같은 지 검증
 	if( pw != $("#upw_check").val() ) {
-		$("#upw_check_msg").html("비밀번호 확인 입력이 동일하지 않습니다!")
+		$("#upw_check_msg").html("비밀번호 확인 입력이 동일하지 않습니다.")
 		return false;
 	}
 	
@@ -97,7 +97,7 @@ function validatePW( pw ) {
 .sfPWrap {
 	width: 400px;
     height: 500px;
-    margin: 100px auto 0;
+    margin: 200px auto 0;
     text-align: center;
     position: relative;
 }

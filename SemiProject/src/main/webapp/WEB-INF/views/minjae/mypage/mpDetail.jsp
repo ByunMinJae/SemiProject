@@ -53,7 +53,7 @@ $(document).ready(function() {
 							
 							if( $.trim(res) == "true" ) {
 								//true일 때 회원정보 수정 페이지로 이동
-								alert("확인 되었습니다!!")
+								alert("확인 되었습니다.")
 								location.href = "/mypage/update";
 								
 							} else {
@@ -248,7 +248,7 @@ li.info_left {
 <!-- dialog DIV -->
 <div id="pwcheck" title="dialog test">
 
-	<p style="font-size: 14px;">회원정보 수정을 위해 본인확인을 해주세요!</p>
+	<p style="font-size: 14px;">회원정보 수정을 위해 본인확인을 해주세요.</p>
 	<label for="pw">비밀번호 : </label>
 	<input type="text" id="pw" name="pw" onFocus="this.value=''; return true;">
 	<input type="text"  hidden="">

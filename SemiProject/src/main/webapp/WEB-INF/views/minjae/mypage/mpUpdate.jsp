@@ -40,7 +40,7 @@ $(document).ready(function () {
 			}
 			
 		} else {
-			$("#name_msg").html("변경된 내용이 없습니다!")
+			$("#name_msg").html("변경된 내용이 없습니다.")
 		}
 	})
 	
@@ -68,10 +68,10 @@ $(document).ready(function () {
 					location.reload();
 				}
 			} else {
-				$("#address_msg").html("상세주소를 입력해 주세요!")
+				$("#address_msg").html("상세주소를 입력해 주세요.")
 			}
 		} else { //주소를 입력하지 않은 경우
-			$("#address_msg").html("변경된 내용이 없습니다!")
+			$("#address_msg").html("변경된 내용이 없습니다.")
 		}
 	})
 	
@@ -107,7 +107,7 @@ $(document).ready(function () {
 							
 							if( $.trim(res) == "true" ) {
 								//true일 때 회원 탈퇴 페이지로 이동
-								alert("확인 되었습니다!!")
+								alert("확인 되었습니다.")
 								location.href = "/mypage/delete";
 								
 							} else {
@@ -148,7 +148,7 @@ function existNick() {
 		existVal($("#btnNickUdt").val(), $("#nick").val(), $("#nick_msg"), "닉네임");
 		
 	} else {
-		$("#nick_msg").html("변경된 내용이 없습니다!")
+		$("#nick_msg").html("변경된 내용이 없습니다.")
 	} 
 	
 }
@@ -163,10 +163,10 @@ function existPhone() {
 			existVal($("#btnPhoneUdt").val(), $("#phone").val(), $("#phone_msg"), "전화번호");
 			
 		} else { //입력한 값이 숫자가 아닐때
-			$("#phone_msg").html("숫자 11자리만 입력하세요!");
+			$("#phone_msg").html("숫자 11자리만 입력하세요.");
 		}
 	} else { //입력한 전화번호가 없을 때
-		$("#phone_msg").html("변경된 내용이 없습니다!");
+		$("#phone_msg").html("변경된 내용이 없습니다.");
 	}
 	
 }
@@ -221,10 +221,10 @@ function updateUserInfo(btnName, info) {
 			console.log(res)
 		
 			if( $.trim(res) == "true" ) {
-				alert("변경 되었습니다!!")
+				alert("변경 되었습니다.")
 				location.reload();
 			} else {
-				alert("변경에 실패하였습니다!!")
+				alert("변경에 실패하였습니다.")
 				location.reload();
 			}
 		
@@ -496,7 +496,7 @@ input {
 <!-- dialog DIV -->
 <div id="pwcheck" title="dialog test">
 
-	<p style="font-size: 14px;">회원정보 수정을 위해 본인확인을 해주세요!</p>
+	<p style="font-size: 14px;">회원정보 수정을 위해 본인확인을 해주세요.</p>
 	<label for="pw">비밀번호 : </label>
 	<input type="text" id="pw" name="pw" onFocus="this.value=''; return true;">
 	<input type="text"  hidden="">

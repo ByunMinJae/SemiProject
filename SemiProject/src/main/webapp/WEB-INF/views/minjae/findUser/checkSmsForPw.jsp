@@ -26,7 +26,7 @@ $(document).ready(function() {
 			//form태그 submit 시키기
 			$("#f").trigger("submit");				
 		} else { //입력한 인증번호가 불일치 할 때
-			$("#checkSms").html("<p id='disSmsAuth' >인증번호가 틀렸습니다 다시 확인해 주세요</p>")
+			$("#checkSms").html("<p id='disSmsAuth' >인증번호가 틀렸습니다 다시 확인해 주세요.</p>")
 			
 		}
 		
@@ -81,7 +81,7 @@ $(document).ready(function() {
 <input type="text" id="authnoS" name="authnoS" placeholder="인증 번호" style="margin: 10px -73px 0 0;">
 <div id="agreeMsgS"></div>
 
-<div id="checkSms"><p>문자로 인증번호를 발송했습니다. 인증번호를 확인해 주세요!</p></div>
+<div id="checkSms"><p>문자로 인증번호를 발송했습니다 인증번호를 확인해 주세요.</p></div>
 
 <button id="btnFindPwBySms">비밀번호 찾기</button>
 

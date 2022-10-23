@@ -5,9 +5,9 @@
     
 <style type="text/css">
 .sfiWrap {
-	width: 400px;
+	width: 500px;
     height: 500px;
-    margin: 100px auto 0;
+    margin: 200px auto 0;
     text-align: center;
     position: relative;
 }
@@ -61,7 +61,7 @@ h3 {
 </style>
 
 <div class="sfiWrap">
-<h1>아이디 확인</h1>
+<h1>아이디 찾기가 완료 되었습니다.</h1>
 <hr>
 
 <div id="fromInsideOut">

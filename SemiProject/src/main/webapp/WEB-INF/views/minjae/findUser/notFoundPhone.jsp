@@ -11,7 +11,7 @@
 </style>   
 
 <%	if( "".equals(request.getParameter("userPhone")) ) { %>
-		<p class="nf">전화번호를 입력해 주세요!</p>
+		<p class="nf">전화번호를 입력해 주세요.</p>
 <%	} else { %>
-		<p class="nf">해당 정보로 가입된 아이디가 없습니다. 다시 확인해 주세요!</p>
+		<p class="nf">해당 정보로 가입된 아이디가 없습니다. 다시 확인해 주세요.</p>
 <%	} %>

@@ -13,7 +13,7 @@ $(document).ready(function() {
 		if(confirm(" 회원 탈퇴를 진행하실 경우 회원 정보나 게시물은 다시 복구할 수 없습니다.\n\n그래도 진행하시겠다면 '확인'버튼을 클릭하세요.")) {
 			$("form").submit();
 		} else {
-			alert("취소되었습니다!")
+			alert("취소되었습니다.")
 		}
 	})
 	

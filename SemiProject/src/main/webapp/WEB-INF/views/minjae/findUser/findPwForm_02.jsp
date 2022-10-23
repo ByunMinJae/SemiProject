@@ -53,7 +53,7 @@ $(document).ready(function() {
 					$("#resid").html("")
 
 				} else {
-					$("#resid").html("<p>해당 아이디로 가입된 유저가 없습니다</p>")
+					$("#resid").html("<p>해당 아이디로 가입된 유저가 없습니다.</p>")
 				}
 			}
 

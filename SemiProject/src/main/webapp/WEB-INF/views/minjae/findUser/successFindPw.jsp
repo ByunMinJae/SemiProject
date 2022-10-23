@@ -6,9 +6,9 @@
 
 <style type="text/css">
 .gtlWrap {
-	width: 400px;
+	width: 500px;
     height: 500px;
-    margin: 100px auto 0;
+    margin: 200px auto 0;
     text-align: center;
     position: relative;
 }
@@ -29,7 +29,7 @@
 </style>
 
 <div class="gtlWrap">
-	<h1>완료!!</h1>
+	<h1>비밀번호 변경이 완료 되었습니다.</h1>
 	<hr>
 	<a href="/cmc/login"><button id="goToLoginPage">로그인하러 가기</button></a>
 </div>
