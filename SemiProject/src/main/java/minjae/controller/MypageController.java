@@ -27,7 +27,7 @@ public class MypageController extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		
 		HttpSession session = req.getSession();
-		session.setAttribute("userno", 14);
+//		session.setAttribute("userno", 14); //테스트용
 		int userno = (int)session.getAttribute("userno");
 		
 		MpMain mpMain = mypageService.getUserInfo(userno);
