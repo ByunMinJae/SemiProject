@@ -8,10 +8,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import changmin.dto.Product;
-import changmin.dto.User;
+import com.google.gson.Gson;
+
 import changmin.service.face.PayDoService;
 import changmin.service.impl.PayDoServiceImpl;
+import jeonghwa.dto.Product;
+import sharon.dto.User;
 
 @WebServlet("/pay/do")
 public class PayDoController extends HttpServlet {
@@ -41,7 +43,6 @@ public class PayDoController extends HttpServlet {
 		//로그인 한 사람 정보를 모델값으로 전달
 		req.setAttribute("loginUser", loginUser);
 		
-		
 		//-------------------------------------------------------------------
 
 		//------------------------상품 정보 조회-----------------------------
@@ -64,7 +65,14 @@ public class PayDoController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("/pay/do [POST]");
-
+		
+		Gson gson = new Gson();
+		String test = gson.fromJson( req.getParameter("pay_method").trim(), String.class);
+		System.out.println(test);
+		
+//		String regIdString = req.getParameter("pay_method").trim();
+//		System.out.println(regIdString);
+		
 		req.getRequestDispatcher("/WEB-INF/views/changmin/paydo.jsp").forward(req, resp);
 	}
 	

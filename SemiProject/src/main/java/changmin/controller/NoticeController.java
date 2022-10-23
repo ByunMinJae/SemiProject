@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import changmin.dto.Category;
 import changmin.service.face.BoardService;
 import changmin.service.impl.BoardServiceImpl;
 import daun.dto.Board;
@@ -25,29 +26,30 @@ public class NoticeController extends HttpServlet {
 	
 		//----------------------게시글 전체 조회-------------------------------
 		
-		//전달파라미터에서 현재 페이징 객체 계산하기
-		Paging paging = boardService.getPaging(req);
-		System.out.println("[TEST] " + paging);
+		Category category = new Category();
+		category.setCategoryno(1);
 		
-		req.setAttribute("paging", paging);
+		//전달파라미터에서 현재 페이징 객체 계산하기
+		Paging paging = boardService.getPaging(req, category);
+		System.out.println("[TEST] " + paging);
 		
 		
 		//게시글 페이징 목록 조회
-		List<Board> boardList = boardService.getList( paging );
-//		for( int i=0; i<5; i++) {
-//			int abc = boardList.get(i).getCategoryno();
-//			System.out.println(abc);
-//		}
-		
+		List<Board> boardList = boardService.getList( paging, category );
+
 		//[TEST] 조회결과 확인
 		for(Board b : boardList)	System.out.println(b);
 		
+		req.setAttribute("paging", paging);
 		req.setAttribute("boardList", boardList);
 		
 		//----------------------게시글 전체 조회-------------------------------
+		
+		
 		
 	
 		
 		req.getRequestDispatcher("/WEB-INF/views/changmin/notice.jsp").forward(req, resp);
 	}
+	
 }

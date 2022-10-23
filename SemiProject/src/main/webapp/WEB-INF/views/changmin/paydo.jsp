@@ -1,5 +1,5 @@
-<%@page import="changmin.dto.Product"%>
-<%@page import="changmin.dto.User"%>
+<%@page import="jeonghwa.dto.Product"%>
+<%@page import="sharon.dto.User"%>
 <%@page import="java.util.List"%>
 <%@page import="changmin.dto.Pay"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -20,32 +20,33 @@
 //카카오 결제 API
 var IMP = window.IMP; // 생략가능
 IMP.init('imp88224386');  // 가맹점 식별코드
+
 // IMP.request_pay(param, callback) 결제창 호출
 function payDo(){
     IMP.request_pay({ // param
  
     pg: "html5_inicis",
     pay_method: "card",
-    merchant_uid: "ORD20180131-0000011",
+    merchant_uid: "test1232244",
     name: $("#prodnamevalue").val(),
     amount: $("#prodpricevalue").val(),
     buyer_email: $("#emailvalue").val(),
     buyer_name: $("#prodpricevalue").val(),
     buyer_tel: $("#phonevalue").val(),
     buyer_addr: $("#addressvalue").val(),
-    buyer_postcode: "01181"
+    buyer_postcode: "01181" 
 	}, function (rsp) { // callback
         if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
             // jQuery로 HTTP 요청
-            jQuery.ajax({
-                url: "{/orderafterlist}", // 예: https://www.myservice.com/payments/complete
+            console.log(rsp.pay_method);
+            $.ajax({
+                url: "/orderafterlist", // 예: https://www.myservice.com/payments/complete
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                data: {
-                    imp_uid: rsp.imp_uid,
-                    merchant_uid: rsp.merchant_uid
-                }
+                dataType: "json",
+                data: { pay_method: rsp.pay_method }
             }).done(function (data) {
+                	console.log(rsp.pay_method);
               // 가맹점 서버 결제 API 성공시 로직
             })
           } else {
@@ -53,7 +54,33 @@ function payDo(){
           }
      });
     
-}	
+} 
+
+<%-- function payDo(){
+	$.ajax({
+		url: "/orderafterlist",//(action url),
+		type: "POST",//(get, post 방식),
+		data: {
+		    pg: "html5_inicis",
+		    pay_method: "card",
+		    merchant_uid: <%= loginUser.getUserno() %> + new Date.getTime(),
+		    name: $("#prodnamevalue").val(),
+		    amount: $("#prodpricevalue").val(),
+		    buyer_email: $("#emailvalue").val(),
+		    buyer_name: $("#prodpricevalue").val(),
+		    buyer_tel: $("#phonevalue").val(),
+		    buyer_addr: $("#addressvalue").val(),	
+		},
+		dataType: "text",
+		success: function(result){
+			alert("success");
+		},
+		error: function(){
+			console.log(JSON.stringify(error));
+		}
+	});
+} --%>
+
 
 $(document).ready(function() {
 	
@@ -197,10 +224,11 @@ button {
 	width: 345px;
 }
 
-.widthcontainer {
-	width: 75%;
-}
 
+li {
+   display: list-item;
+   list-style-type: none;
+}
 
 
  

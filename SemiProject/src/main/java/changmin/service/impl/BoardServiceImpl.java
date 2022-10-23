@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import changmin.dao.face.BoardDao;
 import changmin.dao.impl.BoardDaoImpl;
+import changmin.dto.Category;
 import changmin.service.face.BoardService;
 import common.JDBCTemplate;
 import daun.dto.Board;
@@ -25,15 +26,15 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public List<Board> getList(Paging paging) {
-		return boardDao.selectAll(JDBCTemplate.getConnection(), paging);
+	public List<Board> getList(Paging paging, Category category) {
+		return boardDao.selectAll(conn, paging, category);
 	}
 	
 	@Override
-	public Paging getPaging(HttpServletRequest req) {
+	public Paging getPaging(HttpServletRequest req,Category category) {
 		
 		//총 게시글 수 조회하기
-		int totalCount = boardDao.selectCntAll(JDBCTemplate.getConnection());
+		int totalCount = boardDao.selectCntAll(conn, category);
 		
 		
 		//전달파라미터 curPage 추출하기
@@ -42,7 +43,6 @@ public class BoardServiceImpl implements BoardService{
 		if( param != null && !"".equals(param) ) {
 			curPage = Integer.parseInt(param);
 		}
-		
 		
 		//Paging객체 생성
 		Paging paging = new Paging(totalCount, curPage);
@@ -71,9 +71,6 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public Board view(Board boardno) {
 		
-		//DB연결 객체
-		Connection conn = JDBCTemplate.getConnection();
-		
 		//조회수 증가
 		if( boardDao.updateHit(conn, boardno)>0) {
 			JDBCTemplate.commit(conn);
@@ -88,7 +85,13 @@ public class BoardServiceImpl implements BoardService{
 		return board;
 	}
 
-
-	
+	@Override
+	public void deleteboard(Board board) {
+		if(boardDao.delete(conn, board)>0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+	}
 
 }

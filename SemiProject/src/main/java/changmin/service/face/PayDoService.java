@@ -1,12 +1,10 @@
 package changmin.service.face;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import changmin.dto.Pay;
-import changmin.dto.Product;
-import changmin.dto.User;
+import jeonghwa.dto.Product;
+import sharon.dto.User;
 
 public interface PayDoService {
 	

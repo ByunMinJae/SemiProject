@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import changmin.dto.Category;
 import changmin.service.face.BoardService;
 import changmin.service.impl.BoardServiceImpl;
 import daun.dto.Board;
@@ -26,19 +27,21 @@ public class FoodController extends HttpServlet {
 
 		//----------------------게시글 전체 조회-------------------------------
 
+		Category category = new Category();
+		category.setCategoryno(3);
+		
 		//전달파라미터에서 현재 페이징 객체 계산하기
-		Paging paging = boardService.getPaging(req);
+		Paging paging = boardService.getPaging(req, category);
 		System.out.println("[TEST] " + paging);
-
-		req.setAttribute("paging", paging);
-
-
+		
+		
 		//게시글 페이징 목록 조회
-		List<Board> boardList = boardService.getList( paging );
+		List<Board> boardList = boardService.getList( paging, category );
 
 		//[TEST] 조회결과 확인
 		for(Board b : boardList)	System.out.println(b);
-
+		
+		req.setAttribute("paging", paging);
 		req.setAttribute("boardList", boardList);
 
 		//----------------------게시글 전체 조회-------------------------------
