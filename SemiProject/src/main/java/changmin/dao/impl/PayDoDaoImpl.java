@@ -5,12 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.servlet.http.HttpSession;
-
 import changmin.dao.face.PayDoDao;
-import changmin.dto.Product;
-import changmin.dto.User;
 import common.JDBCTemplate;
+import jeonghwa.dto.Product;
+import sharon.dto.User;
 
 public class PayDoDaoImpl implements PayDoDao{
 

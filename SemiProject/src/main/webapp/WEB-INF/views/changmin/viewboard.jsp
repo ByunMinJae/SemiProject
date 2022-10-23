@@ -13,13 +13,50 @@
 $(document).ready(function() {
 	
 	$('#btnList').click(function() {
-		window.history.back();
+		window.history.back(); // 목록 버튼 클릭시 뒤로가기
 	})
+	
+
 })
+
+function deleteboard(){
+   $.ajax({
+        url:"./deleteboard?boardno=<%=viewBoard.getBoardno() %>",
+        type:'POST',
+        data: {boardno:<%=viewBoard.getBoardno()%>},
+        success:function(data){
+            location.href=('/board/notice'); //게시글 삭제시 default 게시글목록으로 이동
+            alert("삭제 완료!");
+        },
+        error:function(jqXHR, textStatus, errorThrown){
+            alert("에러 발생 \n" + textStatus + " : " + errorThrown);
+        }
+   });
+}
 </script>
 <style type="text/css">
+
+@font-face {
+	font-family: 'dalseo';
+	src: url('/resources/css/DalseoHealingBold.ttf') format('truetype');
+}
+
+#wrapper {
+	background-color: #BFDCFB;
+}
+
+#footer {
+	background-color: #BFDCFB;
+	border: none;
+	
+}
+
 th, td {
 	text-align: center;
+}
+td {
+	padding: 5 5 5 5;
+	background-color: white;
 }
 
 td:nth-child(2) {
@@ -30,8 +67,15 @@ td:nth-child(2) {
 	position: relative;
 	float: right;
 	width: 800px;
-	top: -500px;
+	top: -380px;
 	
+	
+}
+
+.left{
+	position: absolute;
+	top: 150px;
+	left: -100px;
 }
 
 img {
@@ -42,68 +86,66 @@ img {
 	float: right;
 }
 
+#title {
+	font-size: 34px; 
+}
 
+#boarddate, #boardhit {
+	font-size: 6px;
+}
+
+#content-detail {
+	min-height: 300px;
+}
+
+ 
+ 
 </style>
 <div class="myContainer">
-	<form>
 	<hr>
 		<div style="min-height: 500px;">
 			<div class="left">
 	
 				<!-- 게시판 목록 -->		
-				<ul class="menu">
-					<li><a href="/board/notice"><img src="/resources/image/notice.png"></a>
-					<li><a href="/board/free"><img src="/resources/image/free.png"></a>
-					<li><a href="/board/food"><img src="/resources/image/food.png"></a>
-					<li><a href="/board/gathering"><img src="/resources/image/gathering.png"></a>
-					<li><a href="/board/question"><img src="/resources/image/question.png"></a>
-				</ul>
+				<p><a href="/board/notice"><img src="/resources/image/notice.png"></a></p>
+				<p><a href="/board/free"><img src="/resources/image/free.png"></a></p>
+				<p><a href="/board/food"><img src="/resources/image/food.png"></a></p>
+				<p><a href="/board/gathering"><img src="/resources/image/gathering.png"></a></p>
+				<p><a href="/board/question"><img src="/resources/image/question.png"></a></p>
 			
 			</div>
 			
 		</div>
-	</form>
 
-<div class="right">
-	<table class="table table-bordered">
+<div class="right" >
+	<table class="table">
 	<tr>
-		<td class="info">글번호</td>
-		<td><%=viewBoard.getBoardno() %></td>
-		
-		<td class="info">작성일</td>
-		<td><%=viewBoard.getBoarddate() %></td>
+		<td colspan="4" class="text-left success" id="title">제목 : <%=viewBoard.getBoardtitle() %></td>
 	</tr>
 	
 	<tr>
-		<td class="info">회원번호</td>
-		<td><%=viewBoard.getUserno() %></td>
-		
-		<td class="info">닉네임</td>
-		<td>[추후 추가]</td>
 	</tr>
+	 
+	<tr>
+		<td class="text-left">
+		<span id="user">작성자 : <%=viewBoard.getUserno() %></span><br>
+		<span id="boarddate"><%=viewBoard.getBoarddate() %></span>
+		<span id="boardhit">&emsp;조회&nbsp;<%=viewBoard.getHit() %></span>
+		</td>
+	</tr> 
 	
 	<tr>
-		<td class="info">조회수</td>
-		<td colspan="4"><%=viewBoard.getHit() %>
+		<td class="success">본문</td>
 	</tr>
 	<tr>
-		<td class="info">제목</td>
-		<td colspan="3"><%=viewBoard.getBoardtitle() %></td>
-	</tr>
-	
-	<tr>
-		<td class="info" colspan="4">본문</td>
-	</tr>
-	
-	<tr>
-		<td colspan="4"><%=viewBoard.getBoardcon() %></td>
+		<td colspan="4" class="text-left"><p id="content-detail"><%=viewBoard.getBoardcon() %></p></td>
 	</tr>
 	
 	</table>
 	<div class="text-center">
 		<button id="btnList" class="btn btn-primary">목록</button>
 		<button id="btnUpdate" class="btn btn-info">수정</button>
-		<button id="btnDelete" class="btn btn-danger">삭제</button>
+		<button id="btnDelete" class="btn btn-danger" onClick="deleteboard();">삭제</button>
 	</div>
 </div>
 

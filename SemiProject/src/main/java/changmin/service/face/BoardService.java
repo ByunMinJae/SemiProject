@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import changmin.dto.Category;
 import daun.dto.Board;
 import util.Paging;
 
@@ -23,16 +24,19 @@ public interface BoardService {
 	 * @param req
 	 * @return Paging - 페이징 계산 완료 객체
 	 */
-	public Paging getPaging(HttpServletRequest req);
+	public Paging getPaging(HttpServletRequest req, Category category);
 
 
-	public List<Board> getList(Paging paging);
+	public List<Board> getList(Paging paging, Category category);
 
 
 	public Board getBoardno(HttpServletRequest req);
 
 
 	public Board view(Board boardno);
+
+
+	public void deleteboard(Board board);
 
 	
 	
