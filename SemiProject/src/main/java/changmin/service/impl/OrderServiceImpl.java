@@ -1,6 +1,7 @@
 package changmin.service.impl;
 
 import java.sql.Connection;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,9 +19,7 @@ public class OrderServiceImpl implements OrderService {
 	public void orderinsert(HttpServletRequest req) {
 		
 		Order order = new Order();
-		
-//		order.setOrderprocess("결제완료");
-//		order.setOrderafterno(Integer.parseInt(req.getParameter("merchant_uid")));
+
 		order.setPaymethod(req.getParameter("pay_method"));
 		order.setMerchant_uid(req.getParameter("merchant_uid"));
 		order.setProdname(req.getParameter("name"));
@@ -39,6 +38,11 @@ public class OrderServiceImpl implements OrderService {
 			}
 			
 		}
+	@Override
+	public List<Order> orderview() {
+
+		return orderDao.orderList(conn);
+	}
 
 
 }

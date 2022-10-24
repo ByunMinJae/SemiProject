@@ -9,5 +9,7 @@ public interface OrderDao {
 
 	public int insertOrder(Connection conn, Order order);
 
+	public List<Order> orderList(Connection conn);
+
 
 }

@@ -12,7 +12,7 @@ import changmin.dto.Order;
 import changmin.service.face.OrderService;
 import changmin.service.impl.OrderServiceImpl;
 
-@WebServlet("/orderafterlist")
+@WebServlet("/ordersuccess")
 public class OrderController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -24,7 +24,7 @@ public class OrderController extends HttpServlet {
 		System.out.println("Order [GET]");
 		
 	
-		req.getRequestDispatcher("/WEB-INF/views/changmin/orderafterlist.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/changmin/ordersuccess.jsp").forward(req, resp);
 	}
 	
 	@Override
@@ -51,7 +51,7 @@ public class OrderController extends HttpServlet {
 		 
 		
 		
-		req.getRequestDispatcher("/WEB-INF/views/changmin/orderafterlist.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/changmin/ordersuccess.jsp").forward(req, resp);
 	}
 	
 	

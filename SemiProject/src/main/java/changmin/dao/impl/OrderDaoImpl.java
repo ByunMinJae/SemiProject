@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import changmin.dao.face.OrderDao;
@@ -51,5 +52,39 @@ public class OrderDaoImpl implements OrderDao{
 		
 		System.out.println(order.getOrderprocess());
 		return res;
+	}
+
+
+	@Override
+	public List<Order> orderList(Connection conn) {
+		String sql = "";
+		sql+="SELECT orderafterno, pay_method, prodname, amount, buyer_email, buyer_name, buyer_addr";
+		sql+="	FROM user_orderafter";
+		sql+="	ORDER BY orderafterno desc";
+		
+		List<Order> orderList = new ArrayList<>();
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				
+				Order o = new Order();
+				o.setOrderafterno(rs.getInt("orderafterno"));
+				o.setPaymethod(rs.getString("pay_method"));
+				o.setProdname(rs.getString("prodname"));
+				o.setAmount(rs.getInt("amount"));
+				o.setBuyeremail(rs.getString("buyer_name"));
+				o.setBuyeraddr(rs.getString("buyer_addr"));
+				
+				orderList.add(o);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return orderList;
 	}
 }

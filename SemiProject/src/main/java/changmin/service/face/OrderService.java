@@ -10,6 +10,8 @@ public interface OrderService {
 
 	public void orderinsert(HttpServletRequest req);
 
+	public List<Order> orderview();
+
 
 
 }
