@@ -129,7 +129,7 @@ img {
 <%-- 					<%	if( paging.getCurPage() != paging.getTotalPage() ) { %>
 					<li><a href="./notice?curPage=<%=paging.getTotalPage() %>">&rarr; 끝</a></li>
 					<%	} %> --%>
-					<a href="/board/insert"><button role="button" class="btn btn-success">글쓰기</button></a>
+					<a href="/board/write"><button role="button" class="btn btn-success">글쓰기</button></a>
 				</ul>
 			</div>
 	</div>

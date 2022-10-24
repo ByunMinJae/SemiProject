@@ -184,7 +184,7 @@ img {
 	</table>
 	<div class="text-center">
 		<button id="btnList" class="btn btn-primary">목록</button>
-		<button id="btnUpdate" class="btn btn-info">수정</button>
+		<a href="/board/update"><button id="btnUpdate" class="btn btn-info">수정</button></a>
 		<button id="btnDelete" class="btn btn-danger" onClick="deleteboard();">삭제</button>
 	</div>
 </div>
