@@ -13,7 +13,7 @@ import daun.service.face.BoardService;
 import daun.service.impl.BoardServiceImpl;
 
 @WebServlet("/board/write")
-public class BoardInsertController extends HttpServlet {
+public class BoardWriteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private BoardService boardService = new BoardServiceImpl();
