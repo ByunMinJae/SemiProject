@@ -114,13 +114,13 @@ img {
     top: 109px;
     right: 66px;
 }
-a {
+.ct {
 	color: #777  !important;
 	font-weight: bold;
 	text-decoration: none !important;
 	cursor: pointer;
 }
-a:hover {
+.ct:hover {
 	color: #000 !important;
 }
 </style>
@@ -133,10 +133,10 @@ a:hover {
 <hr>
 
 <div id="searchWrap">
-<a id="row">가격 낮은 순 </a>| 
-<a id="high">가격 높은 순 </a>|
-<a id="sal">판매량 순 </a>|
-<a id="date">최신 등록일 순 </a>
+<a class="ct" id="row">가격 낮은 순 </a>| 
+<a class="ct" id="high">가격 높은 순 </a>|
+<a class="ct" id="sal">판매량 순 </a>|
+<a class="ct" id="date">최신 등록일 순 </a>
 
 <input type="text" id="search" placeholder="상품 검색">
 <button id="btnSearch">검색</button>
