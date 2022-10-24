@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+
 <style>
 .container{
 	top: 205px !important;
@@ -11,6 +12,7 @@
 #login-wrap{
 	width:50%;
 	margin: 0 auto;
+
 }
 
 #login_letter {
@@ -76,7 +78,7 @@ input[type=submit] {
 	height: 35px;
 	font-size: 13pt;
 	margin-top: 50px;
-	margin-left: 27px;
+	margin-left: 46px;
 	font-weight: bolder;
 }
 
@@ -100,9 +102,10 @@ input[type=submit] {
 }
 
 #kakao-wrap{
-	width: 50%;
-	margin-left: 205px;
+	margin-left: 331px;
 }
+
+
 </style>
 
 
@@ -117,7 +120,7 @@ $(document).ready(function(){
 	
 	console.log(document.cookie);
 	
-	var cookieValue = getCookie("cookie"); //이름이 "cookie"인 쿠키의 value 가져오기
+	var cookieValue = getCookieValue("cookie"); //이름이 "cookie"인 쿠키의 value 가져오기
 	
 	console.log(cookieValue); //확인
 	
@@ -154,7 +157,7 @@ function createCookie(name, value, exdays){//exdays : 쿠키 만기일
 } 
 
 //쿠키 이름을 통해 value값 가져오는 함수
-function getCookie(name){
+function getCookieValue(name){
 	var cookieName = name + "=";  //name=value로 이루어진 쿠키에서 name= 까지만 설정
 	var cookie = document.cookie;
 	
@@ -197,45 +200,56 @@ function emptyAlert(){ //아이디, 비밀번호 미입력시 처리
 </script>
 
 <%-- 카카오 로그인 script --%>
-<%--  <script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script type="text/javascript">
 	Kakao.init('47e41ad73741ecf726fae8911f475fd9'); //발급받은 키 중 javascript키를 사용해준다.
 	console.log(Kakao.isInitialized()); // sdk초기화여부판단
 	//카카오로그인
 	function kakaoLogin() {
-		Kakao.Auth.login({
-			success : function(response) {
-				Kakao.API.request({
-					url : '/v2/user/me',
-					success : function(response) {
-						console.log(response)
-					},
-					fail : function(error) {
-						console.log(error)
-					},
-				})
-			},
-			fail : function(error) {
-				console.log(error)
-			},
-		})
-	}
+		 //1. 로그인 시도
+	    Kakao.Auth.login({
+	        success: function(authObj) {
+	         
+	          //2. 로그인 성공시, API 호출
+	          Kakao.API.request({
+	            url: '/v2/user/me',
+	            success: function(res) {
+	              console.log(res);
+	              var id = res.id;
+				  scope : 'profile, account_email';
+				  alert('환영합니다');
+	              location.href="/cmc/kakao";
+			
+			
+	              
+	        }
+	          })
+	          console.log(authObj);
+	          var token = authObj.access_token;
+	        },
+	        fail: function(err) {
+	          alert(JSON.stringify(err));
+	        }
+	      });
+	        
+	} //
+	
 
-	function kakaoLogout() {
-		if (Kakao.Auth.getAccessToken()) {
-			Kakao.API.request({
-				url : '/v1/user/unlink',
-				success : function(response) {
-					console.log(response)
-				},
-				fail : function(error) {
-					console.log(error)
-				},
-			})
-			Kakao.Auth.setAccessToken(undefined)
-		}
-	} 
-</script> --%>
+	//function kakaoLogout() {
+		//if (Kakao.Auth.getAccessToken()) {
+		//	Kakao.API.request({
+			//	url : '/v1/user/unlink',
+			//	success : function(response) {
+			//		console.log(response)
+			//	},
+			//	fail : function(error) {
+			//		console.log(error)
+			//	},
+			//})
+			//Kakao.Auth.setAccessToken(undefined)
+	//	}
+//	} 
+</script>
 
 
 <%-- body --%>
@@ -261,7 +275,7 @@ function emptyAlert(){ //아이디, 비밀번호 미입력시 처리
 		아이디 저장
 		</div>
 		
-		<div id="forgot"><a href="" id="findid">아이디 찾기</a> <a href="">비밀번호 찾기</a></div>
+		<div id="forgot"><a href="/find/findid" id="findid">아이디 찾기</a> <a href="/find/findpw">비밀번호 찾기</a></div>
 		<input type="submit" value="로그인"  >
 
 
