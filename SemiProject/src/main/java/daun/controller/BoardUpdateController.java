@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import daun.dto.Board;
+import daun.dto.BoardFile;
 import daun.service.face.BoardService;
 import daun.service.impl.BoardServiceImpl;
 
@@ -16,26 +17,29 @@ import daun.service.impl.BoardServiceImpl;
 public class BoardUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
+	private BoardService boardService = new BoardServiceImpl();
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		//전달 파라미터 한글 인코딩 처리
-		req.setCharacterEncoding("UTF-8");
+		Board boardno = boardService.getBoardno(req);
 		
-		String userId = req.getParameter("userId");
-		String userPwd = req.getParameter("userPw");
-		String userName = req.getParameter("userName");
-		String arr[] = req.getParameterValues("hobby");
-
-		String hobby = "";
-
-		if (arr != null) {
-
-		hobby = String.join(",", arr);
-
-		}
+		//상세보기 결과 조회
+		Board updateBoard = boardService.view(boardno);
 		
+		//조회결과 MODEL값 전달
+		req.setAttribute("updateBoard", updateBoard);
+
+		//작성자 닉네임 전달
+		req.setAttribute("writerNick", boardService.getWriteNick(updateBoard));
+		
+		//첨부파일 정보 조회
+		BoardFile boardFile = boardService.viewFile(updateBoard);
+		
+		//첨부파일 정보를 MODEL값 전달
+		req.setAttribute("boardFile", boardFile);
+		
+		//VIEW 지정 및 응답
 		req.getRequestDispatcher("/WEB-INF/views/daun/boardupdate.jsp").forward(req, resp);
 		
 	}
@@ -43,32 +47,8 @@ public class BoardUpdateController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		//전달 파라미터 한글 인코딩 처리
-		req.setCharacterEncoding("UTF-8");
-		
-		BoardService boardService = new BoardServiceImpl();
-
-		String id = req.getParameter("id");
-
-		Board board = new Board();
-
-//		if(board != null && board.getUserId().equals(id)) { // 만약 ID 값이 기존값과 일치한다면 수정 실행
-//			
-//			board.setBoardtitle(req.getParameter("boardTitle"));
-//			board.setBoardcon(req.getParameter("boardCon"));
-//			board.setUserno(req.getParameter("userno"));
-//
-//			if(boardService.updateBoard(board) > 0) {
-//				session.setAttribute("member", member);
-//				resp.sendRedirect(reqt.getContextPath()+"/index.jsp");
-//			} else {
-//				out.append("<script>alert('회원 정보 수정 오류!\\n 관리자에게 문의하세요!');</script>");
-//			}
-//		} else {
-//			req.setAttribute("message", "회원 정보 수정 오류 발생!!");
-//			req.getRequestDispatcher("/WEB-INF/views/daun/boardError.jsp").forward(req, resp);
-//		}
-//	
+		boardService.update(req);
+		resp.sendRedirect("/board/list");
 		
 	}
 	
