@@ -15,9 +15,6 @@
 <!-- + jQuery UI Base Theme CDN -->
 <link type="text/css" rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 
-<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"> -->
-<!-- <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script> -->
-
 <script type="text/javascript">
 $(document).ready(function() {
 	
@@ -83,7 +80,7 @@ $(document).ready(function() {
 }
 #mpmLeft {
 	width: 40%;
-	height: 641px;
+	height: 651px;
 	float: left;
 	background: #c7f2a482;
 }
@@ -193,6 +190,27 @@ li.info_left {
 #btnDialog:hover {
 	background: linear-gradient(#c7f2a4, #88eb38);
 }
+#back {
+	float: left;
+    position: relative;
+    top: -97px;
+    left: 35px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #777;
+}
+#back:hover {
+	color: #444;
+}
+#arrow {
+	background: url("/resources/image/left_arrow.png") no-repeat 0 0;
+	width: 20px;
+    height: 20px;
+    position: relative;
+    top: -75px;
+    left: 15px;
+}
+}
 </style>
 
 <div id="mpmWrap">
@@ -201,6 +219,8 @@ li.info_left {
 <div id="mpmLeft">
 	<!-- 유저 정보 영역 -->
 	<div id="userInfo">
+		<div id="arrow"></div>
+		<a id="back" href="/mypage/main">뒤로가기</a>
 		<ul id="ul_left">
 			<li><div id="userImg"></div></li>
 			<li class="info_left"><a id="md" href="/mypage/detail"><%=mpMain.getNick() %></a></li>

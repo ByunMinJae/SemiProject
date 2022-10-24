@@ -96,7 +96,7 @@ function hiddenImg( btnCateg, mi ) {
 }
 #mpmLeft {
 	width: 40%;
-	height: 640px;
+	height: 651px;
 	float: left;
 	background: #c7f2a482;
 }
@@ -279,17 +279,13 @@ li.info_left {
 			<li class="info_left" style="font-size: 15px;"><%=mpMain.getGradename() %></li>
 		</ul>
 	</div>
-	<!-- 중간 이미지 -->
-<!-- 	<div id="ropeImg"></div> -->
-<!-- 	<div class="rope1"></div> -->
-<!-- 	<div class="rope2"></div> -->
 </div>
 
 <!-- 오른쪽 영역 -->
 <div id="mpmRight">
 	<!-- 상단 카테고리 버튼 -->
 	<div class="mount_img" id="mi1"></div>
-	<a href=""><button class="btnCateg" id="btnCateg1">주문목록</button></a>
+	<a href="/orderafterlist"><button class="btnCateg" id="btnCateg1">주문목록</button></a>
 	<div class="mount_img" id="mi2"></div>
 	<a href=""><button class="btnCateg" id="btnCateg2">반품/교환/취소</button></a>
 	<div class="mount_img" id="mi3"></div>

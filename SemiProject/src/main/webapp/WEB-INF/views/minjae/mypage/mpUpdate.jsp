@@ -374,6 +374,12 @@ input {
     top: -59px;
     left: 26px;
 }
+#btnDialog {
+    float: right;
+	position: relative;
+    right: 22px;
+    bottom: -69px;
+}
 </style>
 
 <div id="mpuWrap">
@@ -397,7 +403,7 @@ input {
 <tr id="currName">
 	<td>이름</td>
 	<td><%=mpMain.getUsername() %></td>
-	<td style="margin-left: 131px;"><button id="btnChgName">변 경</button></td>
+	<td style="margin-left: 184px;"><button id="btnChgName">변 경</button></td>
 </tr>
 <!-- 변경 이름 -->
 <tr id="hidName" style="display: none;">
@@ -413,7 +419,7 @@ input {
 <tr id="currNick">
 	<td>닉네임</td>
 	<td><%=mpMain.getNick() %></td>
-	<td style="margin-left: 111px;"><button id="btnChgNick">변 경</button></td>
+	<td style="margin-left: 146px;"><button id="btnChgNick">변 경</button></td>
 </tr>
 <!-- 변경 닉네임 -->
 <tr id="hidNick" style="display: none;">
@@ -445,7 +451,7 @@ input {
 <tr id="currPhone">
 	<td>전화번호</td>
 	<td><%=mpMain.getPhone() %></td>
-	<td style="margin-left: 63px;"><button id="btnChgPhone">변 경</button></td>
+	<td style="margin-left: 111px;"><button id="btnChgPhone">변 경</button></td>
 </tr>
 <!-- 변경 전화번호 -->
 <tr id="hidPhone" style="display: none;">
@@ -461,7 +467,7 @@ input {
 <tr id="currAddr">
 	<td>주소</td>
 	<td><%=mpMain.getAddress() %></td>
-	<td class="btnChg"><button id="btnChgAddr">변 경</button></td>
+	<td class="btnChg"  style="margin-left: 111px;"><button id="btnChgAddr">변 경</button></td>
 </tr>
 <!-- 변경 주소 -->
 <tr class="addr ad" style="display: none; margin: 15px 0 0 51px !important;">
