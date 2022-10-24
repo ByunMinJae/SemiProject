@@ -12,7 +12,7 @@
 <div class="myContainer">
 
 <h1>주문목록</h1>
-구매자 : <%= orderView.get(2).getBuyername() %>
-금액 : <%= orderView.get(2).getAmount() %>
+구매자 : <%= orderView.get(0).getBuyername() %>
+금액 : <%= orderView.get(0).getAmount() %>
 </div>
 <%@ include file="../layout/footer.jsp" %>

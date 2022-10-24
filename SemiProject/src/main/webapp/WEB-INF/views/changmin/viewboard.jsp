@@ -52,6 +52,13 @@ function deleteboard(){
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 #wrapper {
 	background-color: #BFDCFB;
 }
@@ -100,21 +107,20 @@ img {
 #category {
 	color: #6478FF;
 }
-
+#gmarketfont {
+	font-family: 'GmarketSansMedium';
+	min-height: 300px;
+}
 .smalltext { 
-	font-family: 'MonoplexKR-Regular';
+	font-family: 'GmarketSansMedium';
 	font-size: 10px; 
 	font-weight: bold;
 }
 
 .normalt {
-	font-family: 'MonoplexKR-Regular';
+	font-family: 'GmarketSansMedium';
 	font-size: 20px;
-	font-weight: bold;
-}
-
-#content-detail {
-	min-height: 300px;
+	font-weight: bold; 
 }
 
 .cotainer-wrap {
@@ -129,6 +135,8 @@ img {
 	max-height:0;
 	border: none;
 }
+
+
  
 </style>
 <div class="myContainer">
@@ -167,10 +175,10 @@ img {
 	</tr> 
 
 	<tr>
-		<td class="success" style="font-family: 'MonoplexKR-Regular';">본문</td>
+		<td class="success" id="gamrketfont">본문</td>
 	</tr>
 	<tr>
-		<td colspan="4" class="text-left"><p id="content-detail"><%=viewBoard.getBoardcon() %></p></td>
+		<td colspan="4" class="text-left"><p id="gmarketfont"><%=viewBoard.getBoardcon() %></p></td>
 	</tr>
 	
 	</table>
