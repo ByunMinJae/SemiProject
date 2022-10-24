@@ -22,7 +22,15 @@ public class UserListController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	System.out.println("/user/list [GET]");
 	
-	List<User> list = listService.list();
+	System.out.println("findType : " + req.getParameter("findType"));
+	System.out.println("findKeyword : " + req.getParameter("findKeyword"));
+	
+	String findType = req.getParameter("findType");
+	String findKeyword = req.getParameter("findKeyword");
+	
+	
+	List<User> list = listService.list(findType, findKeyword);
+	
 	
 	System.out.println("[TEST} UserListController-전체조회목록");
 	

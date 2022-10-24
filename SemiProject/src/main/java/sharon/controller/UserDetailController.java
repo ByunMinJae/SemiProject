@@ -31,7 +31,7 @@ public class UserDetailController extends HttpServlet {
 		
 		
 		//조회
-		User user = ListService.info(userno);
+		User user = listService.info(userno);
 		System.out.println("UserDetailController - user조회 : " + user);
 		
 		req.setAttribute("user", user);

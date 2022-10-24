@@ -8,6 +8,37 @@
 <title>Insert title here</title>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="crossorigin="anonymous">
+</script>
+<script type="text/javascript">
+function checkId(){
+	var userid=$("#userid").val();
+	
+	$.ajax({
+		type:'post',
+		url:'${pageContext.request.contextPath}/user/idCheck',
+		data:{userid:userid},
+		success:function(result){
+			console.log(result)
+			
+			if(result.result ==1){
+				$("#uid_msg").text("사용 가능한 아이디 입니다");
+				$("#uid_msg").css("color","blue");
+			}
+			else{
+				$("#uid_msg").text("아이디가 중복되었습니다.");
+				$("#uid_msg").css("color","red");
+			}
+		},
+		error:function(a,b,c){
+			console.log("상태코드:"+a);
+			console.log("메시지:"+b);
+			console.log("에러설명:"+c);
+		}
+	});
+	
+}
+</script>
 
 <script type="text/javascript">
 
@@ -21,6 +52,11 @@ function validate() {
 	if( !validatePW( $("#userpw").val() ) ) { //PW유효성 검증 실패
 		return false; //submit 중단
 	}
+	
+	if( !validateNAME( $("#username").val() ) ) { //PW유효성 검증 실패
+		return false; //submit 중단
+	}
+
 
 	//모든 유효성 검증 성공	
 	return true; //submit 허용하기
@@ -47,6 +83,68 @@ function validateID( id ) {
 	return true;
 }
 
+//1023 아이디중복
+
+
+//----------------------10/20 아이디중복
+/* let idCheck = false;
+
+function useridCheck(){
+	
+	var userid = $("#userid").val();
+	
+	$.ajax({
+		type:"POST",
+		url:"/user/idCheck",
+		data:{userid:userid},
+		contentType:"application/json:charset=utf-8",
+		dataType:"text"
+		
+	}).done(function(result){
+		if(result== 1){
+			$("uid_msg").html("아이디가 중복되었습니다.");
+			idCheck=false;
+			
+		}else{
+			$("uid_msg").html("사용 가능한 아이디입니다.");
+			isChecking=true;
+		}
+	});
+	
+}  */
+
+
+/* $(document).ready(function() {
+	
+ 	$("#idCheckbtn").click(function() {
+ 		
+ 		$.ajax({
+ 			type:"POST",
+ 			url:"/user/idCheck",
+ 			data:{userid:userid},
+ //			contentType:"application/json:charset=utf-8",
+ 			dataType:"html",
+ 			success: function( res ) {
+ 				console.log("AJAX 성공")
+ 				console.log(res)
+ 				
+ 				if( $.trim(res) == "true" ) {
+ 					console.log('사용 가능한 아이디입니다.')
+ 					
+ 				if( validateID( $("#userid").val() ) ) {
+ 					$("#form").submit();
+ 				} else {	
+ 					console.log('중복된 아이디입니다.')
+ 					$("#uid_msg").html(res);
+ 				}
+ 			}
+ 		}
+	})
+})})
+
+ */
+//----아이디중복끝
+
 function validatePW( pw ) {
 	//패스워드를 입력하지 않았을 때
 	if( pw == '' ) {
@@ -72,8 +170,37 @@ function validatePW( pw ) {
 	return true;
 }
 
+function validateNAME( name ) {
+	//패스워드를 입력하지 않았을 때
+	if( name == '' ) {
+		$("#username_msg").html("이름을 입력해주세요!")
+		
+		return false;
+	}
+	return true;
+}
 
-//postcode, addredss, detailadress가 합쳐져서 sql에 하나의 데이터로 들어감(10/19 선생님께 확인)
+
+
+//-----------------10/13추가 메시지 삭제가 안되고 그대로 남아있음
+
+//--- 유효성 검증 에러 메시지 초기화 ---
+
+//아이디 입력 시도할 때 아이디메시지 삭제
+/*  $("#userid").focus(function() {
+	$('#uid_msg').html("")
+})
+
+//패스워드 입력 시도할 때 패스워드메시지 삭제
+$("#userpw").focus(function() {
+	$("#upw_msg").html("")
+})
+
+//패스워드 확인 입력 시도할 때 패스워드체크 메시지 삭제
+$("#pwCk").focus(function() {
+	$("#pwCk_msg").html("")
+})  */
+
 $(document).ready(function () {
 
 	$("form").submit(function() {
@@ -83,7 +210,6 @@ $(document).ready(function () {
 	
 })
 
-//테스트데이터
 function data() {
 	userid.value = 'abcd';
 	userpw.value = 'Abc1234';
@@ -100,44 +226,79 @@ function data() {
 	extraAddress.value = '테스트 주소3';
 }
 
-//-----------------10/13추가 메시지 삭제가 안되고 그대로 남아있음
-
-//--- 유효성 검증 에러 메시지 초기화 ---
-/* 
-//아이디 입력 시도할 때 아이디메시지 삭제
-$("#userid").focus(function() {
-	$('#uid_msg').html("")
-})
-
-//패스워드 입력 시도할 때 패스워드메시지 삭제
-$("#userpw").focus(function() {
-	$("#upw_msg").html("")
-})
-
-//패스워드 확인 입력 시도할 때 패스워드체크 메시지 삭제
-$("#pwCk").focus(function() {
-	$("#pwCk_msg").html("")
-}) */
-
 </script>
 
 
 <style type="text/css">
 
 .outer{
-	width:400px;
+	width:450px;
 	margin: 0 auto;
-	margin-top: 20%;
+	margin-top: 17%;
+	background-color: #f5f6f7;
 }
 
 .msg {
-	font-size: 0.5em;
+	font-size: 0.7em;
 	color: red;
-	margin-left: 55px;
+	font-weight:bold;
+/* 	margin-left: 10px; */
 	
 } 
 
+button,#btnadd { 
+    border: none;
+    border-radius: 10px;
+    font-family: "paybooc-Light", sans-serif;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    font-weight: 600;
+    cursor: pointer;
+}
+body{
+background-color: #f5f6f7; 
+font-family: "paybooc-Light", sans-serif;
 
+}
+
+h1{
+	text-align:center;
+}
+
+.ps_box.int_id, .ps_box.int_id input {
+    background: #fff;
+    outline: 0;
+}
+
+.ps_box, .ps_box_disable {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 51px;
+    border: solid 1px #dadada;
+    padding: 10px 110px 10px 14px;
+    background: #fff;
+    box-sizing: border-box;
+    vertical-align: top;
+}
+
+.int {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 29px;
+    padding-right: 25px;
+    line-height: 29px;
+    border: none;
+    font-size: 15px;
+    box-sizing: border-box;
+    z-index: 10;
+}
+
+
+
+#form{
+margin:0 auto;
+}
 </style>
 
 
@@ -145,64 +306,79 @@ $("#pwCk").focus(function() {
 </head>
 <body>
 <div class="outer">
-<h1>회원가입 페이지</h1>
+<h1><center>회원가입</center></h1>
 <hr>
 
-<form action="/user/join" method="post" onsubmit="return validate();">
+<form action="/user/join" method="post" id="form" onsubmit="return validate();">
 
 <label for="userid">아이디</label>
-<input type="text" name="userid" id="userid" >
-<button id="idCheck" type="button">중복확인</button><br>
+<button type="button" id="idCheckbtn" onclick="checkId();">중복확인</button>
+<span class="ps_box int_id">
+<input type="text" name="userid" id="userid" class="int" ></span>
 <span id="uid_msg" class="msg"></span><br>
 
 <label for="userpw">비밀번호</label>
-<input type="password" name="userpw" id="userpw" ><br>
+<span class="ps_box int_id">
+<input type="password" name="userpw" id="userpw" class="int"></span>
 <span id="upw_msg" class="msg"></span><br>
 
 <label for="pwCk">비밀번호 확인</label>
-<input type="password" name="pwCk" id="pwCk" ><br>
+<span class="ps_box int_id">
+<input type="password" name="pwCk" id="pwCk" class="int"></span>
 <span id="pwCk_msg" class="msg"></span><br>
 
 <label for="username">이름</label>
-<input type="text" name="username" id="username" ><br>
-<span id="name_msg" class="msg"></span><br>
+<span class="ps_box int_id">
+<input type="text" name="username" id="username" class="int"></span>
+<span id="username_msg" class="msg"></span><br>
 
 <label for="nick">닉네임</label>
-<input type="text" name="nick" id="nick" ><br>
+<span class="ps_box int_id">
+<input type="text" name="nick" id="nick" class="int"></span>
 <span id="nick_msg" class="msg"></span><br>
 
+
 <label for="birth">생년월일</label>
-<input type="date" name="birth" id="birth" ><br>
+<span class="ps_box int_id">
+<input type="date" name="birth" id="birth" class="int"></span>
 <span id="birth_msg" class="msg"></span><br>
 <!-- <select id="mm" class="sel" aria-label="월"></select><br> -->
 
 <label for="gender">성별</label>
+<span class="ps_box int_id">
 <input type="radio" name="gender" value="남자">남
-<input type="radio" name="gender" id="여자">여<br>
+<input type="radio" name="gender" value="여자">여</span>
 <span id="gender_msg" class="msg"></span><br>
 
 <label for="email">이메일</label>
-<span class="box">
-<input type="text" name="email" id="email" ><br><br>
+<span class="ps_box int_id">
+<input type="text" name="email" id="email"class="int" ></span>
 <span id="email_msg" class="msg"></span><br>
-</span>
+
 
 <label for="phone">전화번호</label>
-<input type="text" name="phone" id="phone" placeholder="(-)없이 입력" ><br>
+<span class="ps_box int_id">
+<input type="text" name="phone" id="phone" class="int" placeholder="(-)없이 입력" ></span>
 <span id="phone_msg" class="msg"></span><br>
 
 <label for="address">주소</label>
-<input type="text" id="postcode" placeholder="우편번호">
-<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
-<input type="text" id="address" placeholder="주소"><br>
-<input type="text" id="detailAddress" placeholder="상세주소">
-<input type="text" id="extraAddress" placeholder="참고항목">
-<span id="address_msg" class="msg"></span><br>
+<input type="button" id="btnadd" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
+<span class="ps_box int_id">
+<input type="text" id="postcode" placeholder="우편번호"class="int"></span>
+<span class="ps_box int_id">
+<input type="text" id="address" class="int"placeholder="주소"><br></span>
+<span class="ps_box int_id">
+<input type="text" id="detailAddress" class="int"placeholder="상세주소"></span>
+<span class="ps_box int_id">
+<input type="text" id="extraAddress" class="int"placeholder="참고항목"></span>
 
 <input type="hidden" name="address" id="addressSubmit">
 
 <span id="address_msg" class="msg"></span><br>
 
+<!-- 	<button type="button" class="btn btn-primary" id="btnJoin">회원가입</button>
+	<button type="button" class="btn btn-danger" id="btnCancel">취소</button>
+ -->
 <button>가입</button>
 </form>
 
@@ -254,16 +430,14 @@ $("#pwCk").focus(function() {
                 document.getElementById("address").value = addr;
                 // 커서를 상세주소 필드로 이동한다.
                 document.getElementById("detailAddress").focus();
+                
+                
             }
         }).open();
     }
 </script>
 
-
-
-
-
-
 </body>
 </html>
+
 <%@ include file="../../layout/footer.jsp" %>
