@@ -52,6 +52,7 @@ img {
 #writeButton {
 	float: right;
 }
+ 
 
 
 </style>
@@ -89,11 +90,11 @@ img {
 				<tr class="active">
 					<td><%= boardList.get(i).getBoardno() %>
 					<td>
-						<a href="/board/view?boardno=<%=boardList.get(i).getBoardno() %>">
+						<a href="/board/view?boardno=<%=boardList.get(i).getBoardno() %>&userno=<%=boardList.get(i).getUserno()%>">
 							<%=boardList.get(i).getBoardtitle() %>
 						</a>
-						
-					<td><%= boardList.get(i).getBoardtitle() %></td>
+
+					<td><%= boardList.get(i).getNick() %></td>						
 					<td><%= boardList.get(i).getBoarddate() %></td>
 					<td><%= boardList.get(i).getHit() %></td>
 				</tr>

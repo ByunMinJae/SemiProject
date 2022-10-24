@@ -5,6 +5,7 @@ import java.util.List;
 
 import changmin.dto.Category;
 import daun.dto.Board;
+import sharon.dto.User;
 import util.Paging;
 
 public interface BoardDao {
@@ -57,6 +58,10 @@ public interface BoardDao {
 	 * @return
 	 */
 	public int delete(Connection conn, Board board);
+
+	public Category selectCatename(Connection conn, int i);
+
+	public User getNick(Connection conn, Board bUserno);
 
 
 	

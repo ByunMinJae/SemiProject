@@ -31,6 +31,7 @@ public class PayDoController extends HttpServlet {
 		
 		//테스트 용 데이터
 //		req.getSession().setAttribute("userid", "changmin");
+//		String userid = req.getParameter("userid");
 		
 		HttpSession session = req.getSession();
 		session.setAttribute("userno", 4);

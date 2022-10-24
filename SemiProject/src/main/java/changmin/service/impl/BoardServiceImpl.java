@@ -11,6 +11,7 @@ import changmin.dto.Category;
 import changmin.service.face.BoardService;
 import common.JDBCTemplate;
 import daun.dto.Board;
+import sharon.dto.User;
 import util.Paging;
 
 public class BoardServiceImpl implements BoardService{
@@ -60,6 +61,7 @@ public class BoardServiceImpl implements BoardService{
 		//전달파라미터 boardno 추출(파싱)
 		String param = req.getParameter("boardno");
 		
+		
 		if( param != null && !"".equals(param) ) { //전달파라미터가 null 또는 ""빈문자열이 아닐 때 처리
 			board.setBoardno( Integer.parseInt(param) );
 		}
@@ -93,5 +95,38 @@ public class BoardServiceImpl implements BoardService{
 			JDBCTemplate.rollback(conn);
 		}
 	}
+
+	@Override
+	public Category catename(int i) {
+		
+		return boardDao.selectCatename(conn, i);
+	}
+
+
+	@Override
+	public Board getUserno(HttpServletRequest req) {
+		//전달파라미터를 저장할 객체 생성
+		Board board = new Board();
+		
+		//전달파라미터 boardno 추출(파싱)
+		String param = req.getParameter("userno");
+		
+		
+		if( param != null && !"".equals(param) ) { //전달파라미터가 null 또는 ""빈문자열이 아닐 때 처리
+			board.setUserno( Integer.parseInt(param) );
+		}
+		
+		
+		return board;
+	}
+
+	@Override
+	public User getNick(Board bUserno) {
+		
+		return boardDao.getNick(conn, bUserno);
+	}
+
+
+
 
 }

@@ -1,9 +1,13 @@
+<%@page import="sharon.dto.User"%>
+<%@page import="changmin.dto.Category"%>
 <%@page import="util.Paging"%>
 <%@page import="daun.dto.Board"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% Board viewBoard = (Board) request.getAttribute("viewBoard"); %>
+<% Category category = (Category) request.getAttribute("category"); %>
+<% List<User> userList = (List) request.getAttribute("userList"); %>
 <%@include file="../layout/header.jsp" %>
 <!-- 부트스트랩 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -41,21 +45,22 @@ function deleteboard(){
 	src: url('/resources/css/DalseoHealingBold.ttf') format('truetype');
 }
 
+@font-face {
+    font-family: 'MonoplexKR-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_Monoplex-kr@1.0/MonoplexKR-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
 #wrapper {
 	background-color: #BFDCFB;
 }
 
-#footer {
-	background-color: #BFDCFB;
-	border: none;
-	
-}
 
 th, td {
 	text-align: center;
 }
 td {
-	padding: 5 5 5 5;
 	background-color: white;
 }
 
@@ -66,7 +71,8 @@ td:nth-child(2) {
 .right {
 	position: relative;
 	float: right;
-	width: 800px;
+	width: 900px;
+	left: 100px;
 	top: -380px;
 	
 	
@@ -86,19 +92,43 @@ img {
 	float: right;
 }
 
-#title {
+#contentHead {
 	font-size: 34px; 
+	font-family: 'dalseo';
+} 
+
+#category {
+	color: #6478FF;
 }
 
-#boarddate, #boardhit {
-	font-size: 6px;
+.smalltext { 
+	font-family: 'MonoplexKR-Regular';
+	font-size: 10px; 
+	font-weight: bold;
+}
+
+.normalt {
+	font-family: 'MonoplexKR-Regular';
+	font-size: 20px;
+	font-weight: bold;
 }
 
 #content-detail {
 	min-height: 300px;
 }
 
- 
+.cotainer-wrap {
+	min-height: 1000px;
+}
+
+.myContainer {
+	min-height: 1000px;
+}
+
+.footer {
+	max-height:0;
+	border: none;
+}
  
 </style>
 <div class="myContainer">
@@ -120,22 +150,24 @@ img {
 <div class="right" >
 	<table class="table">
 	<tr>
-		<td colspan="4" class="text-left success" id="title">제목 : <%=viewBoard.getBoardtitle() %></td>
+		<td colspan="4" class="text-left success" id="contentHead">
+		<span id="category">[<%=category.getCategoryname()%>]</span>
+		<span id="title"><%=viewBoard.getBoardtitle() %></span></td>
 	</tr>
 	
 	<tr>
 	</tr>
-	 
+ 	 
 	<tr>
 		<td class="text-left">
-		<span id="user">작성자 : <%=viewBoard.getUserno() %></span><br>
-		<span id="boarddate"><%=viewBoard.getBoarddate() %></span>
-		<span id="boardhit">&emsp;조회&nbsp;<%=viewBoard.getHit() %></span>
+			<span class="smalltext">닉네임&ensp;</span><span class="normalt"><%=viewBoard.getNick() %></span><br>
+			<span class="smalltext">등록일&ensp;</span><span class="normalt"><%=viewBoard.getBoarddate() %></span>
+			<span class="smalltext">&emsp;조회&ensp;</span><span class="normalt"><%=viewBoard.getHit() %></span>
 		</td>
 	</tr> 
-	
+
 	<tr>
-		<td class="success">본문</td>
+		<td class="success" style="font-family: 'MonoplexKR-Regular';">본문</td>
 	</tr>
 	<tr>
 		<td colspan="4" class="text-left"><p id="content-detail"><%=viewBoard.getBoardcon() %></p></td>

@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import changmin.dto.Category;
 import daun.dto.Board;
+import sharon.dto.User;
 import util.Paging;
 
 public interface BoardService {
@@ -37,6 +38,17 @@ public interface BoardService {
 
 
 	public void deleteboard(Board board);
+
+
+	public Category catename(int i);
+
+
+	public User getNick(Board bUserno);
+
+
+	public Board getUserno(HttpServletRequest req);
+
+
 
 	
 	

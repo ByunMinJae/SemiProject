@@ -23,6 +23,21 @@ public class OrderController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("Order [GET]");
 		
+	
+		req.getRequestDispatcher("/WEB-INF/views/changmin/orderafterlist.jsp").forward(req, resp);
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		System.out.println("Order [POST]");
+
+		req.setCharacterEncoding("UTF-8");
+//		resp.setContentType("application/json;charset=utf-8"); //JSON 응답
+//		Gson gson = new Gson();
+//		Pay pay = gson.fromJson( req.getParameter("pay_method"), Pay.class);
+//		System.out.println(pay);
+		orderService.orderinsert(req);
+		
 //		order.setMerchant_uid(req.getParameter("merchant_uid"));
 //		order.setProdname(req.getParameter("name"));
 //		order.setAmount(Integer.parseInt(req.getParameter("amount")));
@@ -30,41 +45,10 @@ public class OrderController extends HttpServlet {
 //		order.setBuyername(req.getParameter("buyer_name"));
 //		order.setBuyertel(req.getParameter("buyer_tel"));
 //		order.setBuyeraddr(req.getParameter("buyer_addr"));
-//		order.setBuyeraddr(req.getParameter("buyer_addr"));
 		
-		
-//		   pay_method: "card",
-//		    merchant_uid: "ORD20180131-0000011",
-//		    name: $("#prodnamevalue").val(),
-//		    amount: $("#prodpricevalue").val(),
-//		    buyer_email: $("#emailvalue").val(),
-//		    buyer_name: $("#prodpricevalue").val(),
-//		    buyer_tel: $("#phonevalue").val(),
-//		    buyer_addr
-	
-	
-		req.getRequestDispatcher("/WEB-INF/views/changmin/orderafterlist.jsp").forward(req, resp);
-	}
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("Order [POST]");
-
-//		Gson gson = new Gson();
-//		Pay pay = gson.fromJson( req.getParameter("pay_method"), Pay.class);
-//		System.out.println(pay);
-		
-		order.setMerchant_uid(req.getParameter("merchant_uid"));
-		order.setProdname(req.getParameter("name"));
-		order.setAmount(Integer.parseInt(req.getParameter("amount")));
-		order.setBuyeremail(req.getParameter("buyer_email"));
-		order.setBuyername(req.getParameter("buyer_name"));
-		order.setBuyertel(req.getParameter("buyer_tel"));
-		order.setBuyeraddr(req.getParameter("buyer_addr"));
-		
-		String test = req.getParameter("pay_method");
+		String test = req.getParameter("amount");
 		System.out.println(test);
-		
-		Order orderinsert = orderService.orderinsert(req);
+		 
 		
 		
 		req.getRequestDispatcher("/WEB-INF/views/changmin/orderafterlist.jsp").forward(req, resp);

@@ -11,6 +11,7 @@ import changmin.dao.face.BoardDao;
 import changmin.dto.Category;
 import common.JDBCTemplate;
 import daun.dto.Board;
+import sharon.dto.User;
 import util.Paging;
 
 public class BoardDaoImpl implements BoardDao {
@@ -102,7 +103,7 @@ public class BoardDaoImpl implements BoardDao {
 	      sql += "SELECT * FROM ("; 
 	      sql += "   SELECT rownum rnum, B.* FROM (";
 	      sql += "      SELECT";
-	      sql += "         boardno, boardtitle, boarddate, userno, categoryno, hit";
+	      sql += "         boardno, boardtitle, boarddate, userno, categoryno, hit, nick";
 	      sql += "       FROM board_info";
 	      sql += "       WHERE categoryno=?";
 	      sql += "       ORDER BY boardno DESC";
@@ -130,6 +131,7 @@ public class BoardDaoImpl implements BoardDao {
 				b.setUserno(rs.getInt("userno"));
 				b.setCategoryno(rs.getInt("categoryno"));
 				b.setHit(rs.getInt("hit"));
+				b.setNick(rs.getString("nick"));
 				
 				list.add(b);
 				
@@ -177,7 +179,7 @@ public class BoardDaoImpl implements BoardDao {
 		
 		String sql = "";
 		sql += "SELECT";
-		sql += "	boardno, boardtitle, boarddate, boardcon, userno, categoryno, hit";
+		sql += "	boardno, boardtitle, boarddate, boardcon, userno, categoryno, hit, nick";
 		sql += " FROM board_info";
 		sql += " WHERE boardno = ?";
 		
@@ -200,7 +202,7 @@ public class BoardDaoImpl implements BoardDao {
 				board.setUserno(rs.getInt("userno"));
 				board.setCategoryno(rs.getInt("categoryno"));
 				board.setHit(rs.getInt("hit"));
-				
+				board.setNick(rs.getString("nick"));
 			} 
 			
 		} catch (SQLException e) {
@@ -235,7 +237,72 @@ public class BoardDaoImpl implements BoardDao {
 		
 		return res;
 	}
-	
+
+	@Override
+	public Category selectCatename(Connection conn, int i) {
+		System.out.println("selectCatename - Start");
+		String sql ="";
+		sql += "SELECT categoryname";
+		sql += "	FROM board_category";
+		sql += "	WHERE categoryno=?";
+		
+		Category category = null;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, i);
+			
+			rs = ps.executeQuery();
+
+			category = new Category();
+			
+			while(rs.next()) {
+				category.setCategoryname(rs.getString("categoryname"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+			JDBCTemplate.close(ps);
+		}
+		
+		
+		return category;
+	}
+
+
+	@Override
+	public User getNick(Connection conn, Board bUserno) {
+		String sql = "";
+		sql+="SELECT nick";
+		sql+="	FROM user_info";
+		sql+="	WHERE userno";
+		sql+="	IN (SELECT userno FROM board_info WHERE userno=?)";
+
+		User user = null;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, bUserno.getUserno());
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				user = new User();
+				
+				user.setUserno(rs.getInt("nick"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		return user;
+	}
 	
 
 

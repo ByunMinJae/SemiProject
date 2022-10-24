@@ -14,10 +14,31 @@ public class OrderServiceImpl implements OrderService {
 
 	private OrderDao orderDao = new OrderDaoImpl();
 	private Connection conn = JDBCTemplate.getConnection();
-
 	@Override
-	public Order orderinsert(HttpServletRequest req) {
-		return orderDao.orderinsert(conn);
-	}
+	public void orderinsert(HttpServletRequest req) {
+		
+		Order order = new Order();
+		
+//		order.setOrderprocess("결제완료");
+//		order.setOrderafterno(Integer.parseInt(req.getParameter("merchant_uid")));
+		order.setPaymethod(req.getParameter("pay_method"));
+		order.setMerchant_uid(req.getParameter("merchant_uid"));
+		order.setProdname(req.getParameter("name"));
+		order.setAmount(Integer.parseInt(req.getParameter("amount").trim()));
+		order.setBuyeremail(req.getParameter("buyer_email"));
+		order.setBuyername(req.getParameter("buyer_name"));
+		order.setBuyertel(req.getParameter("buyer_tel"));
+		order.setBuyeraddr(req.getParameter("buyer_addr"));
+		
+		int res = orderDao.insertOrder(conn,order);
+			
+			if( res > 0 ) {
+				JDBCTemplate.commit(conn);
+			} else {
+				JDBCTemplate.rollback(conn);
+			}
+			
+		}
+
 
 }

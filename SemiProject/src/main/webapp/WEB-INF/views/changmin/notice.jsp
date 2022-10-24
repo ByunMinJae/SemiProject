@@ -91,11 +91,11 @@ img {
 				<% if(boardList.get(i).getCategoryno()==1){ %>
 						<td><%= boardList.get(i).getBoardno() %>
 						<td>
-							<a href="/board/view?boardno=<%=boardList.get(i).getBoardno() %>">
+							<a href="/board/view?boardno=<%=boardList.get(i).getBoardno() %>&cateno=<%=boardList.get(i).getCategoryno()%>">
 								<%=boardList.get(i).getBoardtitle() %>
 							</a>
 							
-						<td><%= boardList.get(i).getBoardtitle() %></td>
+						<td><%= boardList.get(i).getNick() %></td>
 						<td><%= boardList.get(i).getBoarddate() %></td>
 						<td><%= boardList.get(i).getHit() %></td>
 				<% } %>
