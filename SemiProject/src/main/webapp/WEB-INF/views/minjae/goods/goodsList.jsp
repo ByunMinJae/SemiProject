@@ -16,20 +16,22 @@
 $(document).ready(function() {
 	
 	$("#row").click(function() {
-		console.log("asd");
-		selectCateList("prodprice");
+		
+		$("#hide").attr("value", "prodprice");
+		$("#searchWrap").submit();
+// 		selectCateList("prodprice");
 	})
 	
 	$("#high").click(function() {
-		selectCateList("prodprice DESC");
+// 		selectCateList("prodprice DESC");
 	})
 	
 	$("#sal").click(function() {
-		selectCateList("prodpop DESC");
+// 		selectCateList("prodpop DESC");
 	})
 	
 	$("#date").click(function() {
-		selectCateList("prodprice");
+// 		selectCateList("prodprice");
 	})
 	
 })
@@ -95,7 +97,7 @@ function selectCateList(cateVal) {
     padding: 0;
     margin: 12px 0 12px 12px;
 }
-img {
+#prodImg {
 	width: 200px;
 	height: 200px;
 }
@@ -132,20 +134,22 @@ img {
 <h1 style="margin-top: 41px;">상품 목록</h1>
 <hr>
 
-<div id="searchWrap">
+<form action="/goods/list" method="get" id="searchWrap">
 <a class="ct" id="row">가격 낮은 순 </a>| 
 <a class="ct" id="high">가격 높은 순 </a>|
 <a class="ct" id="sal">판매량 순 </a>|
 <a class="ct" id="date">최신 등록일 순 </a>
 
+<input type="text" hidden="" id="hide" name="value" value="">
+
 <input type="text" id="search" placeholder="상품 검색">
 <button id="btnSearch">검색</button>
-</div>
+</form>
 
 <div id="inner-list">
 <%	for(int i=0; i<list.size(); i++) { %>
 <a id="goodsImg" href="/goods/detail?prodno=<%=list.get(i).getProdno() %>">
-	<img alt="" src="/resources/image/<%=list.get(i).getProdimage() %>">
+	<img id="prodImg" alt="" src="/resources/image/<%=list.get(i).getProdimage() %>">
 </a>
 <ul id="goodsList">
 	<li><%=list.get(i).getProdname() %></li>
