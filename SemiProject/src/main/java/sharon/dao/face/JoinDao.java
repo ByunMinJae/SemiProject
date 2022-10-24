@@ -13,4 +13,6 @@ public interface JoinDao {
 
 	public int insert(Connection conn, User user);
 	
+	public int checkId(User user);
+	
 }

@@ -1,6 +1,7 @@
 package minjae.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,17 +26,25 @@ public class MypageController extends HttpServlet {
 		System.out.println("/mypage/main [GET]");
 		
 		req.setCharacterEncoding("UTF-8");
-		
 		HttpSession session = req.getSession();
-//		session.setAttribute("userno", 14); //테스트용
-		int userno = (int)session.getAttribute("userno");
+		session.setAttribute("userno", 1); //테스트용
 		
-		MpMain mpMain = mypageService.getUserInfo(userno);
-		MpMainRight mpMR = mypageService.getOrderInfo(userno);
-		
-		req.setAttribute("mpMain", mpMain);
-		req.setAttribute("mpMR", mpMR);
-		req.getRequestDispatcher("/WEB-INF/views/minjae/mypage/mypageMain.jsp").forward(req, resp);
+		if(null != session.getAttribute("userno")) {
+			
+			int userno = (int)session.getAttribute("userno");
+			
+			MpMain mpMain = mypageService.getUserInfo(userno);
+			MpMainRight mpMR = mypageService.getOrderInfo(userno);
+			
+			req.setAttribute("mpMain", mpMain);
+			req.setAttribute("mpMR", mpMR);
+			req.getRequestDispatcher("/WEB-INF/views/minjae/mypage/mypageMain.jsp").forward(req, resp);
+			
+		} else {
+			resp.setContentType("text/html; charset=UTF-8");
+			PrintWriter pw = resp.getWriter();
+			pw.append("<script type=\"text/javascript\">alert('로그인 후 이용 가능합니다.'); location.href = '/';</script>");
+		}
 		
 	}
 	

@@ -14,6 +14,7 @@ public class JoinDaoImpl implements JoinDao {
 	
 	private PreparedStatement ps;
 	private ResultSet rs;
+	private Connection conn;
 	
 	public int selectCntMemberByUseridUserpw(Connection conn, User user) {
 		
@@ -112,40 +113,30 @@ public class JoinDaoImpl implements JoinDao {
 		
 		return res;
 	}
-			/*
-			 * //10/14 ->회원목록 조회 ... public List<User> selectAll(Connection conn){
-			 * 
-			 * 
-			 * //--- SQL 작성 --- String sql = ""; sql += "SELECT"; sql +=
-			 * "	userno, userid, gender, birth"; sql += " FROM user_info"; sql +=
-			 * " ORDER BY userno";
-			 * 
-			 * //--- 조회 결과 저장할 List 객체 --- List<User> list = new ArrayList<>();
-			 * 
-			 * try { //--- SQL 수행 객체 생성 --- ps = conn.prepareStatement(sql);
-			 * 
-			 * //--- SQL 수행 및 결과 저장 --- rs = ps.executeQuery();
-			 * 
-			 * //--- 조회 결과 처리 --- while( rs.next() ) { User user = new User();
-			 * 
-			 * user.setUserno( rs.getInt("userno") ); user.setUserid( rs.getString("userid")
-			 * ); user.setGender( rs.getString("gender") ); user.setBirth(
-			 * rs.getDate("birth") );
-			 * 
-			 * list.add(user); }
-			 * 
-			 * } catch (SQLException e) { e.printStackTrace(); } finally { //--- 자원 해제 ---
-			 * JDBCTemplate.close(rs); JDBCTemplate.close(ps); }
-			 * 
-			 * return list;
-			 * 
-			 * 
-			 * }
-			 * 
-			 * @Override public User selectByUserno(Connection conn, int userno) { // TODO
-			 * Auto-generated method stub return null; }
-			 */
-
+			
+	public int checkId(User user) {
+		System.out.println("아이디중복 시작-daoimpl");
+		
+		String sql = "";
+		sql += "SELECT * FROM user_info WHERE userid =?";
+		
+		conn =JDBCTemplate.getConnection();
+		try {
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, user.getUserid());
+			rs=ps.executeQuery();
+			
+			if(rs.next()) {
+				return 0; //중복ㅇ
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(ps);
+			JDBCTemplate.close(conn);
+		}
+		return 1; //중복x
+	}
 
 }
 

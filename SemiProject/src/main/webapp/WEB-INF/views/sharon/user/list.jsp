@@ -2,6 +2,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="../../layout/header.jsp" %>
     
 <%	List<User> uList = (List) request.getAttribute("userList");%>
 
@@ -28,6 +29,9 @@ td {
 	
 	padding: 5px 10px;
 }
+.section{
+margin-top: 20%;
+}
 
 /* tr:hover {
 	background-color: #FAFAD2;
@@ -42,8 +46,22 @@ td:hover {
 </head>
 <body>
 
-<h1>회원 목록</h1>
-<hr>
+  <h2 style="text-align: center;" class="section"><strong>회원목록조회</strong></h2>
+            <div>
+			<form name="findF" action="./list" class="form-inline">
+		
+			
+				<select name="findType">
+					<option value="">=검색유형=</option>
+					<option value="1">이름</option>
+					<option value="2">성별</option>
+					<option value="3">연락처</option>
+				</select>
+				<input type="text" name="findKeyword" placeholder="검색어를 입력하세요" class="form-control mr-2">
+				<button class="btn btn-success">검 색</button>
+				</form>
+				</div>
+            <br>
 
 <table>
 
@@ -94,3 +112,4 @@ td:hover {
 
 </body>
 </html>
+<%@ include file="../../layout/footer.jsp" %>
