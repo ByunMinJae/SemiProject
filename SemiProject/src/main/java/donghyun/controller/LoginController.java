@@ -51,6 +51,7 @@ public class LoginController extends HttpServlet {
     	String userid = req.getParameter("userid");
     	String userpw = req.getParameter("userpw");
     	
+    	
     	System.out.println("userid :" + userid);
     	System.out.println("userpw :" + userpw);
     	
@@ -60,7 +61,7 @@ public class LoginController extends HttpServlet {
     	
     	if(userInfo != null) {
     		HttpSession session = req.getSession();
-    		session.setAttribute("userid", userid);
+    		session.setAttribute("userno", userInfo.getUserno());
     		
     		//req.getRequestDispatcher("/WEB-INF/views/donghyun/loginSuccess.jsp").forward(req, resp);
     		resp.sendRedirect("/");
