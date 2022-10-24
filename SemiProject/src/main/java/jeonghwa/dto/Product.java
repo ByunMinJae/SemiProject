@@ -1,6 +1,5 @@
 package jeonghwa.dto;
 
-import java.sql.Blob;
 import java.util.Date;
 
 public class Product {
@@ -8,7 +7,7 @@ public class Product {
 	private int prodno;
 	private String prodname;
 	private int prodprice;
-	private Blob prodimage;
+	private String prodimage;
 	private String prodcon;
 	private Date prodDate;
 	private int prodpop;
@@ -17,7 +16,7 @@ public class Product {
 	public Product() {}
 
 
-	public Product(int prodno, String prodname, int prodprice, Blob prodimage, String prodcon, Date prodDate,
+	public Product(int prodno, String prodname, int prodprice, String prodimage, String prodcon, Date prodDate,
 			int prodpop) {
 		super();
 		this.prodno = prodno;
@@ -67,12 +66,12 @@ public class Product {
 	}
 
 
-	public Blob getProdimage() {
+	public String getProdimage() {
 		return prodimage;
 	}
 
 
-	public void setProdimage(Blob prodimage) {
+	public void setProdimage(String prodimage) {
 		this.prodimage = prodimage;
 	}
 
