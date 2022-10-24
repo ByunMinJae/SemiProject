@@ -133,7 +133,6 @@ public class JoinDaoImpl implements JoinDao {
 			e.printStackTrace();
 		}finally {
 			JDBCTemplate.close(ps);
-			JDBCTemplate.close(conn);
 		}
 		return 1; //중복x
 	}

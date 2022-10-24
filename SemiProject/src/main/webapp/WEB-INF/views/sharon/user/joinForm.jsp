@@ -439,5 +439,5 @@ margin:0 auto;
 
 </body>
 </html>
-
-<%@ include file="../../layout/footer.jsp" %>
+<jsp:include page="../../layout/footer.jsp"/>
+<%-- <%@ include file="../../layout/footer.jsp" %> --%>
