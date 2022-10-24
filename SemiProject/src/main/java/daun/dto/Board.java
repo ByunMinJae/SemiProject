@@ -11,11 +11,13 @@ public class Board {
 	private int userno;
 	private int categoryno;
 	private int hit;
+	private String nick;
 	
-	
-	public Board() {}
+	public Board() {
+	}
 
-	public Board(int boardno, String boardtitle, String boardcon, Date boarddate, int userno, int categoryno, int hit) {
+	public Board(int boardno, String boardtitle, String boardcon, Date boarddate, int userno, int categoryno, int hit,
+			String nick) {
 		super();
 		this.boardno = boardno;
 		this.boardtitle = boardtitle;
@@ -24,13 +26,14 @@ public class Board {
 		this.userno = userno;
 		this.categoryno = categoryno;
 		this.hit = hit;
+		this.nick = nick;
 	}
-
 
 	@Override
 	public String toString() {
 		return "Board [boardno=" + boardno + ", boardtitle=" + boardtitle + ", boardcon=" + boardcon + ", boarddate="
-				+ boarddate + ", userno=" + userno + ", categoryno=" + categoryno + ", hit=" + hit + "]";
+				+ boarddate + ", userno=" + userno + ", categoryno=" + categoryno + ", hit=" + hit + ", nick=" + nick
+				+ "]";
 	}
 
 	public int getBoardno() {
@@ -88,6 +91,16 @@ public class Board {
 	public void setHit(int hit) {
 		this.hit = hit;
 	}
+
+	public String getNick() {
+		return nick;
+	}
+
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
+	
+	
 
 	
 	

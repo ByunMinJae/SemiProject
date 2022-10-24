@@ -27,7 +27,7 @@ function payDo(){
  
     pg: "html5_inicis",
     pay_method: "card",
-    merchant_uid: "test1232244",
+    merchant_uid: <%=loginUser.getUserno()%> + new Date().getTime(),
     name: $("#prodnamevalue").val(),
     amount: $("#prodpricevalue").val(),
     buyer_email: $("#emailvalue").val(),
@@ -42,12 +42,25 @@ function payDo(){
             $.ajax({
                 url: "/orderafterlist", // 예: https://www.myservice.com/payments/complete
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
-                dataType: "json",
-                data: { pay_method: rsp.pay_method }
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                dataType: "html",
+                data: { 
+                	imp_uid: rsp.imp_uid,
+                	pay_method: rsp.pay_method,
+                	merchant_uid: rsp.merchant_uid,
+                	name: rsp.name,
+                	amount: <%=prod.getProdprice()%>,
+                	userno: <%=loginUser.getUserno()%>,
+	                buyer_email: '<%=loginUser.getEmail()%>',
+	                buyer_name: '<%=prod.getProdname()%>',
+	                buyer_tel: '<%=loginUser.getPhone()%>',
+	                buyer_addr: $("#addressvalue").val(),
+               	}
             }).done(function (data) {
-                	console.log(rsp.pay_method);
+                	console.log(rsp.orderprocess);
+                	console.log("결제성공");
               // 가맹점 서버 결제 API 성공시 로직
+              	 	window.location.href = "/ordersuccess";	
             })
           } else {
             alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
@@ -85,6 +98,13 @@ function payDo(){
 $(document).ready(function() {
 	
 	$("#addressSubmitButton").click(function(){
+		
+	      $('#info_addressdetail').html($("#postcode").val() + " " + $("#address").val() + " " + $("#detailAddress").val())
+	      
+	}); //funciton End
+	
+}); //ready End  */
+	
 // 	    $.ajax({
 // 	      type: "POST",
 // 	      url: "/address/change",
@@ -108,11 +128,7 @@ $(document).ready(function() {
 	    
 //       return false;//화면이동 막기
       
-      $('#info_addressdetail').html($("#postcode").val() + " " + $("#address").val() + " " + $("#detailAddress").val())
-      
-	}); //funciton End
-	
-}); //ready End  */
+
 
 /* $(document).ready(function () {
 
@@ -187,14 +203,29 @@ button {
 
 #paydo {
 	position: relative;
-	left: 500px;
+	left: 350px;
+	top: 75px;
+	margin: 0 auto;
 	border: none;
+	padding: 0;
 	background-color: white;
 	cursor: pointer;
+	
 }
 
+.container {
+	background-color: #BFDCFB;
+	height: 1150px; 
+}
+
+.container-wrap{
+	position: relative;
+	top: 100px; 
+	background-color: white;
+} 
+
 .info {
-	background-color: #EEEEEE;
+	background-color: #E1FFB1;
 	border-collapse: collapse;
 	padding: 10px;
 }
@@ -202,7 +233,6 @@ button {
 #pay {
 	display:table;
 	width:90%;
-	border:1px solid #DDD;
 }
 
 #addressChange {
@@ -230,10 +260,23 @@ li {
    list-style-type: none;
 }
 
+.widthcontainer {
+	position: relative;
+	top: 100px;
+	width: 70%;
+	margin: 0 auto;	 
+}
 
+.w-button { 
+    border: none;
+    border-radius: 5px;
+    font-family: "paybooc-Light", sans-serif;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    font-weight: 600;
+    cursor: pointer;
+}
  
 </style>
-
 
 <div class="widthcontainer">
 	<h1>주문 / 결제</h1>
@@ -268,7 +311,7 @@ li {
 				<ul class="address_A">
 					<li><input type="text" name="postcode" id="postcode" placeholder="우편번호"></li>
 				</ul>
-					<input type="button" id="postbutton" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
+					<input type="button" id="postbutton" class="w-button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
 				<ul class="address_B"> 
 					<li><input type="text" id="address" placeholder="주소"><br></li>
 				</ul>
@@ -278,7 +321,7 @@ li {
 				</ul>
 				<input type="hidden" name="address" id="addressSubmit">
 	
-				<button type="button" id="addressSubmitButton">주소변경</button>
+				<button type="button" id="addressSubmitButton" class="w-button">주소변경</button>
 				<span id="address_msg" class="msg"></span><br>
 			</div>
 		</div>

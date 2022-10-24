@@ -1,6 +1,7 @@
 package changmin.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,9 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import changmin.dto.Category;
 import changmin.service.face.BoardService;
 import changmin.service.impl.BoardServiceImpl;
 import daun.dto.Board;
+import sharon.dto.User;
+import sharon.service.face.ListService;
+import sharon.service.impl.ListServiceImpl;
 
 
 @WebServlet("/board/view")
@@ -18,7 +23,7 @@ public class BoardViewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private BoardService boardService = new BoardServiceImpl();
-	
+	private ListService listService = new ListServiceImpl();
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("/board/view [GET]");
@@ -33,9 +38,26 @@ public class BoardViewController extends HttpServlet {
 		Board viewBoard = boardService.view(boardno);
 		System.out.println("BoardViewControoler doGet() - viewBoard : " + viewBoard );
 
+		int cateno = viewBoard.getCategoryno();
+		System.out.println("Categoryno : " + cateno);
+		
+		Category category = boardService.catename(cateno);
+		System.out.println("Categoryname : " + category.getCategoryname());
+		
 		req.setAttribute("viewBoard", viewBoard);
+		req.setAttribute("category", category);
 		
 		//----------------------게시글 상세 조회-------------------------------
+		
+		//------------------------회원정보 조회--------------------------------
+
+		List<User> list = listService.list();
+		
+		System.out.println("[TEST} UserListController-전체조회목록");
+		
+		req.setAttribute("userList", list);
+		
+		//------------------------회원정보 조회--------------------------------
 		
 		req.getRequestDispatcher("/WEB-INF/views/changmin/viewboard.jsp").forward(req, resp);
 	}

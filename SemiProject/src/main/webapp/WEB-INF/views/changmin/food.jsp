@@ -91,7 +91,7 @@ img {
 						<%=boardList.get(i).getBoardtitle() %>
 					</a>
 					
-				<td><%= boardList.get(i).getBoardtitle() %></td>
+				<td><%= boardList.get(i).getNick() %></td>
 				<td><%= boardList.get(i).getBoarddate() %></td>
 				<td><%= boardList.get(i).getHit() %></td>
 			</tr>

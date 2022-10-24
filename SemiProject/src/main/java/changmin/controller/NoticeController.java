@@ -13,6 +13,7 @@ import changmin.dto.Category;
 import changmin.service.face.BoardService;
 import changmin.service.impl.BoardServiceImpl;
 import daun.dto.Board;
+import sharon.dto.User;
 import util.Paging;
 
 @WebServlet("/board/notice")
@@ -44,8 +45,7 @@ public class NoticeController extends HttpServlet {
 		req.setAttribute("boardList", boardList);
 		
 		//----------------------게시글 전체 조회-------------------------------
-		
-		
+			
 		
 	
 		
