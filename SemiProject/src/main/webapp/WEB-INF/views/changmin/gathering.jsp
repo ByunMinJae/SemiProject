@@ -26,10 +26,12 @@ h1 {
 
 th, td {
 	text-align: center;
+	font-family: 'GmarketSansMedium';
 }
 
 td:nth-child(2) {
 	text-align: justify;
+	font-family: 'GmarketSansMedium';
 }
 
 .right {

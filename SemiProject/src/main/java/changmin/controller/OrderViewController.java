@@ -13,7 +13,7 @@ import changmin.dto.Order;
 import changmin.service.face.OrderService;
 import changmin.service.impl.OrderServiceImpl;
 
-@WebServlet("/order/view")
+@WebServlet("/orderafterlist")
 public class OrderViewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	

@@ -40,7 +40,7 @@ function payDo(){
             // jQuery로 HTTP 요청
             console.log(rsp.pay_method);
             $.ajax({
-                url: "/orderafterlist", // 예: https://www.myservice.com/payments/complete
+                url: "/ordersuccess", // 예: https://www.myservice.com/payments/complete
                 method: "POST",
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
                 dataType: "html",
@@ -194,16 +194,15 @@ function execDaumPostcode() {
 
 <style type="text/css">
 
-.addressChange {
-	float:left;
-}
 button {
 	margin: 10px;
 }
 
+input {
+}
 #paydo {
 	position: relative;
-	left: 350px;
+	left: 160px;
 	top: 75px;
 	margin: 0 auto;
 	border: none;
@@ -212,7 +211,9 @@ button {
 	cursor: pointer;
 	
 }
-
+#wrapper {
+	background-color: #BFDCFB;
+}
 .container {
 	background-color: #BFDCFB;
 	height: 1150px; 
@@ -229,6 +230,11 @@ button {
 	border-collapse: collapse;
 	padding: 10px;
 }
+#buttonposition {
+	position: relative;
+	top: -13px;
+	left: 6px;
+}
 
 #pay {
 	display:table;
@@ -236,13 +242,13 @@ button {
 }
 
 #addressChange {
-	height: 155px;
+	height: 170px;
 }
 
 #addressChange input {
 	float: left;
 	position: relative;
-	top: -35px;
+	top: -15px;
 	left: 80px; 
 }
 
@@ -251,8 +257,8 @@ button {
 }
 
 #address {
-	width: 345px;
-}
+	width: 355px;
+} 
 
 
 li {
@@ -266,7 +272,7 @@ li {
 	width: 70%;
 	margin: 0 auto;	 
 }
-
+ 
 .w-button { 
     border: none;
     border-radius: 5px;
@@ -311,7 +317,9 @@ li {
 				<ul class="address_A">
 					<li><input type="text" name="postcode" id="postcode" placeholder="우편번호"></li>
 				</ul>
+				<div id="buttonposition">
 					<input type="button" id="postbutton" class="w-button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
+				</div>
 				<ul class="address_B"> 
 					<li><input type="text" id="address" placeholder="주소"><br></li>
 				</ul>

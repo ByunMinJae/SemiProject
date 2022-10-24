@@ -29,54 +29,51 @@ public class PayDoController extends HttpServlet {
 		
 		//-----------------------회원 정보 조회------------------------------
 		
-		//테스트 용 데이터
-//		req.getSession().setAttribute("userid", "changmin");
-//		String userid = req.getParameter("userid");
-		
 		HttpSession session = req.getSession();
-		session.setAttribute("userno", 4);
+//		session.setAttribute("userno", 4);
 		
 		//로그인한 사람의 PK -> userno -> 2323
 		//	-> 이걸 이용하여 로그인한 사람의 정보 조회 - 서비스 이용
+		if( session.getAttribute("userno")==null ) {
+			resp.sendRedirect("/cmc/login");
 		
-		int userno = (int) req.getSession().getAttribute("userno");
-		
-		//로그인한 사람의 정보 조회
-		User loginUser = payDoService.getUserInfo(userno);
-		System.out.println(loginUser);
-		
-		//로그인 한 사람 정보를 모델값으로 전달
-		req.setAttribute("loginUser", loginUser);
-		
-		//-------------------------------------------------------------------
-
-		//------------------------상품 정보 조회-----------------------------
-		
-		req.getSession().setAttribute("prodno", 1);
-		
-		int prodno = (int) req.getSession().getAttribute("prodno");
-		
-		Product orderlist = payDoService.getProdInfo(prodno);
-		
-		req.setAttribute("prod", orderlist);
-		
-		//-------------------------------------------------------------------
-
-		
-		req.getRequestDispatcher("/WEB-INF/views/changmin/paydo.jsp").forward(req, resp);
+			
+			
+		} else {
+			int userno = (int) session.getAttribute("userno");
+			System.out.println("userno : " + userno);
+			
+			//로그인한 사람의 정보 조회
+			User loginUser = payDoService.getUserInfo(userno);
+			System.out.println(loginUser);
+			
+			//로그인 한 사람 정보를 모델값으로 전달
+			req.setAttribute("loginUser", loginUser);
+			
+			//-------------------------------------------------------------------
 	
+			//------------------------상품 정보 조회-----------------------------
+			
+			req.getSession().setAttribute("prodno", 1);
+			
+			int prodno = (int) req.getSession().getAttribute("prodno");
+			
+			Product orderlist = payDoService.getProdInfo(prodno);
+			
+			req.setAttribute("prod", orderlist);
+			
+			//-------------------------------------------------------------------
+	
+			
+			req.getRequestDispatcher("/WEB-INF/views/changmin/paydo.jsp").forward(req, resp);
+	
+		}
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("/pay/do [POST]");
 		
-		Gson gson = new Gson();
-		String test = gson.fromJson( req.getParameter("pay_method").trim(), String.class);
-		System.out.println(test);
-		
-//		String regIdString = req.getParameter("pay_method").trim();
-//		System.out.println(regIdString);
 		
 		req.getRequestDispatcher("/WEB-INF/views/changmin/paydo.jsp").forward(req, resp);
 	}
