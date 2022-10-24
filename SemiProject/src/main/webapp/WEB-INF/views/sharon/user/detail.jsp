@@ -1,8 +1,8 @@
 <%@page import="sharon.dto.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<%	User user= (User) request.getAttribute("userList");%>
+<%@ include file="../../layout/header.jsp" %>
+<%	User user= (User) request.getAttribute("user");%>
 
 <!DOCTYPE html>
 <html>
@@ -30,7 +30,13 @@
 
 
 <br>
-<a href="/user/list"><button>목록</button></a>
+
+<div class="text-center">
+	<a href="/user/list"><button id="btnList">목록</button></a>
+	<a href=""><button>수정</button></a>
+	<a href=""><button>삭제</button></a>
+</div>
 
 </body>
 </html>
+<%@ include file="../../layout/footer.jsp" %>
