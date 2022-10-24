@@ -34,7 +34,7 @@ public class JoinController extends HttpServlet {
 		
 		joinService.join(user);
 		
-		resp.sendRedirect("https://naver.com/");
+		resp.sendRedirect("/main");
 	}
 
 }
