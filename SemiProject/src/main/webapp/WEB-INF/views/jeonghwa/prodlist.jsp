@@ -1,28 +1,25 @@
+<%@page import="util.Paging"%>
 <%@page import="jeonghwa.dto.Product"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+
+
+<!-- 서블릿(Controller)이 전달한 데이터 꺼내기 -->
+<%	List<Product> pList = (List)request.getAttribute("productList"); %>
+
 <%@ include file="../layout/header.jsp" %>
 
-<%	List<Product> list = (List) request.getAttribute("productList"); %>
+<!-- 부트스트랩3 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 <style>
+
 .container {
 	height: 700px;
-}
-table {
-	border: 1px solid black;
-	border-collapse: collapse;
-	
-	width: 60%;
-	right: 200px;
-	text-align: center;
-	
-}
-tr, th, td {
-	border: 1px solid black;
-	height: 30%;
 }
 
 .updatebtn {
@@ -30,29 +27,31 @@ tr, th, td {
 }
 </style>
 
-<h3>게시글 목록</h3>
+<h3>상품 목록</h3>
 
 
-<table>
+<table class="table table-striped table-hover">
 
   <tr>
-	<th style="width: 15%;">사진</th>
-	<th style="width: 15%;">상품명</th>
-	<th style="width: 15%;">가격</th>
-	<th style="width: 15%;">재고</th>
-	<th style="width: 15%;">기능</th>
+	<th style="width: 40%;">사진</th>
+	<th style="width: 20%;">상품명</th>
+	<th style="width: 10%;">가격</th>
+	<th style="width: 10%;">재고</th>
+	<th style="width: 40%;">기능</th>
   </tr>
   
-  <%	for(int i=0; i<list.size(); i++) { %>
+  <%	for(int i=0; i<pList.size(); i++) { %>
   <tr>
-    <td><%=list.get(i).getProdimage() %></td>
+    <td><%=pList.get(i).getProdimage() %></td>
+    
     <td>
-    	<a href="/WEB-INF/views/jeonghwa/prodview.jsp">
-    		<%=list.get(i).getProdname() %>
+    	<a href="/prod/detail?prodno=<%=pList.get(i).getProdno() %>">
+    		<%=pList.get(i).getProdname() %>
     	</a>	
     </td>
-    <td><%=list.get(i).getProdprice() %></td>
-    <td><%=list.get(i).getProdpop() %></td>
+    
+    <td><%=pList.get(i).getProdprice() %></td>
+    <td><%=pList.get(i).getProdpop() %></td>
     <td>
 		<button class="btn" onclick="location.href=''">수정</button>
 		<button class="btn" onclick="location.href=''">삭제</button>
@@ -64,6 +63,6 @@ tr, th, td {
 
 <button class="updatebtn" onclick="location.href=''">상품 추가</button>
 
-
+<%@	include file="paging.jsp"%>
 
 <%@ include file="../layout/footer.jsp" %>
