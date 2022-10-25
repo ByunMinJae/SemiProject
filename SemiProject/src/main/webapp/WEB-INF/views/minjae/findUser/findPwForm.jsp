@@ -32,12 +32,16 @@ $(document).ready(function() {
 </script>
 
 <style type="text/css">
+#wrapper {
+	background-color: #BFDCFB;
+}
 .fupWrap {
 	width: 400px;
     height: 500px;
     margin: 200px auto 0;
     text-align: center;
     position: relative;
+    font-family: 'GmarketSansMedium';
 }
 
 #userId {
@@ -55,9 +59,9 @@ $(document).ready(function() {
 
 .btnReqAuth {
 	float: right;
-	position: relative;
-   	top: -31px;
-    right: 54px;
+    position: relative;
+    top: -29px;
+    right: 59px;
 }
 
 .findId {

@@ -37,8 +37,9 @@ $(document).ready(function() {
 
 <style type="text/css">
 #checkSms {
-    font-size: 5px;
+    font-size: 13px;
     color: blue;
+    margin-top: 4px;
 }
 
 #disSmsAuth {
@@ -61,8 +62,8 @@ $(document).ready(function() {
 #agreeMsgS {
     position: absolute;
     color: lime;
-    top: 216px;
-    right: 54px;
+    top: 208px;
+    right: 62px;
 }
 #checkMark {
 	background: url("/resources/image/check-mark.png") no-repeat 0 0;

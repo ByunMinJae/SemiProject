@@ -98,12 +98,16 @@ function hiddenForm() {
 </script>
 
 <style type="text/css">
+#wrapper {
+	background-color: #BFDCFB;
+}
 .fuiWrap {
 	width: 400px;
     height: 500px;
     margin: 200px auto 0;
     text-align: center;
     position: relative;
+    font-family: 'GmarketSansMedium';
 }
 
 #userEmail, #userName,
@@ -117,8 +121,8 @@ function hiddenForm() {
 .btnReqAuth {
 	float: right;
 	position: relative;
-   	top: -31px;
-    right: 54px;
+   	top: -29px;
+    right: 59px;
 }
 
 .findPw {
@@ -150,34 +154,22 @@ function hiddenForm() {
 }
 
 #hid1, #hid2 {
-    margin-left: 53px;
+    margin-left: 62px;
 }
 .radioDiv {
 	text-align: left;
 	font-size: 14px;
 }
-input[type='radio'],
-input[type='radio']:checked {
-  appearance: none;
-  width: 0.9rem;
-  height: 0.9rem;
-  border-radius: 30%;
-  margin-right: 0.1rem;
-}
-input[type='radio'] {
-  background-color: #fff;
-  border: 2px solid #ccc;
-}
-input[type='radio']:checked {
-  background-color: #4c6ae7;
-}
-
 #selectBox {
 	width: 330px;
 	margin: 13px 0px 4px 36px;
 }
-select {
+select { 
 	height: 30px;
+}
+.findType {
+	display: inline-block;
+	margin: 0;
 }
 </style> 
 
@@ -191,10 +183,12 @@ select {
 </div>
 
 <div class="radioDiv" style="margin-top: 35px;">
-	<input type="radio" name="type" value="sms" id="hid1" checked onclick="hiddenForm();">전화번호
+	<input type="radio" name="type" value="sms" id="hid1" checked onclick="hiddenForm();">
+	<p class="findType">전화번호</p>
 </div>
 <div class="radioDiv">
-	<input type="radio" name="type" value="email" id="hid2" onclick="hiddenForm();">이메일
+	<input type="radio" name="type" value="email" id="hid2" onclick="hiddenForm();">
+	<p class="findType">이메일</p>
 </div>
 
 <!-- sms 인증 -->
