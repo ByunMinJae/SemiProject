@@ -294,9 +294,8 @@ h1{
 	<th>글번호</th>
 	<th>제목</th>
 	<th>작성날짜</th>
-	<th>카테고리번호</th>
-	<th></th>
-
+	<th>글쓴이</th>
+	
 </tr>
 
 <% for(int i=0; i<noticeBoard.size(); i++){ %>
@@ -304,8 +303,7 @@ h1{
 	<td><%= noticeBoard.get(i).getBoardno() %></td>
 	<td><a href="./boardview?boardno=<%=noticeBoard.get(i).getBoardno() %>"><%= noticeBoard.get(i).getBoardtitle() %></a></td>
 	<td><%= noticeBoard.get(i).getBoarddate() %></td>
-	<td><%= noticeBoard.get(i).getCategoryno() %></td>
-	<td><button>삭제</button></td>
+	<td><%= noticeBoard.get(i).getNick() %></td>
 </tr>
 <% } %>
 

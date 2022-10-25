@@ -60,4 +60,17 @@ public class BoardServiceImpl implements BoardService {
 		return board;
 	}
 
+	@Override
+	public void delete(Board boardno) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+				
+		if(boardDao.delete(conn, boardno)>0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+	}
+
 }

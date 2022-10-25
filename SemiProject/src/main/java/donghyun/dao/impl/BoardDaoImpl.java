@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import common.JDBCTemplate;
 import donghyun.dao.face.BoardDao;
 import donghyun.dto.Board;
 
@@ -36,11 +37,16 @@ public class BoardDaoImpl implements BoardDao {
 				board.setBoarddate(rs.getDate("boarddate"));
 				board.setUserno(rs.getInt("userno"));
 				board.setCategoryno(rs.getInt("categoryno"));
+				board.setHit(rs.getInt("hit"));
+				board.setNick(rs.getString("nick"));
 				
 				noticeBoard.add(board);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
 		}
 		
 		return noticeBoard;
@@ -66,11 +72,16 @@ public class BoardDaoImpl implements BoardDao {
 				board.setBoarddate(rs.getDate("boarddate"));
 				board.setUserno(rs.getInt("userno"));
 				board.setCategoryno(rs.getInt("categoryno"));
+				board.setHit(rs.getInt("hit"));
+				board.setNick(rs.getString("nick"));
 				
 				freeBoard.add(board);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
 		}
 		
 		
@@ -97,11 +108,16 @@ public class BoardDaoImpl implements BoardDao {
 				board.setBoarddate(rs.getDate("boarddate"));
 				board.setUserno(rs.getInt("userno"));
 				board.setCategoryno(rs.getInt("categoryno"));
+				board.setHit(rs.getInt("hit"));
+				board.setNick(rs.getString("nick"));
 				
 				foodBoard.add(board);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
 		}
 		
 		
@@ -128,11 +144,16 @@ public class BoardDaoImpl implements BoardDao {
 				board.setBoarddate(rs.getDate("boarddate"));
 				board.setUserno(rs.getInt("userno"));
 				board.setCategoryno(rs.getInt("categoryno"));
+				board.setHit(rs.getInt("hit"));
+				board.setNick(rs.getString("nick"));
 				
 				meetingBoard.add(board);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
 		}
 		
 		
@@ -160,11 +181,16 @@ public class BoardDaoImpl implements BoardDao {
 				board.setBoarddate(rs.getDate("boarddate"));
 				board.setUserno(rs.getInt("userno"));
 				board.setCategoryno(rs.getInt("categoryno"));
+				board.setHit(rs.getInt("hit"));
+				board.setNick(rs.getString("nick"));
 				
 				qnaBoard.add(board);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
 		}
 		
 		
@@ -193,11 +219,36 @@ public class BoardDaoImpl implements BoardDao {
 				board.setBoarddate(rs.getDate("boarddate"));
 				board.setUserno(rs.getInt("userno"));
 				board.setCategoryno(rs.getInt("categoryno"));
+				board.setHit(rs.getInt("hit"));
+				board.setNick(rs.getString("nick"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
 		}
 		return board;
+	}
+	@Override
+	public int delete(Connection conn, Board boardno) {
+		
+		String sql = "";
+		sql += " DELETE board_info WHERE boardno = ?";
+		
+		int res=0;
+		
+		try {
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, boardno.getBoardno());
+			
+			res=ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		return res;
 	}
 
 }

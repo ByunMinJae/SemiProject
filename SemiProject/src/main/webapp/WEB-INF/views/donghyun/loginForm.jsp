@@ -22,7 +22,7 @@
 
 form {
 	padding: 10px;
-	width: 50%;
+	width: 86%;
 	margin: 0 auto;
 }
 
@@ -78,7 +78,7 @@ input[type=submit] {
 	height: 35px;
 	font-size: 13pt;
 	margin-top: 50px;
-	margin-left: 46px;
+	margin-left: 36px;
 	font-weight: bolder;
 }
 
@@ -102,7 +102,7 @@ input[type=submit] {
 }
 
 #kakao-wrap{
-	margin-left: 331px;
+	margin-left: 70px;
 }
 
 

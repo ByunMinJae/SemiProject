@@ -26,7 +26,7 @@ public class BoardViewController extends HttpServlet {
 	private ListService listService = new ListServiceImpl();
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("/board/view [GET]");
+		System.out.println("/board/view  [GET]");
 		
 		//----------------------게시글 상세 조회-------------------------------
 		

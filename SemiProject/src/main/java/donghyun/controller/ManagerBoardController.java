@@ -24,6 +24,8 @@ public class ManagerBoardController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		
 		req.getRequestDispatcher("/WEB-INF/views/donghyun/managerBoard.jsp").forward(req, resp);
 
 
@@ -32,7 +34,8 @@ public class ManagerBoardController extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("[POST]");
+		
+		System.out.println("/manager/board    [POST]");
 		
 		String category = req.getParameter("category");
 		

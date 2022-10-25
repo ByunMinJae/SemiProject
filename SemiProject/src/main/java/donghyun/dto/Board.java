@@ -10,13 +10,32 @@ public class Board {
 	private Date boarddate;
 	private int userno;
 	private int categoryno;
+	private int hit;
+	private String nick;
 	
+	public int getHit() {
+		return hit;
+	}
+
+	public void setHit(int hit) {
+		this.hit = hit;
+	}
+
+	public String getNick() {
+		return nick;
+	}
+
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
+
 	public Board() {}
 
 	@Override
 	public String toString() {
 		return "Board [boardno=" + boardno + ", boardtitle=" + boardtitle + ", boardcon=" + boardcon + ", boarddate="
-				+ boarddate + ", userno=" + userno + ", categoryno=" + categoryno + "]";
+				+ boarddate + ", userno=" + userno + ", categoryno=" + categoryno + ", hit=" + hit + ", nick=" + nick
+				+ "]";
 	}
 
 	public int getBoardno() {
