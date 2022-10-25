@@ -49,7 +49,7 @@ button {
 		<div id="table">
 			<img src="/resources/image/ok.png">
 			<p id="success">결제가 완료되었어요 !</p>
-			<p><a href="/orderafterlist"><button>주문목록</button></a></p>
+			<p><a href="/orderafterlist"><button>결제목록</button></a></p>
 		</div>
 	</div>
 

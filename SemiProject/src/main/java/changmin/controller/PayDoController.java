@@ -34,8 +34,6 @@ public class PayDoController extends HttpServlet {
 		//	-> 이걸 이용하여 로그인한 사람의 정보 조회 - 서비스 이용
 		if( session.getAttribute("userno")==null ) {
 			resp.sendRedirect("/cmc/login");
-		
-			
 			
 		} else {
 			int userno = (int) session.getAttribute("userno");

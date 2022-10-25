@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import changmin.service.face.OrderService;
 import changmin.service.impl.OrderServiceImpl;
@@ -29,9 +30,13 @@ public class OrderController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("Order [POST]");
 
+		HttpSession session = req.getSession();
+		
+		int userno = (int)session.getAttribute("userno");
+		
 		req.setCharacterEncoding("UTF-8");
 
-		orderService.orderinsert(req);
+		orderService.orderinsert(req, userno);
 		
 		
 		req.getRequestDispatcher("/WEB-INF/views/changmin/ordersuccess.jsp").forward(req, resp);

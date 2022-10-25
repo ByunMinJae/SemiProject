@@ -14,6 +14,7 @@ public class Order {
 	private String buyeraddr;
 	private String orderdate;
 	private int orderno;
+	private int userno;
 
 	public Order() {
 	}
@@ -23,12 +24,12 @@ public class Order {
 		return "Order [orderafterno=" + orderafterno + ", orderprocess=" + orderprocess + ", paymethod=" + paymethod
 				+ ", merchant_uid=" + merchant_uid + ", prodname=" + prodname + ", amount=" + amount + ", buyeremail="
 				+ buyeremail + ", buyername=" + buyername + ", buyertel=" + buyertel + ", tel=" + tel + ", buyeraddr="
-				+ buyeraddr + ", orderdate=" + orderdate + ", orderno=" + orderno + "]";
+				+ buyeraddr + ", orderdate=" + orderdate + ", orderno=" + orderno + ", userno=" + userno + "]";
 	}
 
 	public Order(int orderafterno, String orderprocess, String paymethod, String merchant_uid, String prodname,
 			int amount, String buyeremail, String buyername, String buyertel, String tel, String buyeraddr,
-			String orderdate, int orderno) {
+			String orderdate, int orderno, int userno) {
 		super();
 		this.orderafterno = orderafterno;
 		this.orderprocess = orderprocess;
@@ -43,6 +44,7 @@ public class Order {
 		this.buyeraddr = buyeraddr;
 		this.orderdate = orderdate;
 		this.orderno = orderno;
+		this.userno = userno;
 	}
 
 	public int getOrderafterno() {
@@ -148,10 +150,15 @@ public class Order {
 	public void setOrderno(int orderno) {
 		this.orderno = orderno;
 	}
-	
-	
-	
-	
+
+	public int getUserno() {
+		return userno;
+	}
+
+	public void setUserno(int userno) {
+		this.userno = userno;
+	}
+
 	
 	
 	
