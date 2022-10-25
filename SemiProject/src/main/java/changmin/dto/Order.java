@@ -12,13 +12,14 @@ public class Order {
 	private String buyertel;
 	private String tel;
 	private String buyeraddr;
-	private int payno;
+	private int orderno;
 	
 	public Order() {
 	}
 
 	public Order(int orderafterno, String orderprocess, String paymethod, String merchant_uid, String prodname,
-			int amount, String buyeremail, String buyername, String buyertel, String tel, String buyeraddr, int payno) {
+			int amount, String buyeremail, String buyername, String buyertel, String tel, String buyeraddr,
+			int orderno) {
 		super();
 		this.orderafterno = orderafterno;
 		this.orderprocess = orderprocess;
@@ -31,7 +32,7 @@ public class Order {
 		this.buyertel = buyertel;
 		this.tel = tel;
 		this.buyeraddr = buyeraddr;
-		this.payno = payno;
+		this.orderno = orderno;
 	}
 
 	@Override
@@ -39,7 +40,7 @@ public class Order {
 		return "Order [orderafterno=" + orderafterno + ", orderprocess=" + orderprocess + ", paymethod=" + paymethod
 				+ ", merchant_uid=" + merchant_uid + ", prodname=" + prodname + ", amount=" + amount + ", buyeremail="
 				+ buyeremail + ", buyername=" + buyername + ", buyertel=" + buyertel + ", tel=" + tel + ", buyeraddr="
-				+ buyeraddr + ", payno=" + payno + "]";
+				+ buyeraddr + ", orderno=" + orderno + "]";
 	}
 
 	public int getOrderafterno() {
@@ -130,13 +131,14 @@ public class Order {
 		this.buyeraddr = buyeraddr;
 	}
 
-	public int getPayno() {
-		return payno;
+	public int getOrderno() {
+		return orderno;
 	}
 
-	public void setPayno(int payno) {
-		this.payno = payno;
+	public void setOrderno(int orderno) {
+		this.orderno = orderno;
 	}
+	
 	
 	
 	

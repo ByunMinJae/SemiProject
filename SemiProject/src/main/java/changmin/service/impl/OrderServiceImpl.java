@@ -28,6 +28,7 @@ public class OrderServiceImpl implements OrderService {
 		order.setBuyername(req.getParameter("buyer_name"));
 		order.setBuyertel(req.getParameter("buyer_tel"));
 		order.setBuyeraddr(req.getParameter("buyer_addr"));
+		order.setOrderno(Integer.parseInt(req.getParameter("orderno").trim()));
 		
 		int res = orderDao.insertOrder(conn,order);
 			

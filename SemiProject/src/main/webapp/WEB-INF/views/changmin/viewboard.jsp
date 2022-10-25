@@ -24,18 +24,22 @@ $(document).ready(function() {
 })
 
 function deleteboard(){
-   $.ajax({
-        url:"./deleteboard?boardno=<%=viewBoard.getBoardno() %>",
-        type:'POST',
-        data: {boardno:<%=viewBoard.getBoardno()%>},
-        success:function(data){
-            location.href=('/board/notice'); //게시글 삭제시 default 게시글목록으로 이동
-            alert("삭제 완료!");
-        },
-        error:function(jqXHR, textStatus, errorThrown){
-            alert("에러 발생 \n" + textStatus + " : " + errorThrown);
-        }
-   });
+	 if (confirm("정말 삭제하시겠습니까?") == true){    //확인
+		   $.ajax({
+		        url:"./deleteboard?boardno=<%=viewBoard.getBoardno() %>",
+		        type:'POST',
+		        data: {boardno:<%=viewBoard.getBoardno()%>},
+		        success:function(data){
+		            location.href=('/board/notice'); //게시글 삭제시 default 게시글목록으로 이동
+		            alert("삭제 완료!");
+		        },
+		        error:function(jqXHR, textStatus, errorThrown){
+		            alert("에러 발생 \n" + textStatus + " : " + errorThrown);
+		        }
+		   });
+	 } else {
+		 return false;
+	 }
 }
 </script>
 <style type="text/css">
@@ -80,7 +84,7 @@ td:nth-child(2) {
 	float: right;
 	width: 900px;
 	left: 100px;
-	top: -380px;
+	top: -340px;
 	
 	
 }
@@ -140,7 +144,6 @@ img {
  
 </style>
 <div class="myContainer">
-	<hr>
 		<div style="min-height: 500px;">
 			<div class="left">
 	

@@ -22,7 +22,7 @@ public class OrderDaoImpl implements OrderDao{
 		System.out.println(order.getPaymethod());
 		String sql = "";
 		sql += "INSERT INTO user_orderafter";
-		sql += "	(orderafterno, pay_method, merchant_uid, prodname, amount, buyer_email, buyer_name, buyer_tel, buyer_addr, payno)";
+		sql += "	(orderafterno, pay_method, merchant_uid, prodname, amount, buyer_email, buyer_name, buyer_tel, buyer_addr, orderno)";
 		sql += "	VALUES";
 		sql += "	(user_orderafter_seq.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
@@ -40,7 +40,7 @@ public class OrderDaoImpl implements OrderDao{
 			ps.setString(6, order.getBuyername());
 			ps.setString(7, order.getBuyertel());
 			ps.setString(8, order.getBuyeraddr());
-			ps.setInt(9, order.getPayno());
+			ps.setInt(9, order.getOrderno());
 			
 			res = ps.executeUpdate();
 			

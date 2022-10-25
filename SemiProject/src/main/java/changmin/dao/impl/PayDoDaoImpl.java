@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import changmin.dao.face.PayDoDao;
+import changmin.dto.OrderBefore;
 import common.JDBCTemplate;
 import jeonghwa.dto.Product;
 import sharon.dto.User;
@@ -63,30 +64,30 @@ public class PayDoDaoImpl implements PayDoDao{
 
 
 	@Override
-	public Product getProdInfo(Connection conn, int prodno) {
-		System.out.println("ProdDao - Start");
+	public OrderBefore getOrderInfo(Connection conn, int orderno) {
+		System.out.println("OrderBeforeDao - Start");
 		
 		String sql = "";
 		
 		sql+= "SELECT";
-		sql+= " prodno, prodname, prodprice";
-		sql+= " FROM product";
-		sql+= " WHERE prodno=?";
+		sql+= " orderno, buyprodname, totalamount";
+		sql+= " FROM user_orderbefore";
+		sql+= " WHERE orderno=?";
 		 
-		Product prod = new Product();
+		OrderBefore order = new OrderBefore();
 		
 		try {
 			ps = conn.prepareStatement(sql);
 			
-			ps.setInt(1, prodno);
+			ps.setInt(1, orderno);
 			
 			rs = ps.executeQuery();
 			
 			while( rs.next()) {
 				
-				prod.setProdno( rs.getInt("prodno"));
-				prod.setProdname( rs.getString("prodname"));
-				prod.setProdprice( rs.getInt("prodprice"));
+				order.setOrderno(rs.getInt("orderno"));
+				order.setBuyprodname(rs.getString("buyprodname"));
+				order.setTotalamount(rs.getInt("totalamount"));
 				
 				
 			}
@@ -97,9 +98,9 @@ public class PayDoDaoImpl implements PayDoDao{
 			JDBCTemplate.close(ps);
 		}
 		
-		System.out.println("ProdDao - End");
+		System.out.println("OrderBeforeDao - End");
 		
-		return prod;
+		return order;
 	}
 
 

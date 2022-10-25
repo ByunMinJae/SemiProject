@@ -1,4 +1,6 @@
-<%@page import="jeonghwa.dto.Product"%>
+<%@page import="changmin.dto.OrderBefore"%>
+<%-- <%@page import="changmin.dto.Order"%>
+<%@page import="jeonghwa.dto.Product"%> --%>
 <%@page import="sharon.dto.User"%>
 <%@page import="java.util.List"%>
 <%@page import="changmin.dto.Pay"%>
@@ -7,7 +9,8 @@
 <%@ include file="../layout/header.jsp"%>
 <% Pay pay = (Pay) request.getAttribute("pay"); %>
 <% User loginUser = (User) request.getAttribute("loginUser"); %>
-<% Product prod = (Product) request.getAttribute("prod"); %>
+<%-- <% Product prod = (Product) request.getAttribute("prod"); %> --%>
+<% OrderBefore orderInfo = (OrderBefore) request.getAttribute("orderInfo"); %>
 <% User updateUser = (User) request.getAttribute("updateUser"); %>
 
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
@@ -40,7 +43,7 @@ function payDo(){
             // jQuery로 HTTP 요청
             console.log(rsp.pay_method);
             $.ajax({
-                url: "/orderafterlist", // 예: https://www.myservice.com/payments/complete
+                url: "/ordersuccess", // 예: https://www.myservice.com/payments/complete
                 method: "POST",
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
                 dataType: "html",
@@ -49,12 +52,13 @@ function payDo(){
                 	pay_method: rsp.pay_method,
                 	merchant_uid: rsp.merchant_uid,
                 	name: rsp.name,
-                	amount: <%=prod.getProdprice()%>,
+                	amount: <%=orderInfo.getTotalamount()%>,
                 	userno: <%=loginUser.getUserno()%>,
 	                buyer_email: '<%=loginUser.getEmail()%>',
-	                buyer_name: '<%=prod.getProdname()%>',
+	                buyer_name: '<%=orderInfo.getBuyprodname()%>',
 	                buyer_tel: '<%=loginUser.getPhone()%>',
 	                buyer_addr: $("#addressvalue").val(),
+	                orderno: <%=orderInfo.getOrderno()%>
                	}
             }).done(function (data) {
                 	console.log(rsp.orderprocess);
@@ -194,16 +198,15 @@ function execDaumPostcode() {
 
 <style type="text/css">
 
-.addressChange {
-	float:left;
-}
 button {
 	margin: 10px;
 }
 
+input {
+}
 #paydo {
 	position: relative;
-	left: 350px;
+	left: 160px;
 	top: 75px;
 	margin: 0 auto;
 	border: none;
@@ -212,7 +215,9 @@ button {
 	cursor: pointer;
 	
 }
-
+#wrapper {
+	background-color: #BFDCFB;
+}
 .container {
 	background-color: #BFDCFB;
 	height: 1150px; 
@@ -229,6 +234,11 @@ button {
 	border-collapse: collapse;
 	padding: 10px;
 }
+#buttonposition {
+	position: relative;
+	top: -13px;
+	left: 6px;
+}
 
 #pay {
 	display:table;
@@ -236,13 +246,13 @@ button {
 }
 
 #addressChange {
-	height: 155px;
+	height: 170px;
 }
 
 #addressChange input {
 	float: left;
 	position: relative;
-	top: -35px;
+	top: -15px;
 	left: 80px; 
 }
 
@@ -251,8 +261,8 @@ button {
 }
 
 #address {
-	width: 345px;
-}
+	width: 355px;
+} 
 
 
 li {
@@ -266,7 +276,7 @@ li {
 	width: 70%;
 	margin: 0 auto;	 
 }
-
+ 
 .w-button { 
     border: none;
     border-radius: 5px;
@@ -311,7 +321,9 @@ li {
 				<ul class="address_A">
 					<li><input type="text" name="postcode" id="postcode" placeholder="우편번호"></li>
 				</ul>
+				<div id="buttonposition">
 					<input type="button" id="postbutton" class="w-button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
+				</div>
 				<ul class="address_B"> 
 					<li><input type="text" id="address" placeholder="주소"><br></li>
 				</ul>
@@ -342,9 +354,9 @@ li {
 		<div id="pay_info">
 			<h3>결제 정보</h3>
 			<span class="info">&nbsp;총결제금액</span>
-			<input type="hidden" id="prodnamevalue" value="<%=prod.getProdname() %>">
-			<input type="hidden" id="prodpricevalue" value="<%=prod.getProdprice()%>">
-			<span class="info_detail"><%=prod.getProdprice() %></span>
+			<input type="hidden" id="prodnamevalue" value="<%=orderInfo.getBuyprodname() %>">
+			<input type="hidden" id="prodpricevalue" value="<%=orderInfo.getTotalamount() %>">
+			<span class="info_detail"><%=orderInfo.getTotalamount() %></span>
 		</div> 
 		<br>
 		<hr>

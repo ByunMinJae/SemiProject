@@ -9,6 +9,11 @@
 <!-- jQeury 2.2.4 -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
+<!-- 부트스트랩 -->
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script> -->
+
 <style type="text/css">
 
 @font-face {
@@ -26,6 +31,15 @@
 .header li {
 	display: list-item;
 	list-style-type: none;
+}
+
+.header a {
+	color: #777  !important;
+	text-decoration: none !important;
+	cursor: pointer;
+}
+.header a:hover {
+	color: #000 !important;
 }
 
 .wrapper {
@@ -78,6 +92,7 @@
 
 .top-wrap .top .toplist {
 	margin-top: 8px;
+	padding-right: 15px;
 	float: right;
 }
 
@@ -98,6 +113,7 @@
 	position: relative;
 	top: 0;
 	height: 80px;
+	left: -2px;
 	margin: 0;
 	padding: 0;
 }
@@ -127,8 +143,8 @@
 .header-menu .hmenulist {
 	position: absolute;
 	float: left;
-	top: 8px;
-	left: 40%;
+	top: 12px; 
+	left: 571px;
 	height: 80px;
 } 
 
@@ -156,7 +172,7 @@
 	position: absolute;
 	display: inline-block;
 	top: 5px;
-	left: 90%;
+	left: 89.2%; 
 }
 
 .weather-widget p {
@@ -178,6 +194,7 @@
 
 .weather-widget .weather-content {
 	position: absolute;
+	top: 6px;
 	width: 142%;
 }	
 
@@ -187,7 +204,7 @@
 	text-align: center;
 	color: gray;
 	font-family: bold;
-	margin: 3px auto;
+	margin: 1px auto;
 }
 
 .weather-widget .weather-content .ctemp {
@@ -201,7 +218,7 @@
 .weather-widget .weather-content ul {
 	display: -webkit-inline-box;
 	margin: 0;
-	padding-left: 5px;
+	padding-left: 12px;
 	float: left;
 	font-family: 'dalseo';
 }
@@ -225,6 +242,8 @@
 	font-family: bold;
 }
 .weather-widget .icon-wrap {
+	position: relative;
+	top: -12px;
 	display: inline-block;
 	width: 100px;
 }
@@ -286,11 +305,11 @@
 					<ul class="toplist">
 						<li><a href="/mypage/main" class="">마이페이지</a></li>
 						<li><a href="/user/join">회원가입</a></li>
-						<%if ( session.getAttribute("userid") == null){ %>
-						<li><a href="/cmc/login">로그인</a></li>
-						<% } else { %>
-						<li><a href="/cmc/logout">로그아웃</a></li>
-						<% } %>
+						<%if ( session.getAttribute("userno") == null){ %>
+		                <li><a href="/cmc/login">로그인</a></li>
+		                <% } else { %>
+		                <li><a href="/cmc/logout">로그아웃</a></li>
+		                <% } %>
 					</ul>
 				</div> <!-- .top end -->
 			</div> <!-- .header-wrap end -->
@@ -391,15 +410,15 @@ html {
 .back {
 	position: absolute;
 	width:2200px;
-	right: 1px;
-	
 }
 
 
 .back img {
+	position: absolute;
+	right: 500px;
 	width: 100%;
 	height: 820px;
-	z-index: 1;
+	z-index: 0;
 }
 
 .text-slide{

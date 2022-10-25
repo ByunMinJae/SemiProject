@@ -13,7 +13,7 @@ import changmin.dto.Order;
 import changmin.service.face.OrderService;
 import changmin.service.impl.OrderServiceImpl;
 
-@WebServlet("/order/view")
+@WebServlet("/orderafterlist")
 public class OrderViewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -27,7 +27,7 @@ public class OrderViewController extends HttpServlet {
 		List<Order> orderview = orderService.orderview();
 		
 		req.setAttribute("orderView", orderview);
-		
+		System.out.println(orderview);
 		
 		req.getRequestDispatcher("/WEB-INF/views/changmin/orderview.jsp").forward(req, resp);
 	
