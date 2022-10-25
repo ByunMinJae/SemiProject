@@ -51,16 +51,13 @@ public class PayDoController extends HttpServlet {
 		//-------------------------------------------------------------------
 	
 			//------------------------상품 정보 조회-----------------------------
+//			int orderno = (int) req.getAttribute("orderno");
+//			System.out.println(req.getParameter("orderno"));
+//			System.out.println(orderno);
 			
-			req.setAttribute("orderno", 17777);
-			req.setAttribute("totalamount", 100);
-			
-			int orderno = (int) req.getAttribute("orderno");
-			
-			System.out.println(orderno);
-			
-			OrderBefore orderInfo = payDoService.getOrderInfo(orderno);
-			
+//			OrderBefore orderInfo = payDoService.getOrderInfo(orderno);
+			OrderBefore orderInfo = payDoService.getOrderInfo(userno);
+			System.out.println("OrderInfo : " + orderInfo);
 			req.setAttribute("orderInfo", orderInfo);
 			
 			//-------------------------------------------------------------------

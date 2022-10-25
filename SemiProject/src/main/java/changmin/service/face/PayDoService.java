@@ -31,9 +31,9 @@ public interface PayDoService {
 	 * @return - 상품정보 조회
 	 */
 
-	public OrderBefore getOrderInfo(int orderno);
-
-
+//	public OrderBefore getOrderInfo(int orderno);
+	
+	public OrderBefore getOrderInfo(int userno);
 
 
 
