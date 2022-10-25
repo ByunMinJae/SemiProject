@@ -1,6 +1,8 @@
 package changmin.service.impl;
 
 import java.sql.Connection;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +31,12 @@ public class OrderServiceImpl implements OrderService {
 		order.setBuyertel(req.getParameter("buyer_tel"));
 		order.setBuyeraddr(req.getParameter("buyer_addr"));
 		order.setOrderno(Integer.parseInt(req.getParameter("orderno").trim()));
+		
+//		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-mm-dd");
+//		String date = req.getParameter("orderdate");
+//		Date tDate = transFormat(date);
+//		
+//		order.setOrderdate(tDate);
 		
 		int res = orderDao.insertOrder(conn,order);
 			

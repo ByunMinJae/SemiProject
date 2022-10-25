@@ -22,9 +22,9 @@ public class OrderDaoImpl implements OrderDao{
 		System.out.println(order.getPaymethod());
 		String sql = "";
 		sql += "INSERT INTO user_orderafter";
-		sql += "	(orderafterno, pay_method, merchant_uid, prodname, amount, buyer_email, buyer_name, buyer_tel, buyer_addr, orderno)";
+		sql += "	(orderafterno, pay_method, merchant_uid, prodname, amount, buyer_email, buyer_name, buyer_tel, buyer_addr, orderno, orderprocess, orderdate)";
 		sql += "	VALUES";
-		sql += "	(user_orderafter_seq.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		sql += "	(user_orderafter_seq.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?, '결제완료', trim(to_char(sysdate, 'yyyy-mm-dd hh24:mi:ss')))";
 		
 		int res = 0;
 		
@@ -58,7 +58,7 @@ public class OrderDaoImpl implements OrderDao{
 	@Override
 	public List<Order> orderList(Connection conn) {
 		String sql = "";
-		sql+="SELECT orderafterno, pay_method, prodname, amount, buyer_email, buyer_name, buyer_addr";
+		sql+="SELECT orderafterno, pay_method, prodname, amount, buyer_email, buyer_name, buyer_addr, orderdate";
 		sql+="	FROM user_orderafter";
 		sql+="	ORDER BY orderafterno desc";
 		
@@ -70,7 +70,6 @@ public class OrderDaoImpl implements OrderDao{
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				
 				Order o = new Order();
 				o.setOrderafterno(rs.getInt("orderafterno"));
 				o.setPaymethod(rs.getString("pay_method"));
@@ -78,6 +77,9 @@ public class OrderDaoImpl implements OrderDao{
 				o.setAmount(rs.getInt("amount"));
 				o.setBuyeremail(rs.getString("buyer_name"));
 				o.setBuyeraddr(rs.getString("buyer_addr"));
+				o.setOrderdate(rs.getString("orderdate"));
+				System.out.println("OrderDaoImpl orderdate : " + rs.getString("orderdate"));
+//				o.setOrderdate(rs.getDate("orderdate"));
 				
 				orderList.add(o);
 			}
