@@ -73,7 +73,7 @@ public class MypageDaoImpl implements MypageDao {
 		System.out.println("/mypage/main selectOrderInfo() - 시작");
 		
 		String sql = "";
-		sql += "SELECT count(DECODE(orderprocess,'배송중', 1)) cnt1";
+		sql += "SELECT count(DECODE(orderprocess,'결제완료', 1)) cnt1";
 		sql += " , count(DECODE(orderprocess,'배송완료', 1)) cnt2";
 		sql += " , count(DECODE(orderprocess,'교환/반품/취소', 1)) cnt3";
 		sql += " FROM";
