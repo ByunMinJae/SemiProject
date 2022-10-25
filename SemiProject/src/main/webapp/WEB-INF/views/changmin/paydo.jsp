@@ -1,4 +1,6 @@
-<%@page import="jeonghwa.dto.Product"%>
+<%@page import="changmin.dto.OrderBefore"%>
+<%-- <%@page import="changmin.dto.Order"%>
+<%@page import="jeonghwa.dto.Product"%> --%>
 <%@page import="sharon.dto.User"%>
 <%@page import="java.util.List"%>
 <%@page import="changmin.dto.Pay"%>
@@ -7,7 +9,8 @@
 <%@ include file="../layout/header.jsp"%>
 <% Pay pay = (Pay) request.getAttribute("pay"); %>
 <% User loginUser = (User) request.getAttribute("loginUser"); %>
-<% Product prod = (Product) request.getAttribute("prod"); %>
+<%-- <% Product prod = (Product) request.getAttribute("prod"); %> --%>
+<% OrderBefore orderInfo = (OrderBefore) request.getAttribute("orderInfo"); %>
 <% User updateUser = (User) request.getAttribute("updateUser"); %>
 
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
@@ -49,12 +52,13 @@ function payDo(){
                 	pay_method: rsp.pay_method,
                 	merchant_uid: rsp.merchant_uid,
                 	name: rsp.name,
-                	amount: <%=prod.getProdprice()%>,
+                	amount: <%=orderInfo.getTotalamount()%>,
                 	userno: <%=loginUser.getUserno()%>,
 	                buyer_email: '<%=loginUser.getEmail()%>',
-	                buyer_name: '<%=prod.getProdname()%>',
+	                buyer_name: '<%=orderInfo.getBuyprodname()%>',
 	                buyer_tel: '<%=loginUser.getPhone()%>',
 	                buyer_addr: $("#addressvalue").val(),
+	                orderno: <%=orderInfo.getOrderno()%>
                	}
             }).done(function (data) {
                 	console.log(rsp.orderprocess);
@@ -350,9 +354,9 @@ li {
 		<div id="pay_info">
 			<h3>결제 정보</h3>
 			<span class="info">&nbsp;총결제금액</span>
-			<input type="hidden" id="prodnamevalue" value="<%=prod.getProdname() %>">
-			<input type="hidden" id="prodpricevalue" value="<%=prod.getProdprice()%>">
-			<span class="info_detail"><%=prod.getProdprice() %></span>
+			<input type="hidden" id="prodnamevalue" value="<%=orderInfo.getBuyprodname() %>">
+			<input type="hidden" id="prodpricevalue" value="<%=orderInfo.getTotalamount() %>">
+			<span class="info_detail"><%=orderInfo.getTotalamount() %></span>
 		</div> 
 		<br>
 		<hr>

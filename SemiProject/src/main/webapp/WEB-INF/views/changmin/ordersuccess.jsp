@@ -8,7 +8,7 @@
 </script>
 <style type="text/css">
 
-@font-face {
+@font-face {	
    font-family: 'dalseo';
    src: url('/resources/css/DalseoHealingBold.ttf') format('truetype');
 }
@@ -20,6 +20,10 @@
 	display: table;
 }
 
+
+#wrapper {
+	background-color: #BFDCFB;
+}
 #table {
 	display: table-cell;
 	vertical-align: middle;
@@ -45,7 +49,7 @@ button {
 		<div id="table">
 			<img src="/resources/image/ok.png">
 			<p id="success">결제가 완료되었어요 !</p>
-			<p><a href="/main"><button>메인화면으로</button></a></p>
+			<p><a href="/orderafterlist"><button>주문목록</button></a></p>
 		</div>
 	</div>
 

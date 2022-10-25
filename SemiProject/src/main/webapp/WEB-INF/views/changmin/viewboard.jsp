@@ -84,7 +84,7 @@ td:nth-child(2) {
 	float: right;
 	width: 900px;
 	left: 100px;
-	top: -380px;
+	top: -340px;
 	
 	
 }
@@ -144,7 +144,6 @@ img {
  
 </style>
 <div class="myContainer">
-	<hr>
 		<div style="min-height: 500px;">
 			<div class="left">
 	

@@ -2,6 +2,7 @@ package changmin.service.face;
 
 import javax.servlet.http.HttpServletRequest;
 
+import changmin.dto.OrderBefore;
 import changmin.dto.Pay;
 import jeonghwa.dto.Product;
 import sharon.dto.User;
@@ -29,7 +30,8 @@ public interface PayDoService {
 	 * @param prodno
 	 * @return - 상품정보 조회
 	 */
-	public Product getProdInfo(int prodno);
+
+	public OrderBefore getOrderInfo(int orderno);
 
 
 

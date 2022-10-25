@@ -37,9 +37,10 @@ td:nth-child(2) {
 .right {
 	position: relative;
 	float: right;
-	top: -400px;
+	top: -360px;  
 	
 }
+
 
 .left{
 	position: absolute;
@@ -60,7 +61,6 @@ img {
 </style>
 <div class="myContainer">
 	<form method="get">
-	<hr>
 		<div style="min-height: 500px;">
 			<div class="left">
 	

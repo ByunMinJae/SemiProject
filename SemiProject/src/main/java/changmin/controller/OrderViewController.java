@@ -27,7 +27,7 @@ public class OrderViewController extends HttpServlet {
 		List<Order> orderview = orderService.orderview();
 		
 		req.setAttribute("orderView", orderview);
-		
+		System.out.println(orderview);
 		
 		req.getRequestDispatcher("/WEB-INF/views/changmin/orderview.jsp").forward(req, resp);
 	

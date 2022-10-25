@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import changmin.dao.face.PayDoDao;
 import changmin.dao.impl.PayDoDaoImpl;
+import changmin.dto.OrderBefore;
 import changmin.dto.Pay;
 import changmin.service.face.PayDoService;
 import common.JDBCTemplate;
@@ -30,10 +31,11 @@ public class PayDoServiceImpl implements PayDoService{
 	}
 
 
+
 	@Override
-	public Product getProdInfo(int prodno) {
+	public OrderBefore getOrderInfo(int orderno) {
 		
-		return payDoDao.getProdInfo(conn, prodno);
+		return payDoDao.getOrderInfo(conn, orderno);
 	}
 
 

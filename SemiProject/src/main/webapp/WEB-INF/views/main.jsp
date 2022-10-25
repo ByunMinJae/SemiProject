@@ -194,6 +194,7 @@
 
 .weather-widget .weather-content {
 	position: absolute;
+	top: 6px;
 	width: 142%;
 }	
 
@@ -241,6 +242,8 @@
 	font-family: bold;
 }
 .weather-widget .icon-wrap {
+	position: relative;
+	top: -12px;
 	display: inline-block;
 	width: 100px;
 }
@@ -407,15 +410,15 @@ html {
 .back {
 	position: absolute;
 	width:2200px;
-	right: 1px;
-	
 }
 
 
 .back img {
+	position: absolute;
+	right: 500px;
 	width: 100%;
 	height: 820px;
-	z-index: 1;
+	z-index: 0;
 }
 
 .text-slide{
