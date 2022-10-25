@@ -73,19 +73,21 @@ $(document).ready(function() {
 <style type="text/css">
 #mpmWrap {
 	width: 1100px;
-    height: 600px;
-    margin: 0px auto;
+    height: 597px;
+    margin: 18px auto;
     text-align: center;
     position: relative;
+    font-family: 'GmarketSansMedium';
 }
 #mpmLeft {
 	width: 40%;
-	height: 651px;
+	height: 665px;
 	float: left;
 	background: #c7f2a482;
+	position: absolute;
 }
 #userInfo {
-	padding-top: 92px;
+	padding-top: 54px;
 }
 #mpmRight {
 	margin-top: 88px;
@@ -180,36 +182,36 @@ li.info_left {
 	display: inline-block;
 }
 #btnDialog {
-	width: 100px;
+	width: 110px;
     font-weight: bold;
     background: #fff;
     border-radius: 5px;
     border: 1px solid #cfcfcf;
     cursor: pointer;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
 }
 #btnDialog:hover {
-	background: linear-gradient(#c7f2a4, #88eb38);
+	background: linear-gradient(#d7e1cf, #b3b3b3);
 }
 #back {
 	float: left;
     position: relative;
-    top: -97px;
+	top: -62px;
     left: 35px;
     text-decoration: none;
     font-weight: bold;
-    color: #777;
+    color: #555;
 }
 #back:hover {
-	color: #444;
+	color: #000;
 }
 #arrow {
 	background: url("/resources/image/left_arrow.png") no-repeat 0 0;
 	width: 20px;
     height: 20px;
     position: relative;
-    top: -75px;
+    top: -43px;
     left: 15px;
-}
 }
 </style>
 

@@ -12,28 +12,38 @@ $(document).ready(function() {
 	//장바구니 버튼
 	$("#btnCart").click(function() {
 		
-		 if(confirm("장바구니에 담으시겠습니까?")) {
-	         location.href = "/cart/list?cartcount=" + $('#cartcount').val() + "&prodname=" + $('#prodname').val();
-	      } else {
-	    	  alert("취소 되었습니다.")
-	      }
+		if(confirm("장바구니에 담으시겠습니까?")) {
+		         location.href = "/cart/add?cartcount=" + $('#cartcount').val() + "&prodno=" + $('#prodno').val();
+		}
 		
 	})
 
 	//구매하기 버튼
 	$("#btnBuy").click(function() {
-		location.href = "/pay/do?prodname=" + $('#prodname').val() + "&prodprice=<%=prod.getProdprice() %>&cartcount=" + $('#cartcount').val()
+		
+			var cartCnt = parseInt($("#cartcount").val());
+			var prodPrice = parseInt(<%=prod.getProdprice() %>);
+			var totalamount = cartCnt*prodPrice;
+			
+			location.href = "/goods/buy?buyprodname=" + $('#prodname').val() + "&totalamount=" + totalamount;
+			
 	})
 	
 })
 </script>
 
 <style type="text/css">
+#wrapper {
+	background-color: #BFDCFB;
+}
 #detailWrap {
 	width: 900px;
     height: 100%;
     margin: 18px auto 0;
     text-align: center;
+    font-family: 'GmarketSansMedium';
+    position: relative;
+    left: -51px;
 }
 #detail_table {
 	border-collapse: collapse;
@@ -132,6 +142,7 @@ $(document).ready(function() {
 	<option value="4">4</option>
 	<option value="5">5</option>
 </select>
+<input type="text" hidden="" name="prodno"  id="prodno" value="<%=prod.getProdno() %>"> 
 <input type="text" hidden="" name="prodname"  id="prodname" value="<%=prod.getProdname() %>">
 
 <button type="button" id="btnCart" class="btnType">장바구니</button>

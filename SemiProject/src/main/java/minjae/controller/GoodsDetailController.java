@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import minjae.dto.Product;
 import minjae.service.face.GoodsService;
@@ -29,6 +30,12 @@ public class GoodsDetailController extends HttpServlet {
 		req.setAttribute("pordDetail", pordDetail);
 		
 		req.getRequestDispatcher("/WEB-INF/views/minjae/goods/goodsListDetail.jsp").forward(req, resp);
+		
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
 		
 	}
 	

@@ -292,10 +292,11 @@ $(document).ready(function() {
 <style type="text/css">
 #mpuWrap {
 	width: 1100px;
-    height: 705px;
-    margin: 0px auto;
+    height: 685px;
+    margin: 18px auto;
     text-align: center;
     position: relative;
+    font-family: 'GmarketSansMedium';
 }
 #mpuContents {
 	width: 851px;
@@ -303,6 +304,7 @@ $(document).ready(function() {
     margin: 0px auto;
     background: #fcffb282;
     border: 1px solid #ccc;
+    position: absolute;
 }
 #f p {
 	display: inline-block;
@@ -311,6 +313,8 @@ $(document).ready(function() {
 	font-size: 12px;
 	color: red;
 	width: 287px;
+	position: absolute;
+    right: 280px;
 }
 .tr_msg {
 	margin: -21px 0 0 231px !important;
@@ -326,7 +330,7 @@ $(document).ready(function() {
 	display: block;
     margin: 15px 0 15px 51px;
     border-bottom: 1px solid #2d954d5c;
-    width: 644px;
+    width: 676px;
 }
 #mpuTable tr td:first-child {
 	width: 103px;
@@ -341,8 +345,8 @@ $(document).ready(function() {
 .ad {
 	margin: 15px 0 0 51px !important;
 }
-input {
-	height: 20px;
+.ip {
+	height: 30px;
     font-size: 18px;
     border-radius: 4px;
     border: 1px solid #777;
@@ -376,17 +380,18 @@ input {
 }
 #btnDialog {
     float: right;
-	position: relative;
     right: 22px;
-    bottom: -69px;
+    position: absolute;
+    bottom: 8px;
 }
+#h1t{	font-family: 'dalseo'; }	
 </style>
 
 <div id="mpuWrap">
 
 <div id="mpuContents">
 
-<h1>회원정보 수정</h1>
+<h1 id="h1t">회원정보 수정</h1>
 <div id="goImg"></div>
 <a href="/mypage/main" id="goMp">마이페이지</a>
 
@@ -408,7 +413,7 @@ input {
 <!-- 변경 이름 -->
 <tr id="hidName" style="display: none;">
 	<td><label for="name">이름</label></td>
-	<td><input type="text" id="name" name="name" placeholder="<%=mpMain.getUsername() %>" onFocus="this.value=''; return true;"></td>
+	<td><input type="text" id="name" name="name" placeholder="<%=mpMain.getUsername() %>" onFocus="this.value=''; return true;" class="ip"></td>
 	<td><button id="btnNameUdt" value="name" type="button">확 인</button></td>
 	<td><button id="btnCencelName" type="button">취 소</button></td>
 </tr>
@@ -424,7 +429,7 @@ input {
 <!-- 변경 닉네임 -->
 <tr id="hidNick" style="display: none;">
 	<td><label for="nick">닉네임</label></td>
-	<td><input type="text" id="nick" name="nick" placeholder="<%=mpMain.getNick() %>" onFocus="this.value=''; return true;"></td>
+	<td><input type="text" id="nick" name="nick" placeholder="<%=mpMain.getNick() %>" onFocus="this.value=''; return true;" class="ip"></td>
 	<td><button id="btnNickUdt" value="nick" type="button">확 인</button></td>
 	<td><button id="btnCencelNick" type="button">취 소</button></td>
 </tr>
@@ -456,7 +461,7 @@ input {
 <!-- 변경 전화번호 -->
 <tr id="hidPhone" style="display: none;">
 	<td><label for="phone">전화번호</label></td>
-	<td><input type="text" id="phone" name="phone" placeholder="<%=mpMain.getPhone() %>" onFocus="this.value=''; return true;"></td>
+	<td><input type="text" id="phone" name="phone" placeholder="<%=mpMain.getPhone() %>" onFocus="this.value=''; return true;" class="ip"></td>
 	<td><button id="btnPhoneUdt" value="phone" type="button">확 인</button></td>
 	<td><button id="btnCencelPhone" type="button">취 소</button></td>
 </tr>
@@ -472,17 +477,17 @@ input {
 <!-- 변경 주소 -->
 <tr class="addr ad" style="display: none; margin: 15px 0 0 51px !important;">
 	<td><label for="address">주소</label></td>
-	<td><input type="text" id="postcode" placeholder="우편번호"></td>
-	<td><input type="button" onclick="execDaumPostcode()" value="우편번호 찾기" id="pc"></td>
+	<td><input type="text" id="postcode" placeholder="우편번호" class="ip"></td>
+	<td><input type="button" onclick="execDaumPostcode()" value="우편번호 찾기" id="pc" class="ip"></td>
 </tr>
 <tr class="addr" style="display: none;">
 	<td><label for="address"></label></td><!-- 여백용 -->
-	<td><input type="text" id="address" placeholder="주소"></td>
+	<td><input type="text" id="address" placeholder="주소" class="ip"></td>
 </tr>
 <tr class="addr" style="display: none;">
 	<td><label for="address"></label></td><!-- 여백용 -->
-	<td><input type="text" id="detailAddress" placeholder="상세주소"></td>
-	<td><input type="text" id="extraAddress" placeholder="참고항목"></td>
+	<td><input type="text" id="detailAddress" placeholder="상세주소" class="ip"></td>
+	<td><input type="text" id="extraAddress" placeholder="참고항목" class="ip"></td>
 </tr>
 <tr class="addr" style="display: none;">
 	<td><label for="address"></label></td><!-- 여백용 -->
@@ -504,7 +509,7 @@ input {
 
 	<p style="font-size: 14px;">회원정보 수정을 위해 본인확인을 해주세요.</p>
 	<label for="pw">비밀번호 : </label>
-	<input type="text" id="pw" name="pw" onFocus="this.value=''; return true;">
+	<input type="text" id="pw" name="pw" onFocus="this.value=''; return true;" class="ip">
 	<input type="text"  hidden="">
 	<!-- 확인 메시지 태그 -->
 	<p id="check_msg" style="color: red; font-size: 12px; margin: 3px 0 0 74px;"></p>

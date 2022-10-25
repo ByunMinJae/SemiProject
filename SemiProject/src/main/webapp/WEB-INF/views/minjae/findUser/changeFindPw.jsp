@@ -94,14 +94,17 @@ function validatePW( pw ) {
 </script>
     
 <style type="text/css">
+#wrapper {
+	background-color: #BFDCFB;
+}
 .sfPWrap {
 	width: 400px;
     height: 500px;
     margin: 200px auto 0;
     text-align: center;
     position: relative;
+    font-family: 'GmarketSansMedium';
 }
-
 input {
 	width: 288px;
     height: 32px;
@@ -138,7 +141,7 @@ input {
 
 .msg {
 	color: red;
-	font-size: 7px;
+	font-size: 13px;
 }
 h4 {
 	margin: 44px 117px 0 0;
@@ -167,8 +170,8 @@ h4 {
 }
 #agreeMsgS {
 	position: absolute;
-    top: 202px;
-    right: 54px;
+    top: 184px;
+    right: 60px;
 }
 </style>
 

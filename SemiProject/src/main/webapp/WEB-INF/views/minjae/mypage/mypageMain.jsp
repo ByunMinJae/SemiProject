@@ -93,12 +93,14 @@ function hiddenImg( btnCateg, mi ) {
     margin: 0px auto;
     text-align: center;
     position: relative;
+    font-family: 'GmarketSansMedium';
 }
 #mpmLeft {
 	width: 40%;
 	height: 651px;
 	float: left;
 	background: #c7f2a482;
+	position: absolute;
 }
 #userInfo {
 	padding-top: 92px;
@@ -120,6 +122,7 @@ function hiddenImg( btnCateg, mi ) {
 	color: #555;
 }
 .md:hover {
+	text-decoration: none;
 	cursor: pointer;
 	color: #36871b;
 }
@@ -229,7 +232,7 @@ li.info_left {
 .cnt_no {
 	display: inline-block;
     position: absolute;
-    top: 236px;
+    top: 287px;
     font-size: 50px;
     color: #b321d7eb;
 }
@@ -289,7 +292,7 @@ li.info_left {
 	<div class="mount_img" id="mi2"></div>
 	<a href=""><button class="btnCateg" id="btnCateg2">반품/교환/취소</button></a>
 	<div class="mount_img" id="mi3"></div>
-	<a href=""><button class="btnCateg" id="btnCateg3">장바구니</button></a>
+	<a href="/cart/list"><button class="btnCateg" id="btnCateg3">장바구니</button></a>
 	<!-- contents 영역 -->
 	<div id="contents">
 		<!-- delivery -->

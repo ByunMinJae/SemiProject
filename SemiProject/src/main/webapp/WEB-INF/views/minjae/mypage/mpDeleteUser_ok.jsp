@@ -12,6 +12,7 @@
 	margin: 239px auto 0;
 	text-align: center;
 	position: relative;
+	font-family: 'GmarketSansMedium';
 }
 a {
 	text-decoration: none;
