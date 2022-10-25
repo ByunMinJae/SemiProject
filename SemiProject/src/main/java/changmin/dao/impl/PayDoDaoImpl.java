@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import changmin.dao.face.PayDoDao;
 import changmin.dto.OrderBefore;
 import common.JDBCTemplate;
-import jeonghwa.dto.Product;
 import sharon.dto.User;
 
 public class PayDoDaoImpl implements PayDoDao{
@@ -63,8 +62,48 @@ public class PayDoDaoImpl implements PayDoDao{
 
 
 
+//	@Override
+//	public OrderBefore getOrderInfo(Connection conn, int orderno) {
+//		System.out.println("OrderBeforeDao - Start");
+//		
+//		String sql = "";
+//		
+//		sql+= "SELECT";
+//		sql+= " orderno, buyprodname, totalamount";
+//		sql+= " FROM user_orderbefore";
+//		sql+= " WHERE orderno=?";
+//		 
+//		OrderBefore order = new OrderBefore();
+//		
+//		try {
+//			ps = conn.prepareStatement(sql);
+//			
+//			ps.setInt(1, orderno);
+//			
+//			rs = ps.executeQuery();
+//			
+//			while( rs.next()) {
+//				
+//				order.setOrderno(rs.getInt("orderno"));
+//				order.setBuyprodname(rs.getString("buyprodname"));
+//				order.setTotalamount(rs.getInt("totalamount"));
+//				
+//				
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			JDBCTemplate.close(rs);
+//			JDBCTemplate.close(ps);
+//		}
+//		
+//		System.out.println("OrderBeforeDao - End");
+//		
+//		return order;
+//	}
+
 	@Override
-	public OrderBefore getOrderInfo(Connection conn, int orderno) {
+	public OrderBefore getOrderInfo(Connection conn, int userno) {
 		System.out.println("OrderBeforeDao - Start");
 		
 		String sql = "";
@@ -72,14 +111,16 @@ public class PayDoDaoImpl implements PayDoDao{
 		sql+= "SELECT";
 		sql+= " orderno, buyprodname, totalamount";
 		sql+= " FROM user_orderbefore";
-		sql+= " WHERE orderno=?";
+		sql+= " WHERE orderno=( SELECT";
+		sql+= "		MAX(orderno) FROM user_orderbefore";
+		sql+= "		WHERE userno=?)";
 		 
 		OrderBefore order = new OrderBefore();
 		
 		try {
 			ps = conn.prepareStatement(sql);
 			
-			ps.setInt(1, orderno);
+			ps.setInt(1, userno);
 			
 			rs = ps.executeQuery();
 			
@@ -134,5 +175,6 @@ public class PayDoDaoImpl implements PayDoDao{
 		System.out.println("Update - End");
 		return user;
 	}
+
 
 }

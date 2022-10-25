@@ -32,10 +32,16 @@ public class PayDoServiceImpl implements PayDoService{
 
 
 
+//	@Override
+//	public OrderBefore getOrderInfo(int orderno) {
+//		
+//		return payDoDao.getOrderInfo(conn, orderno);
+//	}
+	
 	@Override
-	public OrderBefore getOrderInfo(int orderno) {
+	public OrderBefore getOrderInfo(int userno) {
 		
-		return payDoDao.getOrderInfo(conn, orderno);
+		return payDoDao.getOrderInfo(conn, userno);
 	}
 
 
