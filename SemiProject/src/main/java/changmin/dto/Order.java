@@ -12,14 +12,23 @@ public class Order {
 	private String buyertel;
 	private String tel;
 	private String buyeraddr;
+	private String orderdate;
 	private int orderno;
-	
+
 	public Order() {
+	}
+
+	@Override
+	public String toString() {
+		return "Order [orderafterno=" + orderafterno + ", orderprocess=" + orderprocess + ", paymethod=" + paymethod
+				+ ", merchant_uid=" + merchant_uid + ", prodname=" + prodname + ", amount=" + amount + ", buyeremail="
+				+ buyeremail + ", buyername=" + buyername + ", buyertel=" + buyertel + ", tel=" + tel + ", buyeraddr="
+				+ buyeraddr + ", orderdate=" + orderdate + ", orderno=" + orderno + "]";
 	}
 
 	public Order(int orderafterno, String orderprocess, String paymethod, String merchant_uid, String prodname,
 			int amount, String buyeremail, String buyername, String buyertel, String tel, String buyeraddr,
-			int orderno) {
+			String orderdate, int orderno) {
 		super();
 		this.orderafterno = orderafterno;
 		this.orderprocess = orderprocess;
@@ -32,15 +41,8 @@ public class Order {
 		this.buyertel = buyertel;
 		this.tel = tel;
 		this.buyeraddr = buyeraddr;
+		this.orderdate = orderdate;
 		this.orderno = orderno;
-	}
-
-	@Override
-	public String toString() {
-		return "Order [orderafterno=" + orderafterno + ", orderprocess=" + orderprocess + ", paymethod=" + paymethod
-				+ ", merchant_uid=" + merchant_uid + ", prodname=" + prodname + ", amount=" + amount + ", buyeremail="
-				+ buyeremail + ", buyername=" + buyername + ", buyertel=" + buyertel + ", tel=" + tel + ", buyeraddr="
-				+ buyeraddr + ", orderno=" + orderno + "]";
 	}
 
 	public int getOrderafterno() {
@@ -131,6 +133,14 @@ public class Order {
 		this.buyeraddr = buyeraddr;
 	}
 
+	public String getOrderdate() {
+		return orderdate;
+	}
+
+	public void setOrderdate(String orderdate) {
+		this.orderdate = orderdate;
+	}
+
 	public int getOrderno() {
 		return orderno;
 	}
@@ -138,6 +148,8 @@ public class Order {
 	public void setOrderno(int orderno) {
 		this.orderno = orderno;
 	}
+	
+	
 	
 	
 	

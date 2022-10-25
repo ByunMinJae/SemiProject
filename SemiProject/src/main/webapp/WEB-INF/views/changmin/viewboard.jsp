@@ -28,13 +28,16 @@ function deleteboard(){
 		   $.ajax({
 		        url:"./deleteboard?boardno=<%=viewBoard.getBoardno() %>",
 		        type:'POST',
-		        data: {boardno:<%=viewBoard.getBoardno()%>},
+		        data: {
+		        	boardno:<%=viewBoard.getBoardno()%>,
+		        	userno:<%=viewBoard.getUserno()%>
+		        	},
 		        success:function(data){
 		            location.href=('/board/notice'); //게시글 삭제시 default 게시글목록으로 이동
 		            alert("삭제 완료!");
 		        },
 		        error:function(jqXHR, textStatus, errorThrown){
-		            alert("에러 발생 \n" + textStatus + " : " + errorThrown);
+		            alert("삭제 권한이 없습니다.");
 		        }
 		   });
 	 } else {

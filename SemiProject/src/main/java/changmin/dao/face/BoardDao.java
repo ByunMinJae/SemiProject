@@ -63,6 +63,8 @@ public interface BoardDao {
 
 	public User getNick(Connection conn, Board bUserno);
 
+	public Board boardUserno(Connection conn);
+
 
 	
 

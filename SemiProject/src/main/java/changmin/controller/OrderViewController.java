@@ -23,7 +23,6 @@ public class OrderViewController extends HttpServlet {
 	
 		System.out.println("/order/view [GET]");
 
-		
 		List<Order> orderview = orderService.orderview();
 		
 		req.setAttribute("orderView", orderview);

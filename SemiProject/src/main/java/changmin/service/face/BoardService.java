@@ -49,6 +49,9 @@ public interface BoardService {
 	public Board getUserno(HttpServletRequest req);
 
 
+	public Board boardUserno(HttpServletRequest req);
+
+
 
 	
 	

@@ -303,6 +303,26 @@ public class BoardDaoImpl implements BoardDao {
 		
 		return user;
 	}
+
+	@Override
+	public Board boardUserno(Connection conn) {
+
+		String sql="";
+		sql+="SELECT userno";
+		sql+="	FROM board_info";
+		sql+="	WHERE boardno=?";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		return null;
+	}
 	
 
 
