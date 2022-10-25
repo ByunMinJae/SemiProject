@@ -1,6 +1,4 @@
 <%@page import="changmin.dto.OrderBefore"%>
-<%-- <%@page import="changmin.dto.Order"%>
-<%@page import="jeonghwa.dto.Product"%> --%>
 <%@page import="sharon.dto.User"%>
 <%@page import="java.util.List"%>
 <%@page import="changmin.dto.Pay"%>
@@ -9,7 +7,6 @@
 <%@ include file="../layout/header.jsp"%>
 <% Pay pay = (Pay) request.getAttribute("pay"); %>
 <% User loginUser = (User) request.getAttribute("loginUser"); %>
-<%-- <% Product prod = (Product) request.getAttribute("prod"); %> --%>
 <% OrderBefore orderInfo = (OrderBefore) request.getAttribute("orderInfo"); %>
 <% User updateUser = (User) request.getAttribute("updateUser"); %>
 
@@ -25,78 +22,56 @@ var IMP = window.IMP; // 생략가능
 IMP.init('imp88224386');  // 가맹점 식별코드
 
 // IMP.request_pay(param, callback) 결제창 호출
-function payDo(){
-    IMP.request_pay({ // param
- 
-    pg: "html5_inicis",
-    pay_method: "card",
-    merchant_uid: <%=loginUser.getUserno()%> + new Date().getTime(),
-    name: $("#prodnamevalue").val(),
-    amount: $("#prodpricevalue").val(),
-    buyer_email: $("#emailvalue").val(),
-    buyer_name: $("#prodpricevalue").val(),
-    buyer_tel: $("#phonevalue").val(),
-    buyer_addr: $("#addressvalue").val(),
-    buyer_postcode: "01181" 
-	}, function (rsp) { // callback
-        if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
-            // jQuery로 HTTP 요청
-            console.log(rsp.pay_method);
-            $.ajax({
-                url: "/ordersuccess", // 예: https://www.myservice.com/payments/complete
-                method: "POST",
-                headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                dataType: "html",
-                data: { 
-                	imp_uid: rsp.imp_uid,
-                	pay_method: rsp.pay_method,
-                	merchant_uid: rsp.merchant_uid,
-                	name: rsp.name,
-                	amount: <%=orderInfo.getTotalamount()%>,
-                	userno: <%=loginUser.getUserno()%>,
-	                buyer_email: '<%=loginUser.getEmail()%>',
-	                buyer_name: '<%=orderInfo.getBuyprodname()%>',
-	                buyer_tel: '<%=loginUser.getPhone()%>',
-	                buyer_addr: $("#addressvalue").val(),
-	                orderno: <%=orderInfo.getOrderno()%>
-               	}
-            }).done(function (data) {
-                	console.log(rsp.orderprocess);
-                	console.log("결제성공");
-              // 가맹점 서버 결제 API 성공시 로직
-              	 	window.location.href = "/ordersuccess";	
-            })
-          } else {
-            alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
-          }
-     });
-    
-} 
-
-<%-- function payDo(){
-	$.ajax({
-		url: "/orderafterlist",//(action url),
-		type: "POST",//(get, post 방식),
-		data: {
-		    pg: "html5_inicis",
-		    pay_method: "card",
-		    merchant_uid: <%= loginUser.getUserno() %> + new Date.getTime(),
-		    name: $("#prodnamevalue").val(),
-		    amount: $("#prodpricevalue").val(),
-		    buyer_email: $("#emailvalue").val(),
-		    buyer_name: $("#prodpricevalue").val(),
-		    buyer_tel: $("#phonevalue").val(),
-		    buyer_addr: $("#addressvalue").val(),	
-		},
-		dataType: "text",
-		success: function(result){
-			alert("success");
-		},
-		error: function(){
-			console.log(JSON.stringify(error));
-		}
+$(document).ready(function(){
+	$("#paydo").click(function(){
+	    IMP.request_pay({ // param
+	 
+	    pg: "html5_inicis",
+	    pay_method: "card",
+	    merchant_uid: <%=loginUser.getUserno()%> + new Date().getTime(),
+	    name: $("#prodnamevalue").val(),
+	    amount: $("#prodpricevalue").val(),
+	    buyer_email: $("#emailvalue").val(),
+	    buyer_name: $("#prodpricevalue").val(),
+	    buyer_tel: $("#phonevalue").val(),
+	    buyer_addr: $("#addressvalue").val(),
+	    buyer_postcode: "01181" 
+		}, function (rsp) { // callback
+	        if (rsp.success) { // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
+	            // jQuery로 HTTP 요청
+	            console.log(rsp.pay_method);
+	            $.ajax({
+	                url: "/ordersuccess",
+	                method: "POST",
+	                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+	                dataType: "html",
+	                data: { 
+	                	imp_uid: rsp.imp_uid,
+	                	pay_method: rsp.pay_method,
+	                	merchant_uid: rsp.merchant_uid,
+	                	name: rsp.name,
+	                	amount: <%=orderInfo.getTotalamount()%>,
+	                	userno: <%=loginUser.getUserno()%>,
+		                buyer_email: '<%=loginUser.getEmail()%>',
+		                buyer_name: '<%=orderInfo.getBuyprodname()%>',
+		                buyer_tel: '<%=loginUser.getPhone()%>',
+		                buyer_addr: $("#addressvalue").val(),
+		                orderno: <%=orderInfo.getOrderno()%>
+	               	}
+	            }).done(function (data) {
+	                	console.log(rsp.orderprocess);
+	                	console.log("결제성공");
+	              // 가맹점 서버 결제 API 성공시 로직
+	              	 	window.location.href = "/ordersuccess";	
+	            })
+	          } else {
+	            alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
+	          }
+	     });
+	    
 	});
-} --%>
+});
+
 
 
 $(document).ready(function() {
@@ -104,6 +79,7 @@ $(document).ready(function() {
 	$("#addressSubmitButton").click(function(){
 		
 	      $('#info_addressdetail').html($("#postcode").val() + " " + $("#address").val() + " " + $("#detailAddress").val())
+	      $('#addressvalue').val($("#postcode").val() + " " + $("#address").val() + " " + $("#detailAddress").val())
 	      
 	}); //funciton End
 	
@@ -202,8 +178,7 @@ button {
 	margin: 10px;
 }
 
-input {
-}
+
 #paydo {
 	position: relative;
 	left: 160px;
@@ -218,6 +193,14 @@ input {
 #wrapper {
 	background-color: #BFDCFB;
 }
+
+h1{
+	font-family: 'dalseo';
+}
+
+h3{
+	font-family: 'GmarketSansMedium';
+}
 .container {
 	background-color: #BFDCFB;
 	height: 1150px; 
@@ -230,9 +213,16 @@ input {
 } 
 
 .info {
+	font-family: 'GmarketSansMedium';
+	font-weight: bold;
 	background-color: #E1FFB1;
 	border-collapse: collapse;
 	padding: 10px;
+	
+}
+
+.info_detail {
+	font-family: 'GmarketSansMedium';
 }
 #buttonposition {
 	position: relative;
@@ -278,13 +268,14 @@ li {
 }
  
 .w-button { 
-    border: none;
+    border: 0.5px solid silver; 
     border-radius: 5px;
-    font-family: "paybooc-Light", sans-serif;
+	font-family: 'GmarketSansMedium';
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
     font-weight: 600;
     cursor: pointer;
 }
+
  
 </style>
 
@@ -362,7 +353,7 @@ li {
 		<hr>
 		<br>
 		<div>
-			<button id="paydo" type="button" onclick="payDo();"><img src="/resources/image/btn_payment.gif"></button>
+			<button id="paydo" type="button"><img src="/resources/image/btn_payment.gif"></button>
 		</div>
 	</form>
 	<br><br><br>

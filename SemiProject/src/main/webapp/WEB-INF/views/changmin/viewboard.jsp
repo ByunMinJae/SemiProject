@@ -28,13 +28,16 @@ function deleteboard(){
 		   $.ajax({
 		        url:"./deleteboard?boardno=<%=viewBoard.getBoardno() %>",
 		        type:'POST',
-		        data: {boardno:<%=viewBoard.getBoardno()%>},
+		        data: {
+		        	boardno:<%=viewBoard.getBoardno()%>,
+		        	userno:<%=viewBoard.getUserno()%>
+		        	},
 		        success:function(data){
 		            location.href=('/board/notice'); //게시글 삭제시 default 게시글목록으로 이동
 		            alert("삭제 완료!");
 		        },
 		        error:function(jqXHR, textStatus, errorThrown){
-		            alert("에러 발생 \n" + textStatus + " : " + errorThrown);
+		            alert("삭제 권한이 없습니다.");
 		        }
 		   });
 	 } else {
@@ -87,6 +90,18 @@ td:nth-child(2) {
 	top: -340px;
 	
 	
+}
+
+#report {
+	float: right;
+	font-family: 'GmarketSansMedium';
+	font-size: 10px;
+	font-color: black;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    font-weight: 600;
+    cursor: pointer;
 }
 
 .left{
@@ -163,7 +178,9 @@ img {
 	<tr>
 		<td colspan="4" class="text-left success" id="contentHead">
 		<span id="category">[<%=category.getCategoryname()%>]</span>
-		<span id="title"><%=viewBoard.getBoardtitle() %></span></td>
+		<span id="title"><%=viewBoard.getBoardtitle() %></span>
+		<span id="report"><a href="/board/report"><button>게시글 신고</button></a></span>
+		</td>
 	</tr>
 	
 	<tr>

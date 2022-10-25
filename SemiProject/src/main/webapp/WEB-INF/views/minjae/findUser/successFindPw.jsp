@@ -5,12 +5,16 @@
 
 
 <style type="text/css">
+#wrapper {
+	background-color: #BFDCFB;
+}
 .gtlWrap {
-	width: 500px;
+	width: 539px;
     height: 500px;
     margin: 200px auto 0;
     text-align: center;
     position: relative;
+    font-family: 'GmarketSansMedium';
 }
 #goToLoginPage {
 	width: 304px;

@@ -61,7 +61,6 @@ public class BoardServiceImpl implements BoardService{
 		//전달파라미터 boardno 추출(파싱)
 		String param = req.getParameter("boardno");
 		
-		
 		if( param != null && !"".equals(param) ) { //전달파라미터가 null 또는 ""빈문자열이 아닐 때 처리
 			board.setBoardno( Integer.parseInt(param) );
 		}
@@ -125,6 +124,21 @@ public class BoardServiceImpl implements BoardService{
 	public User getNick(Board bUserno) {
 		
 		return boardDao.getNick(JDBCTemplate.getConnection(), bUserno);
+	}
+
+	@Override
+	public Board boardUserno(HttpServletRequest req) {
+		
+		Board board = new Board();
+		
+		String userno = req.getParameter("userno");
+
+		if( userno != null && !"".equals(userno) ) {
+			board.setUserno( Integer.parseInt(userno));
+			
+		}
+		
+		return board;
 	}
 
 

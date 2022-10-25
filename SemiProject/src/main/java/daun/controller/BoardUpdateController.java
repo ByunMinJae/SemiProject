@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import daun.dto.Board;
 import daun.dto.BoardFile;
@@ -23,6 +24,10 @@ public class BoardUpdateController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		Board boardno = boardService.getBoardno(req);
+		
+		HttpSession session = req.getSession();
+		String userid = (String)session.getAttribute("userid");
+
 		
 		//상세보기 결과 조회
 		Board updateBoard = boardService.view(boardno);

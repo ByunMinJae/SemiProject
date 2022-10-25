@@ -58,6 +58,15 @@ public interface GoodsService {
 	 * @return 상품 상세 정보 
 	 */
 	public Product getProdDetail(int prodno);
+	
+	/**
+	 * 요청 정보를 orderbefore 테이블에 저장한다
+	 * 
+	 * @param req - 요청 데이터 정보
+	 * @param userno - 요청한 유저 번호
+	 * @return insert 결과
+	 */
+	public int insertBuyProd(HttpServletRequest req, int userno);
 
 
 }

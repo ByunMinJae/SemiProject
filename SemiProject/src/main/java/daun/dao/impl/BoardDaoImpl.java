@@ -7,11 +7,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import changmin.dto.Category;
 import common.JDBCTemplate;
 import daun.dao.face.BoardDao;
 import daun.dto.Board;
 import daun.dto.BoardFile;
+import daun.dto.Report;
 import daun.util.Paging;
+import sharon.dto.User;
 
 public class BoardDaoImpl implements BoardDao {
 
@@ -25,7 +28,7 @@ public class BoardDaoImpl implements BoardDao {
 		//SQL작성
 		String sql = "";
 		sql += "SELECT";
-		sql += "	boardno, boardtitle, boardcon, boarddate, userno, categoryno";
+		sql += "	boardno, boardtitle, boardcon, boarddate, userno";
 		sql += " FROM board_info";
 		sql += " ORDER BY boardno DESC";
 		
@@ -46,7 +49,6 @@ public class BoardDaoImpl implements BoardDao {
 				b.setBoardcon(rs.getString("boardcon"));
 				b.setBoarddate(rs.getDate("boarddate"));
 				b.setUserno(rs.getInt("userno"));
-				b.setCategoryno(rs.getInt("categoryno"));
 				
 				//리스트에 결과값 저장하기
 				boardList.add(b);
@@ -72,7 +74,7 @@ public class BoardDaoImpl implements BoardDao {
 		sql += "SELECT * FROM (";
 		sql += "	SELECT rownum rnum, B.* FROM (";
 		sql += "		SELECT";
-		sql += "			boardno, boardtitle, boardcon, boarddate, userno, categoryno";
+		sql += "			boardno, boardtitle, boardcon, boarddate, userno";
 		sql += "		FROM board_info";
 		sql += "		ORDER BY boardno DESC";
 		sql += "	) B";
@@ -100,7 +102,6 @@ public class BoardDaoImpl implements BoardDao {
 				b.setBoardcon(rs.getString("boardcon"));
 				b.setBoarddate(rs.getDate("boarddate"));
 				b.setUserno(rs.getInt("userno"));
-				b.setCategoryno(rs.getInt("categoryno"));
 				
 				//리스트에 결과값 저장하기
 				boardList.add(b);
@@ -175,7 +176,7 @@ public class BoardDaoImpl implements BoardDao {
 		
 		String sql = "";
 		sql += "SELECT";
-		sql += "	boardno, boardtitle, boardcon, boarddate, userno, categoryno";
+		sql += "	boardno, boardtitle, boardcon, boarddate, userno, ";
 		sql += " FROM board_info";
 		sql += " WHERE boardno = ?";
 		
@@ -195,7 +196,6 @@ public class BoardDaoImpl implements BoardDao {
 				board.setBoardcon(rs.getString("boardcon"));
 				board.setBoarddate(rs.getDate("boarddate"));
 				board.setUserno(rs.getInt("userno"));
-				board.setCategoryno(rs.getInt("categoryno"));
 			}
 			
 		} catch (SQLException e) {
@@ -208,16 +208,52 @@ public class BoardDaoImpl implements BoardDao {
 		return board;
 	}
 	
+	
+	@Override
+	public User getUserInfo(Connection conn, int userno) {
+		
+		String sql = "";
+		
+		sql+="SELECT";
+		sql+="	userno, userid ";
+		sql+="	FROM user_info";
+		sql+="	WHERE userno=?";
+
+		User user = new User();
+
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, userno);
+			 
+			rs = ps.executeQuery();
+			
+			
+			while( rs.next() ) {
+				
+				user.setUserno( rs.getInt("userno"));
+				user.setUserid( rs.getString("userid"));
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		return user;
+	}
 
 	@Override
 	public String selectNickByBoard(Connection conn, Board viewBoard) {
 		
 		String sql = "";
-		sql += "SELECT usernick FROM member";
-		sql += " WHERE userid = ?";
+		sql += "SELECT nick FROM userinfo";
+		sql += " WHERE userno = ?";
 		
 		//결과 저장할 변수
-		String usernick = null;
+		String nick = null;
 		
 		try {
 			ps = conn.prepareStatement(sql);
@@ -226,7 +262,7 @@ public class BoardDaoImpl implements BoardDao {
 			rs = ps.executeQuery();
 			
 			while( rs.next() ) {
-				usernick = rs.getString("usernick");
+				nick = rs.getString("nick");
 			}
 			
 		} catch (SQLException e) {
@@ -236,15 +272,15 @@ public class BoardDaoImpl implements BoardDao {
 			JDBCTemplate.close(ps);
 		}
 		
-		return usernick;
+		return nick;
 	}
 
 	@Override
 	public int insert(Connection conn, Board board) {
 
 		String sql = "";
-		sql += "INSERT INTO board ( boardno, boardtitle, userno, boardcon, hit )";
-		sql += " VALUES ( ?, ?, ?, ?, 0 )";
+		sql += "INSERT INTO board ( boardno, boardtitle, boardcon, boarddate, userno, categoryno, hit, nick )";
+		sql += " VALUES ( ?, ?, ?, sysdate, ?, ?, 0, ? )";
 		
 		int res = 0;
 
@@ -253,8 +289,10 @@ public class BoardDaoImpl implements BoardDao {
 			
 			ps.setInt(1, board.getBoardno());
 			ps.setString(2, board.getBoardtitle());
-			ps.setInt(3, board.getUserno());
-			ps.setString(4, board.getBoardcon());
+			ps.setString(3, board.getBoardcon());
+			ps.setInt(4, board.getUserno());
+			ps.setInt(5, board.getCategoryno());
+			ps.setString(6, board.getNick());
 			
 			res = ps.executeUpdate();
 			
@@ -299,7 +337,7 @@ public class BoardDaoImpl implements BoardDao {
 		
 		String sql = "";
 		sql += "INSERT INTO boardfile( fileno, boardno, originname, storedname, filesize )";
-		sql += " VALUES( board_file_seq.nextval, ?, ?, ?, ? )";
+		sql += " VALUES( boardfile_seq.nextval, ?, ?, ?, ? )";
 		
 		int res = 0;
 		
@@ -418,7 +456,71 @@ public class BoardDaoImpl implements BoardDao {
 	}
 	
 	
+	@Override
+	public int report(Connection conn, Report report) {
+		
+		String sql = "";
+		sql += "INSERT INTO boardreport( reportno, reportcon, reportdate, userno, boardno )";
+		sql += " VALUES( boardreport_seq.nextval, ?, ?, ? )";
+		
+		int res = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setString(1, report.getReportcon());
+			ps.setDate(2, report.getReportdate());
+			ps.setInt(3, report.getUserno());
+			ps.setInt(4, report.getBoardno());
+			
+			res = ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		return res;
+	}
 	
+	
+	
+//	@Override
+//	public int getCategoty(Connection conn, Category categoryno) {
+//		
+//		String sql = "";
+//		sql += "SELECT";
+//		sql += "	categoryno, categoryname ";
+//		sql += " FROM boardcategory";
+//		sql += " WHERE categoryno = ? ";
+//		
+//		//조회 결과 객체
+//		Category category = new Category();
+//		
+//		try {
+//			ps = conn.prepareStatement(sql);
+//			ps.setInt(1, categoryno.getCategoryno());
+//			
+//			rs = ps.executeQuery();
+//			
+//			while( rs.next() ) {
+//				category = new Category();
+//				
+//				category.setCategoryno( rs.getInt("categoryno") );
+//				category.setCategoryname( rs.getString("categoryname") );
+//			}
+//			
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			JDBCTemplate.close(rs);
+//			JDBCTemplate.close(ps);
+//		}
+//		
+//		return category;
+//	}
+//	
 }
 
 
