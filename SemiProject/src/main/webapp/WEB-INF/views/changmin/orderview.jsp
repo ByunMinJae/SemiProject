@@ -38,11 +38,12 @@ td {
 	position: relative;
 	left: -8px; 
 	background-color: #E1FFB1;
-	padding: 10px;
+	padding:10px 50px 10px 50px;
+	 
 }
 
 .orderDetail {
-	padding: 10px;
+	padding: 10px 10px 10px 20px;
 }
 </style>
  

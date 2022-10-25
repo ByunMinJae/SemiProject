@@ -50,10 +50,10 @@ public class OrderServiceImpl implements OrderService {
 	
 
 	@Override
-	public Paging2 getPaging(HttpServletRequest req) {
+	public Paging2 getPaging(HttpServletRequest req, int userno) {
 		
 		//총 게시글 수 조회하기
-		int totalCount = orderDao.selectCntAll(JDBCTemplate.getConnection());
+		int totalCount = orderDao.selectCntAll(JDBCTemplate.getConnection(), userno);
 		
 		
 		//전달파라미터 curPage 추출하기

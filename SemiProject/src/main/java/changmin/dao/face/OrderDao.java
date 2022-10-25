@@ -13,7 +13,7 @@ public interface OrderDao {
 
 	public List<Order> orderList(Connection conn);
 
-	public int selectCntAll(Connection connection);
+	public int selectCntAll(Connection connection, int userno);
 
 	public List<Order> selectAll(Connection conn, Paging2 paging, int userno);
 

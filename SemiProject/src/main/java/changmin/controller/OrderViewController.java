@@ -34,7 +34,7 @@ public class OrderViewController extends HttpServlet {
 			
 			System.out.println("/orderafterlist userno : " + userno);
 			
-			Paging2 paging = orderService.getPaging(req);
+			Paging2 paging = orderService.getPaging(req, userno);
 			 
 			List<Order> orderview = orderService.orderview(paging, userno);
 	

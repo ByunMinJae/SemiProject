@@ -93,17 +93,20 @@ public class OrderDaoImpl implements OrderDao{
 
 
 	@Override
-	public int selectCntAll(Connection conn) {
+	public int selectCntAll(Connection conn, int userno) {
 		
 		String sql = "";
 		sql += "SELECT count(*) cnt";
 		sql += "	FROM user_orderafter";
+		sql += "	WHERE userno=?";
 		
 		//총 게시글 수 변수
 		int count = 0;
 		
 		try {
 			ps = conn.prepareStatement(sql); //SQL수행 객체
+			
+			ps.setInt(1, userno);
 			
 			rs = ps.executeQuery(); //SQL수행 및 결과 집합 저장
 			

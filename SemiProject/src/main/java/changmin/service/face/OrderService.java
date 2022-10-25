@@ -14,7 +14,7 @@ public interface OrderService {
 
 	public List<Order> orderview(Paging2 paging, int userno);
 
-	public Paging2 getPaging(HttpServletRequest req);
+	public Paging2 getPaging(HttpServletRequest req, int userno);
 
 
 
