@@ -1,3 +1,4 @@
+<%@page import="sharon.dto.User"%>
 <%@page import="daun.dto.BoardFile"%>
 <%@page import="daun.dto.Board"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -115,7 +116,7 @@ td {
 		
 			<tr>
 				<td class="info">아이디</td>
-				<td><%=updateBoard.getUserno() %></td>
+				<td><%=request.getAttribute("userid") %></td>
 			</tr>
 			<tr>
 				<td class="info">닉네임</td>
@@ -135,7 +136,7 @@ td {
 			
 		<tr>
 			<td>제목</td>
-			<td><input type="text" id="title" name="title" value="<%-- <%=updateBoard.getboardtitle() %> --%>"></td>
+			<td><input type="text" id="title" name="title" value="<%=updateBoard.getBoardtitle() %>"></td>
 		</tr>
 		
 		<tr>

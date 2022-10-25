@@ -21,8 +21,10 @@ import daun.dao.face.BoardDao;
 import daun.dao.impl.BoardDaoImpl;
 import daun.dto.Board;
 import daun.dto.BoardFile;
+import daun.dto.Report;
 import daun.service.face.BoardService;
 import daun.util.Paging;
+import oracle.net.aso.b;
 
 public class BoardServiceImpl implements BoardService {
 
@@ -188,6 +190,9 @@ public class BoardServiceImpl implements BoardService {
 				if( "content".equals(key) ) {
 					board.setBoardcon(value);
 				}
+				if( "categoryno".equals(key) ) {
+					board.setCategoryno(Integer.parseInt(value));
+				}
 				
 			} // if( item.isFormField() ) end
 			
@@ -234,8 +239,10 @@ public class BoardServiceImpl implements BoardService {
 		//게시글 번호 삽입
 		board.setBoardno(boardno);
 
-		//작성자 ID 처리
-//		board.setUserid( (String) req.getSession().getAttribute("userid") );
+		board.setUserno((int)req.getSession().getAttribute("userno"));
+
+		//작성자 닉네임 처리
+		board.setNick( (String) req.getSession().getAttribute("nick") );
 		
 		if( boardDao.insert(conn, board) > 0 ) {
 			JDBCTemplate.commit(conn);
@@ -412,6 +419,28 @@ public class BoardServiceImpl implements BoardService {
 		}
 		
 	}
+	
+	@Override
+	public void report(HttpServletRequest req) {
+		
+		//DB연결 객체
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//게시글 정보 DTO객체
+		Report report = new Report();
+		
+		if( boardDao.report(conn, report) > 0 ) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		
+		
+	}
+	
+	
+	
 }
 
 

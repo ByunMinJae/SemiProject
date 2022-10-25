@@ -1,12 +1,17 @@
 package daun.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import daun.service.face.ManagerLoginService;
+import daun.service.impl.ManagerLoginServiceImpl;
+import donghyun.dto.UserInfo;
 
 @WebServlet("/manager/login")
 public class ManagerLoginController extends HttpServlet {
@@ -28,23 +33,24 @@ public class ManagerLoginController extends HttpServlet {
 		String userid = req.getParameter("userid");
 		String userpw = req.getParameter("userpw");
 		
-		if( "abc".equals(userid) && "123".equals(userpw) ) {
-			System.out.println("LoginController doPost() - 로그인 성공");
+		
+		ManagerLoginService ManagerLoginService = new ManagerLoginServiceImpl();
+		
+		UserInfo userInfo = ManagerLoginService.selectOneUser(userid, userpw);
+		
+		if( userInfo != null ) {
 			
 			//세션 객체
 			HttpSession session = req.getSession();
 			
 			//세션 정보 저장하기
-			session.setAttribute("login", true);	//로그인 상태
-			session.setAttribute("loginid", userid);	//로그인한 아이디
+			session.setAttribute("userno", userInfo.getUserno());
 			
-			req.getRequestDispatcher("/WEB-INF/views/daun/loginSuccess.jsp").forward(req, resp);
+			req.getRequestDispatcher("/WEB-INF/views/daun/managerLoginSuccess.jsp").forward(req, resp);
+    		resp.sendRedirect("/");
 			
 		} else {
-			System.out.println("LoginController doPost() - 로그인 성공");
-			
-			req.getRequestDispatcher("/WEB-INF/views/daun/loginFail.jsp").forward(req, resp);
-			
+			req.getRequestDispatcher("/WEB-INF/views/daun/managerLoginFail.jsp").forward(req, resp);
 		}
 	}
 
