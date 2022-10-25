@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import daun.dto.Board;
 import daun.service.face.BoardService;
@@ -26,15 +27,12 @@ public class BoardWriteController extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
 		
 		//작성글 삽입
 		boardService.write(req);
 		
-		//목록으로 리데이렉트
-		resp.sendRedirect("board/");
-				
+		//목록으로 리다이렉트
+		resp.sendRedirect("/board/notice");
 			
 	}
-
 }
