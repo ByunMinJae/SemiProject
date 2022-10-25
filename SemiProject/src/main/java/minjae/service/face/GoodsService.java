@@ -33,6 +33,24 @@ public interface GoodsService {
 	public List<Product> getGoodsList(Paging paging);
 	
 	/**
+	 * 카테고리 별 게시글 페이징 목록 조회
+	 * 
+	 * @param paging - 페이징 정보 객체
+	 * @param cateVal - 카테고리 값
+	 * @return List<Product> - 조건에 맞는 게시글 조회 목록
+	 */
+	public List<Product> getGoodsList(Paging paging, String cateVal);
+	
+	/**
+	 *  입력받은 단어가 포함된 상품을 조회한다
+	 * 
+	 * @param paging - 페이징 정보 객체
+	 * @param search - 검색 단어
+	 * @return List<Product> - 조건에 맞는 게시글 조회 목록
+	 */
+	public List<Product> getSearchList(Paging paging, String search);
+	
+	/**
 	 *  선택하여 넘어온 상품번호를 이용하여
 	 * 해당 상품의 상세 정보를 조회한다
 	 * 
@@ -40,14 +58,6 @@ public interface GoodsService {
 	 * @return 상품 상세 정보 
 	 */
 	public Product getProdDetail(int prodno);
-	
-	/**
-	 * 카테고리 별 게시글 페이징 목록 조회
-	 * 
-	 * @param paging - 페이징 정보 객체
-	 * @param cateVal - 카테고리 값
-	 * @return List<Product> - 게시글 조회 목록
-	 */
-	public List<Product> getGoodsList(Paging paging, String cateVal);
+
 
 }

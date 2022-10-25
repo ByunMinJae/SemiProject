@@ -7,7 +7,7 @@
     
 <%	for(int i=0; i<list.size(); i++) { %>
 <a id="goodsImg" href="/goods/detail?prodno=<%=list.get(i).getProdno() %>">
-	<img alt="" src="/resources/image/<%=list.get(i).getProdimage() %>">
+	<img id="prodImg" alt="" src="/resources/image/<%=list.get(i).getProdimage() %>">
 </a>
 <ul id="goodsList">
 	<li><%=list.get(i).getProdname() %></li>

@@ -15,51 +15,50 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	
-	$("#row").click(function() {
-		console.log("asd");
-		selectCateList("prodprice");
+	$("#default").click(function() { //기본 순
+		$("#hide").attr("value", "prodno");
+		$("#cateWrap").submit();
 	})
 	
-	$("#high").click(function() {
-		selectCateList("prodprice DESC");
+	$("#_prodList").click(function() { //상품 목록 클릭 시 기본 순
+		$("#hide").attr("value", "prodno");
+		$("#cateWrap").submit();
 	})
 	
-	$("#sal").click(function() {
-		selectCateList("prodpop DESC");
+	$("#row").click(function() { //가격 낮은 순
+		$("#hide").attr("value", "prodprice");
+		$("#cateWrap").submit();
 	})
 	
-	$("#date").click(function() {
-		selectCateList("prodprice");
+	$("#high").click(function() { //가격 높은 순
+		$("#hide").attr("value", "prodprice DESC");
+		$("#cateWrap").submit()
+	})
+	
+	$("#sal").click(function() { //판매량 순
+		$("#hide").attr("value", "prodpop DESC");
+		$("#cateWrap").submit()
+	})
+	
+// 	$("#date").click(function() { //최신 등록일 순
+// 		$("#hide").attr("value", "proddate");
+// 		$("#cateWrap").submit()
+// 	})
+	
+	$("#btnSearch").click(function() { //상품 검색
+		if($("#search").val() == "") {
+			$("#search").attr("value", "null")	
+			$("#searchWrap").submit()
+		}
 	})
 	
 })
 
-
-function selectCateList(cateVal) {
-		
-	$.ajax({
-		type: "post"					
-		, url: "/goods/list"			
-		, data: {						
-			value: cateVal
-		}
-		, dataType: "html"				
-		, success: function( res ) {
-			console.log("AJAX 성공")
-			console.log(res)
-			
-			$("#inner-list").html(res);
-			
-		}
-		
-	})
-	
-}
 </script>
 
 <style type="text/css">
 #goodsWrap {
-    height: 741px;
+    height: 786px;
     margin: 18px auto 0;
     text-align: center;
     position: relative;
@@ -68,7 +67,7 @@ function selectCateList(cateVal) {
 }
 #goodsContents {
 	width: 1004px;
-	height: 866px;
+	height: 911px;
     margin: 0px auto;
     background: #fcffb282;
     border: 1px solid #ccc;
@@ -95,7 +94,7 @@ function selectCateList(cateVal) {
     padding: 0;
     margin: 12px 0 12px 12px;
 }
-img {
+#prodImg {
 	width: 200px;
 	height: 200px;
 }
@@ -107,12 +106,20 @@ img {
 	position: absolute;
     top: 109px;
 }
-#searchWrap {
-	width: 607px;
-    margin: 0 10px 0 376px;
+#cateWrap {
+	width: 305px;
+    margin: 0 215px 0 284px;
     position: absolute;
     top: 109px;
-    right: 66px;
+    right: 113px;
+}
+#searchWrap {
+	position: relative;
+    top: -26px;
+    right: -379px;
+    width: 291px;
+    margin: 10px;
+    display: inline-block;
 }
 .ct {
 	color: #777  !important;
@@ -123,35 +130,59 @@ img {
 .ct:hover {
 	color: #000 !important;
 }
+.gsStrong {
+	color: ##747474;
+	display: inline-block;
+}
+.gss {
+	margin: 98px 0 0px;
+}
+#_prodList {
+	color: #777;
+	text-decoration: none;
+	cursor: pointer;
+}
+#_prodList:hover {
+	color: #000;
+}
 </style>
 
 <div id="goodsWrap" class="container text-center">
 
 <div id="goodsContents">
 
-<h1 style="margin-top: 41px;">상품 목록</h1>
+<h1 style="margin-top: 41px;"><a id="_prodList">상품 목록</a></h1>
 <hr>
 
-<div id="searchWrap">
+<form action="/goods/cate" method="get" id="cateWrap">
+<a class="ct" id="default">기본 순 </a>| 
 <a class="ct" id="row">가격 낮은 순 </a>| 
 <a class="ct" id="high">가격 높은 순 </a>|
-<a class="ct" id="sal">판매량 순 </a>|
-<a class="ct" id="date">최신 등록일 순 </a>
+<a class="ct" id="sal">판매량 순 </a>
+<!-- <a class="ct" id="date">최신 등록일 순 </a> -->
 
-<input type="text" id="search" placeholder="상품 검색">
+<input type="text" hidden="" id="hide" name="value" value="">
+</form>
+
+<form action="/goods/cate" method="get" id="searchWrap">
+<input type="text" id="search" name="search" value="" placeholder="상품 검색">
 <button id="btnSearch">검색</button>
-</div>
-
+</form>
 <div id="inner-list">
-<%	for(int i=0; i<list.size(); i++) { %>
-<a id="goodsImg" href="/goods/detail?prodno=<%=list.get(i).getProdno() %>">
-	<img alt="" src="/resources/image/<%=list.get(i).getProdimage() %>">
-</a>
-<ul id="goodsList">
-	<li><%=list.get(i).getProdname() %></li>
-	<li><%=list.get(i).getProdprice() %>원</li>
-	<li>판매량 : <%=list.get(i).getProdpop() %></li>
-</ul>
+<%	if( list.size() > 0 ) { %> 
+<%		for(int i=0; i<list.size(); i++) { %>
+		<a id="goodsImg" href="/goods/detail?prodno=<%=list.get(i).getProdno() %>">
+			<img id="prodImg" alt="" src="/resources/image/<%=list.get(i).getProdimage() %>">
+		</a>
+		<ul id="goodsList">
+			<li><%=list.get(i).getProdname() %></li>
+			<li><%=list.get(i).getProdprice() %>원</li>
+			<li>판매량 : <%=list.get(i).getProdpop() %></li>
+		</ul>
+<%		} %>
+<%	} else { %>
+		<strong class="gsStrong gss">검색된 상품이 없습니다.</strong><br>
+		<strong class="gsStrong">'상품 검색하기'에서 상품을 검색해주세요.</strong>
 <%	} %>
 </div>
 
