@@ -294,8 +294,8 @@ h1 {
 	<th>글번호</th>
 	<th>제목</th>
 	<th>작성날짜</th>
-	<th>카테고리번호</th>
-	<th></th>
+	<th>글쓴이</th>
+	
 
 </tr>
 
@@ -304,8 +304,8 @@ h1 {
 	<td><%= qnaBoard.get(i).getBoardno() %></td>
 	<td><a href="./boardview?boardno=<%=qnaBoard.get(i).getBoardno() %>"><%= qnaBoard.get(i).getBoardtitle() %></a></td>
 	<td><%= qnaBoard.get(i).getBoarddate() %></td>
-	<td><%= qnaBoard.get(i).getCategoryno() %></td>
-	<td><button>삭제</button></td>
+	<td><%= qnaBoard.get(i).getNick() %></td>
+	
 </tr>
 <% } %>
 

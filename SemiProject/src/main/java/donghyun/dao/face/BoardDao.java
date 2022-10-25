@@ -19,4 +19,6 @@ public interface BoardDao {
 
 	Board selectBoardByBoardno(Connection conn, Board boardno);
 
+	int delete(Connection conn, Board boardno);
+
 }

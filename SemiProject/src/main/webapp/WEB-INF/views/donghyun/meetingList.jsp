@@ -301,8 +301,7 @@ td{
 	<th>글번호</th>
 	<th>제목</th>
 	<th>작성날짜</th>
-	<th>카테고리번호</th>
-	<th></th>
+	<th>글쓴이</th>
 
 </tr>
 
@@ -311,8 +310,7 @@ td{
 	<td><%= meetingBoard.get(i).getBoardno() %></td>
 	<td><a href="./boardview?boardno=<%=meetingBoard.get(i).getBoardno() %>"><%= meetingBoard.get(i).getBoardtitle() %></a></td>
 	<td><%= meetingBoard.get(i).getBoarddate() %></td>
-	<td><%= meetingBoard.get(i).getCategoryno() %></td>
-	<td><button>삭제</button></td>
+	<td><%= meetingBoard.get(i).getNick() %></td>
 </tr>
 <% } %>
 

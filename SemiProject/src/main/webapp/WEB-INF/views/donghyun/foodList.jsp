@@ -4,7 +4,7 @@
     pageEncoding="UTF-8"%>
     
 <% List<Board> foodBoard = (List) request.getAttribute("foodBoard"); %>
-
+<% Board boardno = (Board) request.getAttribute("boardno"); %>
 
 <!DOCTYPE html>
 <html>
@@ -19,6 +19,11 @@
 
 <!-- jQeury 2.2.4 -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script type="text/javascript">
+
+
+
+</script>
 
 <style type="text/css">
 
@@ -296,8 +301,8 @@ h1{
 	<th>글번호</th>
 	<th>제목</th>
 	<th>작성날짜</th>
-	<th>카테고리번호</th>
-	<th></th>
+	<th>글쓴이</th>
+	
 
 </tr>
 
@@ -306,8 +311,7 @@ h1{
 	<td><%= foodBoard.get(i).getBoardno() %></td>
 	<td><a href="./boardview?boardno=<%=foodBoard.get(i).getBoardno() %>"><%= foodBoard.get(i).getBoardtitle() %></a></td>
 	<td><%= foodBoard.get(i).getBoarddate() %></td>
-	<td><%= foodBoard.get(i).getCategoryno() %></td>
-	<td><button>삭제</button></td>
+	<td><%= foodBoard.get(i).getNick() %></td>
 </tr>
 <% } %>
 

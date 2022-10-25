@@ -296,8 +296,8 @@ h1{
 	<th>글번호</th>
 	<th>제목</th>
 	<th>작성날짜</th>
-	<th>카테고리번호</th>
-	<th></th>
+	<th>글쓴이</th>
+	
 
 </tr>
 
@@ -306,8 +306,7 @@ h1{
 	<td><%= freeBoard.get(i).getBoardno() %></td>
 	<td><a href="./boardview?boardno=<%=freeBoard.get(i).getBoardno() %>"><%= freeBoard.get(i).getBoardtitle() %></a></td>
 	<td><%= freeBoard.get(i).getBoarddate() %></td>
-	<td><%= freeBoard.get(i).getCategoryno() %></td>
-	<td><button>삭제</button></td>
+	<td><%= freeBoard.get(i).getNick() %></td>
 </tr>
 <% } %>
 

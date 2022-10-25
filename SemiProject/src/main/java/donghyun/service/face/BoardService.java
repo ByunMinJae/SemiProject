@@ -49,6 +49,8 @@ public interface BoardService {
 	
 	Board view(Board boardno);
 
+	void delete(Board boardno);
+
 	
 
 }
