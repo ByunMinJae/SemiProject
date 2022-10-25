@@ -3,10 +3,11 @@
     
 <style type="text/css">
 .nf {
-    font-size: 5px;
+    font-size: 13px;
     color: red;
     position: relative;
     left: 38px;
+    top: 4px;
 }
 </style>
 

@@ -65,8 +65,15 @@ public class GoodsServiceImpl implements GoodsService {
 	
 	@Override
 	public List<Product> getSearchList(Paging paging, String search) {
-		System.out.println("/goods/list getGoodsList(cateVal)");
-		return goodsDao.selectSearchAll(JDBCTemplate.getConnection(), paging, search);
+		System.out.println("/goods/list getGoodsList(search)");
+		
+		//로그아웃 하고 세션에 seach가 null일때 아무것도 안나오는 경우 기본값 보여주기로 처리
+		if( search == null ) {
+			String def = "%%";
+			return goodsDao.selectSearchDefualt(JDBCTemplate.getConnection(), paging, def);
+		} else {
+			return goodsDao.selectSearchAll(JDBCTemplate.getConnection(), paging, search);
+		}
 	}
 	
 	@Override
@@ -77,6 +84,29 @@ public class GoodsServiceImpl implements GoodsService {
 		
 		System.out.println("/goods/detail getProdDetail() - 끝");
 		return prod;
+	}
+
+	@Override
+	public int insertBuyProd(HttpServletRequest req, int userno) {
+		System.out.println("/goods/detail insertBuyProd() - 시작");
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		String buyprodname = req.getParameter("buyprodname");
+		int totalamount = Integer.parseInt(req.getParameter("totalamount"));
+				
+		int res = goodsDao.insertBuyProd(conn, userno, buyprodname, totalamount);
+		
+		if( res > 0 ) {
+			JDBCTemplate.commit(conn);
+			System.out.println("/goods/detail insertBuyProd() - 끝");
+			return 1;
+		} else {
+			JDBCTemplate.rollback(conn);
+			System.out.println("/goods/detail insertBuyProd() - 끝");
+			return 0;
+		}
+		
 	}
 	
 }

@@ -262,6 +262,61 @@ public class GoodsDaoImpl implements GoodsDao {
 	}
 	
 	@Override
+	public List<Product> selectSearchDefualt(Connection conn, Paging paging, String def) {
+		System.out.println("/goods/list selectSearchDefualt() - 시작");
+		System.out.println("현재 검색하려는 단어 : " + def);
+		
+		String sql = "";
+		sql += "SELECT * FROM (";
+		sql += "	SELECT rownum rnum, B.* FROM (";
+		sql += "		SELECT";
+		sql += "			prodno, prodname, prodprice, prodimage, prodcon, proddate, prodpop";
+		sql += "		FROM product";
+		sql += "		WHERE prodname LIKE ?";
+		sql += "		ORDER BY prodno";
+		sql += "	) B"; 	
+		sql += " ) PROD";
+		sql += " WHERE rnum BETWEEN ? AND ?";
+		
+		//결과 저장할 List
+		List<Product> goodsList = new ArrayList<>();
+		
+		try {
+			ps = conn.prepareStatement(sql); //SQL수행 객체
+			ps.setString(1, def);
+			ps.setInt(2, paging.getStartNo());
+			ps.setInt(3, paging.getEndNo());
+			
+			rs = ps.executeQuery(); //SQL수행 및 결과 집합 저장
+			
+			//조회 결과 처리
+			while(rs.next()) {
+				Product prod = new Product(); //조회 결과 행 저장 DTO객체
+				
+				prod.setProdno(rs.getInt("prodno"));
+				prod.setProdname(rs.getString("prodname"));
+				prod.setProdprice(rs.getInt("prodprice"));
+				prod.setProdcon(rs.getString("prodcon"));
+				prod.setProddate(rs.getDate("proddate"));
+				prod.setProdpop(rs.getInt("prodpop"));
+				prod.setProdimage(rs.getString("prodimage"));
+				
+				//리스트에 결과값 저장하기
+				goodsList.add(prod);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("/goods/list selectSearchDefualt() - 끝");
+		return goodsList; //최종 결과 반환
+	}
+	
+	@Override
 	public Product selectProdDetail(Connection conn, int prodno) {
 		System.out.println("/goods/detail selectProdDetail() - 시작");
 		
@@ -299,6 +354,34 @@ public class GoodsDaoImpl implements GoodsDao {
 		
 		System.out.println("/goods/detail selectProdDetail() - 끝");
 		return prod;
+	}
+	
+	@Override
+	public int insertBuyProd(Connection conn, int userno, String buyprodname, int totalamount) {
+		System.out.println("/goods/detail insertBuyProd() - 시작");
+		
+		String sql = "";
+		sql += "INSERT INTO user_orderbefore";
+		sql += " VALUES (user_orderbefore_seq.nextval, ?, ?, ?)";
+		
+		int res = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, buyprodname);
+			ps.setInt(2, totalamount);
+			ps.setInt(3, userno);
+			
+			res = ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("/goods/detail insertBuyProd() - 끝");
+		return res;
 	}
 	
 }

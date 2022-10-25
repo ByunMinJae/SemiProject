@@ -3,10 +3,12 @@
     
 <style type="text/css">
 p.nfe {
-    font-size: 5px;
+    font-size: 13px;
     color: red;
     position: relative;
-    left: 38px;
+    left: 3px;
+    top: -21px;
+    display: inline-block;
 }
 </style>
 

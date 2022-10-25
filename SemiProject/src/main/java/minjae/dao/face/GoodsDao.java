@@ -52,15 +52,37 @@ public interface GoodsDao {
 	 * @return List<Product> - 테이블 페이징 목록 조회 결과
 	 */
 	public List<Product> selectSearchAll(Connection conn, Paging paging, String search);
+	
+	/**
+	 *  잔달 받은 단어가 없을 때 디폴트 값으로 '%%'를 넣어 조회한다
+	 * 
+	 * @param conn - DB 연결 객체
+	 * @param paging - 페이징 정보 객체
+	 * @param def - 디폴드 검색어
+	 * @return List<Product> - 테이블 페이징 목록 조회 결과
+	 */
+	public List<Product> selectSearchDefualt(Connection conn, Paging paging, String def);
 
 	/**
 	 *  해당 번호의 상품의 상세정보를 조회한 후 반환한다
 	 * 
-	 * @param conn DB 연결 객체
+	 * @param conn - DB 연결 객체
 	 * @param prodno - 상품 번호
 	 * @return 상품 상세 정보 DTO
 	 */
 	public Product selectProdDetail(Connection conn, int prodno);
+	
+	/**
+	 *  해당 정보를 orderbefore 테이블에 insert 한다
+	 *  
+	 * @param conn - DB 연결 객체
+	 * @param userno - 유저 번호
+	 * @param buyprodname - 상품이름
+	 * @param totalamount - 총 구매가격
+	 * @return insert 결과
+	 */
+	public int insertBuyProd(Connection conn, int userno, String buyprodname, int totalamount);
+
 
 
 

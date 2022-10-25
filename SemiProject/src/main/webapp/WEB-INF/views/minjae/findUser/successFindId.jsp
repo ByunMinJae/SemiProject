@@ -4,12 +4,16 @@
 <%@	include file="../../layout/header.jsp" %>
     
 <style type="text/css">
+#wrapper {
+	background-color: #BFDCFB;
+}
 .sfiWrap {
-	width: 500px;
+	width: 532px;
     height: 500px;
     margin: 200px auto 0;
     text-align: center;
     position: relative;
+    font-family: 'GmarketSansMedium';
 }
 
 #btnLogin {

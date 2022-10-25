@@ -64,6 +64,7 @@ $(document).ready(function() {
     position: relative;
     top: 0px;
     left: -149px;
+    font-family: 'GmarketSansMedium';
 }
 #goodsContents {
 	width: 1004px;
@@ -138,12 +139,15 @@ $(document).ready(function() {
 	margin: 98px 0 0px;
 }
 #_prodList {
-	color: #777;
+	color: #444;
 	text-decoration: none;
 	cursor: pointer;
+	margin-top: 41px;
+	font-family: 'dalseo';
+	font-size: 54px;
 }
 #_prodList:hover {
-	color: #000;
+	color: #222;
 }
 </style>
 
@@ -151,7 +155,7 @@ $(document).ready(function() {
 
 <div id="goodsContents">
 
-<h1 style="margin-top: 41px;"><a id="_prodList">상품 목록</a></h1>
+<h1><a id="_prodList">상품 목록</a></h1>
 <hr>
 
 <form action="/goods/cate" method="get" id="cateWrap">

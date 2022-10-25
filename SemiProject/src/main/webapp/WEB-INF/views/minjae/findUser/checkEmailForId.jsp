@@ -36,8 +36,9 @@ $(document).ready(function() {
 
 <style type="text/css">
 #checkEmail {
-    font-size: 5px;
+    font-size: 13px;
     color: blue;
+    margin-top: 5px;
 }
 
 #disEmailAuth {
@@ -56,8 +57,8 @@ $(document).ready(function() {
 #agreeMsgE {
     position: absolute;
     color: lime;
-    top: 229px;
-    right: 54px;
+    top: 222px;
+    right: 62px;
 }
 #checkMark {
 	background: url("/resources/image/check-mark.png") no-repeat 0 0;

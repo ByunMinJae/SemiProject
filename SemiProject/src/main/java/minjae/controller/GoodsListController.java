@@ -36,6 +36,7 @@ public class GoodsListController extends HttpServlet {
 		
 		//선택한 카테고리값
 		HttpSession session = req.getSession();
+		
 		String cateVal = (String)session.getAttribute("cateVal");
 		String search = (String)session.getAttribute("search");
 		System.out.println("[TEST] cateVal : " + cateVal);
@@ -46,7 +47,7 @@ public class GoodsListController extends HttpServlet {
 			req.getRequestDispatcher("/goods/search").forward(req, resp);
 			return;
 		}
-		
+			
 		if("".equals(cateVal) || null == cateVal) {
 			System.out.println("기본 세팅 정렬");
 			
@@ -63,6 +64,7 @@ public class GoodsListController extends HttpServlet {
 			req.setAttribute("goodsList", goodsList);
 			req.getRequestDispatcher("/WEB-INF/views/minjae/goods/goodsList.jsp").forward(req, resp);
 		}
+			
 			
 	}
 	
