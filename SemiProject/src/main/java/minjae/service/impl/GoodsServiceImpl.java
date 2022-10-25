@@ -53,12 +53,20 @@ public class GoodsServiceImpl implements GoodsService {
 	
 	@Override
 	public List<Product> getGoodsList(Paging paging) {
+		System.out.println("/goods/list getGoodsList()");
 		return goodsDao.selectAll(JDBCTemplate.getConnection(), paging);
 	}
 	
 	@Override
 	public List<Product> getGoodsList(Paging paging, String cateVal) {
+		System.out.println("/goods/list getGoodsList(cateVal)");
 		return goodsDao.selectAll(JDBCTemplate.getConnection(), paging, cateVal);
+	}
+	
+	@Override
+	public List<Product> getSearchList(Paging paging, String search) {
+		System.out.println("/goods/list getGoodsList(cateVal)");
+		return goodsDao.selectSearchAll(JDBCTemplate.getConnection(), paging, search);
 	}
 	
 	@Override

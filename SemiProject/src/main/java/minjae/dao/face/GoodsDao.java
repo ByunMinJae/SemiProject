@@ -44,6 +44,16 @@ public interface GoodsDao {
 	public List<Product> selectAll(Connection conn, Paging paging, String cateVal);
 
 	/**
+	 *  전달 받은 단어가 포함된 상품 리스트를 반환한다
+	 * 
+	 * @param conn - DB 연결 객체
+	 * @param paging - 페이징 정보 객체
+	 * @param search - 검색 단어
+	 * @return List<Product> - 테이블 페이징 목록 조회 결과
+	 */
+	public List<Product> selectSearchAll(Connection conn, Paging paging, String search);
+
+	/**
 	 *  해당 번호의 상품의 상세정보를 조회한 후 반환한다
 	 * 
 	 * @param conn DB 연결 객체
@@ -51,6 +61,7 @@ public interface GoodsDao {
 	 * @return 상품 상세 정보 DTO
 	 */
 	public Product selectProdDetail(Connection conn, int prodno);
+
 
 
 }
