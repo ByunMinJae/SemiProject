@@ -77,11 +77,9 @@ public class MypageDaoImpl implements MypageDao {
 		sql += " , count(DECODE(orderprocess,'배송완료', 1)) cnt2";
 		sql += " , count(DECODE(orderprocess,'교환/반품/취소', 1)) cnt3";
 		sql += " FROM";
-		sql += " 	(SELECT a.*, b.payno, c.orderafterno, c.orderprocess FROM user_orderbefore a";
-		sql += " 	INNER JOIN pay b";
+		sql += " 	(SELECT a.*, b.orderafterno, b.orderprocess FROM user_orderbefore a";
+		sql += " 	INNER JOIN user_orderafter b";
 		sql += " 	ON a.orderno = b.orderno";
-		sql += " 	INNER JOIN user_orderafter c";
-		sql += "	ON b.payno = c.payno";
 		sql += "	WHERE a.userno = ?)";
 		
 		MpMainRight mpMR = null;
