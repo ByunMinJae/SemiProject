@@ -11,7 +11,13 @@ $(document).ready(function() {
 	
 	//장바구니 버튼
 	$("#btnCart").click(function() {
-		location.href = "/cart/list?cartcount=" + $('#cartcount').val() + "&prodname=" + $('#prodname').val() 
+		
+		 if(confirm("장바구니에 담으시겠습니까?")) {
+	         location.href = "/cart/list?cartcount=" + $('#cartcount').val() + "&prodname=" + $('#prodname').val();
+	      } else {
+	    	  alert("취소 되었습니다.")
+	      }
+		
 	})
 
 	//구매하기 버튼
@@ -44,7 +50,7 @@ $(document).ready(function() {
 	font-size: 18px;
 	font-weight: bold;
 }
-img {
+#prodImg {
 	width: 600px;
 	height: 600px; 
 }
@@ -69,7 +75,7 @@ img {
     left: 202px;
     top: 65px;
 }
-form {
+#f {
 	width: 583px;
     margin: 0 223px;
 }
@@ -103,10 +109,10 @@ form {
 		<td><%=prod.getProdprice() %></td>
 	</tr>
 	<tr>
-		<td colspan="4"><img alt="" src="/resources/image/<%=prod.getProdimage() %>"></td>
+		<td colspan="4"><img id="prodImg" alt="" src="/resources/image/<%=prod.getProdimage() %>"></td>
 	</tr>
 	<tr>
-		<td colspan="4"><%=prod.getProdcon() %></td>
+		<td colspan="4" style="text-align: left;"><%=prod.getProdcon() %></td>
 	</tr>
 	<tr>
 		<td>상품 주문수</td>
@@ -116,7 +122,7 @@ form {
 	</tr>
 </table>
 
-<form action="" method="get">
+<form action="" method="get" id="f">
 
 <label for="cartcount">수량 : </label>
 <select id="cartcount" name="cartcount">

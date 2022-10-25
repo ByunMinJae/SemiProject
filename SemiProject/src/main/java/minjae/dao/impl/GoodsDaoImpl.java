@@ -96,7 +96,7 @@ public class GoodsDaoImpl implements GoodsDao {
 		sql += "SELECT * FROM (";
 		sql += "	SELECT rownum rnum, B.* FROM (";
 		sql += "		SELECT";
-		sql += "			prodno, prodname, prodprice, prodcon, proddate, prodpop, prodimage";
+		sql += "			prodno, prodname, prodprice, prodimage, prodcon, proddate, prodpop";
 		sql += "		FROM product";
 		sql += "		ORDER BY prodno DESC";
 		sql += "	) B";
@@ -145,26 +145,90 @@ public class GoodsDaoImpl implements GoodsDao {
 	@Override
 	public List<Product> selectAll(Connection conn, Paging paging, String cateVal) {
 		System.out.println("/goods/list selectAll(cateVal) - 시작");
+		System.out.println("현재 조회하려는 카테고리 : " + cateVal);
 		
-		//SQL작성
 		String sql = "";
 		sql += "SELECT * FROM (";
 		sql += "	SELECT rownum rnum, B.* FROM (";
 		sql += "		SELECT";
-		sql += "			prodno, prodname, prodprice, prodcon, proddate, prodpop, prodimage";
+		sql += "			prodno, prodname, prodprice, prodimage, prodcon, proddate, prodpop";
 		sql += "		FROM product";
-		sql += "		ORDER BY ?";
-		sql += "	) B";
+		if("prodno".equals(cateVal)) { //기본 순
+			sql += "		ORDER BY prodno";
+		} else if("prodprice".equals(cateVal)) { //가격 낮은 순
+			sql += "		ORDER BY prodprice";
+		} else if("prodprice DESC".equals(cateVal)) { //가격 높은 순
+			sql += "		ORDER BY prodprice DESC";
+		} else if("prodpop DESC".equals(cateVal)) { //판매량 순
+			sql += "		ORDER BY prodpop DESC";
+		} 
+//		else if("proddate".equals(cateVal)) { //최신 등록일 순
+//			sql += "		ORDER BY proddate";
+//		}
+		sql += "	) B"; 	
 		sql += " ) PROD";
 		sql += " WHERE rnum BETWEEN ? AND ?";
 		
+		//결과 저장할 List
+		List<Product> goodsList = new ArrayList<>();
+		
+		try {
+			ps = conn.prepareStatement(sql); //SQL수행 객체
+			ps.setInt(1, paging.getStartNo());
+			ps.setInt(2, paging.getEndNo());
+			
+			rs = ps.executeQuery(); //SQL수행 및 결과 집합 저장
+			
+			//조회 결과 처리
+			while(rs.next()) {
+				Product prod = new Product(); //조회 결과 행 저장 DTO객체
+				
+				prod.setProdno(rs.getInt("prodno"));
+				prod.setProdname(rs.getString("prodname"));
+				prod.setProdprice(rs.getInt("prodprice"));
+				prod.setProdcon(rs.getString("prodcon"));
+				prod.setProddate(rs.getDate("proddate"));
+				prod.setProdpop(rs.getInt("prodpop"));
+				prod.setProdimage(rs.getString("prodimage"));
+				
+				//리스트에 결과값 저장하기
+				goodsList.add(prod);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("/goods/list selectAll(cateVal) - 끝");
+		return goodsList; //최종 결과 반환
+	}
+	
+	@Override
+	public List<Product> selectSearchAll(Connection conn, Paging paging, String search) {
+		System.out.println("/goods/list selectSearchAll() - 시작");
+		System.out.println("현재 검색하려는 단어 : " + search);
+		
+		String sql = "";
+		sql += "SELECT * FROM (";
+		sql += "	SELECT rownum rnum, B.* FROM (";
+		sql += "		SELECT";
+		sql += "			prodno, prodname, prodprice, prodimage, prodcon, proddate, prodpop";
+		sql += "		FROM product";
+		sql += "		WHERE prodname LIKE ?";
+		sql += "		ORDER BY prodno";
+		sql += "	) B"; 	
+		sql += " ) PROD";
+		sql += " WHERE rnum BETWEEN ? AND ?";
 		
 		//결과 저장할 List
 		List<Product> goodsList = new ArrayList<>();
-		System.out.println(paging.getStartNo() + " : " + paging.getEndNo());
+		
 		try {
 			ps = conn.prepareStatement(sql); //SQL수행 객체
-			ps.setString(1, cateVal);
+			ps.setString(1, search);
 			ps.setInt(2, paging.getStartNo());
 			ps.setInt(3, paging.getEndNo());
 			
@@ -193,7 +257,7 @@ public class GoodsDaoImpl implements GoodsDao {
 			JDBCTemplate.close(ps);
 		}
 		
-		System.out.println("/goods/list selectAll(cateVal) - 끝");
+		System.out.println("/goods/list selectSearchAll() - 끝");
 		return goodsList; //최종 결과 반환
 	}
 	
