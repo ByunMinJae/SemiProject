@@ -47,6 +47,7 @@ public class BoardDeleteController extends HttpServlet {
 			
 			//------------------------게시글 삭제----------------------------------
 			
+			//게시글 삭제시 게시판 default페이지로 이동
 			resp.sendRedirect("/board/notice");
 
 		} 

@@ -268,7 +268,7 @@ li {
 }
  
 .w-button { 
-    border: none;
+    border: 0.5px solid silver; 
     border-radius: 5px;
 	font-family: 'GmarketSansMedium';
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);

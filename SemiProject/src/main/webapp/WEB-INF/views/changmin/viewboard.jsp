@@ -92,6 +92,18 @@ td:nth-child(2) {
 	
 }
 
+#report {
+	float: right;
+	font-family: 'GmarketSansMedium';
+	font-size: 10px;
+	font-color: black;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    font-weight: 600;
+    cursor: pointer;
+}
+
 .left{
 	position: absolute;
 	top: 150px;
@@ -166,7 +178,9 @@ img {
 	<tr>
 		<td colspan="4" class="text-left success" id="contentHead">
 		<span id="category">[<%=category.getCategoryname()%>]</span>
-		<span id="title"><%=viewBoard.getBoardtitle() %></span></td>
+		<span id="title"><%=viewBoard.getBoardtitle() %></span>
+		<span id="report"><a href="/board/report"><button>게시글 신고</button></a></span>
+		</td>
 	</tr>
 	
 	<tr>
