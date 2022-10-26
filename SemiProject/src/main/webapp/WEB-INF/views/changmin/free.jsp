@@ -62,8 +62,8 @@ img {
 	float: right;
 }
 
-.searchList {
-	width: 60px;
+.searchListHead {
+	width: 100px;
 	height: 30px;
 	background-size: 20px;
 	padding: 5px; 

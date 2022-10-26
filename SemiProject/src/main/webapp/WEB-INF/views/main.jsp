@@ -455,21 +455,17 @@ html {
 }
 
 
-.one {
-  animation-delay: 1s;
-}
-
 .two {
-  animation-delay: 3s;
+  animation-delay: 2s;
 }
 
 .three {
-  animation-delay: 5s;
+  animation-delay: 4s;
 }
 
 .four {
   position: relative;
-  animation-delay: 7s;
+  animation-delay: 6s;
   left: -34px;
 }
 
