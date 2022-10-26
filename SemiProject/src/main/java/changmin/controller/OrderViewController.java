@@ -37,6 +37,7 @@ public class OrderViewController extends HttpServlet {
 			
 			String word = req.getParameter("word");
 			
+			//검색한 값이 없을때
 			if ( word==null || word.equals("")) {
 				System.out.println("디폴트페이지");
 				
@@ -46,6 +47,7 @@ public class OrderViewController extends HttpServlet {
 				req.setAttribute("paging", paging);
 				req.setAttribute("orderView", orderview);
 			
+			//검색한 값이 있을때
 			} else {
 				System.out.println("검색페이지");
 				

@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import changmin.dto.Board;
 import changmin.dto.Category;
 import changmin.service.face.BoardService;
 import changmin.service.impl.BoardServiceImpl;
-import daun.dto.Board;
 import util.Paging;
 
 @WebServlet("/board/question")
@@ -33,6 +33,7 @@ public class QuestionController extends HttpServlet {
 		//전달파라미터에서 현재 페이징 객체 계산하기
 		
 		String word = req.getParameter("word");
+		String searchList = req.getParameter("list");
 		
 		if ( word==null || word.equals("")) {
 			System.out.println("디폴트페이지");
@@ -46,12 +47,13 @@ public class QuestionController extends HttpServlet {
 		} else {
 			System.out.println("검색페이지");
 			
-			Paging paging = boardService.getPaging(req, category, word);
-			List<Board> boardList = boardService.getList( paging, category, word ); 
+			Paging paging = boardService.getPaging(req, category, word, searchList);
+			List<Board> boardList = boardService.getList( paging, category, word, searchList ); 
 			
 			req.setAttribute("boardList", boardList);
 			req.setAttribute("paging", paging);
 			req.setAttribute("word", word);
+			req.setAttribute("list", searchList);
 		}
 
 		//----------------------게시글 전체 조회-------------------------------

@@ -1,5 +1,5 @@
+<%@page import="changmin.dto.Board"%>
 <%@page import="util.Paging"%>
-<%@page import="daun.dto.Board"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -59,10 +59,16 @@ img {
 	float: right;
 }
 
-input [type=text] {
-	float:right;
+.search {
+	float: right;
 }
 
+.text-center {
+	position: relative;
+	top: 50px;
+	padding-left: 150px;
+	left: 30px;
+} 
 </style>
 <div class="myContainer">
 	<form method="get">
@@ -96,7 +102,7 @@ input [type=text] {
 						<% if(boardList.get(i).getCategoryno()==1){ %>
 								<td><%= boardList.get(i).getBoardno() %>
 								<td>
-									<a href="/board/view?boardno=<%=boardList.get(i).getBoardno() %>&cateno=<%=boardList.get(i).getCategoryno()%>">
+					 				<a href="/board/view?boardno=<%=boardList.get(i).getBoardno() %>&cateno=<%=boardList.get(i).getCategoryno()%>">
 										<%=boardList.get(i).getBoardtitle() %>
 									</a>
 									
@@ -107,8 +113,15 @@ input [type=text] {
 					</tr> 
 			 		<% } %>
 				</table>
-			<input type="text" name="word" value="" placeholder="제목을 입력해주세요">
-			<button type="submit">검색</button>
+				<div class="search">
+				<select class="form-control" name="searchList">
+					<option value="0">선택</option>
+					<option value="boardtitle">제목</option>
+					<option value="nick">닉네임</option>
+				</select>
+				<input type="text" name="word" value="" placeholder="제목을 입력해주세요">
+				<button type="submit">검색</button>
+				</div>
 			</form>
 			<div class="text-center">
 				<ul class="pagination">

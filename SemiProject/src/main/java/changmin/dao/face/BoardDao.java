@@ -3,8 +3,8 @@ package changmin.dao.face;
 import java.sql.Connection;
 import java.util.List;
 
+import changmin.dto.Board;
 import changmin.dto.Category;
-import daun.dto.Board;
 import sharon.dto.User;
 import util.Paging;
 
@@ -61,11 +61,11 @@ public interface BoardDao {
 
 	public Category selectCatename(Connection conn, int i);
 
-	public User getNick(Connection conn, Board bUserno);
+//	public User getNick(Connection conn, Board bUserno);
 
-	public List<Board> selectAll(Connection connection, Paging paging, Category category, String word);
+	public List<Board> selectAll(Connection connection, Paging paging, Category category, String word, String searchList);
 
-	public int selectCntAll(Connection connection, Category category, String word);
+	public int selectCntAll(Connection connection, Category category, String word, String searchList);
 
 
 
