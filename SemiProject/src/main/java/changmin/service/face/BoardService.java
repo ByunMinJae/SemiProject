@@ -79,7 +79,7 @@ public interface BoardService {
 	 * @param bUserno - 게시글 유저넘버
 	 * @return User - 게시글 유저넘버에 따른 닉네임 반환
 	 */
-	public User getNick(Board bUserno);
+//	public User getNick(Board bUserno);
 
 
 	/**

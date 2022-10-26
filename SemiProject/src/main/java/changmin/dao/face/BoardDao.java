@@ -61,7 +61,7 @@ public interface BoardDao {
 
 	public Category selectCatename(Connection conn, int i);
 
-	public User getNick(Connection conn, Board bUserno);
+//	public User getNick(Connection conn, Board bUserno);
 
 	public List<Board> selectAll(Connection connection, Paging paging, Category category, String word);
 

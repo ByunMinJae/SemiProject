@@ -138,12 +138,12 @@ public class BoardDaoImpl implements BoardDao {
 	      String sql = "";
 	      sql += "SELECT * FROM ("; 
 	      sql += "   SELECT rownum rnum, B.* FROM (";
-	      sql += "      SELECT";
-	      sql += "         boardno, boardtitle, boarddate, userno, categoryno, hit, nick";
+	      sql += "      SELECT *";
 	      sql += "       FROM board_info";
-	      sql += "       WHERE categoryno=?";
+	      sql += "       INNER JOIN user_info ON user_info.userno = board_info.userno";
 	      sql += "       ORDER BY boardno DESC";
 	      sql += "    ) B";
+	      sql += "	  WHERE categoryno=?";
 	      sql += " ) BOARD";
 	      sql += " WHERE rnum BETWEEN ? AND ?";
 		
@@ -192,13 +192,13 @@ public class BoardDaoImpl implements BoardDao {
 	      String sql = "";
 	      sql += "SELECT * FROM ("; 
 	      sql += "   SELECT rownum rnum, B.* FROM (";
-	      sql += "      SELECT";
-	      sql += "         boardno, boardtitle, boarddate, userno, categoryno, hit, nick";
+	      sql += "      SELECT *";
 	      sql += "       FROM board_info";
-	      sql += "       WHERE categoryno=?";
-	      sql += "		 AND boardtitle LIKE ?";
+	      sql += "       INNER JOIN user_info ON user_info.userno = board_info.userno";
 	      sql += "       ORDER BY boardno DESC";
 	      sql += "    ) B";
+	      sql += "	  WHERE categoryno=?";
+	      sql += "	  AND boardtitle LIKE ?";
 	      sql += " ) BOARD";
 	      sql += " WHERE rnum BETWEEN ? AND ?";
 		
@@ -271,8 +271,9 @@ public class BoardDaoImpl implements BoardDao {
 		
 		String sql = "";
 		sql += "SELECT";
-		sql += "	boardno, boardtitle, boarddate, boardcon, userno, categoryno, hit, nick";
+		sql += " *";
 		sql += " FROM board_info";
+		sql += " INNER JOIN user_info ON user_info.userno=board_info.userno";
 		sql += " WHERE boardno = ?";
 		
 		Board board = null;
@@ -364,37 +365,37 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 
-	@Override
-	public User getNick(Connection conn, Board bUserno) {
-		String sql = "";
-		sql+="SELECT nick";
-		sql+="	FROM user_info";
-		sql+="	WHERE userno";
-		sql+="	IN (SELECT userno FROM board_info WHERE userno=?)";
-
-		User user = null;
-		
-		try {
-			ps = conn.prepareStatement(sql);
-			ps.setInt(1, bUserno.getUserno());
-			
-			rs = ps.executeQuery();
-			
-			while(rs.next()) {
-				user = new User();
-				
-				user.setUserno(rs.getInt("nick"));
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			JDBCTemplate.close(rs);
-			JDBCTemplate.close(ps);
-		}
-		
-		return user;
-	}
+//	@Override
+//	public User getNick(Connection conn, Board bUserno) {
+//		String sql = "";
+//		sql+="SELECT nick";
+//		sql+="	FROM user_info";
+//		sql+="	WHERE userno";
+//		sql+="	IN (SELECT userno FROM board_info WHERE userno=?)";
+//
+//		User user = null;
+//		
+//		try {
+//			ps = conn.prepareStatement(sql);
+//			ps.setInt(1, bUserno.getUserno());
+//			
+//			rs = ps.executeQuery();
+//			
+//			while(rs.next()) {
+//				user = new User();
+//				
+//				user.setUserno(rs.getInt("nick"));
+//			}
+//			
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			JDBCTemplate.close(rs);
+//			JDBCTemplate.close(ps);
+//		}
+//		
+//		return user;
+//	}
 
 
 }

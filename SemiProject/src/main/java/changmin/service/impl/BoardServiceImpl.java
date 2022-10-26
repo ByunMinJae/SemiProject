@@ -141,11 +141,11 @@ public class BoardServiceImpl implements BoardService{
 		return board;
 	}
 
-	@Override
-	public User getNick(Board bUserno) {
-		
-		return boardDao.getNick(JDBCTemplate.getConnection(), bUserno);
-	}
+//	@Override
+//	public User getNick(Board bUserno) {
+//		
+//		return boardDao.getNick(JDBCTemplate.getConnection(), bUserno);
+//	}
 
 	@Override
 	public List<Board> getList(Paging paging, Category category, String word) {
