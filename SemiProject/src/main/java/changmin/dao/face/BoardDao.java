@@ -3,8 +3,8 @@ package changmin.dao.face;
 import java.sql.Connection;
 import java.util.List;
 
+import changmin.dto.Board;
 import changmin.dto.Category;
-import daun.dto.Board;
 import sharon.dto.User;
 import util.Paging;
 

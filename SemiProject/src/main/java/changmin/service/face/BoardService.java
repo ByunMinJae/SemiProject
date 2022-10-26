@@ -4,8 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import changmin.dto.Board;
 import changmin.dto.Category;
-import daun.dto.Board;
 import sharon.dto.User;
 import util.Paging;
 

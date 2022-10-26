@@ -7,10 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import changmin.dao.face.BoardDao;
 import changmin.dao.impl.BoardDaoImpl;
+import changmin.dto.Board;
 import changmin.dto.Category;
 import changmin.service.face.BoardService;
 import common.JDBCTemplate;
-import daun.dto.Board;
 import sharon.dto.User;
 import util.Paging;
 

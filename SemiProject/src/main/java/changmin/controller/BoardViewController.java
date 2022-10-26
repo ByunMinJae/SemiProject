@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import changmin.dto.Board;
 import changmin.dto.Category;
 import changmin.service.face.BoardService;
 import changmin.service.impl.BoardServiceImpl;
-import daun.dto.Board;
 import sharon.dto.User;
 import sharon.service.face.ListService;
 import sharon.service.impl.ListServiceImpl;

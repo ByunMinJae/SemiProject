@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import changmin.dao.face.BoardDao;
+import changmin.dto.Board;
 import changmin.dto.Category;
 import common.JDBCTemplate;
-import daun.dto.Board;
 import sharon.dto.User;
 import util.Paging;
 
