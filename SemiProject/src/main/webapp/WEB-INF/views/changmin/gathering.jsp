@@ -59,11 +59,18 @@ img {
 	float: right;
 }
 
+.searchList {
+	width: 60px;
+	height: 30px;
+	background-size: 20px;
+	padding: 5px; 
+	border-radius: 5px;
+}
+ 
 .text-center {
 	position: relative;
 	top: 50px;
-	padding-left: 150px;
-	left: 30px;
+	left: 150px;
 } 
 
 </style>
@@ -112,7 +119,12 @@ img {
 			 		<% } %>
 				</table>
 				<div class="search">
-				<input type="text" name="word" value="" placeholder="제목을 입력해주세요">
+				<select class="searchList" name="searchList">
+					<option value="0">선택</option>
+					<option value="boardtitle">제목</option>
+					<option value="nick">닉네임</option>
+				</select>
+				<input type="text" name="word" value="" placeholder="검색어를 입력해주세요">
 				<button type="submit">검색</button>
 				</div>
 			</form>
