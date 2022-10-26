@@ -5,6 +5,7 @@
     pageEncoding="UTF-8"%>
 <% List<Board> boardList = (List) request.getAttribute("boardList"); %>
 <% Paging paging = (Paging) request.getAttribute("paging"); %>
+<% String wordParam = (String) request.getAttribute("word"); %>
 <%@include file="../layout/header.jsp" %>
 <!-- 부트스트랩 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -109,21 +110,39 @@ img {
 					<li><a href="./notice">&larr; 처음</a></li>
 					<%	} %> --%>
 				
+				<% if( wordParam ==null ) { %>
 					<%	if( paging.getCurPage() != 1) { %>
-					<li><a href="./notice?curPage=<%=paging.getCurPage() - 1 %>">&lt;</a></li>
+					<li><a href="./food?curPage=<%=paging.getCurPage() - 1 %>">&lt;</a></li>
 					<%	} %>
 					
 					<%	for(int i=paging.getStartPage(); i<=paging.getEndPage(); i++) { %>
 					<%		if( i == paging.getCurPage() ) { %>
-					<li class="active"><a href="./notice?curPage=<%=i %>"><%=i %></a></li>
+					<li class="active"><a href="./food?curPage=<%=i %>"><%=i %></a></li>
 					<%		} else { %>
-					<li><a href="./notice?curPage=<%=i %>"><%=i %></a></li>
+					<li><a href="./food?curPage=<%=i %>"><%=i %></a></li>
 					<%		} %>
 					<%	} %>
 			
 					<%	if( paging.getCurPage() != paging.getTotalPage() ) { %>
-					<li><a href="./notice?curPage=<%=paging.getCurPage() + 1 %>">&gt;</a></li>
+					<li><a href="./food?curPage=<%=paging.getCurPage() + 1 %>">&gt;</a></li>
 					<%	} %>
+				<% } else {%>
+					<%	if( paging.getCurPage() != 1) { %>
+					<li><a href="./food?curPage=<%=paging.getCurPage() - 1 %>&word=<%=wordParam%>">&lt;</a></li>
+					<%	} %>
+					
+					<%	for(int i=paging.getStartPage(); i<=paging.getEndPage(); i++) { %>
+					<%		if( i == paging.getCurPage() ) { %>
+					<li class="active"><a href="./food?curPage=<%=i %>&word=<%=wordParam%>"><%=i %></a></li>
+					<%		} else { %>
+					<li><a href="./food?curPage=<%=i %>&word=<%=wordParam%>"><%=i %></a></li>
+					<%		} %>
+					<%	} %>
+			
+					<%	if( paging.getCurPage() != paging.getTotalPage() ) { %>
+					<li><a href="./food?curPage=<%=paging.getCurPage() + 1 %>&word=<%=wordParam%>">&gt;</a></li>
+					<%	} %>				
+				<% } %>
 					
 					
 <%-- 					<%	if( paging.getCurPage() != paging.getTotalPage() ) { %>

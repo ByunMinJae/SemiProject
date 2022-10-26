@@ -33,16 +33,30 @@ public class OrderViewController extends HttpServlet {
 		} else {
 			//로그인상태일 경우 userno에 따른 주문목록 조회
 			int userno = (int)session.getAttribute("userno");
-			
 			System.out.println("/orderafterlist userno : " + userno);
 			
-			Paging2 paging = orderService.getPaging(req, userno);
-			 
-			List<Order> orderview = orderService.orderview(paging, userno);
-	
-			req.setAttribute("paging", paging);
-			req.setAttribute("orderView", orderview);
-			System.out.println(orderview);
+			String word = req.getParameter("word");
+			
+			if ( word==null || word.equals("")) {
+				System.out.println("디폴트페이지");
+				
+				Paging2 paging = orderService.getPaging(req, userno);
+				List<Order> orderview = orderService.orderview(paging, userno);
+		
+				req.setAttribute("paging", paging);
+				req.setAttribute("orderView", orderview);
+			
+			} else {
+				System.out.println("검색페이지");
+				
+				Paging2 paging = orderService.getPaging(req, userno, word);
+				List<Order> orderview = orderService.orderview(paging, userno, word);
+		
+				req.setAttribute("paging", paging);
+				req.setAttribute("orderView", orderview);
+				req.setAttribute("word", word);
+				
+			}
 			
 			req.getRequestDispatcher("/WEB-INF/views/changmin/orderview.jsp").forward(req, resp);
 

@@ -126,6 +126,41 @@ public class OrderDaoImpl implements OrderDao{
 		return count;
 	}
 
+	@Override
+	public int selectCntAll(Connection conn, int userno, String word) {
+		
+		String sql = "";
+		sql += "SELECT count(*) cnt";
+		sql += "	FROM user_orderafter";
+		sql += "	WHERE userno=?";
+		sql += "	AND prodname LIKE ?";
+		
+		//총 게시글 수 변수
+		int count = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql); //SQL수행 객체
+			
+			ps.setInt(1, userno);
+			ps.setString(2, "%" + word + "%");
+			
+			rs = ps.executeQuery(); //SQL수행 및 결과 집합 저장
+			
+			while( rs.next() ) {
+				count = rs.getInt("cnt");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			System.out.println("selectCntAll : " + count);
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		//최종 결과 반환
+		return count;
+	}
 
 	@Override
 	public List<Order> selectAll(Connection conn, Paging2 paging, int userno) {
@@ -152,6 +187,58 @@ public class OrderDaoImpl implements OrderDao{
 			ps.setInt(1, userno);
 			ps.setInt(2, paging.getStartNo());
 			ps.setInt(3, paging.getEndNo());
+			
+			rs = ps.executeQuery();
+			
+			while( rs.next() ) {
+				Order order = new Order();
+				
+				order.setOrderafterno(rs.getInt("orderafterno"));
+				order.setProdname(rs.getString("prodname"));
+				order.setAmount(rs.getInt("amount"));
+				order.setBuyeraddr(rs.getString("buyer_addr"));
+				order.setOrderdate(rs.getString("orderdate"));
+				
+				list.add(order);
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally { 
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		return list;
+	}
+	
+	@Override
+	public List<Order> selectAll(Connection conn, Paging2 paging, int userno, String word) {
+		System.out.println("selectAll - start");
+		
+		//SQL 작성
+	      String sql = "";
+	      sql += "SELECT * FROM ("; 
+	      sql += "   SELECT rownum rnum, B.* FROM (";
+	      sql += "      SELECT";
+	      sql += "         orderafterno, prodname, amount, buyer_addr, orderdate";
+	      sql += "       FROM user_orderafter";
+	      sql += "		 WHERE userno = ?";		
+	      sql += "		 AND prodname LIKE ?";
+	      sql += "       ORDER BY orderafterno DESC";
+	      sql += "    ) B";
+	      sql += " )";
+	      sql += " WHERE rnum BETWEEN ? AND ?";
+		
+		List<Order> list = new ArrayList<>();
+
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, userno);
+			ps.setString(2, "%" + word + "%");
+			ps.setInt(3, paging.getStartNo());
+			ps.setInt(4, paging.getEndNo());
 			
 			rs = ps.executeQuery();
 			

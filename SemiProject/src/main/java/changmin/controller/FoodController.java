@@ -51,6 +51,7 @@ public class FoodController extends HttpServlet {
 			
 			req.setAttribute("boardList", boardList);
 			req.setAttribute("paging", paging);
+			req.setAttribute("word", word);
 		}
 
 		//----------------------게시글 전체 조회-------------------------------

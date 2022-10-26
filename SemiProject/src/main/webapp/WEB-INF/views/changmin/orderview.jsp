@@ -5,6 +5,7 @@
     pageEncoding="UTF-8"%>
 <%	List<Order> orderView = (List) request.getAttribute("orderView"); %>
 <%  Paging2 paging = (Paging2) request.getAttribute("paging"); %>
+<%  String wordParam = (String) request.getAttribute("word"); %>
 <%@ include file="../layout/header.jsp"%>
 
 <script>
@@ -50,67 +51,89 @@ td {
 
 <div class="myContainer">
 	<h1 id="listhead">결제목록</h1>
-	<% for(int i=0; i<orderView.size(); i++) { %>
-	<table class="table">
-		<tr>
-			<td>
-				<span class="orderTitle">결제번호</span>
-				<span class="orderDetail"><%= orderView.get(i).getOrderafterno() %></span>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<span class="orderTitle">결제시간</span>
-				<span class="orderDetail"><%= orderView.get(i).getOrderdate() %></span>
-			</td>
-		</tr>
-		
-		<tr>
-			<td>
-				<span class="orderTitle">상품이름</span>
-				<span class="orderDetail"><%= orderView.get(i).getProdname() %></span>
-			</td>
-		</tr>
-		
-		<tr>
-			<td>
-				<span class="orderTitle">결제금액</span>
-				<span class="orderDetail"><%= orderView.get(i).getAmount() %></span>
-			</td>
-		</tr>
-		
-		<tr>
-			<td>
-				<span class="orderTitle">배송주소</span>
-				<span class="orderDetail"><%= orderView.get(i).getBuyeraddr() %></span>
-			</td>
-		</tr>
-		
-		<tr>
+	<form name="frm" method="GET" action="./orderafterlist">
+		<% for(int i=0; i<orderView.size(); i++) { %>
+		<table class="table">
+			<tr>
+				<td>
+					<span class="orderTitle">결제번호</span>
+					<span class="orderDetail"><%= orderView.get(i).getOrderafterno() %></span>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span class="orderTitle">결제시간</span>
+					<span class="orderDetail"><%= orderView.get(i).getOrderdate() %></span>
+				</td>
+			</tr>
 			
-		</tr>
-	</table>
-	<% } %>
+			<tr>
+				<td>
+					<span class="orderTitle">상품이름</span>
+					<span class="orderDetail"><%= orderView.get(i).getProdname() %></span>
+				</td>
+			</tr>
+			
+			<tr>
+				<td>
+					<span class="orderTitle">결제금액</span>
+					<span class="orderDetail"><%= orderView.get(i).getAmount() %></span>
+				</td>
+			</tr>
+			
+			<tr>
+				<td>
+					<span class="orderTitle">배송주소</span>
+					<span class="orderDetail"><%= orderView.get(i).getBuyeraddr() %></span>
+				</td>
+			</tr>
+			
+			<tr>
+				
+			</tr>
+		</table>
+		<% } %>
+	<input type="text" name="word" value="" placeholder="상품명을 입력해주세요">
+	<button type="submit">검색</button>
+	</form>
 	
 	<div class="text-center">
 	<ul class="pagination">
-		<%	paging.setListCount(1); %>	
-		<%	if( paging.getCurPage() != 1) { %>
-		<li><a href="./orderafterlist?curPage=<%=paging.getCurPage() - 1 %>">&lt;</a></li>
-		<%	} %>
-		
-		<%	for(int i=paging.getStartPage(); i<=paging.getEndPage(); i++) { %>
-		<%		if( i == paging.getCurPage() ) { %>
-		<li class="active"><a href="./orderafterlist?curPage=<%=i %>"><%=i %></a></li>
-		<%		} else { %>
-		<li><a href="./orderafterlist?curPage=<%=i %>"><%=i %></a></li>
-		<%		} %>
-		<%	} %>
-
-		<%	if( paging.getCurPage() != paging.getTotalPage() ) { %>
-		<li><a href="./orderafterlist?curPage=<%=paging.getCurPage() + 1 %>">&gt;</a></li>
-		<%	} %>
-		
+		<%  if( wordParam==null) {%>
+			<%	paging.setListCount(1); %>	
+			<%	if( paging.getCurPage() != 1) { %>
+			<li><a href="./orderafterlist?curPage=<%=paging.getCurPage() - 1 %>">&lt;</a></li>
+			<%	} %>
+			
+			<%	for(int i=paging.getStartPage(); i<=paging.getEndPage(); i++) { %>
+			<%		if( i == paging.getCurPage() ) { %>
+			<li class="active"><a href="./orderafterlist?curPage=<%=i %>"><%=i %></a></li>
+			<%		} else { %>
+			<li><a href="./orderafterlist?curPage=<%=i %>"><%=i %></a></li>
+			<%		} %>
+			<%	} %>
+	
+			<%	if( paging.getCurPage() != paging.getTotalPage() ) { %>
+			<li><a href="./orderafterlist?curPage=<%=paging.getCurPage() + 1 %>">&gt;</a></li>
+			<%	} %>
+		<%  } else { %>
+			<%	paging.setListCount(1); %>	
+			<%	if( paging.getCurPage() != 1) { %>
+			<li><a href="./orderafterlist?curPage=<%=paging.getCurPage() - 1 %>&word=<%=wordParam%>">&lt;</a></li>
+			<%	} %>
+			
+			<%	for(int i=paging.getStartPage(); i<=paging.getEndPage(); i++) { %>
+			<%		if( i == paging.getCurPage() ) { %>
+			<li class="active"><a href="./orderafterlist?curPage=<%=i %>&word=<%=wordParam%>"><%=i %></a></li>
+			<%		} else { %>
+			<li><a href="./orderafterlist?curPage=<%=i %>&word=<%=wordParam%>"><%=i %></a></li>
+			<%		} %>
+			<%	} %>
+	
+			<%	if( paging.getCurPage() != paging.getTotalPage() ) { %>
+			<li><a href="./orderafterlist?curPage=<%=paging.getCurPage() + 1 %>&word=<%=wordParam%>">&gt;</a></li>
+			<%	} %>
+		<%  } %>
 	</ul>
 </div>
 </div>

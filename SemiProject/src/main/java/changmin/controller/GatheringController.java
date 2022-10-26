@@ -42,6 +42,7 @@ public class GatheringController extends HttpServlet {
 			
 			req.setAttribute("boardList", boardList);
 			req.setAttribute("paging", paging);
+			req.setAttribute("word", word);
 			
 		} else {
 			System.out.println("검색페이지");

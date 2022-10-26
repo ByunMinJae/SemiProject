@@ -72,9 +72,35 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public List<Order> orderview(Paging2 paging, int userno) {
 
-		System.out.println(paging.getListCount());
-		 
 		return orderDao.selectAll(conn, paging, userno);
+	}
+
+
+	@Override
+	public Paging2 getPaging(HttpServletRequest req, int userno, String word) {
+		
+		//총 게시글 수 조회하기
+		int totalCount = orderDao.selectCntAll(JDBCTemplate.getConnection(), userno, word);
+		
+		
+		//전달파라미터 curPage 추출하기
+		String param = req.getParameter("curPage");
+		int curPage = 0;
+		if( param != null && !"".equals(param) ) {
+			curPage = Integer.parseInt(param);
+		}
+		
+		//Paging객체 생성
+		Paging2 paging = new Paging2(totalCount, curPage);
+		
+		return paging;
+	}
+
+
+	@Override
+	public List<Order> orderview(Paging2 paging, int userno, String word) {
+		
+		return orderDao.selectAll(conn, paging, userno, word);
 	}
 
 

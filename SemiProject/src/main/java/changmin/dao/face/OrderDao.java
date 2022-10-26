@@ -13,9 +13,26 @@ public interface OrderDao {
 
 	public List<Order> orderList(Connection conn);
 
+	/**전체조회
+	 * 
+	 * @param connection
+	 * @param userno
+	 * @return
+	 */
 	public int selectCntAll(Connection connection, int userno);
 
 	public List<Order> selectAll(Connection conn, Paging2 paging, int userno);
+
+	/**
+	 * 검색기능
+	 * @param connection
+	 * @param userno
+	 * @param word
+	 * @return
+	 */
+	public int selectCntAll(Connection connection, int userno, String word);
+
+	public List<Order> selectAll(Connection conn, Paging2 paging, int userno, String word);
 
 
 }
