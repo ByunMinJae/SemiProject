@@ -60,8 +60,8 @@ img {
 	float: right;
 }
 
-.searchList {
-	width: 60px;
+.searchListHead {
+	width: 100px;
 	height: 30px;
 	background-size: 20px;
 	padding: 5px; 
@@ -118,9 +118,8 @@ img {
 			 		<% } %>
 				</table>
 				<div class="search">
-				<select class="searchList" name="searchList">
-					<option value="0">선택</option>
-					<option value="boardtitle">제목</option>
+				<select class="searchListHead" name="searchList">
+					<option value="boardtitle" selected="selected">제목</option>
 					<option value="nick">닉네임</option>
 				</select>
 				<input type="text" name="word" value="" placeholder="검색어를 입력해주세요">

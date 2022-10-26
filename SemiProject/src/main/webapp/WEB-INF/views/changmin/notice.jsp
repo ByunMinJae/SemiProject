@@ -14,25 +14,26 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 
-/* $(document).ready(function(){
+$(document).ready(function(){
 
     $.ajax({
         type: "GET",
         url: "/board/notice",
-        dataType: "text",
+        dataType: "html",
         data: {
         	searchList:$(".searchList").val()
         	},
-        error: function() {
+            success: function(data) {
+                console.log("통신데이터 값 : " + data);
+              },
+      	  error: function() {
           console.log('통신실패!!');
-        },
-        success: function(data) {
-          console.log("통신데이터 값 : " + data);
         }
+
       });
 
 	
-}); */
+});
 
 </script>
 
@@ -84,8 +85,8 @@ img {
 	float: right;
 }
 
-.searchList {
-	width: 60px;
+.searchListHead {
+	width: 100px;
 	height: 30px;
 	background-size: 20px;
 	padding: 5px; 
@@ -142,7 +143,7 @@ img {
 			 		<% } %>
 				</table>
 				<div class="search">
-				<select class="searchList" name="searchList">
+				<select class="searchListHead" name="searchList">
 					<!-- <option value="0">선택</option> -->
 					<option class="searchList" value="boardtitle" id="option1" >제목</option>
 					<option class="searchList" value="nick" id="option2">닉네임</option>

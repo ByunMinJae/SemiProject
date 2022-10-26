@@ -126,10 +126,12 @@ img {
 #category {
 	color: #6478FF;
 }
+
 #gmarketfont {
 	font-family: 'GmarketSansMedium';
-	min-height: 300px;
+	padding: 10px 10px 100px 10px;
 }
+
 .smalltext { 
 	font-family: 'GmarketSansMedium';
 	font-size: 10px; 
@@ -198,7 +200,9 @@ img {
 		<td class="success" id="gamrketfont">본문</td>
 	</tr>
 	<tr>
-		<td colspan="4" class="text-left"><p id="gmarketfont"><%=viewBoard.getBoardcon() %></p></td>
+		<div id="content">
+		<td colspan="4" class="text-left" id="gmarketfont"><%=viewBoard.getBoardcon() %></td>
+		</div>
 	</tr>
 	
 	</table>
