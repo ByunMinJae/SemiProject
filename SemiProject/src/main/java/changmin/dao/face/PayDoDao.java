@@ -11,6 +11,7 @@ public interface PayDoDao {
 
 	public User updateUser(Connection conn, int userno);
 
-	public OrderBefore getOrderInfo(Connection conn, int orderno);
+//	public OrderBefore getOrderInfo(Connection conn, int orderno);
 
+	public OrderBefore getOrderInfo(Connection conn, int userno);
 }
