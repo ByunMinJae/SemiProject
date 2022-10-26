@@ -224,6 +224,11 @@ h3{
 .info_detail {
 	font-family: 'GmarketSansMedium';
 }
+
+#onechance {
+	font-family: 'GmarketSansMedium';
+	float: right;
+}
 #buttonposition {
 	position: relative;
 	top: -13px;
@@ -329,6 +334,7 @@ li {
 				<input type="hidden" name="address" id="addressSubmit">
 	
 				<button type="button" id="addressSubmitButton" class="w-button">주소변경</button>
+				<p id="onechance"> * 이번만 다른주소로 받기</p>
 				<span id="address_msg" class="msg"></span><br>
 			</div>
 		</div>

@@ -1,5 +1,6 @@
 package util;
 
+//한 화면에 보여지는 게시글 수 2개
 public class Paging2 {
 
 	private int curPage; //현재 페이지 번호

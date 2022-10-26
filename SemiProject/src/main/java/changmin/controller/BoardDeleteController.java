@@ -23,6 +23,8 @@ public class BoardDeleteController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("/board/delete [POST]");
 
+		//---------------------------게시글 삭제------------------------------------
+
 		//세션 유저정보를 userno로 조회
 		HttpSession session = req.getSession();
 
@@ -41,17 +43,16 @@ public class BoardDeleteController extends HttpServlet {
 			
 		} else {
 			System.out.println("삭제성공");
-			//------------------------게시글 삭제----------------------------------
 			
 			Board board = boardService.getBoardno(req);
 			
 			boardService.deleteboard(board);
 			
-			//------------------------게시글 삭제----------------------------------
-			
 			//게시글 삭제시 게시판 default페이지로 이동
 			resp.sendRedirect("/board/notice");
 
+		//---------------------------게시글 삭제------------------------------------
+			
 		} 
 	}
 }

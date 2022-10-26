@@ -26,10 +26,12 @@ public class OrderViewController extends HttpServlet {
 		
 		HttpSession session = req.getSession();
 				
+		//로그인상태가 아닐때 로그인페이지로 이동
 		if( session.getAttribute("userno")==null ) {
 			resp.sendRedirect("/cmc/login");
 			
 		} else {
+			//로그인상태일 경우 userno에 따른 주문목록 조회
 			int userno = (int)session.getAttribute("userno");
 			
 			System.out.println("/orderafterlist userno : " + userno);
