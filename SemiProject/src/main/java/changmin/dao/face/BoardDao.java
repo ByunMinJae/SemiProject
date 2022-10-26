@@ -63,7 +63,11 @@ public interface BoardDao {
 
 	public User getNick(Connection conn, Board bUserno);
 
-	public Board boardUserno(Connection conn);
+	public List<Board> selectAll(Connection connection, Paging paging, Category category, String word);
+
+	public int selectCntAll(Connection connection, Category category, String word);
+
+
 
 
 	

@@ -95,6 +95,42 @@ public class BoardDaoImpl implements BoardDao {
 	}
 	
 	@Override
+	public int selectCntAll(Connection conn, Category category, String word) {
+		
+		String sql = "";
+		sql += "SELECT count(*) cnt";
+		sql += "	FROM board_info";
+		sql += "	WHERE categoryno = ?";
+		sql += "	AND boardtitle LIKE ?";
+		
+		//총 게시글 수 변수
+		int count = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql); //SQL수행 객체
+			
+			ps.setInt(1, category.getCategoryno());
+			ps.setString(2, "%" + word + "%");
+			rs = ps.executeQuery(); //SQL수행 및 결과 집합 저장
+
+			
+			while( rs.next() ) {
+				count = rs.getInt("cnt");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			System.out.println("selectCntAll : " + count);
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		//최종 결과 반환
+		return count;
+	}
+	
+	@Override
 	public List<Board> selectAll(Connection conn, Paging paging, Category category) {
 		System.out.println("selectAll - start");
 		
@@ -119,6 +155,62 @@ public class BoardDaoImpl implements BoardDao {
 			ps.setInt(1, category.getCategoryno());
 			ps.setInt(2, paging.getStartNo());
 			ps.setInt(3, paging.getEndNo());
+			
+			rs = ps.executeQuery();
+			
+			while( rs.next() ) {
+				Board b = new Board();
+				
+				b.setBoardno(rs.getInt("boardno"));
+				b.setBoardtitle(rs.getString("boardtitle"));
+				b.setBoarddate(rs.getDate("boarddate"));
+				b.setUserno(rs.getInt("userno"));
+				b.setCategoryno(rs.getInt("categoryno"));
+				b.setHit(rs.getInt("hit"));
+				b.setNick(rs.getString("nick"));
+				
+				list.add(b);
+				
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally { 
+			System.out.println("카테고리넘버 : " + category.getCategoryno());
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		return list;
+	}
+	
+	@Override
+	public List<Board> selectAll(Connection conn, Paging paging, Category category, String word) {
+		System.out.println("selectAll - start");
+		
+		//SQL 작성
+	      String sql = "";
+	      sql += "SELECT * FROM ("; 
+	      sql += "   SELECT rownum rnum, B.* FROM (";
+	      sql += "      SELECT";
+	      sql += "         boardno, boardtitle, boarddate, userno, categoryno, hit, nick";
+	      sql += "       FROM board_info";
+	      sql += "       WHERE categoryno=?";
+	      sql += "		 AND boardtitle LIKE ?";
+	      sql += "       ORDER BY boardno DESC";
+	      sql += "    ) B";
+	      sql += " ) BOARD";
+	      sql += " WHERE rnum BETWEEN ? AND ?";
+		
+		List<Board> list = new ArrayList<>();
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, category.getCategoryno());
+			ps.setString(2, "%" + word + "%");
+			ps.setInt(3, paging.getStartNo());
+			ps.setInt(4, paging.getEndNo());
 			
 			rs = ps.executeQuery();
 			
@@ -303,27 +395,6 @@ public class BoardDaoImpl implements BoardDao {
 		
 		return user;
 	}
-
-	@Override
-	public Board boardUserno(Connection conn) {
-
-		String sql="";
-		sql+="SELECT userno";
-		sql+="	FROM board_info";
-		sql+="	WHERE boardno=?";
-		
-		try {
-			ps = conn.prepareStatement(sql);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			JDBCTemplate.close(rs);
-			JDBCTemplate.close(ps);
-		}
-		
-		return null;
-	}
-	
 
 
 }

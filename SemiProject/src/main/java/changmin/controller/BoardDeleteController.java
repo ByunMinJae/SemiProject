@@ -23,6 +23,8 @@ public class BoardDeleteController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("/board/delete [POST]");
 
+		//---------------------------게시글 삭제------------------------------------
+
 		//세션 유저정보를 userno로 조회
 		HttpSession session = req.getSession();
 
@@ -34,22 +36,23 @@ public class BoardDeleteController extends HttpServlet {
 		
 		//세션 userno가 게시판 userno와 일치할때 삭제 가능
 		if( (int)session.getAttribute("userno")!=userno ) {
-			
+
+			//삭제 권한이 없을경우 오류발생시키기
+			req.getRequestDispatcher("").forward(req, resp);
 			System.out.println("Session userno != Board userno");
 			
 		} else {
-			
-			//------------------------게시글 삭제----------------------------------
+			System.out.println("삭제성공");
 			
 			Board board = boardService.getBoardno(req);
 			
 			boardService.deleteboard(board);
 			
-			//------------------------게시글 삭제----------------------------------
-			
 			//게시글 삭제시 게시판 default페이지로 이동
 			resp.sendRedirect("/board/notice");
 
+		//---------------------------게시글 삭제------------------------------------
+			
 		} 
 	}
 }

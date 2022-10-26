@@ -53,7 +53,7 @@ $(document).ready(function(){
 	                	amount: <%=orderInfo.getTotalamount()%>,
 	                	userno: <%=loginUser.getUserno()%>,
 		                buyer_email: '<%=loginUser.getEmail()%>',
-		                buyer_name: '<%=orderInfo.getBuyprodname()%>',
+		                buyer_name: '<%=loginUser.getUsername()%>',
 		                buyer_tel: '<%=loginUser.getPhone()%>',
 		                buyer_addr: $("#addressvalue").val(),
 		                orderno: <%=orderInfo.getOrderno()%>
@@ -182,7 +182,7 @@ button {
 #paydo {
 	position: relative;
 	left: 160px;
-	top: 75px;
+	top: 50px;
 	margin: 0 auto;
 	border: none;
 	padding: 0;
@@ -224,6 +224,11 @@ h3{
 .info_detail {
 	font-family: 'GmarketSansMedium';
 }
+
+#onechance {
+	font-family: 'GmarketSansMedium';
+	float: right;
+}
 #buttonposition {
 	position: relative;
 	top: -13px;
@@ -244,6 +249,10 @@ h3{
 	position: relative;
 	top: -15px;
 	left: 80px; 
+}
+
+input[type=text] {
+	min-height: 20px;
 }
 
 #addressChange input:not(#postbutton){
@@ -325,6 +334,7 @@ li {
 				<input type="hidden" name="address" id="addressSubmit">
 	
 				<button type="button" id="addressSubmitButton" class="w-button">주소변경</button>
+				<p id="onechance"> * 이번만 다른주소로 받기</p>
 				<span id="address_msg" class="msg"></span><br>
 			</div>
 		</div>
@@ -344,8 +354,10 @@ li {
 		<!-- 결제정보 -->
 		<div id="pay_info">
 			<h3>결제 정보</h3>
-			<span class="info">&nbsp;총결제금액</span>
+			<span class="info">&ensp;&emsp;상품이름</span>
 			<input type="hidden" id="prodnamevalue" value="<%=orderInfo.getBuyprodname() %>">
+			<span class="info_detail"><%=orderInfo.getBuyprodname() %></span><br><br>
+			<span class="info">&nbsp;총결제금액</span>
 			<input type="hidden" id="prodpricevalue" value="<%=orderInfo.getTotalamount() %>">
 			<span class="info_detail"><%=orderInfo.getTotalamount() %></span>
 		</div> 

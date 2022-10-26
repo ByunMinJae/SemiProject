@@ -28,6 +28,7 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public List<Board> getList(Paging paging, Category category) {
+		
 		return boardDao.selectAll(JDBCTemplate.getConnection(), paging, category);
 	}
 	
@@ -36,6 +37,26 @@ public class BoardServiceImpl implements BoardService{
 		
 		//총 게시글 수 조회하기
 		int totalCount = boardDao.selectCntAll(JDBCTemplate.getConnection(), category);
+		
+		
+		//전달파라미터 curPage 추출하기
+		String param = req.getParameter("curPage");
+		int curPage = 0;
+		if( param != null && !"".equals(param) ) {
+			curPage = Integer.parseInt(param);
+		}
+		
+		//Paging객체 생성
+		Paging paging = new Paging(totalCount, curPage);
+		
+		return paging;
+	}
+	
+	@Override
+	public Paging getPaging(HttpServletRequest req,Category category, String word) {
+		
+		//총 게시글 수 조회하기
+		int totalCount = boardDao.selectCntAll(JDBCTemplate.getConnection(), category, word);
 		
 		
 		//전달파라미터 curPage 추출하기
@@ -127,19 +148,11 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public Board boardUserno(HttpServletRequest req) {
-		
-		Board board = new Board();
-		
-		String userno = req.getParameter("userno");
-
-		if( userno != null && !"".equals(userno) ) {
-			board.setUserno( Integer.parseInt(userno));
-			
-		}
-		
-		return board;
+	public List<Board> getList(Paging paging, Category category, String word) {
+	
+		return boardDao.selectAll(JDBCTemplate.getConnection(), paging, category, word);
 	}
+
 
 
 

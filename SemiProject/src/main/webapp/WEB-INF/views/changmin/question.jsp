@@ -5,6 +5,7 @@
     pageEncoding="UTF-8"%>
 <% List<Board> boardList = (List) request.getAttribute("boardList"); %>
 <% Paging paging = (Paging) request.getAttribute("paging"); %>
+<% String wordParam = (String) request.getAttribute("word"); %>
 <%@include file="../layout/header.jsp" %>
 <!-- 부트스트랩 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -75,38 +76,41 @@ img {
 	
 	<div class="right">
 		<h1>질문게시판</h1>
-		<table class="table table-hover">
-			<tr class="success">
-				<th width="8%">번호</th>
-				<th width="54%">제목</th>
-				<th width="15%">글쓴이</th>
-				<th width="15%">등록일</th>
-				<th width="8%">조회수</th>
-			</tr>
-		
-		<% for(int i=0; i<boardList.size(); i++) {%>
-			<% if(boardList.get(i).getCategoryno()==5){ %>
-			<tr class="active">
-				<td><%= boardList.get(i).getBoardno() %>
-				<td>
-					<a href="/board/view?boardno=<%=boardList.get(i).getBoardno() %>">
-						<%=boardList.get(i).getBoardtitle() %>
-					</a>
-					
-				<td><%= boardList.get(i).getNick() %></td>
-				<td><%= boardList.get(i).getBoarddate() %></td>
-				<td><%= boardList.get(i).getHit() %></td>
-			</tr>
-			<% } %>
-		<% } %>
-		</table>
+			<form name="frm" method="GET" action="./question">
+				<table class="table table-hover">
+					<tr class="success">
+						<th width="8%">번호</th>
+						<th width="54%">제목</th>
+						<th width="15%">글쓴이</th>
+						<th width="15%">등록일</th>
+						<th width="8%">조회수</th>
+					</tr>
+					<% for(int i=0; i<boardList.size(); i++) {%>
+					<tr class="active">
+						<% if(boardList.get(i).getCategoryno()==5){ %>
+								<td><%= boardList.get(i).getBoardno() %>
+								<td>
+									<a href="/board/view?boardno=<%=boardList.get(i).getBoardno() %>&cateno=<%=boardList.get(i).getCategoryno()%>">
+										<%=boardList.get(i).getBoardtitle() %>
+									</a>
+									
+								<td><%= boardList.get(i).getNick() %></td>
+								<td><%= boardList.get(i).getBoarddate() %></td>
+								<td><%= boardList.get(i).getHit() %></td>
+						<% } %>
+					</tr> 
+			 		<% } %>
+				</table>
+			<input type="text" name="word" value="" placeholder="제목을 입력해주세요">
+			<button type="submit">검색</button>
+			</form>
 			<div class="text-center">
 				<ul class="pagination">
 				
 <%-- 					<%	if( paging.getCurPage() != 1) { %>
 					<li><a href="./question">&larr; 처음</a></li>
 					<%	} %> --%>
-				
+				<% if( wordParam ==null ) { %>
 					<%	if( paging.getCurPage() != 1) { %>
 					<li><a href="./question?curPage=<%=paging.getCurPage() - 1 %>">&lt;</a></li>
 					<%	} %>
@@ -122,6 +126,23 @@ img {
 					<%	if( paging.getCurPage() != paging.getTotalPage() ) { %>
 					<li><a href="./question?curPage=<%=paging.getCurPage() + 1 %>">&gt;</a></li>
 					<%	} %>
+				<% } else {%>
+					<%	if( paging.getCurPage() != 1) { %>
+					<li><a href="./question?curPage=<%=paging.getCurPage() - 1 %>&word=<%=wordParam%>">&lt;</a></li>
+					<%	} %>
+					
+					<%	for(int i=paging.getStartPage(); i<=paging.getEndPage(); i++) { %>
+					<%		if( i == paging.getCurPage() ) { %>
+					<li class="active"><a href="./question?curPage=<%=i %>&word=<%=wordParam%>"><%=i %></a></li>
+					<%		} else { %>
+					<li><a href="./question?curPage=<%=i %>&word=<%=wordParam%>"><%=i %></a></li>
+					<%		} %>
+					<%	} %>
+			
+					<%	if( paging.getCurPage() != paging.getTotalPage() ) { %>
+					<li><a href="./question?curPage=<%=paging.getCurPage() + 1 %>&word=<%=wordParam%>">&gt;</a></li>
+					<%	} %>				
+				<% } %>
 					
 					
 <%-- 					<%	if( paging.getCurPage() != paging.getTotalPage() ) { %>
