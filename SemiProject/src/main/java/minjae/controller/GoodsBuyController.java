@@ -30,7 +30,7 @@ public class GoodsBuyController extends HttpServlet {
 		
 		} else {
 			
-			int userno = (int)session.getAttribute("userno");
+			int userno = (Integer)(session.getAttribute("userno"));
 			System.out.println("구매요청한 회원번호 : " + userno);
 			System.out.println(req.getParameter("buyprodname") + " : " + req.getParameter("totalamount"));
 			int res = goodsService.insertBuyProd(req, userno);
