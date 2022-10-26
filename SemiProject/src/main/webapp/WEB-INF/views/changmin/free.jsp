@@ -57,7 +57,16 @@ img {
 	float: right;
 }
  
+.search {
+	float: right;
+}
 
+.text-center {
+	position: relative;
+	top: 50px;
+	padding-left: 150px;
+	left: 30px;
+} 
 
 </style>
 <div class="myContainer">
@@ -104,8 +113,10 @@ img {
 					</tr> 
 			 		<% } %>
 				</table>
-			<input type="text" name="word" value="" placeholder="제목을 입력해주세요">
-			<button type="submit">검색</button>
+				<div class="search">
+				<input type="text" name="word" value="" placeholder="제목을 입력해주세요">
+				<button type="submit">검색</button>
+				</div>
 			</form>
 			<div class="text-center">
 				<ul class="pagination">
