@@ -91,10 +91,10 @@ public interface BoardService {
 	public Board getUserno(HttpServletRequest req);
 
 
-	public List<Board> getList(Paging paging, Category category, String word);
+	public List<Board> getList(Paging paging, Category category, String word, String searchList);
 
 
-	public Paging getPaging(HttpServletRequest req, Category category, String word);
+	public Paging getPaging(HttpServletRequest req, Category category, String word, String searchList);
 
 
 
