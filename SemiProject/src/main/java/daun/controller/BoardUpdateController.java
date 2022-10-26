@@ -25,10 +25,6 @@ public class BoardUpdateController extends HttpServlet {
 		
 		Board boardno = boardService.getBoardno(req);
 		
-		HttpSession session = req.getSession();
-		String userid = (String)session.getAttribute("userid");
-
-		
 		//상세보기 결과 조회
 		Board updateBoard = boardService.view(boardno);
 		

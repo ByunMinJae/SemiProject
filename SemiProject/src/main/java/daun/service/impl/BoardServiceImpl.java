@@ -25,11 +25,13 @@ import daun.dto.Report;
 import daun.service.face.BoardService;
 import daun.util.Paging;
 import oracle.net.aso.b;
+import sharon.dto.User;
 
 public class BoardServiceImpl implements BoardService {
 
 	//DAO객체
 	private BoardDao boardDao = new BoardDaoImpl();
+	private Connection conn = JDBCTemplate.getConnection();
 
 	
 	@Override
@@ -184,10 +186,10 @@ public class BoardServiceImpl implements BoardService {
 				}
 				
 				//key에 맞게 value를 DTO에 삽입하기
-				if( "title".equals(key) ) {
+				if( "boardtitle".equals(key) ) {
 					board.setBoardtitle(value);
 				}
-				if( "content".equals(key) ) {
+				if( "boardcon".equals(key) ) {
 					board.setBoardcon(value);
 				}
 				if( "categoryno".equals(key) ) {
@@ -235,16 +237,22 @@ public class BoardServiceImpl implements BoardService {
 		//게시글 번호 생성
 		int boardno = boardDao.selectNextBoardno(conn);
 		
-		
 		//게시글 번호 삽입
 		board.setBoardno(boardno);
-
-		board.setUserno((int)req.getSession().getAttribute("userno"));
-
-		//작성자 닉네임 처리
-		board.setNick( (String) req.getSession().getAttribute("nick") );
 		
-		if( boardDao.insert(conn, board) > 0 ) {
+		//userno 처리 필요 ->세션
+//		board.setUserno((int)req.getSession().getAttribute("userno"));
+		
+		//nick 처리 필요 -> userno이용하여 DB조회
+
+		int userno = (int)req.getSession().getAttribute("userno");
+
+		
+		User nick = boardDao.UserInfo(conn, userno);
+		System.out.println("nick : " + nick );
+		
+		
+		if( boardDao.insert(conn, board, userno) > 0 ) {
 			JDBCTemplate.commit(conn);
 		} else {
 			JDBCTemplate.rollback(conn);
@@ -265,7 +273,8 @@ public class BoardServiceImpl implements BoardService {
 			
 		}
 		
-		//----------------------------------------------
+		
+		
 	}
 	
 	@Override
@@ -426,19 +435,43 @@ public class BoardServiceImpl implements BoardService {
 		//DB연결 객체
 		Connection conn = JDBCTemplate.getConnection();
 		
-		//게시글 정보 DTO객체
+		//게시글 정보 조회
+//		Board 
+		
+		//신고 정보 DTO객체
 		Report report = new Report();
+		
+		//신고 번호 생성
+		int reportno = boardDao.selectNextreportno(conn);
+		
+		//신고 번호 삽입
+		report.setReportno(reportno);
+		
 		
 		if( boardDao.report(conn, report) > 0 ) {
 			JDBCTemplate.commit(conn);
 		} else {
 			JDBCTemplate.rollback(conn);
 		}
-		
-		
-		
 	}
 	
+	@Override
+	public User getUserInfo(int userno) {
+		return boardDao.getUserInfo(conn, userno);
+	}
+	
+	@Override
+	public Board viewBeforeReport(Board boardno) {
+		
+		//DB연결 객체
+		Connection conn = JDBCTemplate.getConnection();
+		
+		//게시글 조회
+		Board board = boardDao.selectBoardByBoardno(conn, boardno);
+		
+		//조회된 게시글 리턴
+		return board;
+	}
 	
 	
 }

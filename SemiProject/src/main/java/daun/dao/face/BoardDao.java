@@ -3,7 +3,6 @@ package daun.dao.face;
 import java.sql.Connection;
 import java.util.List;
 
-import changmin.dto.Category;
 import daun.dto.Board;
 import daun.dto.BoardFile;
 import daun.dto.Report;
@@ -83,8 +82,7 @@ public interface BoardDao {
 	 * @param board - 삽입될 게시글 내용
 	 * @return int - INSERT 쿼리 수행 결과
 	 */
-	public int insert(Connection conn, Board board);
-
+	public int insert(Connection conn, Board board, int userno);
 	/**
 	 * 시퀀스를 이용하여 다음 게시글 번호 조회하기
 	 * 
@@ -138,15 +136,25 @@ public interface BoardDao {
 	 * @return int - INSERT REPORT 수행 결과
 	 */
 	public int report(Connection conn, Report report);
-	
-//	/**
-//	 * 
-//	 * 
-//	 * @param conn
-//	 * @param category
-//	 * @return
-//	 */
-//	public int getCategoty(Connection conn, Category categoryno);
 
+	
+	/**
+	 * 시퀀스를 이용하여 다음 게시글 번호 조회하기
+	 * 
+	 * @param conn - DB연결 객체
+	 * @return int - 다음 게시글 신고 번호
+	 */
+	public int selectNextreportno(Connection conn);
+
+	/**
+	 * 
+	 * 
+	 * 
+	 * @param conn
+	 * @param userno
+	 * @return
+	 */
+	public User UserInfo(Connection conn, int userno);
+	
 
 }

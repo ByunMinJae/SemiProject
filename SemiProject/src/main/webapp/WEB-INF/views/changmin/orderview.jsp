@@ -33,6 +33,8 @@ td {
 #listhead {
 	font-family: 'dalseo';
 	font-weight: bold;
+	color: black;
+	text-decoration: none;
 }
 
 .orderTitle {
@@ -46,56 +48,69 @@ td {
 .orderDetail {
 	padding: 10px 10px 10px 20px;
 }
+
+.search {
+	float: right;
+}
+
+.text-center {
+	position: relative;
+	top: 50px;
+	padding-left: 150px;
+	left: 30px;
+} 
 </style>
  
 
 <div class="myContainer">
-	<h1 id="listhead">결제목록</h1>
-	<form name="frm" method="GET" action="./orderafterlist">
-		<% for(int i=0; i<orderView.size(); i++) { %>
-		<table class="table">
-			<tr>
-				<td>
-					<span class="orderTitle">결제번호</span>
-					<span class="orderDetail"><%= orderView.get(i).getOrderafterno() %></span>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<span class="orderTitle">결제시간</span>
-					<span class="orderDetail"><%= orderView.get(i).getOrderdate() %></span>
-				</td>
-			</tr>
-			
-			<tr>
-				<td>
-					<span class="orderTitle">상품이름</span>
-					<span class="orderDetail"><%= orderView.get(i).getProdname() %></span>
-				</td>
-			</tr>
-			
-			<tr>
-				<td>
-					<span class="orderTitle">결제금액</span>
-					<span class="orderDetail"><%= orderView.get(i).getAmount() %></span>
-				</td>
-			</tr>
-			
-			<tr>
-				<td>
-					<span class="orderTitle">배송주소</span>
-					<span class="orderDetail"><%= orderView.get(i).getBuyeraddr() %></span>
-				</td>
-			</tr>
-			
-			<tr>
+	<h1 id="listhead"><a href="/orderafterlist" id="listhead">결제목록</a></h1>
+		<form name="frm" method="GET" action="./orderafterlist">
+			<% for(int i=0; i<orderView.size(); i++) { %>
+			<table class="table">
+				<tr>
+					<td>
+						<span class="orderTitle">결제번호</span>
+						<span class="orderDetail"><%= orderView.get(i).getOrderafterno() %></span>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<span class="orderTitle">결제시간</span>
+						<span class="orderDetail"><%= orderView.get(i).getOrderdate() %></span>
+					</td>
+				</tr>
 				
-			</tr>
-		</table>
-		<% } %>
-	<input type="text" name="word" value="" placeholder="상품명을 입력해주세요">
-	<button type="submit">검색</button>
-	</form>
+				<tr>
+					<td>
+						<span class="orderTitle">상품이름</span>
+						<span class="orderDetail"><%= orderView.get(i).getProdname() %></span>
+					</td>
+				</tr>
+				
+				<tr>
+					<td>
+						<span class="orderTitle">결제금액</span>
+						<span class="orderDetail"><%= orderView.get(i).getAmount() %></span>
+					</td>
+				</tr>
+				
+				<tr>
+					<td>
+						<span class="orderTitle">배송주소</span>
+						<span class="orderDetail"><%= orderView.get(i).getBuyeraddr() %></span>
+					</td>
+				</tr>
+				
+				<tr>
+					
+				</tr>
+			</table>
+			<% } %>
+				<div class="search">
+				<input type="text" name="word" value="" placeholder="제목을 입력해주세요">
+				<button type="submit">검색</button>
+				</div>
+		</form>
 	
 	<div class="text-center">
 	<ul class="pagination">
@@ -134,7 +149,7 @@ td {
 			<li><a href="./orderafterlist?curPage=<%=paging.getCurPage() + 1 %>&word=<%=wordParam%>">&gt;</a></li>
 			<%	} %>
 		<%  } %>
-	</ul>
+	</ul> 
 </div>
 </div>
 <%@ include file="../layout/footer.jsp" %>

@@ -4,8 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import changmin.dto.Board;
 import changmin.dto.Category;
-import daun.dto.Board;
 import sharon.dto.User;
 import util.Paging;
 
@@ -79,7 +79,7 @@ public interface BoardService {
 	 * @param bUserno - 게시글 유저넘버
 	 * @return User - 게시글 유저넘버에 따른 닉네임 반환
 	 */
-	public User getNick(Board bUserno);
+//	public User getNick(Board bUserno);
 
 
 	/**
@@ -91,10 +91,10 @@ public interface BoardService {
 	public Board getUserno(HttpServletRequest req);
 
 
-	public List<Board> getList(Paging paging, Category category, String word);
+	public List<Board> getList(Paging paging, Category category, String word, String searchList);
 
 
-	public Paging getPaging(HttpServletRequest req, Category category, String word);
+	public Paging getPaging(HttpServletRequest req, Category category, String word, String searchList);
 
 
 

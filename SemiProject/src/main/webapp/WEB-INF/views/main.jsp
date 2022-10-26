@@ -10,9 +10,9 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 <!-- 부트스트랩 -->
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script> -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 <style type="text/css">
 
@@ -92,7 +92,6 @@
 
 .top-wrap .top .toplist {
 	margin-top: 8px;
-	padding-right: 15px;
 	float: right;
 }
 
@@ -113,7 +112,6 @@
 	position: relative;
 	top: 0;
 	height: 80px;
-	left: -2px;
 	margin: 0;
 	padding: 0;
 }
@@ -143,8 +141,8 @@
 .header-menu .hmenulist {
 	position: absolute;
 	float: left;
-	top: 12px; 
-	left: 571px;
+	top: 25px;
+	left: 40%;
 	height: 80px;
 } 
 
@@ -172,7 +170,7 @@
 	position: absolute;
 	display: inline-block;
 	top: 5px;
-	left: 89.2%; 
+	left: 90%;
 }
 
 .weather-widget p {
@@ -194,7 +192,6 @@
 
 .weather-widget .weather-content {
 	position: absolute;
-	top: 6px;
 	width: 142%;
 }	
 
@@ -242,8 +239,6 @@
 	font-family: bold;
 }
 .weather-widget .icon-wrap {
-	position: relative;
-	top: -12px;
 	display: inline-block;
 	width: 100px;
 }
@@ -415,7 +410,7 @@ html {
 
 .back img {
 	position: absolute;
-	right: 500px;
+	right: 600px; 
 	width: 100%;
 	height: 820px;
 	z-index: 0;
@@ -429,6 +424,7 @@ html {
  
 
 .textst{
+	color: black;
 	font-family: 'dalseo';
 	font-size: 60px;
 	text-align: center;
@@ -438,6 +434,7 @@ html {
 	margin-left: 50%;
 	transform: translateX(-200%);
 	opacity: 0;
+	width: 1000px;
 	animation: slide-in-anim 0s ease-out forwards;
 }
 :is(.one, .two, .three, .four){

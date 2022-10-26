@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import changmin.dto.Board;
 import changmin.service.face.BoardService;
 import changmin.service.impl.BoardServiceImpl;
-import daun.dto.Board;
 
 @WebServlet("/board/deleteboard")
 public class BoardDeleteController extends HttpServlet {

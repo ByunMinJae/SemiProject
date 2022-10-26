@@ -7,10 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import changmin.dao.face.BoardDao;
 import changmin.dao.impl.BoardDaoImpl;
+import changmin.dto.Board;
 import changmin.dto.Category;
 import changmin.service.face.BoardService;
 import common.JDBCTemplate;
-import daun.dto.Board;
 import sharon.dto.User;
 import util.Paging;
 
@@ -53,10 +53,10 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	@Override
-	public Paging getPaging(HttpServletRequest req,Category category, String word) {
+	public Paging getPaging(HttpServletRequest req,Category category, String word, String searchList) {
 		
 		//총 게시글 수 조회하기
-		int totalCount = boardDao.selectCntAll(JDBCTemplate.getConnection(), category, word);
+		int totalCount = boardDao.selectCntAll(JDBCTemplate.getConnection(), category, word, searchList);
 		
 		
 		//전달파라미터 curPage 추출하기
@@ -141,16 +141,16 @@ public class BoardServiceImpl implements BoardService{
 		return board;
 	}
 
-	@Override
-	public User getNick(Board bUserno) {
-		
-		return boardDao.getNick(JDBCTemplate.getConnection(), bUserno);
-	}
+//	@Override
+//	public User getNick(Board bUserno) {
+//		
+//		return boardDao.getNick(JDBCTemplate.getConnection(), bUserno);
+//	}
 
 	@Override
-	public List<Board> getList(Paging paging, Category category, String word) {
+	public List<Board> getList(Paging paging, Category category, String word, String searchList) {
 	
-		return boardDao.selectAll(JDBCTemplate.getConnection(), paging, category, word);
+		return boardDao.selectAll(JDBCTemplate.getConnection(), paging, category, word, searchList);
 	}
 
 

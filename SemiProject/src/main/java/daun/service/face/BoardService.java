@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import daun.dto.Board;
 import daun.dto.BoardFile;
 import daun.util.Paging;
+import sharon.dto.User;
 
 public interface BoardService {
 
@@ -88,6 +89,15 @@ public interface BoardService {
 	 * @param req - 요청 정보 객체
 	 */
 	public void report(HttpServletRequest req);
+
+	
+	public User getUserInfo(int userno);
+
+	
+	
+	public Board viewBeforeReport(Board boardno);
+
+	
 
 
 	
