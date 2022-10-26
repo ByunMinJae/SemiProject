@@ -87,6 +87,9 @@ function hiddenImg( btnCateg, mi ) {
 </script>
 
 <style type="text/css">
+#wrapper {
+	background-color: #BFDCFB;
+}
 #mpmWrap {
 	width: 1100px;
     height: 600px;
@@ -99,7 +102,7 @@ function hiddenImg( btnCateg, mi ) {
 	width: 40%;
 	height: 651px;
 	float: left;
-	background: #c7f2a482;
+	background: #e0fdc9;
 	position: absolute;
 }
 #userInfo {
@@ -162,7 +165,7 @@ li.info_left {
     left: 451px;
 }
 .btnCateg {
-	width: 144px;
+	width: 245px;
     height: 42px;
     margin: 20px 0 10px;
     background-color: #4eab51;
@@ -188,7 +191,7 @@ li.info_left {
 #contents {
 	width: 500px;
     height: 336px;
-    background: #fcffb282;
+    background: #fcffbe;
     border: 1px solid #ccc;
     margin-left: 53px;
     border-radius: 14px;
@@ -288,15 +291,15 @@ li.info_left {
 <div id="mpmRight">
 	<!-- 상단 카테고리 버튼 -->
 	<div class="mount_img" id="mi1"></div>
-	<a href="/orderafterlist"><button class="btnCateg" id="btnCateg1">주문목록</button></a>
-	<div class="mount_img" id="mi2"></div>
-	<a href=""><button class="btnCateg" id="btnCateg2">반품/교환/취소</button></a>
+	<a href="/orderafterlist"><button class="btnCateg" id="btnCateg1">결제내역</button></a>
+<!-- 	<div class="mount_img" id="mi2"></div> -->
+<!-- 	<a href=""><button class="btnCateg" id="btnCateg2">반품/교환/취소</button></a> -->
 	<div class="mount_img" id="mi3"></div>
 	<a href="/cart/list"><button class="btnCateg" id="btnCateg3">장바구니</button></a>
 	<!-- contents 영역 -->
 	<div id="contents">
 		<!-- delivery -->
-		<span class="con_text" style="margin: 55px 0 0 50px;">배송중</span>
+		<span class="con_text" style="margin: 55px 0 0 41px;">결제완료</span>
 		<div class="cont_img1 ci"></div>
 		<div class="cir_img"></div>
 		

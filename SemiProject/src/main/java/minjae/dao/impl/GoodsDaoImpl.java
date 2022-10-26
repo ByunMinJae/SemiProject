@@ -270,7 +270,7 @@ public class GoodsDaoImpl implements GoodsDao {
 		sql += "SELECT * FROM (";
 		sql += "	SELECT rownum rnum, B.* FROM (";
 		sql += "		SELECT";
-		sql += "			prodno, prodname, prodprice, prodimage, prodcon, proddate, prodpop";
+		sql += "			prodno, prodname, prodprice, prodimage, prodcon, proddate, prodpop";//이미지 있는거
 		sql += "		FROM product";
 		sql += "		WHERE prodname LIKE ?";
 		sql += "		ORDER BY prodno";

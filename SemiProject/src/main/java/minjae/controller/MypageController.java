@@ -31,9 +31,7 @@ public class MypageController extends HttpServlet {
 		
 		if(null != session.getAttribute("userno")) {
 			
-			double dbluserno = (double)session.getAttribute("userno");
-			
-			int userno = (int)dbluserno;
+			int userno = (int)session.getAttribute("userno");
 			
 			MpMain mpMain = mypageService.getUserInfo(userno);
 			MpMainRight mpMR = mypageService.getOrderInfo(userno);
