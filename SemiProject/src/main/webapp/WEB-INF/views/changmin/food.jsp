@@ -156,14 +156,14 @@ img {
 					
 					<%	for(int i=paging.getStartPage(); i<=paging.getEndPage(); i++) { %>
 					<%		if( i == paging.getCurPage() ) { %>
-					<li class="active"><a href="./food?curPage=<%=i %>&searchList=<%=searchList%>&word=<%=wordParam%>"><%=i %></a></li>
+					<li class="active"><a href="./food?curPage=<%=i %>&searchList=<%=request.getParameter("searchList")%>&word=<%=wordParam%>"><%=i %></a></li>
 					<%		} else { %>
-					<li><a href="./food?curPage=<%=i %>&searchList=<%=searchList%>&word=<%=wordParam%>"><%=i %></a></li>
+					<li><a href="./food?curPage=<%=i %>&searchList=<%=request.getParameter("searchList")%>&word=<%=wordParam%>"><%=i %></a></li>
 					<%		} %>
 					<%	} %>
 			
 					<%	if( paging.getCurPage() != paging.getTotalPage() ) { %>
-					<li><a href="./food?curPage=<%=paging.getCurPage() + 1 %>&searchList=<%=searchList%>&word=<%=wordParam%>">&gt;</a></li>
+					<li><a href="./food?curPage=<%=paging.getCurPage() + 1 %>&searchList=<%=request.getParameter("searchList")%>&word=<%=wordParam%>">&gt;</a></li>
 					<%	} %>				
 				<% } %>
 					

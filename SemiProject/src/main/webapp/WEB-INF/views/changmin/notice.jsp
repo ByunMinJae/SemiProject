@@ -177,19 +177,19 @@ img {
 					<%	} %>
 				<% } else {%>
 					<%	if( paging.getCurPage() != 1) { %>
-					<li><a href="./notice?curPage=<%=paging.getCurPage() - 1 %>&searchList=<%=searchList%>&word=<%=wordParam%>">&lt;</a></li>
+					<li><a href="./notice?curPage=<%=paging.getCurPage() - 1 %>&searchList=<%=request.getParameter("searchList")%>&word=<%=wordParam%>">&lt;</a></li>
 					<%	} %>
 					
 					<%	for(int i=paging.getStartPage(); i<=paging.getEndPage(); i++) { %>
 					<%		if( i == paging.getCurPage() ) { %>
-					<li class="active"><a href="./notice?curPage=<%=i %>&searchList=<%=searchList%>&word=<%=wordParam%>"><%=i %></a></li>
+					<li class="active"><a href="./notice?curPage=<%=i %>&searchList=<%=request.getParameter("searchList")%>&word=<%=wordParam%>"><%=i %></a></li>
 					<%		} else { %>
-					<li><a href="./notice?curPage=<%=i %>&searchList=<%=searchList%>&word=<%=wordParam%>"><%=i %></a></li>
+					<li><a href="./notice?curPage=<%=i %>&searchList=<%=request.getParameter("searchList")%>&word=<%=wordParam%>"><%=i %></a></li>
 					<%		} %>
 					<%	} %>
 			
 					<%	if( paging.getCurPage() != paging.getTotalPage() ) { %>
-					<li><a href="./notice?curPage=<%=paging.getCurPage() + 1 %>&searchList=<%=searchList%>&word=<%=wordParam%>">&gt;</a></li>
+					<li><a href="./notice?curPage=<%=paging.getCurPage() + 1 %>&searchList=<%=request.getParameter("searchList")%>&word=<%=wordParam%>">&gt;</a></li>
 					<%	} %>				
 				<% } %>
 					

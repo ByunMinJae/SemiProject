@@ -120,9 +120,8 @@ img {
 			 		<% } %>
 				</table>
 				<div class="search">
-				<select class="searchList" name="searchList">
-					<option value="0">선택</option>
-					<option value="boardtitle">제목</option>
+				<select class="searchListHead" name="searchList">
+					<option value="boardtitle" selected="selected">제목</option>
 					<option value="nick">닉네임</option>
 				</select>
 				<input type="text" name="word" value="" placeholder="검색어를 입력해주세요">
@@ -158,14 +157,14 @@ img {
 					
 					<%	for(int i=paging.getStartPage(); i<=paging.getEndPage(); i++) { %>
 					<%		if( i == paging.getCurPage() ) { %>
-					<li class="active"><a href="./question?curPage=<%=i %>&searchList=<%=searchList%>&word=<%=wordParam%>"><%=i %></a></li>
+					<li class="active"><a href="./question?curPage=<%=i %>&searchList=<%=request.getParameter("searchList")%>&word=<%=wordParam%>"><%=i %></a></li>
 					<%		} else { %>
-					<li><a href="./question?curPage=<%=i %>&searchList=<%=searchList%>&word=<%=wordParam%>"><%=i %></a></li>
+					<li><a href="./question?curPage=<%=i %>&searchList=<%=request.getParameter("searchList")%>&word=<%=wordParam%>"><%=i %></a></li>
 					<%		} %>
 					<%	} %>
 			
 					<%	if( paging.getCurPage() != paging.getTotalPage() ) { %>
-					<li><a href="./question?curPage=<%=paging.getCurPage() + 1 %>&searchList=<%=searchList%>&word=<%=wordParam%>">&gt;</a></li>
+					<li><a href="./question?curPage=<%=paging.getCurPage() + 1 %>&searchList=<%=request.getParameter("searchList")%>&word=<%=wordParam%>">&gt;</a></li>
 					<%	} %>				
 				<% } %>
 					
