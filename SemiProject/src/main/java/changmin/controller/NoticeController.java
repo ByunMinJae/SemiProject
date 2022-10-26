@@ -46,14 +46,14 @@ public class NoticeController extends HttpServlet {
 			
 		} else {
 			System.out.println("검색페이지");
-			
+
 			Paging paging = boardService.getPaging(req, category, word, searchList);
 			List<Board> boardList = boardService.getList( paging, category, word, searchList ); 
 			
 			req.setAttribute("boardList", boardList);
 			req.setAttribute("paging", paging);
 			req.setAttribute("word", word);
-			req.setAttribute("list", searchList);
+			req.setAttribute("list", req.getAttribute(searchList));
 		}
 		
 		//----------------------게시글 전체 조회-------------------------------

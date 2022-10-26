@@ -6,13 +6,34 @@
 <% List<Board> boardList = (List) request.getAttribute("boardList"); %>
 <% Paging paging = (Paging) request.getAttribute("paging"); %>
 <% String wordParam = (String) request.getAttribute("word"); %>
+<% String searchList = (String) request.getAttribute("searchList"); %>
 <%@include file="../layout/header.jsp" %>
 <!-- 부트스트랩 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script type="text/javascript">
- 
+
+/* $(document).ready(function(){
+
+    $.ajax({
+        type: "GET",
+        url: "/board/notice",
+        dataType: "text",
+        data: {
+        	searchList:$(".searchList").val()
+        	},
+        error: function() {
+          console.log('통신실패!!');
+        },
+        success: function(data) {
+          console.log("통신데이터 값 : " + data);
+        }
+      });
+
+	
+}); */
+
 </script>
 
 <style type="text/css">
@@ -122,9 +143,9 @@ img {
 				</table>
 				<div class="search">
 				<select class="searchList" name="searchList">
-					<option value="0">선택</option>
-					<option value="boardtitle">제목</option>
-					<option value="nick">닉네임</option>
+					<!-- <option value="0">선택</option> -->
+					<option class="searchList" value="boardtitle" id="option1" >제목</option>
+					<option class="searchList" value="nick" id="option2">닉네임</option>
 				</select>
 				<input type="text" name="word" value="" placeholder="검색어를 입력해주세요">
 				<button type="submit">검색</button>
@@ -155,19 +176,19 @@ img {
 					<%	} %>
 				<% } else {%>
 					<%	if( paging.getCurPage() != 1) { %>
-					<li><a href="./notice?curPage=<%=paging.getCurPage() - 1 %>&word=<%=wordParam%>">&lt;</a></li>
+					<li><a href="./notice?curPage=<%=paging.getCurPage() - 1 %>&searchList=<%=searchList%>&word=<%=wordParam%>">&lt;</a></li>
 					<%	} %>
 					
 					<%	for(int i=paging.getStartPage(); i<=paging.getEndPage(); i++) { %>
 					<%		if( i == paging.getCurPage() ) { %>
-					<li class="active"><a href="./notice?curPage=<%=i %>&word=<%=wordParam%>"><%=i %></a></li>
+					<li class="active"><a href="./notice?curPage=<%=i %>&searchList=<%=searchList%>&word=<%=wordParam%>"><%=i %></a></li>
 					<%		} else { %>
-					<li><a href="./notice?curPage=<%=i %>&word=<%=wordParam%>"><%=i %></a></li>
+					<li><a href="./notice?curPage=<%=i %>&searchList=<%=searchList%>&word=<%=wordParam%>"><%=i %></a></li>
 					<%		} %>
 					<%	} %>
 			
 					<%	if( paging.getCurPage() != paging.getTotalPage() ) { %>
-					<li><a href="./notice?curPage=<%=paging.getCurPage() + 1 %>&word=<%=wordParam%>">&gt;</a></li>
+					<li><a href="./notice?curPage=<%=paging.getCurPage() + 1 %>&searchList=<%=searchList%>&word=<%=wordParam%>">&gt;</a></li>
 					<%	} %>				
 				<% } %>
 					

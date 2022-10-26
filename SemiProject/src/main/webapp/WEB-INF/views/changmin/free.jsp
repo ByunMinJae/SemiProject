@@ -6,6 +6,7 @@
 <% List<Board> boardList = (List) request.getAttribute("boardList"); %>
 <% Paging paging = (Paging) request.getAttribute("paging"); %>
 <% String wordParam = (String) request.getAttribute("word"); %>
+<% String searchList = (String) request.getAttribute("searchList"); %>
 <%@include file="../layout/header.jsp" %>
 <!-- 부트스트랩 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -160,14 +161,14 @@ img {
 					
 					<%	for(int i=paging.getStartPage(); i<=paging.getEndPage(); i++) { %>
 					<%		if( i == paging.getCurPage() ) { %>
-					<li class="active"><a href="./free?curPage=<%=i %>&word=<%=wordParam%>"><%=i %></a></li>
+					<li class="active"><a href="./free?curPage=<%=i %>&searchList=<%=searchList%>&word=<%=wordParam%>"><%=i %></a></li>
 					<%		} else { %>
-					<li><a href="./free?curPage=<%=i %>&word=<%=wordParam%>"><%=i %></a></li>
+					<li><a href="./free?curPage=<%=i %>&searchList=<%=searchList%>&word=<%=wordParam%>"><%=i %></a></li>
 					<%		} %>
 					<%	} %>
 			
 					<%	if( paging.getCurPage() != paging.getTotalPage() ) { %>
-					<li><a href="./free?curPage=<%=paging.getCurPage() + 1 %>&word=<%=wordParam%>">&gt;</a></li>
+					<li><a href="./free?curPage=<%=paging.getCurPage() + 1 %>&searchList=<%=searchList%>&word=<%=wordParam%>">&gt;</a></li>
 					<%	} %>				
 				<% } %>
 					
