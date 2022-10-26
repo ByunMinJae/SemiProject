@@ -31,18 +31,28 @@ public class NoticeController extends HttpServlet {
 		category.setCategoryno(1);
 		
 		//전달파라미터에서 현재 페이징 객체 계산하기
-		Paging paging = boardService.getPaging(req, category);
-		System.out.println("[TEST] " + paging);
 		
+		String word = req.getParameter("word");
 		
-		//게시글 페이징 목록 조회
-		List<Board> boardList = boardService.getList( paging, category );
-
-		//[TEST] 조회결과 확인
-		for(Board b : boardList)	System.out.println(b);
-		
-		req.setAttribute("paging", paging);
-		req.setAttribute("boardList", boardList);
+		if ( word==null || word.equals("")) {
+			System.out.println("디폴트페이지");
+			
+			Paging paging = boardService.getPaging(req, category);
+			List<Board> boardList = boardService.getList( paging, category );
+			
+			req.setAttribute("boardList", boardList);
+			req.setAttribute("paging", paging);
+			
+		} else {
+			System.out.println("검색페이지");
+			
+			Paging paging = boardService.getPaging(req, category, word);
+			List<Board> boardList = boardService.getList( paging, category, word ); 
+			
+			req.setAttribute("boardList", boardList);
+			req.setAttribute("paging", paging);
+			req.setAttribute("word", word);
+		}
 		
 		//----------------------게시글 전체 조회-------------------------------
 			
