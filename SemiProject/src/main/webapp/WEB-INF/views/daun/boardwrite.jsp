@@ -1,10 +1,11 @@
+<%@page import="sharon.dto.User"%>
 <%@page import="changmin.dto.Category"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
 <%@ include file="../layout/header.jsp" %>
 
-<%	Category category = (Category) request.getAttribute("category"); %>
+<% User loginUser = (User) request.getAttribute("loginUser"); %>
 
 <script type="text/javascript" src="/resources/se2/js/service/HuskyEZCreator.js"></script>
 
@@ -29,17 +30,19 @@ $(document).ready(function() {
 
 function updateContents() {
 	
-	//스마트 에디터에 작성된 내용을 #content에 반영한다
-	oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", [])
+	//스마트 에디터에 작성된 내용을 #boardcon에 반영한다
+	oEditors.getById["boardcon"].exec("UPDATE_CONTENTS_FIELD", [])
 	
 }
 </script>
 
 <style>
 
-#content {
+#boardcon {
 	width: 700px;
 	min-height: 700px;
+	
+	
 }
 
 
@@ -64,10 +67,12 @@ function updateContents() {
 			</td>
 		</tr>
 		
-		<tr><td class="info">닉네임</td><td><%=session.getAttribute("nick") %></td></tr>
-		<tr><td class="info">제목</td><td><input type="text" name="title" style="width:100%;"></td></tr>
+<%-- 		<tr><td class="info">닉네임</td><td id="nick" name="nick"><%=session.getAttribute("nick") %></td></tr> --%>
+		<tr><td class="info">닉네임</td><td id="userid" name="userid"><%=loginUser.getNick()%></td></tr>
+		<%-- <tr><td class="info">아이디</td><td id="userid" name="userid"><%=session.getAttribute("userid") %></td></tr> --%>
+		<tr><td class="info">제목</td><td><input type="text" id="boardtitle" name="boardtitle" style="width:100%;"></td></tr>
 		<tr><td class="info" colspan="2">본문</td></tr>
-		<tr><td colspan="2"><textarea id="content" name="content" style="width: 100%;"></textarea></td></tr>
+		<tr><td colspan="2"><textarea id="boardcon" name="boardcon" style="width: 100%;"></textarea></td></tr>
 		</table>
 
 	첨부파일 <input type="file" name="file">
@@ -75,8 +80,8 @@ function updateContents() {
 
 
 	<div class="text-center">
-		<button id="btnWrite" class="btn btn-primary">작성</button>
-		<button id="btnCancel" class="btn btn-danger">취소</button>
+		<button id="btnWrite" class="btn">작성</button>
+		<button id="btnCancel" class="btn">취소</button>
 	</div>
 
 
@@ -86,7 +91,7 @@ function updateContents() {
 var oEditors = [];
 nhn.husky.EZCreator.createInIFrame({
 	oAppRef: oEditors,
-	elPlaceHolder: "content", //에디터가 적용될 <textarea>의 id 적기
+	elPlaceHolder: "boardcon", //에디터가 적용될 <textarea>의 id 적기
 	sSkinURI: "/resources/se2/SmartEditor2Skin.html",
 	fCreator: "createSEditor2"
 })

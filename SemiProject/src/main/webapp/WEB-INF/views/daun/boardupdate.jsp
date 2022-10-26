@@ -99,7 +99,7 @@ td {
 <form action="./update" method="post" enctype="multipart/form-data">
 	<table class="table table-bordered">
 		<tr>
-			<td style="width: 10%">게시판 선택</td>
+			<td style="width: 10%" class="info">게시판 선택</td>
 			<td style="width: 90%">
 				<select>
 					<option value="category" disabled>게시판 선택</option>

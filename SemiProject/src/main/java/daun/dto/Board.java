@@ -1,6 +1,6 @@
 package daun.dto;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Board {
 
@@ -11,29 +11,8 @@ public class Board {
 	private int userno;
 	private int categoryno;
 	private int hit;
-	private String nick;
 	
 	public Board() {
-	}
-
-	public Board(int boardno, String boardtitle, String boardcon, Date boarddate, int userno, int categoryno, int hit,
-			String nick) {
-		super();
-		this.boardno = boardno;
-		this.boardtitle = boardtitle;
-		this.boardcon = boardcon;
-		this.boarddate = boarddate;
-		this.userno = userno;
-		this.categoryno = categoryno;
-		this.hit = hit;
-		this.nick = nick;
-	}
-
-	@Override
-	public String toString() {
-		return "Board [boardno=" + boardno + ", boardtitle=" + boardtitle + ", boardcon=" + boardcon + ", boarddate="
-				+ boarddate + ", userno=" + userno + ", categoryno=" + categoryno + ", hit=" + hit + ", nick=" + nick
-				+ "]";
 	}
 
 	public int getBoardno() {
@@ -92,13 +71,24 @@ public class Board {
 		this.hit = hit;
 	}
 
-	public String getNick() {
-		return nick;
+	@Override
+	public String toString() {
+		return "Board [boardno=" + boardno + ", boardtitle=" + boardtitle + ", boardcon=" + boardcon + ", boarddate="
+				+ boarddate + ", userno=" + userno + ", categoryno=" + categoryno + ", hit=" + hit + "]";
 	}
 
-	public void setNick(String nick) {
-		this.nick = nick;
+	public Board(int boardno, String boardtitle, String boardcon, Date boarddate, int userno, int categoryno, int hit) {
+		super();
+		this.boardno = boardno;
+		this.boardtitle = boardtitle;
+		this.boardcon = boardcon;
+		this.boarddate = boarddate;
+		this.userno = userno;
+		this.categoryno = categoryno;
+		this.hit = hit;
 	}
+
+	
 	
 	
 
