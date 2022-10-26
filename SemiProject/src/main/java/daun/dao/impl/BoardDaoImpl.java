@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import changmin.dto.Category;
 import common.JDBCTemplate;
 import daun.dao.face.BoardDao;
 import daun.dto.Board;
@@ -209,47 +208,13 @@ public class BoardDaoImpl implements BoardDao {
 	}
 	
 	
-	@Override
-	public User getUserInfo(Connection conn, int userno) {
-		
-		String sql = "";
-		
-		sql+="SELECT";
-		sql+="	userno, userid ";
-		sql+="	FROM user_info";
-		sql+="	WHERE userno=?";
 
-		User user = new User();
-
-		try {
-			ps = conn.prepareStatement(sql);
-			
-			ps.setInt(1, userno);
-			 
-			rs = ps.executeQuery();
-			
-			
-			while( rs.next() ) {
-				
-				user.setUserno( rs.getInt("userno"));
-				user.setUserid( rs.getString("userid"));
-				
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			JDBCTemplate.close(rs);
-			JDBCTemplate.close(ps);
-		}
-		
-		return user;
-	}
 
 	@Override
 	public String selectNickByBoard(Connection conn, Board viewBoard) {
 		
 		String sql = "";
-		sql += "SELECT nick FROM userinfo";
+		sql += "SELECT nick FROM user_info";
 		sql += " WHERE userno = ?";
 		
 		//결과 저장할 변수
@@ -276,11 +241,11 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
-	public int insert(Connection conn, Board board) {
+	public int insert(Connection conn, Board board, int userno) {
 
 		String sql = "";
-		sql += "INSERT INTO board ( boardno, boardtitle, boardcon, boarddate, userno, categoryno, hit, nick )";
-		sql += " VALUES ( ?, ?, ?, sysdate, ?, ?, 0, ? )";
+		sql += "INSERT INTO board_info ( boardno, boardtitle, boardcon, boarddate, userno, categoryno, hit )";
+		sql += " VALUES ( ?, ?, ?, sysdate, ?, ?, 0 )";
 		
 		int res = 0;
 
@@ -290,9 +255,8 @@ public class BoardDaoImpl implements BoardDao {
 			ps.setInt(1, board.getBoardno());
 			ps.setString(2, board.getBoardtitle());
 			ps.setString(3, board.getBoardcon());
-			ps.setInt(4, board.getUserno());
+			ps.setInt(4, userno);
 			ps.setInt(5, board.getCategoryno());
-			ps.setString(6, board.getNick());
 			
 			res = ps.executeUpdate();
 			
@@ -309,7 +273,7 @@ public class BoardDaoImpl implements BoardDao {
 	public int selectNextBoardno(Connection conn) {
 		
 		String sql = "";
-		sql += "SELECT board_seq.nextval FROM dual";
+		sql += "SELECT board_info_seq.nextval FROM dual";
 		
 		int nextBoardno = 0;
 		
@@ -336,8 +300,8 @@ public class BoardDaoImpl implements BoardDao {
 	public int insertFile(Connection conn, BoardFile boardFile) {
 		
 		String sql = "";
-		sql += "INSERT INTO boardfile( fileno, boardno, originname, storedname, filesize )";
-		sql += " VALUES( boardfile_seq.nextval, ?, ?, ?, ? )";
+		sql += "INSERT INTO board_file( fileno, boardno, fileoriginname, filestoredname, filesize, boarddate )";
+		sql += " VALUES( board_file_seq.nextval, ?, ?, ?, ?, sysdate )";
 		
 		int res = 0;
 		
@@ -365,8 +329,8 @@ public class BoardDaoImpl implements BoardDao {
 		
 		String sql = "";
 		sql += "SELECT";
-		sql += "	fileno, boardno, originname, storedname, filesize, boarddate";
-		sql += " FROM boardfile";
+		sql += "	fileno, boardno, fileoriginname, filestoredname, filesize, boarddate";
+		sql += " FROM board_file";
 		sql += " WHERE boardno = ?";
 		
 		//조회 결과 객체
@@ -403,7 +367,7 @@ public class BoardDaoImpl implements BoardDao {
 	public int update(Connection conn, Board board) {
 
 		String sql = "";
-		sql += "UPDATE board ";
+		sql += "UPDATE board_info ";
 		sql += " SET";
 		sql += "	boardtitle = ?";
 		sql += "	, boardcon = ?";
@@ -434,7 +398,7 @@ public class BoardDaoImpl implements BoardDao {
 	public int deleteFile(Connection conn, Board board) {
 		
 		String sql = "";
-		sql += "DELETE boardfile ";
+		sql += "DELETE board_file ";
 		sql += " WHERE boardno = ?";
 		
 		int res = 0;
@@ -456,22 +420,61 @@ public class BoardDaoImpl implements BoardDao {
 	}
 	
 	
+	
+	@Override
+	public User getUserInfo(Connection conn, int userno) {
+		
+		String sql = "";
+		
+		sql+="SELECT";
+		sql+="	userno, userid, nick ";
+		sql+="	FROM user_info";
+		sql+="	WHERE userno=?";
+
+		User user = new User();
+
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, userno);
+			 
+			rs = ps.executeQuery();
+			
+			
+			while( rs.next() ) {
+				
+				user.setUserno( rs.getInt("userno"));
+				user.setUserid( rs.getString("userid"));
+				user.setNick( rs.getString("nick"));
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		return user;
+	}
+	
 	@Override
 	public int report(Connection conn, Report report) {
 		
 		String sql = "";
-		sql += "INSERT INTO boardreport( reportno, reportcon, reportdate, userno, boardno )";
-		sql += " VALUES( boardreport_seq.nextval, ?, ?, ? )";
+		sql += "INSERT INTO board_report( reportno, reportcon, reportdate, userno, boardno )";
+		sql += " VALUES( ?, ?, sysdate, ?, ? )";
 		
 		int res = 0;
 		
 		try {
 			ps = conn.prepareStatement(sql);
 			
-			ps.setString(1, report.getReportcon());
-			ps.setDate(2, report.getReportdate());
-			ps.setInt(3, report.getUserno());
-			ps.setInt(4, report.getBoardno());
+			ps.setInt(1, report.getReportno());
+			ps.setString(2, report.getReportcon());
+			ps.setDate(3, report.getReportdate());
+			ps.setInt(4, report.getUserno());
+			ps.setInt(5, report.getBoardno());
 			
 			res = ps.executeUpdate();
 			
@@ -485,42 +488,72 @@ public class BoardDaoImpl implements BoardDao {
 	}
 	
 	
+	@Override
+	public int selectNextreportno(Connection conn) {
+		
+		String sql = "";
+		sql += "SELECT board_report_seq.nextval FROM dual";
+		
+		int nextReportno = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			rs = ps.executeQuery();
+			
+			while( rs.next() ) {
+				nextReportno = rs.getInt("nextval");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		return nextReportno;
+	}
 	
-//	@Override
-//	public int getCategoty(Connection conn, Category categoryno) {
-//		
-//		String sql = "";
-//		sql += "SELECT";
-//		sql += "	categoryno, categoryname ";
-//		sql += " FROM boardcategory";
-//		sql += " WHERE categoryno = ? ";
-//		
-//		//조회 결과 객체
-//		Category category = new Category();
-//		
-//		try {
-//			ps = conn.prepareStatement(sql);
-//			ps.setInt(1, categoryno.getCategoryno());
-//			
-//			rs = ps.executeQuery();
-//			
-//			while( rs.next() ) {
-//				category = new Category();
-//				
-//				category.setCategoryno( rs.getInt("categoryno") );
-//				category.setCategoryname( rs.getString("categoryname") );
-//			}
-//			
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//			JDBCTemplate.close(rs);
-//			JDBCTemplate.close(ps);
-//		}
-//		
-//		return category;
-//	}
-//	
+	
+	@Override
+	public User UserInfo(Connection conn, int userno) {
+		
+		String sql = "";
+		
+		sql+="SELECT";
+		sql+="	userno, nick";
+		sql+="	FROM user_info";
+		sql+="	WHERE userno=?";
+
+		User nick = null;
+
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, userno);
+			 
+			rs = ps.executeQuery();
+			
+			
+			while( rs.next() ) {
+			
+				nick = new User();
+				
+				nick.setUserno( rs.getInt("userno"));
+				nick.setUserid( rs.getString("nick"));
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		return nick;
+	}
+
 }
 
 

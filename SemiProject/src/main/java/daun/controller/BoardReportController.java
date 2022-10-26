@@ -13,6 +13,7 @@ import daun.dto.Board;
 import daun.dto.BoardFile;
 import daun.service.face.BoardService;
 import daun.service.impl.BoardServiceImpl;
+import sharon.dto.User;
 
 
 @WebServlet("/board/report")
@@ -24,24 +25,34 @@ public class BoardReportController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+		HttpSession session = req.getSession();
+		
+		int userno = (int) session.getAttribute("userno");
+		
+		User loginUser = boardService.getUserInfo(userno);
+		req.setAttribute("loginUser", loginUser);	
+		
 		Board boardno = boardService.getBoardno(req);
 		
-		//상세보기 결과 조회
-		Board updateBoard = boardService.view(boardno);
+		Board viewBoard = boardService.viewBeforeReport(boardno);
 		
-		//조회결과 MODEL값 전달
-		req.setAttribute("updateBoard", updateBoard);
+		req.setAttribute("viewBoard", viewBoard);
 		
-		HttpSession session = req.getSession();
+//		//상세보기 결과 조회
+//		Board updateBoard = boardService.view(boardno);
+//		
+//		//조회결과 MODEL값 전달
+//		req.setAttribute("updateBoard", updateBoard);
+//
+//		//작성자 닉네임 전달
+//		req.setAttribute("writerNick", boardService.getWriteNick(updateBoard));
+//		
+//		//첨부파일 정보 조회
+//		BoardFile boardFile = boardService.viewFile(updateBoard);
+//		
+//		//첨부파일 정보를 MODEL값 전달
+//		req.setAttribute("boardFile", boardFile);
 
-		//작성자 닉네임 전달
-		req.setAttribute("writerNick", boardService.getWriteNick(updateBoard));
-		
-		//첨부파일 정보 조회
-		BoardFile boardFile = boardService.viewFile(updateBoard);
-		
-		//첨부파일 정보를 MODEL값 전달
-		req.setAttribute("boardFile", boardFile);
 		
 		req.getRequestDispatcher("/WEB-INF/views/daun/boardreport.jsp").forward(req, resp);
 		
@@ -51,7 +62,7 @@ public class BoardReportController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		boardService.report(req);
-		resp.sendRedirect("/board/list");
+		resp.sendRedirect("/board/view");
 
 	}
 }
