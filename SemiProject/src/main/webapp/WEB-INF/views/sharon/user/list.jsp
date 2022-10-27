@@ -14,40 +14,56 @@
 
 <style type="text/css">
 
+/* .outer{
+margin:0 auto;
+} */
+
 table {
 	border: 1px solid #ccc;
 	border-collapse: collapse;
-	
-	width: 1100px;
-	margin: 0 auto;
+	width: 1200px;
+	font-family: 'GmarketSansMedium';
+	font-size:15px;
 }
 
-td {
+td,th {
 	border-top: 1px solid #ccc;
-	
 	text-align: center;
-	
 	padding: 5px 10px;
 }
 .section{
-margin-top: 20%;
+margin-top: 5%;
+font-family:'dalseo';
 }
 
-/* tr:hover {
-	background-color: #FAFAD2;
+button,#btnadd { 
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    font-weight: 600;
+    cursor: pointer;
+    background-color: #E1FFB1;
+    font-family: 'GmarketSansMedium';
 }
 
-td:hover {
-	background-color: #F3F3C2;
+#list{
+	height:50px;
+	background-color: #B6E388;
 }
- */
+
+option,findType{
+	font-family: 'GmarketSansMedium';
+}
+
+
+
 </style>
 
 </head>
 <body>
-
+<div class="outer">
   <h2 style="text-align: center;" class="section"><strong>회원목록조회</strong></h2>
-            <div>
+            <div class="in">
 			<form name="findF" action="./list" class="form-inline">
 		
 			
@@ -66,18 +82,19 @@ td:hover {
 <table>
 
 <thead>
-<tr>
-	<th style="width: 5%;">회원번호</th>
-	<th style="width: 10%;">이름</th>
-	<th style="width: 10%;">아이디</th>
-	<th style="width: 10%;">닉네임</th>
-	<th style="width: 5%;">성별</th>
-	<th style="width: 10%;">주소</th>
-	<th style="width: 10%;">전화번호</th>
-	<th style="width: 10%;">생년월일</th>
-	<th style="width: 10%;">이메일</th>
+<tr id="list">
+	<th style="width: 8%;">회원번호</th>
+	<th style="width: 8%;">이름</th>
+	<th style="width: 8%;">아이디</th>
+	<th style="width: 7%;">닉네임</th>
+	<th style="width: 6%;">성별</th>
+	<th style="width: 17%;">주소</th>
+	<th style="width: 11%;">전화번호</th>
+	<th style="width: 12%;">생년월일</th>
+	<th style="width: 13%;">이메일</th>
 	<th style="width: 10%;">가입날짜</th>
-	<th style="width: 10%;">회원정보수정일</th>
+<!-- 	<th style="width: 10%;">회원정보수정일</th> -->
+<!-- 	<th style="width: 3%;">등급</th> -->
 </tr>
 </thead>
 
@@ -101,15 +118,15 @@ td:hover {
 	<td><%=uList.get(i).getBirth() %></td>
 	<td><%=uList.get(i).getEmail() %></td>
 	<td><%=uList.get(i).getJoinday() %></td>
-	<td><%=uList.get(i).getUserupdate() %></td>
-	<td><%=uList.get(i).getGradeno() %></td>
+<%-- 	<td><%=uList.get(i).getUserupdate() %></td> --%>
+<%-- 	<td><%=uList.get(i).getGradeno() %></td> --%>
 </tr>
 <%	} %>
 
 </tbody>
 
 </table>
-
+</div>
 </body>
 </html>
-<%@ include file="../../layout/footer.jsp" %>
+<jsp:include page="../../layout/footer.jsp"/>
