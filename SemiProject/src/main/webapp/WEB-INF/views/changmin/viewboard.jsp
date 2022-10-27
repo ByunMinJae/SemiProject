@@ -10,6 +10,7 @@
 <% Category category = (Category) request.getAttribute("category"); %>
 <% List<User> userList = (List) request.getAttribute("userList"); %>
 <% List<BoardFile> fileList = (List) request.getAttribute("fileList"); %>
+<% BoardFile boardFile = (BoardFile) request.getAttribute("boardFile"); %>
 <%@include file="../layout/header.jsp" %>
 <!-- 부트스트랩 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -23,9 +24,9 @@ $(document).ready(function() {
 	})
 	
 
-	$('#fileDown').click(function() {
-		alert('구현되지 않은 기능입니다.');
-	})
+/* 	$('#fileDown').click(function() {
+		alert('구현되지 않은 기능입니다.(｡•́︿•̀｡)');
+	}) */
 })
 
 function deleteboard(){
@@ -223,7 +224,7 @@ img {
 	<tr>
 		<td class="success" id="file">첨부파일</td>
 	</tr>
-	
+<%-- 	
 	<% if(fileList.size()>0) {%>
 	<tr>
 		<% for(int i=0; i<fileList.size(); i++) {%>
@@ -234,7 +235,16 @@ img {
 	<tr>
 		<td class="text-left" id="file">없음</td>
 	</tr>
-	<% } %>
+	<% } %> --%>
+		<!-- 첨부파일 -->
+		<div>
+		<%	if( boardFile != null ) { %>
+		<a href="<%=request.getContextPath() %>/upload/<%=boardFile.getStoredname() %>"
+		 download="<%=boardFile.getOriginname() %>">
+			<%=boardFile.getOriginname() %>
+		</a>
+		<%	} %>
+		</div>
 	</table>
 	<div class="text-center">
 		<button id="btnList" class="btn btn-primary">목록</button>

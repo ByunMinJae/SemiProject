@@ -77,6 +77,19 @@ button {
 	padding: 10px 20px 5px 20px;
 }
 
+#wrapper {
+ background-color: #BFDCFB; 
+}
+
+.container {
+ background-color: white;
+ margin-bottom: 0;
+}
+
+.container-wrap {
+    height: 1000px;
+}
+
 
 </style>
 

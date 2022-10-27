@@ -10,6 +10,7 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
@@ -24,7 +25,6 @@ import daun.dto.BoardFile;
 import daun.dto.Report;
 import daun.service.face.BoardService;
 import daun.util.Paging;
-import oracle.net.aso.b;
 import sharon.dto.User;
 
 public class BoardServiceImpl implements BoardService {
@@ -103,6 +103,14 @@ public class BoardServiceImpl implements BoardService {
 		
 		//조회된 게시글 리턴
 		return board;
+	}
+	
+	@Override
+	public Board infoboard(Board boardno) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		return boardDao.selectBoardByBoardno(conn, boardno);
 	}
 	
 
@@ -244,7 +252,6 @@ public class BoardServiceImpl implements BoardService {
 //		board.setUserno((int)req.getSession().getAttribute("userno"));
 		
 		//nick 처리 필요 -> userno이용하여 DB조회
-
 		int userno = (int)req.getSession().getAttribute("userno");
 
 		
@@ -361,11 +368,14 @@ public class BoardServiceImpl implements BoardService {
 				if( "boardno".equals(key) ) {
 					board.setBoardno(Integer.parseInt(value));
 				}
-				if( "title".equals(key) ) {
+				if( "boardtitle".equals(key) ) {
 					board.setBoardtitle(value);
 				}
-				if( "content".equals(key) ) {
+				if( "boardcon".equals(key) ) {
 					board.setBoardcon(value);
+				}
+				if( "categoryno".equals(key) ) {
+					board.setCategoryno(Integer.parseInt(value));
 				}
 				
 			} // if( item.isFormField() ) end
@@ -406,6 +416,14 @@ public class BoardServiceImpl implements BoardService {
 		//DB연결 객체
 		Connection conn = JDBCTemplate.getConnection();
 		
+		
+		//nick 처리 필요 -> userno이용하여 DB조회
+		int userno = (int)req.getSession().getAttribute("userno");
+
+		
+		User nick = boardDao.UserInfo(conn, userno);
+		System.out.println("nick : " + nick );
+		
 		if( boardDao.update(conn, board) > 0 ) {
 			JDBCTemplate.commit(conn);
 		} else {
@@ -434,25 +452,30 @@ public class BoardServiceImpl implements BoardService {
 		
 		//DB연결 객체
 		Connection conn = JDBCTemplate.getConnection();
-		
-		//게시글 정보 조회
-//		Board 
-		
+			
 		//신고 정보 DTO객체
 		Report report = new Report();
+	
+		System.out.println("파라미터 : " + req.getParameter("boardno"));
+		System.out.println("유저넘버 : " + req.getParameter("userno"));
 		
-		//신고 번호 생성
-		int reportno = boardDao.selectNextreportno(conn);
-		
-		//신고 번호 삽입
-		report.setReportno(reportno);
-		
-		
-		if( boardDao.report(conn, report) > 0 ) {
+		report.setBoardno( Integer.parseInt(req.getParameter("boardno")));
+		report.setUserno( Integer.parseInt(req.getParameter("userno")));
+		report.setReportcon(req.getParameter("reportcon"));
+					
+		if( boardDao.insertreport(conn, report) > 0 ) {
 			JDBCTemplate.commit(conn);
 		} else {
 			JDBCTemplate.rollback(conn);
 		}
+		System.out.println("report : " + report);
+		
+	}
+	
+	
+	@Override
+	public int selectNextreportno(Connection conn) {
+		return boardDao.selectNextreportno(conn);
 	}
 	
 	@Override

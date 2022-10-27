@@ -34,5 +34,7 @@ public interface OrderDao {
 
 	public List<Order> selectAll(Connection conn, Paging2 paging, int userno, String word);
 
+	public int prodUpdate(Connection conn, String prodno);
+
 
 }

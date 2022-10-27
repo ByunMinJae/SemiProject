@@ -21,4 +21,8 @@ public class FileServiceImpl implements FileService {
 		return fileDao.selectAll(conn, boardno);
 	}
 
+	@Override
+	public BoardFile viewFile(Board viewBoard) {
+		return fileDao.selectFile(JDBCTemplate.getConnection(), viewBoard);
+	}
 }

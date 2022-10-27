@@ -14,4 +14,12 @@ public interface FileService {
 	 * @return 조회된 전체 파일 목록
 	 */
 	public List<BoardFile> list(Board boardno);
+	
+	/**
+	 * 첨부파일 정보 조회하기
+	 * 
+	 * @param viewBoard - 첨부파일과 연결된 게시글의 번호
+	 * @return BoardFile - 첨부파일 정보 DTO객체
+	 */
+	public BoardFile viewFile(Board viewBoard);
 }

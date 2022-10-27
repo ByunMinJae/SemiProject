@@ -49,19 +49,28 @@ public class BoardViewController extends HttpServlet {
 		Board viewBoard = boardService.view(boardno);
 		System.out.println("BoardViewControoler doGet() - viewBoard : " + viewBoard );
 
+		//카테고리 번호 불러오기
 		int cateno = viewBoard.getCategoryno();
 		System.out.println("Categoryno : " + cateno);
 		
+		//카테고리 이름 불러오기
 		Category category = boardService.catename(cateno);
 		System.out.println("Categoryname : " + category.getCategoryname());
 		
 		req.setAttribute("viewBoard", viewBoard);
 		req.setAttribute("category", category);
 		
+		//첨부파일 정보 조회
+		BoardFile boardFile = fileService.viewFile(viewBoard);
+		
+		//첨부파일 정보를 MODEL값 전달
+		req.setAttribute("boardFile", boardFile);
+		
 		//----------------------게시글 상세 조회-------------------------------
 		
 		//------------------------회원정보 조회--------------------------------
 
+		//유저 리스트 조회
 		List<User> list = listService.list();
 		
 		System.out.println("[TEST} UserListController-전체조회목록");
