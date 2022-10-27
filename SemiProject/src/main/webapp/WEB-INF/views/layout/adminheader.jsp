@@ -252,9 +252,9 @@ button {
 				</div> <!--.header-title end -->
 				<div class="header-menu">
 					<ul class="hmenulist">
-						<li><a href="/admin/prodOrdAd">주문관리</a></li>
+						<li><a href="/prodOrdAd">주문관리</a></li>
 						<li><a href="/manager/board">게시판관리</a></li>
-						<li><a href="">회원관리</a></li>
+						<li><a href="/user/list">회원관리</a></li>
 						<li><a href="">상품관리</a></li>
 					</ul>
 						
