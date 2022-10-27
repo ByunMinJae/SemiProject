@@ -12,7 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import changmin.dto.Board;
 import changmin.dto.Category;
 import changmin.service.face.BoardService;
+import changmin.service.face.FileService;
 import changmin.service.impl.BoardServiceImpl;
+import changmin.service.impl.FileServiceImpl;
+import daun.dto.BoardFile;
 import sharon.dto.User;
 import sharon.service.face.ListService;
 import sharon.service.impl.ListServiceImpl;
@@ -24,15 +27,23 @@ public class BoardViewController extends HttpServlet {
 	
 	private BoardService boardService = new BoardServiceImpl();
 	private ListService listService = new ListServiceImpl();
+	private FileService fileService = new FileServiceImpl();
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("/board/view  [GET]");
 		
 		//----------------------게시글 상세 조회-------------------------------
 		
-		//전달파라미터 객체 얻어오기
+		
+		//boardno 얻어오기
 		Board boardno = boardService.getBoardno(req);
 		System.out.println("BoardViewController doGet() - boardno 객체 : " + boardno );
+
+		//boardno에 따른 파일 목록 조회하기
+		List<BoardFile> fileList = fileService.list(boardno);
+		System.out.println("FileList : " + fileList);
+		req.setAttribute("fileList", fileList);
 		
 		//게시글 상세보기 조회 결과 얻어오기
 		Board viewBoard = boardService.view(boardno);

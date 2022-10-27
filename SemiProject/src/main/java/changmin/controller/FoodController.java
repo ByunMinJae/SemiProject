@@ -29,11 +29,10 @@ public class FoodController extends HttpServlet {
 
 		Category category = new Category();
 		category.setCategoryno(3);
-		
-		//전달파라미터에서 현재 페이징 객체 계산하기
+
 		
 		String word = req.getParameter("word");
-		String searchList = req.getParameter("list");
+		String searchList = req.getParameter("searchList");
 		
 		if ( word==null || word.equals("")) {
 			System.out.println("디폴트페이지");

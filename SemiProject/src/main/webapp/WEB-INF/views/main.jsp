@@ -299,7 +299,11 @@
 				<div class="top">
 					<ul class="toplist">
 						<li><a href="/mypage/main" class="">마이페이지</a></li>
+						<%	if( session.getAttribute("userno") != null ) { %>
+					
+						<% } else { %>
 						<li><a href="/user/join">회원가입</a></li>
+						<% } %>
 						<%if ( session.getAttribute("userno") == null){ %>
 		                <li><a href="/cmc/login">로그인</a></li>
 		                <% } else { %>
@@ -451,21 +455,17 @@ html {
 }
 
 
-.one {
-  animation-delay: 1s;
-}
-
 .two {
-  animation-delay: 3s;
+  animation-delay: 2s;
 }
 
 .three {
-  animation-delay: 5s;
+  animation-delay: 4s;
 }
 
 .four {
   position: relative;
-  animation-delay: 7s;
+  animation-delay: 6s;
   left: -34px;
 }
 
