@@ -52,6 +52,29 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 	
 	@Override
+	public Paging getPagingForSearch(HttpServletRequest req, String search) {
+		System.out.println("/goods/list getPagingForSearch() - 시작");
+		
+		//총 게시글 수 조회하기
+		int totalCount = goodsDao.selectCntSearch(JDBCTemplate.getConnection(), search);
+		
+		
+		//전달파라미터 curPage 추출하기
+		String param = req.getParameter("curPage");
+		int curPage = 0;
+		if( param != null && !"".equals(param) ) {
+			curPage = Integer.parseInt(param);
+		}
+		
+		
+		//Paging객체 생성
+		Paging paging = new Paging(totalCount, curPage, 4, 5);
+		
+		System.out.println("/goods/list getPagingForSearch() - 끝");
+		return paging;
+	}
+	
+	@Override
 	public List<Product> getGoodsList(Paging paging) {
 		System.out.println("/goods/list getGoodsList()");
 		return goodsDao.selectAll(JDBCTemplate.getConnection(), paging);

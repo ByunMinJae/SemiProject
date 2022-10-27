@@ -24,6 +24,9 @@ public interface GoodsDao {
 	 */
 	public int selectCntAll(Connection conn);
 	
+	public int selectCntSearch(Connection connection, String search);
+
+	
 	/**
 	 * 게시글 테이블 페이징 목록 조회
 	 * 
@@ -82,6 +85,7 @@ public interface GoodsDao {
 	 * @return insert 결과
 	 */
 	public int insertBuyProd(Connection conn, int userno, String buyprodname, int totalamount);
+
 
 
 

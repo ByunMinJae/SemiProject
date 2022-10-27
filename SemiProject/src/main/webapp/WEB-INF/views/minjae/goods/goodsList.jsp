@@ -5,11 +5,6 @@
 
 <%	List<Product> list = (List)request.getAttribute("goodsList"); %>
 
-<!-- 부트스트랩 Bootstrap 3 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
 <%@	include file="../../layout/header.jsp" %>
 
 <script type="text/javascript">
@@ -32,18 +27,13 @@ $(document).ready(function() {
 	
 	$("#high").click(function() { //가격 높은 순
 		$("#hide").attr("value", "prodprice DESC");
-		$("#cateWrap").submit()
+		$("#cateWrap").submit();
 	})
 	
 	$("#sal").click(function() { //판매량 순
 		$("#hide").attr("value", "prodpop DESC");
-		$("#cateWrap").submit()
+		$("#cateWrap").submit();
 	})
-	
-// 	$("#date").click(function() { //최신 등록일 순
-// 		$("#hide").attr("value", "proddate");
-// 		$("#cateWrap").submit()
-// 	})
 	
 	$("#btnSearch").click(function() { //상품 검색
 		if($("#search").val() == "") {

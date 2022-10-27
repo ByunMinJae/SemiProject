@@ -26,18 +26,19 @@ public class GoodsSearchController extends HttpServlet {
 		System.out.println("/goods/search [GET]");
 		
 		req.setCharacterEncoding("UTF-8");
+
+		//검색한 값
+		HttpSession session = req.getSession();
+		String search = (String)session.getAttribute("search");
+		System.out.println("[TEST] search : " + search);
 		
 		//현재 페이징 객체 계산하기
-		Paging paging = goodsService.getPaging(req);
+		Paging paging = goodsService.getPagingForSearch(req, search);
 		System.out.println("[TEST] " + paging);
 		
 		//페이징 객체를 MDOEL값 전달
 		req.setAttribute("paging", paging);
 		
-		//검색한 값
-		HttpSession session = req.getSession();
-		String search = (String)session.getAttribute("search");
-		System.out.println("[TEST] search : " + search);
 		
 		System.out.println("검색어 세팅 정렬");
 		

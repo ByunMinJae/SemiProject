@@ -88,6 +88,39 @@ public class GoodsDaoImpl implements GoodsDao {
 	}
 	
 	@Override
+	public int selectCntSearch(Connection conn, String search) {
+		System.out.println("/goods/list selectCntAll() - 시작");
+		
+		String sql = "";
+		sql += "SELECT count(*) cnt FROM product";
+		sql += " WHERE prodname LIKE ?";
+		sql += " ORDER BY prodno";
+		
+		//총 게시글 수 변수
+		int count = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql); //SQL수행 객체
+			ps.setString(1, search);
+			rs = ps.executeQuery(); //SQL수행 및 결과 집합 저장
+
+			while( rs.next() ) {
+				count = rs.getInt("cnt");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("/goods/list selectCntAll() - 끝");
+		//최종 결과 반환
+		return count;
+	}
+	
+	@Override
 	public List<Product> selectAll(Connection conn, Paging paging) {
 		System.out.println("/goods/list selectAll() - 시작");
 		

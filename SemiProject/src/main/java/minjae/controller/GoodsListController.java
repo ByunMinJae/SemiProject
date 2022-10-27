@@ -26,17 +26,9 @@ public class GoodsListController extends HttpServlet {
 		System.out.println("/goods/list [GET]");
 		
 		req.setCharacterEncoding("UTF-8");
-		
-		//현재 페이징 객체 계산하기
-		Paging paging = goodsService.getPaging(req);
-		System.out.println("[TEST] paging : " + paging);
-		
-		//페이징 객체를 MDOEL값 전달
-		req.setAttribute("paging", paging);
-		
+
 		//선택한 카테고리값
 		HttpSession session = req.getSession();
-		
 		String cateVal = (String)session.getAttribute("cateVal");
 		String search = (String)session.getAttribute("search");
 		System.out.println("[TEST] cateVal : " + cateVal);
@@ -47,6 +39,14 @@ public class GoodsListController extends HttpServlet {
 			req.getRequestDispatcher("/goods/search").forward(req, resp);
 			return;
 		}
+		
+		//현재 페이징 객체 계산하기
+		Paging paging = goodsService.getPaging(req);
+		System.out.println("[TEST] paging : " + paging);
+		
+		//페이징 객체를 MDOEL값 전달
+		req.setAttribute("paging", paging);
+		
 			
 		if("".equals(cateVal) || null == cateVal) {
 			System.out.println("기본 세팅 정렬");

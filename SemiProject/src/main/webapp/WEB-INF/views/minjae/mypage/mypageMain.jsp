@@ -238,6 +238,7 @@ li.info_left {
     top: 287px;
     font-size: 50px;
     color: #b321d7eb;
+    width: 122px;
 }
 #datepicker {
 	font-weight: bold;
@@ -313,9 +314,9 @@ li.info_left {
 		<div class="cont_img3 ci"></div>
 		<div class="cir_img"></div>
 		<div id="result">
-			<div class="cnt_no" style="right: 455px;"><p><%=mpMR.getDelCnt() %></p></div>
-			<div class="cnt_no" style="right: 286px;"><p><%=mpMR.getDelComCnt() %></p></div>
-			<div class="cnt_no" style="right: 120px;"><p><%=mpMR.getExchanCnt() %></p></div>
+			<div class="cnt_no" style="right: 406px;"><p><%=mpMR.getDelCnt() %></p></div>
+			<div class="cnt_no" style="right: 241px;"><p><%=mpMR.getDelComCnt() %></p></div>
+			<div class="cnt_no" style="right: 74px;"><p><%=mpMR.getExchanCnt() %></p></div>
 		</div>
 	</div>
 	<!-- datepicker API -->
