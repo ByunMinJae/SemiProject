@@ -60,6 +60,12 @@ public class BoardViewController extends HttpServlet {
 		req.setAttribute("viewBoard", viewBoard);
 		req.setAttribute("category", category);
 		
+		//첨부파일 정보 조회
+		BoardFile boardFile = fileService.viewFile(viewBoard);
+		
+		//첨부파일 정보를 MODEL값 전달
+		req.setAttribute("boardFile", boardFile);
+		
 		//----------------------게시글 상세 조회-------------------------------
 		
 		//------------------------회원정보 조회--------------------------------

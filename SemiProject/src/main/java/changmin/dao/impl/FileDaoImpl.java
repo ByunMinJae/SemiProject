@@ -54,5 +54,44 @@ public class FileDaoImpl implements FileDao {
 		
 		return list;
 	}
+	
+	@Override
+	public BoardFile selectFile(Connection conn, Board viewBoard) {
+		
+		String sql = "";
+		sql += "SELECT";
+		sql += "	fileno, boardno, fileoriginname, filestoredname, filesize, boarddate";
+		sql += " FROM board_file";
+		sql += " WHERE boardno = ?";
+		
+		//조회 결과 객체
+		BoardFile boardFile = null;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, viewBoard.getBoardno());
+			
+			rs = ps.executeQuery();
+			
+			while( rs.next() ) {
+				boardFile = new BoardFile();
+				
+				boardFile.setFileno( rs.getInt("fileno") );
+				boardFile.setBoardno( rs.getInt("boardno") );
+				boardFile.setOriginname( rs.getString("fileoriginname") );
+				boardFile.setStoredname( rs.getString("filestoredname") );
+				boardFile.setFilesize( rs.getInt("filesize") );
+				boardFile.setBoarddate( rs.getDate("boarddate"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		return boardFile;
+	}
 
 }
