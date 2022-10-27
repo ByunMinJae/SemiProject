@@ -44,6 +44,9 @@ public class PayDoController extends HttpServlet {
 				//로그인 한 사람 정보를 모델값으로 전달
 				req.setAttribute("loginUser", loginUser);
 				
+//				req.setAttribute("prodno", req.getAttribute("prodno"));
+				System.out.println("Prodno : " + req.getAttribute("prodno"));
+				
 			//-------------------------------------------------------------------
 	
 			//------------------------상품 정보 조회-----------------------------

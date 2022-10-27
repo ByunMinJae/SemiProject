@@ -13,6 +13,7 @@ $(document).ready(function() {
 	$("#btnCart").click(function() {
 		
 		if(confirm("장바구니에 담으시겠습니까?")) {
+				console.log($('#cartcount').val())
 		         location.href = "/cart/add?cartcount=" + $('#cartcount').val() + "&prodno=" + $('#prodno').val();
 		}
 		
@@ -25,7 +26,7 @@ $(document).ready(function() {
 			var prodPrice = parseInt(<%=prod.getProdprice() %>);
 			var totalamount = cartCnt*prodPrice;
 			
-			location.href = "/goods/buy?buyprodname=" + $('#prodname').val() + "&totalamount=" + totalamount;
+			location.href = "/goods/buy?buyprodname=" + $('#prodname').val() + "&totalamount=" + totalamount + "&prodno=" + $("#prodno").val();
 			
 	})
 	

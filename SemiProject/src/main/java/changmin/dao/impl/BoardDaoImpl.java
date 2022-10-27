@@ -98,14 +98,19 @@ public class BoardDaoImpl implements BoardDao {
 	public int selectCntAll(Connection conn, Category category, String word, String searchList) {
 		
 		String sql = "";
-		sql += "SELECT count(*) cnt";
+		sql += "SELECT count(*) cnt, A.nick FROM (";
+		sql += " 	SELECT *";
 		sql += "	FROM board_info";
+		sql += "	INNER JOIN user_info ON user_info.userno = board_info.userno";
 		sql += "	WHERE categoryno = ?";
 	      if(searchList.equals("boardtitle")) {
 	    	  sql += "	  AND boardtitle LIKE ?";
+	    	  sql += "	  ) A";
 			} else if (searchList.equals("nick")) {
 			  sql += "	  AND nick LIKE ?";
+			  sql += "	  ) A";
 			}
+	    sql += "	GROUP BY A.nick";
 		
 		//총 게시글 수 변수
 		int count = 0;
@@ -115,6 +120,7 @@ public class BoardDaoImpl implements BoardDao {
 			
 			ps.setInt(1, category.getCategoryno());
 			ps.setString(2, "%" + word + "%");
+			
 			rs = ps.executeQuery(); //SQL수행 및 결과 집합 저장
 
 			

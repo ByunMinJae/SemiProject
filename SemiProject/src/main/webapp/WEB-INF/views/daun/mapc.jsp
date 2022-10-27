@@ -78,6 +78,19 @@ button {
 }
 
 
+#wrapper {
+ background-color: #BFDCFB; 
+}
+
+.container {
+ background-color: white;
+ margin-bottom: 0;
+}
+
+.container-wrap {
+    height: 1000px;
+}
+
 </style>
 
 

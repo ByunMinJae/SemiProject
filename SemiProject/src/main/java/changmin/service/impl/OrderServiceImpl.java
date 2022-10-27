@@ -10,7 +10,7 @@ import changmin.dao.impl.OrderDaoImpl;
 import changmin.dto.Order;
 import changmin.service.face.OrderService;
 import common.JDBCTemplate;
-import util.Paging;
+import minjae.dto.Product;
 import util.Paging2;
 
 public class OrderServiceImpl implements OrderService {
@@ -102,6 +102,23 @@ public class OrderServiceImpl implements OrderService {
 		
 		return orderDao.selectAll(conn, paging, userno, word);
 	}
+
+
+	@Override
+	public void prodUpdate(String prodno) {
+
+		Product product = new Product();
+
+		int res = orderDao.prodUpdate(conn, prodno);
+	
+		if( res > 0 ) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+	}
+		
+		
 
 
 }
