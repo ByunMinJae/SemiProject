@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import donghyun.dto.Board;
+import donghyun.dto.BoardFile;
 import donghyun.service.face.BoardService;
 import donghyun.service.impl.BoardServiceImpl;
 
@@ -32,6 +33,10 @@ public class ManagerBoardViewController extends HttpServlet {
     	Board viewBoard = boardService.view(boardno);
     	
     	req.setAttribute("viewBoard", viewBoard);
+    	
+    	BoardFile boardFile = boardService.viewFile(viewBoard);
+    	
+    	req.setAttribute("boardFile", boardFile);
     	
     	req.getRequestDispatcher("/WEB-INF/views/donghyun/view.jsp").forward(req, resp);
     	}
