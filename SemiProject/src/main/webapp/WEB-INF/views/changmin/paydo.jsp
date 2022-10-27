@@ -9,6 +9,7 @@
 <% User loginUser = (User) request.getAttribute("loginUser"); %>
 <% OrderBefore orderInfo = (OrderBefore) request.getAttribute("orderInfo"); %>
 <% User updateUser = (User) request.getAttribute("updateUser"); %>
+<% String prodno = (String) request.getAttribute("prodno"); %>
 
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -56,7 +57,8 @@ $(document).ready(function(){
 		                buyer_name: '<%=loginUser.getUsername()%>',
 		                buyer_tel: '<%=loginUser.getPhone()%>',
 		                buyer_addr: $("#addressvalue").val(),
-		                orderno: <%=orderInfo.getOrderno()%>
+		                orderno: <%=orderInfo.getOrderno()%>,
+		                prodno: <%=prodno%>
 	               	}
 	            }).done(function (data) {
 	                	console.log(rsp.orderprocess);

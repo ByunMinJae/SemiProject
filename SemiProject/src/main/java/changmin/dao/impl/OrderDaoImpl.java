@@ -263,4 +263,29 @@ public class OrderDaoImpl implements OrderDao{
 		
 		return list;
 	}
+
+
+	@Override
+	public int prodUpdate(Connection conn, String prodno) {
+		String sql="";
+		sql+= "UPDATE product SET prodpop=prodpop+1 WHERE prodno=?";
+
+		
+		int res = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setInt(1, Integer.parseInt(prodno));
+			
+			res = ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(ps);
+		}
+		
+		return res;
+	}
 }

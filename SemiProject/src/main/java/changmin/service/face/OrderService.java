@@ -20,6 +20,8 @@ public interface OrderService {
 
 	public List<Order> orderview(Paging2 paging, int userno, String word);
 
+	public void prodUpdate(String prodno);
+
 
 
 

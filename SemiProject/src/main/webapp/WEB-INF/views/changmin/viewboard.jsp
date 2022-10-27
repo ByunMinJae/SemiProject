@@ -24,7 +24,7 @@ $(document).ready(function() {
 	
 
 	$('#fileDown').click(function() {
-		alert('구현되지 않은 기능입니다.');
+		alert('구현되지 않은 기능입니다.(｡•́︿•̀｡)');
 	})
 })
 
