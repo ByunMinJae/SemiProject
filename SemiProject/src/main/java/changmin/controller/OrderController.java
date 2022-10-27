@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import changmin.service.face.OrderService;
 import changmin.service.impl.OrderServiceImpl;
+import minjae.dto.Product;
 
 @WebServlet("/ordersuccess")
 public class OrderController extends HttpServlet {
@@ -30,12 +31,20 @@ public class OrderController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("Order [POST]");
 
+		req.setCharacterEncoding("UTF-8");
+
 		HttpSession session = req.getSession();
 		
 		int userno = (int)session.getAttribute("userno");
 		
-		req.setCharacterEncoding("UTF-8");
+		System.out.println("prodno : " + req.getParameter("prodno"));
+		
+		String prodno = req.getParameter("prodno");
 
+		//상품 구매시 상품판매량 + 1
+		orderService.prodUpdate(prodno);
+
+		//상품 구매시 주문목록 DB INSERT
 		orderService.orderinsert(req, userno);
 		
 		
