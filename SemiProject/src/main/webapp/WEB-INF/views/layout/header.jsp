@@ -1,5 +1,7 @@
+<%@page import="donghyun.dto.UserInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -322,7 +324,12 @@
 					</div>
 					<div class="hmenulist">
 						<ul>
+						
+							<% if( null != session.getAttribute("gradeno") && (int)session.getAttribute("gradeno") ==3){ %>
+							<li><a href="/BoardAccessDenied.jsp">게시판</a></li>
+							<% }else{ %>
 							<li><a href="/board/notice">게시판</a></li>
+							<%} %>
 							<li><a href="/map">등산 도우미</a></li>
 							<li><a href="/goods/list">굿즈샵</a></li>
 						</ul>

@@ -33,12 +33,14 @@ public class LoginController extends HttpServlet {
     	
     	//System.out.println("/cmc/login 선생님 코드[GET]");
     	
+    	
     	req.getRequestDispatcher("/WEB-INF/views/donghyun/loginForm.jsp").forward(req, resp);
     	//resp.sendRedirect("../../src/webapp/WEB-INF/views/donghyun/loginForm.jsp");
     	
     }
     
-    @Override
+    
+	@Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     	
     	req.setCharacterEncoding("UTF-8");
@@ -62,13 +64,19 @@ public class LoginController extends HttpServlet {
     	if(userInfo != null) {
     		HttpSession session = req.getSession();
     		session.setAttribute("userno", userInfo.getUserno());
+    		session.setAttribute("gradeno",userInfo.getGradeno());
     		
-    		//req.getRequestDispatcher("/WEB-INF/views/donghyun/loginSuccess.jsp").forward(req, resp);
+    		int gradeno = (Integer) session.getAttribute("gradeno");
+    		
+    		System.out.println("회원등급 :" + gradeno);
+    		
+    		//System.out.println("회원등급 :" + userInfo.getGradeno());
+    		
     		resp.sendRedirect("/");
-    	} else {
-    		req.getRequestDispatcher("/WEB-INF/views/donghyun/loginFail.jsp").forward(req, resp);
+    		
+    	}else {
+    	req.getRequestDispatcher("/WEB-INF/views/donghyun/loginFail.jsp").forward(req, resp);
     	}
-    	
     	
     	
     	

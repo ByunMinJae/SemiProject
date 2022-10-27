@@ -1,8 +1,10 @@
+<%@page import="donghyun.dto.BoardFile"%>
 <%@page import="donghyun.dto.Board"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
 <% Board viewBoard = (Board) request.getAttribute("viewBoard"); %>
+<% BoardFile boardFile = (BoardFile) request.getAttribute("boardFile");  %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -84,9 +86,8 @@ div{
 
 
 	
-	<span>작성자:</span>
-	<span><%=viewBoard.getNick() %></span>
-	</td>
+	
+	
 </tr>
 
 <tr class="colored">
@@ -99,6 +100,13 @@ div{
 	
 
 </table>
+<div>
+<% if(boardFile !=null) {%>
+	<%=boardFile.getFileoriginname() %>
+<% } %>
+
+</div>
+
 <div>
 <button id="back" class="btn btn-primary">목록</button>
 <button id="deleteBtn" class="btn btn-danger">삭제</button>
