@@ -36,7 +36,8 @@ public class GoodsBuyController extends HttpServlet {
 			int res = goodsService.insertBuyProd(req, userno);
 			
 			if(res > 0) {
-				resp.sendRedirect("/pay/do");
+				req.setAttribute("prodno", req.getParameter("prodno"));
+				req.getRequestDispatcher("/pay/do").forward(req, resp);
 			} else {
 				req.getRequestDispatcher("/WEB-INF/views/minjae/notInsertBuyProd.jsp").forward(req, resp);
 			}
