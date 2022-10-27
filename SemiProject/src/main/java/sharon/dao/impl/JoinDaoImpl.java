@@ -84,8 +84,8 @@ public class JoinDaoImpl implements JoinDao {
 	public int insert(Connection conn, User user) {
 		
 		String sql = "";
-		sql += "INSERT INTO user_info ( userno, userid, userpw, username, gender, address, phone, birth, email, nick ,joinday,userupdate)";
-		sql += " VALUES ( user_info_seq.nextval, ?, ?, ? ,? ,? ,?, ?, ?, ?, sysdate ,sysdate)";
+		sql += "INSERT INTO user_info ( userno, userid, userpw, username, gender, address, phone, birth, email, nick ,joinday,gradeno)";
+		sql += " VALUES ( user_info_seq.nextval, ?, ?, ? ,? ,? ,?, ?, ?, ?, sysdate ,?)";
 
 		int res = 0;
 		
@@ -101,6 +101,7 @@ public class JoinDaoImpl implements JoinDao {
 			ps.setString(7, user.getBirth());
 			ps.setString(8, user.getEmail());
 			ps.setString(9, user.getNick());
+			ps.setInt(10, 1);
 			
 			
 			res = ps.executeUpdate();
@@ -137,5 +138,89 @@ public class JoinDaoImpl implements JoinDao {
 		return 1; //중복x
 	}
 
+//	회원삭제
+	public int delete(Connection conn, int userno) {
+		
+		System.out.println("회원삭제 시작 -joindaoimpl-delete");
+		
+		String sql = "";
+		sql += "DELETE FROM user_info";
+		sql += "WHERE userno=?";
+		
+		int res=0;
+		
+		try {
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, userno);
+			
+			res=ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(ps);
+			
+		}
+		
+	System.out.println("joindaoimpl - 회원삭제끝");
+		return res;
+	}
+
+	//회원삭제때문에 userno 찾는-----10/27
+	@Override
+	public User selectByUserno(Connection conn, int userno) {
+		//--- SQL 작성 ---
+		String sql = "";
+		sql += "SELECT";
+		sql += "	userno, userid, userpw, username, gender, address, phone";
+		sql += "	, birth, email, nick ,joinday,userupdate,gradeno";		
+		sql += " FROM user_info";
+		sql += " WHERE userno = ?";
+			
+		//--- 조회 결과 저장 객체 ---
+		User user = null;
+		
+		try {
+			//--- SQL 수행 객체 생성 ---
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, userno);
+		
+				//--- SQL 수행 및 결과 저장 ---
+			rs = ps.executeQuery();
+				
+				//--- 조회 결과 처리 ---
+			while( rs.next() ) {
+				user = new User();
+					
+				user.setUserno( rs.getInt("userno") );
+				user.setUsername( rs.getString("username") );
+				
+				user.setUserid( rs.getString("userid") );
+				user.setNick( rs.getString("nick") );
+				user.setGender( rs.getString("gender") );
+				user.setAddress( rs.getString("address") );
+				user.setBirth( rs.getString("birth") );
+				user.setEmail( rs.getString("email") );
+				user.setJoinday( rs.getDate("joinday") );
+				user.setUserupdate( rs.getDate("userupdate") );
+				user.setGradeno( rs.getInt("gradeno") );
+			}
+				
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			//--- 자원 해제 ---
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+			
+			//--- 조회 결과 반환 ---
+		return user;
+	}
+
+
+
+	
+	
 }
 

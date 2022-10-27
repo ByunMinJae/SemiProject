@@ -16,9 +16,30 @@ public class JoinServiceImpl implements JoinService {
 private JoinDao joinDao = new JoinDaoImpl();
 
 	
+	public int deleteUserInfo(int userno) {
+	System.out.println("serviceimpl: deleteUserInfo() - 시작");
+	
+	Connection conn = JDBCTemplate.getConnection();
+	
+	int res = joinDao.delete(conn, userno);
+	
+	if( res > 0 ) {
+		JDBCTemplate.commit(conn);
+		return 1; //성공
+	} else {
+		JDBCTemplate.rollback(conn);
+		System.out.println("끝");
+		return 0; //실패
+	}
+}
+
+
 	public User info(User user) {
 		return joinDao.selectMemberByUserid(JDBCTemplate.getConnection(), user);
 	}
+	
+	
+	
 
 	public User getParam(HttpServletRequest req) {
 		
@@ -49,6 +70,17 @@ private JoinDao joinDao = new JoinDaoImpl();
 		
 		
 	}
+	
+//	//----userno 찾기 -----10/27
 
-}
+	public User infoUserno(int userno) {
+		System.out.println("JoinServiceImpl - detail(): " + userno);
+	
+		//DB연결 객체
+		Connection conn = JDBCTemplate.getConnection();
+		
+		return joinDao.selectByUserno(conn, userno);
+	}
+
+	}
 
