@@ -28,7 +28,7 @@ public class ProdOrderAdminController extends HttpServlet {
 		
 		//세션 객체
 		HttpSession session = req.getSession();
-		session.setAttribute("userno", 1234);
+//		session.setAttribute("userno", 1234);
 		
 		//로그인 유뮤 확인
 		if( session.getAttribute("userno") != null ) {
