@@ -26,15 +26,15 @@ public class NoticeController extends HttpServlet {
 	
 		//----------------------게시글 전체 조회-------------------------------
 		
+		//notice 카테고리 1로 지정
 		Category category = new Category();
 		category.setCategoryno(1);
 		
-		//전달파라미터에서 현재 페이징 객체 계산하기
-		
+		//검색어 파라미터
 		String word = req.getParameter("word");
 		String searchList = req.getParameter("searchList");
-		System.out.println("searchList : " + searchList);
-		
+
+		//검색어가 없을 경우
 		if ( word==null || word.equals("")) {
 			System.out.println("디폴트페이지");
 			
@@ -44,6 +44,7 @@ public class NoticeController extends HttpServlet {
 			req.setAttribute("boardList", boardList);
 			req.setAttribute("paging", paging);
 			
+		//검색어가 있을 경우
 		} else {
 			System.out.println("검색페이지");
 

@@ -107,7 +107,7 @@ td {
 			</table>
 			<% } %>
 				<div class="search">
-				<input type="text" name="word" value="" placeholder="제목을 입력해주세요">
+				<input type="text" name="word" value="" placeholder="상품이름을 입력해주세요">
 				<button type="submit">검색</button>
 				</div>
 		</form>
