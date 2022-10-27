@@ -27,7 +27,7 @@ public class BoardWriteController extends HttpServlet {
 		HttpSession session = req.getSession();
 		
 		//로그인 상태가 아닐 경우 로그인 페이지로 이동
-		if( session.getAttribute("userno")==null ) {
+		if( session.getAttribute("userno") == null ) {
 			resp.sendRedirect("/cmc/login");
 			
 		} else {
@@ -40,10 +40,11 @@ public class BoardWriteController extends HttpServlet {
 			
 			//로그인 한 사람 정보를 모델값으로 전달
 			req.setAttribute("loginUser", loginUser);
+			
+			System.out.println("/board/write doGet");
+			req.getRequestDispatcher("/WEB-INF/views/daun/boardwrite.jsp").forward(req, resp);
 		}
 		
-		System.out.println("/board/write doGet");
-		req.getRequestDispatcher("/WEB-INF/views/daun/boardwrite.jsp").forward(req, resp);
 	}
 	
 	@Override
