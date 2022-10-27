@@ -17,26 +17,26 @@ import util.Paging;
 public class BoardServiceImpl implements BoardService{
 	
 	private BoardDao boardDao = new BoardDaoImpl();
-//	private Connection conn = JDBCTemplate.getConnection();
+	private Connection conn = JDBCTemplate.getConnection();
 
 	@Override
 	public List<Board> getList() {
 		System.out.println("getList - Start");
 		
-		return boardDao.selectAll(JDBCTemplate.getConnection());
+		return boardDao.selectAll(conn);
 	}
 
 	@Override
 	public List<Board> getList(Paging paging, Category category) {
 		
-		return boardDao.selectAll(JDBCTemplate.getConnection(), paging, category);
+		return boardDao.selectAll(conn, paging, category);
 	}
 	
 	@Override
 	public Paging getPaging(HttpServletRequest req,Category category) {
 		
 		//총 게시글 수 조회하기
-		int totalCount = boardDao.selectCntAll(JDBCTemplate.getConnection(), category);
+		int totalCount = boardDao.selectCntAll(conn, category);
 		
 		
 		//전달파라미터 curPage 추출하기
@@ -56,7 +56,7 @@ public class BoardServiceImpl implements BoardService{
 	public Paging getPaging(HttpServletRequest req,Category category, String word, String searchList) {
 		
 		//총 게시글 수 조회하기
-		int totalCount = boardDao.selectCntAll(JDBCTemplate.getConnection(), category, word, searchList);
+		int totalCount = boardDao.selectCntAll(conn, category, word, searchList);
 		
 		
 		//전달파라미터 curPage 추출하기
@@ -74,7 +74,7 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public Board getBoardno(HttpServletRequest req) {
-//		Connection conn = JDBCTemplate.getConnection();
+//		Connection conn = conn;
 		
 		//전달파라미터를 저장할 객체 생성
 		Board board = new Board();
@@ -92,7 +92,6 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public Board view(Board boardno) {
-		Connection conn = JDBCTemplate.getConnection();
 		//조회수 증가
 		if( boardDao.updateHit(conn, boardno)>0) {
 			JDBCTemplate.commit(conn);
@@ -109,7 +108,6 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public void deleteboard(Board board) {
-		Connection conn = JDBCTemplate.getConnection();
 		if(boardDao.delete(conn, board)>0) {
 			JDBCTemplate.commit(conn);
 		} else {
@@ -120,7 +118,7 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public Category catename(int i) {
 		
-		return boardDao.selectCatename(JDBCTemplate.getConnection(), i);
+		return boardDao.selectCatename(conn, i);
 	}
 
 
@@ -144,13 +142,13 @@ public class BoardServiceImpl implements BoardService{
 //	@Override
 //	public User getNick(Board bUserno) {
 //		
-//		return boardDao.getNick(JDBCTemplate.getConnection(), bUserno);
+//		return boardDao.getNick(conn, bUserno);
 //	}
 
 	@Override
 	public List<Board> getList(Paging paging, Category category, String word, String searchList) {
 	
-		return boardDao.selectAll(JDBCTemplate.getConnection(), paging, category, word, searchList);
+		return boardDao.selectAll(conn, paging, category, word, searchList);
 	}
 
 
