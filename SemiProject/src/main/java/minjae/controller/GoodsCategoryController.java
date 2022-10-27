@@ -24,6 +24,7 @@ public class GoodsCategoryController extends HttpServlet {
 		
 		if("null".equals(req.getParameter("search")) || req.getParameter("search") == null ) {
 			System.out.println("/goods/cate 카테고리로 들어옴");
+			
 			//세션에 카테고리 값 저장
 			HttpSession session = req.getSession();
 			session.setAttribute("cateVal", req.getParameter("value"));

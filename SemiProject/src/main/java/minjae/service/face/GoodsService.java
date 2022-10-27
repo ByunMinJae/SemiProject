@@ -24,6 +24,9 @@ public interface GoodsService {
 	 */
 	public Paging getPaging(HttpServletRequest req);
 	
+	public Paging getPagingForSearch(HttpServletRequest req, String search);
+
+	
 	/**
 	 * 게시글 페이징 목록 조회
 	 * 
@@ -67,6 +70,7 @@ public interface GoodsService {
 	 * @return insert 결과
 	 */
 	public int insertBuyProd(HttpServletRequest req, int userno);
+
 
 
 }

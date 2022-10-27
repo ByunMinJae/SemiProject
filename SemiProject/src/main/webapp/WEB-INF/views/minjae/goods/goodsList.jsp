@@ -5,11 +5,6 @@
 
 <%	List<Product> list = (List)request.getAttribute("goodsList"); %>
 
-<!-- 부트스트랩 Bootstrap 3 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
 <%@	include file="../../layout/header.jsp" %>
 
 <script type="text/javascript">
@@ -32,18 +27,13 @@ $(document).ready(function() {
 	
 	$("#high").click(function() { //가격 높은 순
 		$("#hide").attr("value", "prodprice DESC");
-		$("#cateWrap").submit()
+		$("#cateWrap").submit();
 	})
 	
 	$("#sal").click(function() { //판매량 순
 		$("#hide").attr("value", "prodpop DESC");
-		$("#cateWrap").submit()
+		$("#cateWrap").submit();
 	})
-	
-// 	$("#date").click(function() { //최신 등록일 순
-// 		$("#hide").attr("value", "proddate");
-// 		$("#cateWrap").submit()
-// 	})
 	
 	$("#btnSearch").click(function() { //상품 검색
 		if($("#search").val() == "") {
@@ -57,6 +47,9 @@ $(document).ready(function() {
 </script>
 
 <style type="text/css">
+#wrapper {
+	background-color: #BFDCFB;
+}
 #goodsWrap {
     height: 786px;
     margin: 18px auto 0;
@@ -70,7 +63,7 @@ $(document).ready(function() {
 	width: 1004px;
 	height: 911px;
     margin: 0px auto;
-    background: #fcffb282;
+    background: #e0fdc9;
     border: 1px solid #ccc;
 }
 #goodsImg {
@@ -109,7 +102,7 @@ $(document).ready(function() {
 }
 #cateWrap {
 	width: 305px;
-    margin: 0 215px 0 284px;
+    margin: 0 230px 0 284px;
     position: absolute;
     top: 109px;
     right: 113px;
@@ -117,7 +110,7 @@ $(document).ready(function() {
 #searchWrap {
 	position: relative;
     top: -26px;
-    right: -379px;
+    right: -373px;
     width: 291px;
     margin: 10px;
     display: inline-block;
@@ -139,7 +132,7 @@ $(document).ready(function() {
 	margin: 98px 0 0px;
 }
 #_prodList {
-	color: #444;
+	color: #222;
 	text-decoration: none;
 	cursor: pointer;
 	margin-top: 41px;
@@ -147,7 +140,7 @@ $(document).ready(function() {
 	font-size: 54px;
 }
 #_prodList:hover {
-	color: #222;
+	color: #5ba14a;
 }
 </style>
 

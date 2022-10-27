@@ -25,7 +25,7 @@ $(document).ready(function() {
 			var prodPrice = parseInt(<%=prod.getProdprice() %>);
 			var totalamount = cartCnt*prodPrice;
 			
-			location.href = "/goods/buy?buyprodname=" + $('#prodname').val() + "&totalamount=" + totalamount;
+			location.href = "/goods/buy?buyprodname=" + $('#prodname').val() + "&totalamount=" + totalamount + "&prodno=" + $("#prodno").val();
 			
 	})
 	
