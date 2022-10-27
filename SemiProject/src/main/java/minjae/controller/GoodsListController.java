@@ -34,7 +34,11 @@ public class GoodsListController extends HttpServlet {
 		System.out.println("[TEST] cateVal : " + cateVal);
 		System.out.println("[TEST] search : " + search);
 		
-		if(!"null".equals(search)) {
+		if(cateVal == null) {
+			session.setAttribute("cateVal", "prodno");
+		}
+		
+		if(null != search && !"null".equals(search)) { //!"null".equals(search)
 			System.out.println("검색어 발견 /goods/search 로 이동");
 			req.getRequestDispatcher("/goods/search").forward(req, resp);
 			return;
