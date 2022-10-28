@@ -148,6 +148,12 @@
 	height: 80px;
 } 
 
+@media screen and (max-width: 1500px){
+	.header-menu .weather-wrap{
+	display: none;
+	}
+}
+
 .header-menu .hmenulist ul {
 	display: -webkit-inline-box;
 	font-family: 'dalseo';
