@@ -148,6 +148,8 @@
 	height: 80px;
 } 
 
+
+
 .header-menu .hmenulist ul {
 	display: -webkit-inline-box;
 	font-family: 'dalseo';
@@ -173,6 +175,12 @@
 	display: inline-block;
 	top: 5px;
 	left: 90%;
+}
+
+@media screen and (max-width: 1500px){
+	.header-menu .weather-wrap{
+	display: none;
+	}
 }
 
 .weather-widget p {

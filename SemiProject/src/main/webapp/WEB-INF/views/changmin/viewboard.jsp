@@ -29,6 +29,7 @@ $(document).ready(function() {
 	}) */
 })
 
+
 function deleteboard(){
 	 if (confirm("정말 삭제하시겠습니까?") == true){    //확인
 		   $.ajax({
@@ -218,7 +219,13 @@ img {
 	</tr>
 	<tr>
 		<div id="content">
-			<td colspan="4" class="text-left" id="content-detail"><%=viewBoard.getBoardcon() %></td></a>
+
+			<td colspan="4" class="text-left" id="content-detail">
+				<%	if( boardFile != null ) { %>
+				<img src="<%=request.getContextPath() %>/upload/<%=boardFile.getStoredname() %>">
+				<%	} %>
+				<%=viewBoard.getBoardcon() %>
+			</td>
 		</div> 
 	</tr>
 	<tr>
@@ -237,14 +244,22 @@ img {
 	</tr>
 	<% } %> --%>
 		<!-- 첨부파일 -->
+		<tr>
 		<div>
-		<%	if( boardFile != null ) { %>
-		<a href="<%=request.getContextPath() %>/upload/<%=boardFile.getStoredname() %>"
-		 download="<%=boardFile.getOriginname() %>">
-			<%=boardFile.getOriginname() %>
-		</a>
-		<%	} %>
+			<%	if( boardFile != null ) { %>
+			<td colspan="4" class="text-left" id="fileDown">
+				<a href="<%=request.getContextPath() %>/upload/<%=boardFile.getStoredname() %>"
+				   download="<%=boardFile.getOriginname() %>"><%=boardFile.getOriginname() %>
+				</a>
+			</td>
+			<%	} else { %>
+			<tr>
+				<td class="text-left" id="file">없음</td>
+		</tr>
+			<% } %>
 		</div>
+		</tr>
+		
 	</table>
 	<div class="text-center">
 		<button id="btnList" class="btn btn-primary">목록</button>
@@ -252,8 +267,6 @@ img {
 		<button id="btnDelete" class="btn btn-danger" onClick="deleteboard();">삭제</button>
 	</div>
 </div>
-
-	
 	
 
 	
