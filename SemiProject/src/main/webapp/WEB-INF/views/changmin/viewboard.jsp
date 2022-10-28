@@ -219,7 +219,13 @@ img {
 	</tr>
 	<tr>
 		<div id="content">
-			<td colspan="4" class="text-left" id="content-detail"><%=viewBoard.getBoardcon() %></td></a>
+
+			<td colspan="4" class="text-left" id="content-detail">
+				<%	if( boardFile != null ) { %>
+				<img src="<%=request.getContextPath() %>/upload/<%=boardFile.getStoredname() %>">
+				<%	} %>
+				<%=viewBoard.getBoardcon() %>
+			</td>
 		</div> 
 	</tr>
 	<tr>
@@ -246,7 +252,11 @@ img {
 				   download="<%=boardFile.getOriginname() %>"><%=boardFile.getOriginname() %>
 				</a>
 			</td>
-			<%	} %>
+			<%	} else { %>
+			<tr>
+				<td class="text-left" id="file">없음</td>
+		</tr>
+			<% } %>
 		</div>
 		</tr>
 		
