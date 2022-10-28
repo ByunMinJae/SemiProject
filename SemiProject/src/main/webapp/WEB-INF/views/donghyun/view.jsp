@@ -101,9 +101,12 @@ div{
 
 </table>
 <div>
-<% if(boardFile !=null) {%>
+<%	if( boardFile != null ) { %>
+<a href="<%=request.getContextPath() %>/upload/<%=boardFile.getFilestoredname() %>"
+ download="<%=boardFile.getFileoriginname() %>">
 	<%=boardFile.getFileoriginname() %>
-<% } %>
+	<%} %>
+</a>
 
 </div>
 
