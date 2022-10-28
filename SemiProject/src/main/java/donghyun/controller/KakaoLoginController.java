@@ -44,6 +44,11 @@ public class KakaoLoginController extends HttpServlet {
     		
     		kakaoId = kakaoService.selectKakaoUser(kakaoEmail, kakaoNick);
     		if(kakaoId ==null) {
+    			kakaoId = new KakaoId();
+    			
+    			kakaoId.setKakaoEmail(kakaoEmail);
+    			kakaoId.setKakaoNick(kakaoNick);
+    			
     			kakaoService.insert(kakaoId);
     			
     			HttpSession session = req.getSession();
@@ -56,6 +61,7 @@ public class KakaoLoginController extends HttpServlet {
     			session.setAttribute("kakaono", kakaoId.getKakaono());
     			System.out.println("session 부여 완료");
     			resp.sendRedirect("/");
+    			
     			
     		}
     		
