@@ -222,7 +222,7 @@ img {
 
 			<td colspan="4" class="text-left" id="content-detail">
 				<%	if( boardFile != null ) { %>
-				<img src="<%=request.getContextPath() %>/upload/<%=boardFile.getStoredname() %>">
+				<img src="<%=request.getContextPath() %>/upload/<%=boardFile.getStoredname() %>" onerror="this.style.display='none'" alt='' />
 				<%	} %>
 				<%=viewBoard.getBoardcon() %>
 			</td>
