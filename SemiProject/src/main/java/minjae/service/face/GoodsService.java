@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import minjae.dto.Product;
+import minjae.dto.ProductFile;
 import util.Paging;
 
 public interface GoodsService {
@@ -70,6 +71,16 @@ public interface GoodsService {
 	 * @return insert 결과
 	 */
 	public int insertBuyProd(HttpServletRequest req, int userno);
+	
+	/**
+	 *  첨부파일 정보 조회하기
+	 *  
+	 * @param pordDetail - 첨부파일과 연결된 게시글의 번호
+	 * @return ProductFile - 첨부파일 정보 DTO객체
+	 */
+	public ProductFile viewFile(Product pordDetail);
+
+	public List<ProductFile> viewFile(List<Product> goodsList);
 
 
 

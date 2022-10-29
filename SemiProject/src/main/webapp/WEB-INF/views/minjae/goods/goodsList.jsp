@@ -1,9 +1,11 @@
+<%@page import="minjae.dto.ProductFile"%>
 <%@page import="minjae.dto.Product"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
 <%	List<Product> list = (List)request.getAttribute("goodsList"); %>
+<%	List<ProductFile> prodFile = (List)request.getAttribute("prodFileList"); %>
 
 <%@	include file="../../layout/header.jsp" %>
 
@@ -169,7 +171,11 @@ $(document).ready(function() {
 <%	if( list.size() > 0 ) { %> 
 <%		for(int i=0; i<list.size(); i++) { %>
 		<a id="goodsImg" href="/goods/detail?prodno=<%=list.get(i).getProdno() %>">
-			<img id="prodImg" alt="" src="/resources/image/<%=list.get(i).getProdimage() %>">
+	<%	if(prodFile.get(i).getStoredname() == null) { %>
+		 	<img id="prodImg" alt="" src="/resources/image/<%=list.get(i).getProdimage() %>">
+	<%	} else { %>
+			<img id="prodImg" alt="none" src="<%=request.getContextPath() %>/upload/<%=prodFile.get(i).getStoredname() %>">
+	<%	} %>
 		</a>
 		<ul id="goodsList">
 			<li><%=list.get(i).getProdname() %></li>

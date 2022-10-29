@@ -17,7 +17,7 @@ import minjae.service.impl.FindUserServiceImpl;
 public class FindUserPwController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	private FindUserService findUseService = new FindUserServiceImpl();
+	private FindUserService findUserService = new FindUserServiceImpl();
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -58,7 +58,7 @@ public class FindUserPwController extends HttpServlet {
 		}
 		
 		//해당 아이디, 전화번호 유저 확인 후 정보 가져오기
-		UserInfo user = findUseService.checkIdPhone(id, phone);
+		UserInfo user = findUserService.checkIdPhone(id, phone);
 		System.out.println("해당 유저 정보 : " + user);
 		
 		//해당 아이디, 전화번호 가입한 유저가 없을 경우
@@ -68,10 +68,10 @@ public class FindUserPwController extends HttpServlet {
 			return;
 		} else {
 			//인증번호 생성
-			findUseService.createAuth(user);
+			findUserService.createAuth(user);
 			
 			//인증번호 가져오기
-			UserFind userFind = findUseService.getUserFind(user);
+			UserFind userFind = findUserService.getUserFind(user);
 			System.out.println("해당 유저의 인증번호 정보 : " + userFind);
 			
 			//인증번호 문자로 발송 (건당 20원 문자까지 테스트할 때만 주석 풀 것)
