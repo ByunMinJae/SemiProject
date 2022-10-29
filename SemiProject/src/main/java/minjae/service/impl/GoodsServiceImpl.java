@@ -101,6 +101,19 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 	
 	@Override
+	public List<ProductFile> viewSearchFile(List<Product> goodsList, Paging paging, String search) {
+		System.out.println("/goods/list viewSearchFile(search)");
+		
+		//로그아웃 하고 세션에 seach가 null일때 아무것도 안나오는 경우 기본값 보여주기로 처리
+		if( search == null ) {
+			String def = "%%";
+			return goodsDao.viewSearchFileDefualt(JDBCTemplate.getConnection(), goodsList, paging, def);
+		} else {
+			return goodsDao.viewSearchFileAll(JDBCTemplate.getConnection(), goodsList, paging, search);
+		}
+	}
+	
+	@Override
 	public Product getProdDetail(int prodno) {
 		System.out.println("/goods/detail getProdDetail() - 시작");
 		
@@ -139,8 +152,8 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 	
 	@Override
-	public List<ProductFile> viewFile(List<Product> goodsList) {
-		return goodsDao.selectFileList(JDBCTemplate.getConnection(), goodsList);
+	public List<ProductFile> viewFile(List<Product> goodsList, Paging paging) {
+		return goodsDao.selectFileList(JDBCTemplate.getConnection(), goodsList, paging);
 	}
 	
 }

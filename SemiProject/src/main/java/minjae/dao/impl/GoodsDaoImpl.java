@@ -130,7 +130,7 @@ public class GoodsDaoImpl implements GoodsDao {
 		sql += "SELECT * FROM (";
 		sql += "	SELECT rownum rnum, B.* FROM (";
 		sql += "		SELECT";
-		sql += "			prodno, prodname, prodprice, prodimage, prodcon, proddate, prodpop";
+		sql += "			prodno, prodname, prodprice, prodcon, proddate, prodpop";
 		sql += "		FROM product";
 		sql += "		ORDER BY prodno DESC";
 		sql += "	) B";
@@ -159,7 +159,6 @@ public class GoodsDaoImpl implements GoodsDao {
 				prod.setProdcon(rs.getString("prodcon"));
 				prod.setProddate(rs.getDate("proddate"));
 				prod.setProdpop(rs.getInt("prodpop"));
-				prod.setProdimage(rs.getString("prodimage"));
 				
 				//리스트에 결과값 저장하기
 				goodsList.add(prod);
@@ -185,7 +184,7 @@ public class GoodsDaoImpl implements GoodsDao {
 		sql += "SELECT * FROM (";
 		sql += "	SELECT rownum rnum, B.* FROM (";
 		sql += "		SELECT";
-		sql += "			prodno, prodname, prodprice, prodimage, prodcon, proddate, prodpop";
+		sql += "			prodno, prodname, prodprice, prodcon, proddate, prodpop";
 		sql += "		FROM product";
 		if("prodno".equals(cateVal)) { //기본 순
 			sql += "		ORDER BY prodno";
@@ -223,7 +222,7 @@ public class GoodsDaoImpl implements GoodsDao {
 				prod.setProdcon(rs.getString("prodcon"));
 				prod.setProddate(rs.getDate("proddate"));
 				prod.setProdpop(rs.getInt("prodpop"));
-				prod.setProdimage(rs.getString("prodimage"));
+//				prod.setProdimage(rs.getString("prodimage"));
 				
 				//리스트에 결과값 저장하기
 				goodsList.add(prod);
@@ -249,7 +248,7 @@ public class GoodsDaoImpl implements GoodsDao {
 		sql += "SELECT * FROM (";
 		sql += "	SELECT rownum rnum, B.* FROM (";
 		sql += "		SELECT";
-		sql += "			prodno, prodname, prodprice, prodimage, prodcon, proddate, prodpop";
+		sql += "			prodno, prodname, prodprice, prodcon, proddate, prodpop";
 		sql += "		FROM product";
 		sql += "		WHERE prodname LIKE ?";
 		sql += "		ORDER BY prodno";
@@ -278,7 +277,6 @@ public class GoodsDaoImpl implements GoodsDao {
 				prod.setProdcon(rs.getString("prodcon"));
 				prod.setProddate(rs.getDate("proddate"));
 				prod.setProdpop(rs.getInt("prodpop"));
-				prod.setProdimage(rs.getString("prodimage"));
 				
 				//리스트에 결과값 저장하기
 				goodsList.add(prod);
@@ -293,6 +291,61 @@ public class GoodsDaoImpl implements GoodsDao {
 		
 		System.out.println("/goods/list selectSearchAll() - 끝");
 		return goodsList; //최종 결과 반환
+	}
+	
+	@Override
+	public List<ProductFile> viewSearchFileAll(Connection connection, List<Product> goodsList, Paging paging, String search) {
+		System.out.println("/goods/list viewSearchFileAll() - 시작");
+		System.out.println("현재 검색하려는 단어 : " + search);
+		
+		String sql = "";
+		sql += "SELECT * FROM (";
+		sql += "	SELECT rownum rnum, B.* FROM (";
+		sql += "		SELECT";
+		sql += "			a.fileno, a.prodno, a.originname, a.storedname, a.filesize, a.write_date, b.prodname";
+		sql += "		FROM productfile a";
+		sql += "		INNER JOIN product b";
+		sql += "		ON a.prodno = b.prodno";
+		sql += "		WHERE prodname LIKE ?";
+		sql += "		ORDER BY fileno";
+		sql += "	) B"; 	
+		sql += " ) PROD";
+		sql += " WHERE rnum BETWEEN ? AND ?";
+		
+		//결과 저장할 List
+		List<ProductFile> productFileList = new ArrayList<>();
+		
+		try {
+			ps = connection.prepareStatement(sql); //SQL수행 객체
+			ps.setString(1, search);
+			ps.setInt(2, paging.getStartNo());
+			ps.setInt(3, paging.getEndNo());
+			
+			rs = ps.executeQuery(); //SQL수행 및 결과 집합 저장
+			
+			//조회 결과 처리
+			while(rs.next()) {
+				ProductFile productFile = new ProductFile(); //조회 결과 행 저장 DTO객체
+				
+				productFile.setFileno( rs.getInt("fileno") );
+				productFile.setProdno( rs.getInt("prodno") );
+				productFile.setOriginname( rs.getString("originname") );
+				productFile.setStoredname( rs.getString("storedname") );
+				productFile.setFilesize( rs.getInt("filesize") );
+				productFile.setWrite_date( rs.getDate("write_date") );
+				
+				productFileList.add(productFile);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("/goods/list viewSearchFileAll() - 끝");
+		return productFileList; //최종 결과 반환
 	}
 	
 	@Override
@@ -333,7 +386,7 @@ public class GoodsDaoImpl implements GoodsDao {
 				prod.setProdcon(rs.getString("prodcon"));
 				prod.setProddate(rs.getDate("proddate"));
 				prod.setProdpop(rs.getInt("prodpop"));
-				prod.setProdimage(rs.getString("prodimage"));
+//				prod.setProdimage(rs.getString("prodimage"));
 				
 				//리스트에 결과값 저장하기
 				goodsList.add(prod);
@@ -348,6 +401,61 @@ public class GoodsDaoImpl implements GoodsDao {
 		
 		System.out.println("/goods/list selectSearchDefualt() - 끝");
 		return goodsList; //최종 결과 반환
+	}
+	
+	@Override
+	public List<ProductFile> viewSearchFileDefualt(Connection connection, List<Product> goodsList, Paging paging, String def) {
+		System.out.println("/goods/list viewSearchFileDefualt() - 시작");
+		System.out.println("현재 검색하려는 단어 : " + def);
+		
+		String sql = "";
+		sql += "SELECT * FROM (";
+		sql += "	SELECT rownum rnum, B.* FROM (";
+		sql += "		SELECT";
+		sql += "			a.fileno, a.prodno, a.originname, a.storedname, a.filesize, a.write_date, b.prodname";
+		sql += "		FROM productfile a";
+		sql += "		INNER JOIN product b";
+		sql += "		ON a.prodno = b.prodno";
+		sql += "		WHERE prodname LIKE ?";
+		sql += "		ORDER BY fileno";
+		sql += "	) B"; 	
+		sql += " ) PROD";
+		sql += " WHERE rnum BETWEEN ? AND ?";
+		
+		//결과 저장할 List
+		List<ProductFile> productFileList = new ArrayList<>();
+		
+		try {
+			ps = connection.prepareStatement(sql); //SQL수행 객체
+			ps.setString(1, def);
+			ps.setInt(2, paging.getStartNo());
+			ps.setInt(3, paging.getEndNo());
+			
+			rs = ps.executeQuery(); //SQL수행 및 결과 집합 저장
+			
+			//조회 결과 처리
+			while(rs.next()) {
+				ProductFile productFile = new ProductFile(); //조회 결과 행 저장 DTO객체
+				
+				productFile.setFileno( rs.getInt("fileno") );
+				productFile.setProdno( rs.getInt("prodno") );
+				productFile.setOriginname( rs.getString("originname") );
+				productFile.setStoredname( rs.getString("storedname") );
+				productFile.setFilesize( rs.getInt("filesize") );
+				productFile.setWrite_date( rs.getDate("write_date") );
+				
+				productFileList.add(productFile);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("/goods/list viewSearchFileDefualt() - 끝");
+		return productFileList; //최종 결과 반환
 	}
 	
 	@Override
@@ -373,7 +481,6 @@ public class GoodsDaoImpl implements GoodsDao {
 				prod.setProdcon(rs.getString("prodcon"));
 				prod.setProddate(rs.getDate("proddate"));
 				prod.setProdpop(rs.getInt("prodpop"));
-				prod.setProdimage(rs.getString("prodimage"));
 				
 			}
 			
@@ -460,19 +567,27 @@ public class GoodsDaoImpl implements GoodsDao {
 	}
 	
 	@Override
-	public List<ProductFile> selectFileList(Connection conn, List<Product> goodsList) {
+	public List<ProductFile> selectFileList(Connection conn, List<Product> goodsList, Paging paging) {
 		System.out.println("/goods/detail selectFileList() - 시작");
 
 		String sql = "";
-		sql += "SELECT";
-		sql += "	fileno, prodno, originname, storedname, filesize, write_date";
-		sql += " FROM productfile";
+		sql += "SELECT * FROM (";
+		sql += " 	SELECT rownum rnum, B.* FROM (";
+		sql += "		SELECT";
+		sql += "			fileno, prodno, originname, storedname, filesize, write_date";
+		sql += " 		FROM productfile";
+		sql += " 		ORDER BY fileno";
+		sql += " 		) B";
+		sql += " 	) PROD";
+		sql += " 	WHERE rnum BETWEEN ? AND ?";
 		
 		//조회 결과 객체
 		List<ProductFile> productFileList = new ArrayList<>();
 		
 		try {
 			ps = conn.prepareStatement(sql);
+			ps.setInt(1, paging.getStartNo());
+			ps.setInt(2, paging.getEndNo());
 			
 			rs = ps.executeQuery();
 			
