@@ -1,6 +1,6 @@
 package sharon.dao.impl;
 
-import java.sql.Connection; 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -218,9 +218,59 @@ public class JoinDaoImpl implements JoinDao {
 		return user;
 	}
 
-
-
+	//이메일 중복
+	@Override
+		public int emailCheck(String email) {
+			int value = -1;
+			
+			try {
+				conn= JDBCTemplate.getConnection();
+				
+				String sql ="SELECT count(email)"; 
+				sql +=" FROM USER_INFO"; 
+				sql +=" WHERE email = ?";
+				
+				ps = conn.prepareStatement(sql);
+				ps.setString(1, email);
+				rs = ps.executeQuery();
+				
+				if(rs.next()) {
+					return rs.getInt(1);
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} 
+			
+			return value;
+		}
+	//닉네임 중복
+	@Override
+	public int nickCheck(String nick) {
+		int value = -1;
+		
+		try {
+			conn= JDBCTemplate.getConnection();
+			
+			String sql ="SELECT count(nick)"; 
+			sql +=" FROM USER_INFO"; 
+			sql +=" WHERE nick = ?";
+			
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, nick);
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				return rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		
+		return value;
+	}
+	}
 	
-	
-}
+
 

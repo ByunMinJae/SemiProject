@@ -34,7 +34,9 @@ public class JoinController extends HttpServlet {
 		
 		joinService.join(user);
 		
-		resp.sendRedirect("/main");
+//		resp.sendRedirect("/main");
+	
+		req.getRequestDispatcher("/WEB-INF/views/sharon/user/joinsuccess.jsp").forward(req, resp);
 	}
 
 }

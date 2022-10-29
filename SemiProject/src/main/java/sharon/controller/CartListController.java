@@ -1,6 +1,6 @@
 package sharon.controller;
 
-import java.io.IOException;  
+import java.io.IOException;   
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import sharon.dto.Cart;
-import sharon.dto.Product;
 import sharon.service.face.CartService;
 import sharon.service.impl.CartServiceImpl;
 
@@ -32,6 +31,7 @@ public class CartListController extends HttpServlet {
 		
 		req.setAttribute("cartList", cartList);
 		System.out.println( "CartListController:"+cartList );
+		System.out.println("cartList.size:"+cartList.size());
 		
 		
 		req.getRequestDispatcher("/WEB-INF/views/sharon/user/CartView.jsp").forward(req, resp);
