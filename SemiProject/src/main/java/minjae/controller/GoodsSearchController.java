@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import minjae.dto.Product;
+import minjae.dto.ProductFile;
 import minjae.service.face.GoodsService;
 import minjae.service.impl.GoodsServiceImpl;
 import util.Paging;
@@ -43,8 +44,11 @@ public class GoodsSearchController extends HttpServlet {
 		System.out.println("검색어 세팅 정렬");
 		
 		List<Product> goodsList = goodsService.getSearchList(paging, search);
-		
 		req.setAttribute("goodsList", goodsList);
+
+		List<ProductFile> prodFileList = goodsService.viewFile(goodsList);
+		req.setAttribute("prodFileList", prodFileList);
+		
 		req.getRequestDispatcher("/WEB-INF/views/minjae/goods/goodsList.jsp").forward(req, resp);
 	}
 	
