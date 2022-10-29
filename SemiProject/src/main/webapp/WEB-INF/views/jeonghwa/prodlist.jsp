@@ -7,7 +7,9 @@
 
 
 <!-- 서블릿(Controller)이 전달한 데이터 꺼내기 -->
-<%	List<Product> pList = (List)request.getAttribute("productList"); %>
+<%	List<Product> productList = (List)request.getAttribute("productList"); %>
+
+
 
 <%@ include file="../layout/header.jsp" %>
 
@@ -25,44 +27,105 @@
 .updatebtn {
 	
 }
+
+.list {
+	margin-top: 50px;
+}
 </style>
 
-<h3>상품 목록</h3>
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#btnWrite").click(function() {
+		location.href = "./write"
+	})
+})
 
 
-<table class="table table-striped table-hover">
+$(document).ready(function() {
+	
 
-  <tr>
-	<th style="width: 40%;">사진</th>
-	<th style="width: 20%;">상품명</th>
-	<th style="width: 10%;">가격</th>
-	<th style="width: 10%;">재고</th>
-	<th style="width: 40%;">기능</th>
-  </tr>
-  
-  <%	for(int i=0; i<pList.size(); i++) { %>
-  <tr>
-    <td><%=pList.get(i).getProdimage() %></td>
-    
-    <td>
-    	<a href="/prod/detail?prodno=<%=pList.get(i).getProdno() %>">
-    		<%=pList.get(i).getProdname() %>
-    	</a>	
-    </td>
-    
-    <td><%=pList.get(i).getProdprice() %></td>
-    <td><%=pList.get(i).getProdpop() %></td>
-    <td>
-		<button class="btn" onclick="location.href=''">수정</button>
-		<button class="btn" onclick="location.href=''">삭제</button>
-    </td>
-  </tr>
-  <% } %>
-  
-</table>
+	
+	//수정 버튼
+	$("#btnUpdate").click(function() {
+		location.href = "./update"
+	})
 
-<button class="updatebtn" onclick="location.href=''">상품 추가</button>
+	//삭제버튼
+	$("#btnDelete").click(function() {
+		location.href = "./delete"	
+		})
 
-<%@	include file="paging.jsp"%>
+})
+
+
+
+</script>
+
+<div class="list">
+
+	<h3>상품 목록</h3>
+	
+	
+	<table class="table table-striped table-hover">
+	
+	  <tr>
+		<th style="width: 40%;">사진</th>
+		<th style="width: 20%;">상품명</th>
+		<th style="width: 10%;">가격</th>
+		<th style="width: 10%;">재고</th>
+		<th style="width: 40%;">기능</th>
+	  </tr>
+	  
+	  <%	for(int i=0; i<productList.size(); i++) { %>
+	  <tr>
+	    <td><%=productList.get(i).getProdimage() %></td>
+	    
+	    <td>
+	    	<a href="/prod/view?prodno=<%=productList.get(i).getProdno() %>">
+	    		<%=productList.get(i).getProdname() %>
+	    	</a>	
+	    </td>
+	    
+	    <td><%=productList.get(i).getProdprice() %></td>
+	    <td><%=productList.get(i).getProdpop() %></td>
+	    <td>
+			<button id="btnUpdate" class="btn btn-info">수정</button>
+			<button id="btnDelete" class="btn btn-danger">삭제</button>
+	    </td>
+	  </tr>
+	  <% } %>
+	  
+	</table>
+	
+	<div id="btnBox" class="pull-right">
+		<button id="btnWrite" class="btn btn-primary">상품 추가</button>
+	</div>
+
+</div>
+
+<%@	include file="../layout/paging.jsp"%>
 
 <%@ include file="../layout/footer.jsp" %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
