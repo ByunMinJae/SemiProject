@@ -38,6 +38,52 @@ function checkId(){
 	});
 	
 }
+
+//이메일 중복체크 
+function checkEmail(){
+var ebtn = document.getElementById('emilChkbtn');
+var ebtnCheck= false; 
+
+ebtn.onclick = function () {
+	ebtnCheck= true;
+	$.ajax({
+		url : '/user/mailcheck?cmd=EMAIlCHECK',
+		data : {email : $("#email").val()},
+		type: 'POST',
+		success : function(data){
+		$('#email_msg').html(data)
+			
+		},
+		error : function(xhr){
+			 alert(xhr.status + ':' + xhr.statusText);
+		}
+	});		
+ }
+}
+
+//닉네임 중복체크 
+function checkNick(){
+var ebtn = document.getElementById('nickChkbtn');
+var ebtnCheck= false; 
+
+ebtn.onclick = function () {
+	ebtnCheck= true;
+	$.ajax({
+		url : '/user/nickcheck?cmd=NICKCHECK',
+		data : {nick : $("#nick").val()},
+		type: 'POST',
+		success : function(data){
+		$('#nick_msg').html(data)
+			
+		},
+		error : function(xhr){
+			 alert(xhr.status + ':' + xhr.statusText);
+		}
+	});		
+ }
+}
+
+
 </script>
 
 <script type="text/javascript">
@@ -85,7 +131,7 @@ function validateID( id ) {
 	
 	//아이디를 입력했는 지 검증
 	if( id == '' ) {
-		$('#uid_msg').html("아이디를 입력해주세요!");
+		$('#uid_msg').html("*아이디를 입력해주세요!");
 		
 		return false;
 	}
@@ -107,7 +153,7 @@ function validateID( id ) {
 function validatePW( pw ) {
 	//패스워드를 입력하지 않았을 때
 	if( pw == '' ) {
-		$("#upw_msg").html("패스워드를 입력해주세요!")
+		$("#upw_msg").html("*패스워드를 입력해주세요!")
 		
 		return false;
 	}
@@ -237,12 +283,12 @@ function data() {
 .outer{
 	width:450px;
 	margin: 0 auto;
-	margin-top: 10%;
+	margin-top: 9%;
 	background-color: #f5f6f7;
 }
 
 .msg {
-	font-size: 0.7em;
+	font-size: 0.7em;/* 0.7em; */
 	color: red;
 	font-weight:bold;
 /* 	margin-left: 10px; */
@@ -257,6 +303,7 @@ button,#btnadd {
     cursor: pointer;
     background-color: #B6E388;
     font-family: 'GmarketSansMedium';
+    height:25px;
 }
 body{
 background-color: #f5f6f7; 
@@ -308,7 +355,9 @@ margin:0 auto;
 }
 
 #btnjoin{
-margin-left: 50%;
+margin-left: 43%;
+width:13%;
+height:30px;
 }
 #idCheckbtn,#btnadd{
 margin-bottom:5px;
@@ -353,6 +402,7 @@ font-family:'dalseo';
 <span id="username_msg" class="msg"></span><br>
 
 <label for="nick">닉네임</label>
+<button type="button" id="nickChkbtn" onclick="checkNick();">중복확인</button>
 <span class="ps_box int_id">
 <input type="text" name="nick" id="nick" class="int"></span>
 <span id="nick_msg" class="msg"></span><br>
@@ -371,6 +421,7 @@ font-family:'dalseo';
 <span id="gender_msg" class="msg"></span><br>
 
 <label for="email">이메일</label>
+<button type="button" id="emilChkbtn" onclick="checkEmail();">중복확인</button>
 <span class="ps_box int_id">
 <input type="text" name="email" id="email"class="int" ></span>
 <span id="email_msg" class="msg"></span><br>

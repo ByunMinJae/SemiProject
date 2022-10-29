@@ -23,8 +23,16 @@ public class CartAddController extends HttpServlet {
        
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
 		System.out.println("/cart/add [GET]");
+		
+		//회원번호 가져오기
+		HttpSession session = req.getSession();
+		//비로그인시->로그인창
+		if( session.getAttribute("userno") == null ) {
+			resp.sendRedirect("/cmc/login");
+		} else {
+		
+		int userno = (int)session.getAttribute("userno"); 
 		
 		//상품 가져오기
 		int prodno = Integer.parseInt(req.getParameter("prodno"));
@@ -32,13 +40,13 @@ public class CartAddController extends HttpServlet {
 		req.setAttribute("prod", prod);
 		System.out.println("장바구니 선택 상품:"+prod);
 		
-		cartService.cartinsert(req);
+		cartService.cartinsert(userno,req,prod);
 		
 		List<Cart> cart= cartService.getList();
 
 		req.getRequestDispatcher("/WEB-INF/views/sharon/user/CartPro.jsp").forward(req, resp);
 
-		
+		}	
 	}
 
 	/**

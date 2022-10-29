@@ -24,6 +24,10 @@ public interface JoinDao {
 
 	public User selectByUserno(Connection conn, int userno);
 
+	public int emailCheck(String email);
+
+	public int nickCheck(String nick);
+
 
 	
 }
