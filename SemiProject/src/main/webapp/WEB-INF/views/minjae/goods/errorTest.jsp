@@ -1,15 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<%@	include file="../../layout/header.jsp" %>
 
-<% int num = 7/0; %>
+<% int num = 7/0; %><!-- 에러 -->
 
-</body>
-</html>
+<jsp:include page="../../layout/footer.jsp"/>
