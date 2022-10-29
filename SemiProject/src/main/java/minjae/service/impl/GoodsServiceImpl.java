@@ -9,6 +9,7 @@ import common.JDBCTemplate;
 import minjae.dao.face.GoodsDao;
 import minjae.dao.impl.GoodsDaoImpl;
 import minjae.dto.Product;
+import minjae.dto.ProductFile;
 import minjae.service.face.GoodsService;
 import util.Paging;
 
@@ -48,6 +49,29 @@ public class GoodsServiceImpl implements GoodsService {
 		Paging paging = new Paging(totalCount, curPage, 4, 5);
 		
 		System.out.println("/goods/list getPaging() - 끝");
+		return paging;
+	}
+	
+	@Override
+	public Paging getPagingForSearch(HttpServletRequest req, String search) {
+		System.out.println("/goods/list getPagingForSearch() - 시작");
+		
+		//총 게시글 수 조회하기
+		int totalCount = goodsDao.selectCntSearch(JDBCTemplate.getConnection(), search);
+		
+		
+		//전달파라미터 curPage 추출하기
+		String param = req.getParameter("curPage");
+		int curPage = 0;
+		if( param != null && !"".equals(param) ) {
+			curPage = Integer.parseInt(param);
+		}
+		
+		
+		//Paging객체 생성
+		Paging paging = new Paging(totalCount, curPage, 4, 5);
+		
+		System.out.println("/goods/list getPagingForSearch() - 끝");
 		return paging;
 	}
 	
@@ -107,6 +131,16 @@ public class GoodsServiceImpl implements GoodsService {
 			return 0;
 		}
 		
+	}
+	
+	@Override
+	public ProductFile viewFile(Product pordDetail) {
+		return goodsDao.selectFile(JDBCTemplate.getConnection(), pordDetail);
+	}
+	
+	@Override
+	public List<ProductFile> viewFile(List<Product> goodsList) {
+		return goodsDao.selectFileList(JDBCTemplate.getConnection(), goodsList);
 	}
 	
 }

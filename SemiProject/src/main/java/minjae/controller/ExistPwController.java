@@ -16,6 +16,14 @@ public class ExistPwController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private FindUserService findUserService = new FindUserServiceImpl();
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		System.out.println("에러 테스트 컨트롤러 [GET]");
+		
+		
+		req.getRequestDispatcher("/WEB-INF/views/minjae/goods/errorTest.jsp").forward(req, resp);
+		
+	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -27,5 +35,6 @@ public class ExistPwController extends HttpServlet {
 		req.setAttribute("res", res);
 		req.getRequestDispatcher("/WEB-INF/views/minjae/findUser/existPw.jsp").forward(req, resp);
 	}
+	
 	
 }

@@ -325,7 +325,8 @@ public class MypageDaoImpl implements MypageDao {
 	@Override
 	public int updateUserNick(Connection conn, int userno, String nick) {
 		System.out.println("/mypage/main DAO updateUserNick() - 시작");
-		
+		System.out.println(userno);
+		System.out.println(nick);
 		String sql = "";
 		sql += "UPDATE user_info";
 		sql += " SET nick = ?";

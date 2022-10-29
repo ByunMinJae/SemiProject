@@ -173,6 +173,12 @@
 	left: 90%;
 }
 
+@media screen and (max-width: 1500px){
+	.header-menu .weather-wrap{
+	display: none;
+	}
+}
+
 .weather-widget p {
 	font-family: "돋움", Dotum,'Apple SD Gothic Neo', 'Malgun Gothic', 'Helvetica Neue', Helvetica, sans-serif;
 	z-index: 99;
@@ -299,7 +305,11 @@
 				<div class="top">
 					<ul class="toplist">
 						<li><a href="/mypage/main" class="">마이페이지</a></li>
+						<%	if( session.getAttribute("userno") != null ) { %>
+					
+						<% } else { %>
 						<li><a href="/user/join">회원가입</a></li>
+						<% } %>
 						<%if ( session.getAttribute("userno") == null){ %>
 		                <li><a href="/cmc/login">로그인</a></li>
 		                <% } else { %>
@@ -318,7 +328,11 @@
 					</div>
 					<div class="hmenulist">
 						<ul>
+							<% if( null != session.getAttribute("gradeno") && (int)session.getAttribute("gradeno") ==3){ %>
+							<li><a href="/BoardAccessDenied.jsp">게시판</a></li>
+							<% }else{ %>
 							<li><a href="/board/notice">게시판</a></li>
+							<%} %>
 							<li><a href="/map">등산 도우미</a></li>
 							<li><a href="/goods/list">굿즈샵</a></li>
 						</ul>
@@ -451,21 +465,17 @@ html {
 }
 
 
-.one {
-  animation-delay: 1s;
-}
-
 .two {
-  animation-delay: 3s;
+  animation-delay: 2s;
 }
 
 .three {
-  animation-delay: 5s;
+  animation-delay: 4s;
 }
 
 .four {
   position: relative;
-  animation-delay: 7s;
+  animation-delay: 6s;
   left: -34px;
 }
 
@@ -487,6 +497,11 @@ html {
 
 .agent {
 	color: #00CC88;
+}
+
+@media screen and (max-width: 1500px){
+.together{
+	display: none;
 }
 
 

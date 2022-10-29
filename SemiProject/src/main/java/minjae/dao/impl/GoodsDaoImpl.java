@@ -10,6 +10,7 @@ import java.util.List;
 import common.JDBCTemplate;
 import minjae.dao.face.GoodsDao;
 import minjae.dto.Product;
+import minjae.dto.ProductFile;
 import util.Paging;
 
 public class GoodsDaoImpl implements GoodsDao {
@@ -69,6 +70,39 @@ public class GoodsDaoImpl implements GoodsDao {
 		
 		try {
 			ps = conn.prepareStatement(sql); //SQL수행 객체
+			rs = ps.executeQuery(); //SQL수행 및 결과 집합 저장
+
+			while( rs.next() ) {
+				count = rs.getInt("cnt");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("/goods/list selectCntAll() - 끝");
+		//최종 결과 반환
+		return count;
+	}
+	
+	@Override
+	public int selectCntSearch(Connection conn, String search) {
+		System.out.println("/goods/list selectCntAll() - 시작");
+		
+		String sql = "";
+		sql += "SELECT count(*) cnt FROM product";
+		sql += " WHERE prodname LIKE ?";
+		sql += " ORDER BY prodno";
+		
+		//총 게시글 수 변수
+		int count = 0;
+		
+		try {
+			ps = conn.prepareStatement(sql); //SQL수행 객체
+			ps.setString(1, search);
 			rs = ps.executeQuery(); //SQL수행 및 결과 집합 저장
 
 			while( rs.next() ) {
@@ -270,7 +304,7 @@ public class GoodsDaoImpl implements GoodsDao {
 		sql += "SELECT * FROM (";
 		sql += "	SELECT rownum rnum, B.* FROM (";
 		sql += "		SELECT";
-		sql += "			prodno, prodname, prodprice, prodimage, prodcon, proddate, prodpop";
+		sql += "			prodno, prodname, prodprice, prodimage, prodcon, proddate, prodpop";//이미지 있는거
 		sql += "		FROM product";
 		sql += "		WHERE prodname LIKE ?";
 		sql += "		ORDER BY prodno";
@@ -382,6 +416,88 @@ public class GoodsDaoImpl implements GoodsDao {
 		
 		System.out.println("/goods/detail insertBuyProd() - 끝");
 		return res;
+	}
+
+	@Override
+	public ProductFile selectFile(Connection conn, Product pordDetail) {
+		System.out.println("/goods/detail selectFile() - 시작");
+
+		String sql = "";
+		sql += "SELECT";
+		sql += "	fileno, prodno, originname, storedname, filesize, write_date";
+		sql += " FROM productfile";
+		sql += " WHERE prodno = ?";
+		
+		//조회 결과 객체
+		ProductFile productFile = null;
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, pordDetail.getProdno());
+			
+			rs = ps.executeQuery();
+			
+			while( rs.next() ) {
+				productFile = new ProductFile();
+				
+				productFile.setFileno( rs.getInt("fileno") );
+				productFile.setProdno( rs.getInt("prodno") );
+				productFile.setOriginname( rs.getString("originname") );
+				productFile.setStoredname( rs.getString("storedname") );
+				productFile.setFilesize( rs.getInt("filesize") );
+				productFile.setWrite_date( rs.getDate("write_date") );
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("/goods/detail selectFile() - 끝");
+		return productFile;
+	}
+	
+	@Override
+	public List<ProductFile> selectFileList(Connection conn, List<Product> goodsList) {
+		System.out.println("/goods/detail selectFileList() - 시작");
+
+		String sql = "";
+		sql += "SELECT";
+		sql += "	fileno, prodno, originname, storedname, filesize, write_date";
+		sql += " FROM productfile";
+		
+		//조회 결과 객체
+		List<ProductFile> productFileList = new ArrayList<>();
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			rs = ps.executeQuery();
+			
+			while( rs.next() ) {
+				ProductFile productFile = new ProductFile();
+				
+				productFile.setFileno( rs.getInt("fileno") );
+				productFile.setProdno( rs.getInt("prodno") );
+				productFile.setOriginname( rs.getString("originname") );
+				productFile.setStoredname( rs.getString("storedname") );
+				productFile.setFilesize( rs.getInt("filesize") );
+				productFile.setWrite_date( rs.getDate("write_date") );
+				
+				productFileList.add(productFile);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("/goods/detail selectFileList() - 끝");
+		return productFileList;
 	}
 	
 }

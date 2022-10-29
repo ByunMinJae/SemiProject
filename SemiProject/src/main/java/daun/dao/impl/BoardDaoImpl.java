@@ -175,7 +175,7 @@ public class BoardDaoImpl implements BoardDao {
 		
 		String sql = "";
 		sql += "SELECT";
-		sql += "	boardno, boardtitle, boardcon, boarddate, userno, ";
+		sql += "	boardno, boardtitle, boardcon, boarddate, userno, categoryno, hit ";
 		sql += " FROM board_info";
 		sql += " WHERE boardno = ?";
 		
@@ -195,6 +195,8 @@ public class BoardDaoImpl implements BoardDao {
 				board.setBoardcon(rs.getString("boardcon"));
 				board.setBoarddate(rs.getDate("boarddate"));
 				board.setUserno(rs.getInt("userno"));
+				board.setCategoryno(rs.getInt("categoryno"));
+				board.setHit(rs.getInt("hit"));
 			}
 			
 		} catch (SQLException e) {
@@ -459,22 +461,20 @@ public class BoardDaoImpl implements BoardDao {
 	}
 	
 	@Override
-	public int report(Connection conn, Report report) {
+	public int insertreport(Connection conn, Report report) {
 		
 		String sql = "";
 		sql += "INSERT INTO board_report( reportno, reportcon, reportdate, userno, boardno )";
-		sql += " VALUES( ?, ?, sysdate, ?, ? )";
+		sql += " VALUES( board_report_seq.nextval, ?, sysdate, ?, ? )";
 		
 		int res = 0;
 		
 		try {
 			ps = conn.prepareStatement(sql);
 			
-			ps.setInt(1, report.getReportno());
-			ps.setString(2, report.getReportcon());
-			ps.setDate(3, report.getReportdate());
-			ps.setInt(4, report.getUserno());
-			ps.setInt(5, report.getBoardno());
+			ps.setString(1, report.getReportcon());
+			ps.setInt(2, report.getUserno());
+			ps.setInt(3, report.getBoardno());
 			
 			res = ps.executeUpdate();
 			

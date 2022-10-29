@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.List;
 
 import minjae.dto.Product;
+import minjae.dto.ProductFile;
 import util.Paging;
 
 public interface GoodsDao {
@@ -23,6 +24,9 @@ public interface GoodsDao {
 	 * @return int - 테이블의 전체 행 수
 	 */
 	public int selectCntAll(Connection conn);
+	
+	public int selectCntSearch(Connection connection, String search);
+
 	
 	/**
 	 * 게시글 테이블 페이징 목록 조회
@@ -82,6 +86,18 @@ public interface GoodsDao {
 	 * @return insert 결과
 	 */
 	public int insertBuyProd(Connection conn, int userno, String buyprodname, int totalamount);
+	
+	/**
+	 *  첨부파일 정보 조회
+	 *  
+	 * @param conn - DB연결 객체
+	 * @param pordDetail - 조회할 상품 번호
+	 * @return ProductFile - 첨부파일 정보
+	 */
+	public ProductFile selectFile(Connection conn, Product pordDetail);
+
+	public List<ProductFile> selectFileList(Connection conn, List<Product> goodsList);
+
 
 
 

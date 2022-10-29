@@ -1,11 +1,13 @@
 package daun.service.face;
 
+import java.sql.Connection;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import daun.dto.Board;
 import daun.dto.BoardFile;
+import daun.dto.Report;
 import daun.util.Paging;
 import sharon.dto.User;
 
@@ -96,6 +98,11 @@ public interface BoardService {
 	
 	
 	public Board viewBeforeReport(Board boardno);
+
+	public Board infoboard(Board boardno);
+
+	public int selectNextreportno(Connection conn);
+
 
 	
 

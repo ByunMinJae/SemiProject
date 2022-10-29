@@ -1,3 +1,4 @@
+<%@page import="daun.dto.BoardFile"%>
 <%@page import="changmin.dto.Board"%>
 <%@page import="sharon.dto.User"%>
 <%@page import="changmin.dto.Category"%>
@@ -8,6 +9,8 @@
 <% Board viewBoard = (Board) request.getAttribute("viewBoard"); %>
 <% Category category = (Category) request.getAttribute("category"); %>
 <% List<User> userList = (List) request.getAttribute("userList"); %>
+<% List<BoardFile> fileList = (List) request.getAttribute("fileList"); %>
+<% BoardFile boardFile = (BoardFile) request.getAttribute("boardFile"); %>
 <%@include file="../layout/header.jsp" %>
 <!-- 부트스트랩 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -21,7 +24,11 @@ $(document).ready(function() {
 	})
 	
 
+/* 	$('#fileDown').click(function() {
+		alert('구현되지 않은 기능입니다.(｡•́︿•̀｡)');
+	}) */
 })
+
 
 function deleteboard(){
 	 if (confirm("정말 삭제하시겠습니까?") == true){    //확인
@@ -91,7 +98,10 @@ td:nth-child(2) {
 	
 	
 }
-
+#content-detail {
+	font-family: 'GmarketSansMedium';
+	padding: 10px 10px 100px 10px;
+}
 #report {
 	float: right;
 	font-family: 'GmarketSansMedium';
@@ -126,10 +136,15 @@ img {
 #category {
 	color: #6478FF;
 }
+
 #gmarketfont {
 	font-family: 'GmarketSansMedium';
-	min-height: 300px;
 }
+
+#file {
+	font-family: 'GmarketSansMedium';
+}
+
 .smalltext { 
 	font-family: 'GmarketSansMedium';
 	font-size: 10px; 
@@ -153,6 +168,11 @@ img {
 .footer {
 	max-height:0;
 	border: none;
+}
+
+.file {
+	float: left;
+	
 }
 
 
@@ -179,7 +199,7 @@ img {
 		<td colspan="4" class="text-left success" id="contentHead">
 		<span id="category">[<%=category.getCategoryname()%>]</span>
 		<span id="title"><%=viewBoard.getBoardtitle() %></span>
-		<span id="report"><a href="/board/report"><button>게시글 신고</button></a></span>
+		<span id="report"><a href="/board/report?boardno=<%=viewBoard.getBoardno()%>"><button>게시글 신고</button></a></span>
 		</td>
 	</tr>
 	
@@ -195,21 +215,58 @@ img {
 	</tr> 
 
 	<tr>
-		<td class="success" id="gamrketfont">본문</td>
+		<td class="success" id="gmarketfont">본문</td>
 	</tr>
 	<tr>
-		<td colspan="4" class="text-left"><p id="gmarketfont"><%=viewBoard.getBoardcon() %></p></td>
+		<div id="content">
+
+			<td colspan="4" class="text-left" id="content-detail">
+				<%	if( boardFile != null ) { %>
+				<img src="<%=request.getContextPath() %>/upload/<%=boardFile.getStoredname() %>">
+				<%	} %>
+				<%=viewBoard.getBoardcon() %>
+			</td>
+		</div> 
 	</tr>
-	
+	<tr>
+		<td class="success" id="file">첨부파일</td>
+	</tr>
+<%-- 	
+	<% if(fileList.size()>0) {%>
+	<tr>
+		<% for(int i=0; i<fileList.size(); i++) {%>
+		<td colspan="4" class="text-left" id="fileDown"><a href='javascript:void(0);'><%=fileList.get(i).getOriginname() %></a>
+		<% } %>
+	</td>
+	<% } else {%>
+	<tr>
+		<td class="text-left" id="file">없음</td>
+	</tr>
+	<% } %> --%>
+		<!-- 첨부파일 -->
+		<tr>
+		<div>
+			<%	if( boardFile != null ) { %>
+			<td colspan="4" class="text-left" id="fileDown">
+				<a href="<%=request.getContextPath() %>/upload/<%=boardFile.getStoredname() %>"
+				   download="<%=boardFile.getOriginname() %>"><%=boardFile.getOriginname() %>
+				</a>
+			</td>
+			<%	} else { %>
+			<tr>
+				<td class="text-left" id="file">없음</td>
+		</tr>
+			<% } %>
+		</div>
+		</tr>
+		
 	</table>
 	<div class="text-center">
 		<button id="btnList" class="btn btn-primary">목록</button>
-		<a href="/board/update"><button id="btnUpdate" class="btn btn-info">수정</button></a>
+		<a href="/board/update?boardno=<%=viewBoard.getBoardno()%>"><button id="btnUpdate" class="btn btn-info">수정</button></a>
 		<button id="btnDelete" class="btn btn-danger" onClick="deleteboard();">삭제</button>
 	</div>
 </div>
-
-	
 	
 
 	

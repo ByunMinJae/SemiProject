@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import minjae.dto.Product;
+import minjae.dto.ProductFile;
 import minjae.service.face.GoodsService;
 import minjae.service.impl.GoodsServiceImpl;
 import util.Paging;
@@ -26,6 +27,23 @@ public class GoodsListController extends HttpServlet {
 		System.out.println("/goods/list [GET]");
 		
 		req.setCharacterEncoding("UTF-8");
+
+		//선택한 카테고리값
+		HttpSession session = req.getSession();
+		String cateVal = (String)session.getAttribute("cateVal");
+		String search = (String)session.getAttribute("search");
+		System.out.println("[TEST] cateVal : " + cateVal);
+		System.out.println("[TEST] search : " + search);
+		
+		if(cateVal == null) {
+			session.setAttribute("cateVal", "prodno");
+		}
+		
+		if(null != search && !"null".equals(search)) { //!"null".equals(search)
+			System.out.println("검색어 발견 /goods/search 로 이동");
+			req.getRequestDispatcher("/goods/search").forward(req, resp);
+			return;
+		}
 		
 		//현재 페이징 객체 계산하기
 		Paging paging = goodsService.getPaging(req);
@@ -34,34 +52,28 @@ public class GoodsListController extends HttpServlet {
 		//페이징 객체를 MDOEL값 전달
 		req.setAttribute("paging", paging);
 		
-		//선택한 카테고리값
-		HttpSession session = req.getSession();
-		
-		String cateVal = (String)session.getAttribute("cateVal");
-		String search = (String)session.getAttribute("search");
-		System.out.println("[TEST] cateVal : " + cateVal);
-		System.out.println("[TEST] search : " + search);
-		
-		if(!"null".equals(search)) {
-			System.out.println("검색어 발견 /goods/search 로 이동");
-			req.getRequestDispatcher("/goods/search").forward(req, resp);
-			return;
-		}
 			
 		if("".equals(cateVal) || null == cateVal) {
 			System.out.println("기본 세팅 정렬");
 			
 			//상품 페이징 목록 조회
 			List<Product> goodsList = goodsService.getGoodsList(paging);
-			
 			req.setAttribute("goodsList", goodsList);
+			
+			//첨부파일 정보 조회
+			List<ProductFile> prodFileList = goodsService.viewFile(goodsList);
+			req.setAttribute("prodFileList", prodFileList);
+			
 			req.getRequestDispatcher("/WEB-INF/views/minjae/goods/goodsList.jsp").forward(req, resp);
 		} else {
 			System.out.println("카테고리 세팅 정렬");
 			
 			List<Product> goodsList = goodsService.getGoodsList(paging, cateVal);
-			
 			req.setAttribute("goodsList", goodsList);
+			
+			List<ProductFile> prodFileList = goodsService.viewFile(goodsList);
+			req.setAttribute("prodFileList", prodFileList);
+			
 			req.getRequestDispatcher("/WEB-INF/views/minjae/goods/goodsList.jsp").forward(req, resp);
 		}
 			

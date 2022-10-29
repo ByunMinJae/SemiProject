@@ -30,13 +30,14 @@ public class GoodsBuyController extends HttpServlet {
 		
 		} else {
 			
-			int userno = (int)session.getAttribute("userno");
+			int userno = (Integer)(session.getAttribute("userno"));
 			System.out.println("구매요청한 회원번호 : " + userno);
 			System.out.println(req.getParameter("buyprodname") + " : " + req.getParameter("totalamount"));
 			int res = goodsService.insertBuyProd(req, userno);
 			
 			if(res > 0) {
-				resp.sendRedirect("/pay/do");
+				req.setAttribute("prodno", req.getParameter("prodno"));
+				req.getRequestDispatcher("/pay/do").forward(req, resp);
 			} else {
 				req.getRequestDispatcher("/WEB-INF/views/minjae/notInsertBuyProd.jsp").forward(req, resp);
 			}

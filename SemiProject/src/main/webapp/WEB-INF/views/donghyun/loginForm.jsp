@@ -143,6 +143,8 @@ $(document).ready(function(){
 		return emptyAlert(); //아이디 비밀번호 미입력 처리 함수 호출
 		
 		document.form.submit();
+		
+		
 	})
 	
 	
@@ -214,15 +216,23 @@ function emptyAlert(){ //아이디, 비밀번호 미입력시 처리
 	          Kakao.API.request({
 	            url: '/v2/user/me',
 	            success: function(res) {
+	            
 	              console.log(res);
-	              var id = res.id;
-				  scope : 'profile, account_email';
-				  alert('환영합니다');
-	              location.href="/cmc/kakao";
+	              var email = res.kakao_account.email;
+				  var nickname = res.kakao_account.profile.nickname;
+				  
+				  
+				$("#kakaoemail").attr("value", email);
+				  $("#kakaonick").attr("value", nickname);
+					  
+				  $("#kakaoLogin").submit();
+				  
+				  return false;
+				  
 			
 			
 	              
-	        }
+	         }
 	          })
 	          console.log(authObj);
 	          var token = authObj.access_token;
@@ -232,7 +242,7 @@ function emptyAlert(){ //아이디, 비밀번호 미입력시 처리
 	        }
 	      });
 	        
-	} //
+	} // 
 	
 
 	//function kakaoLogout() {
@@ -285,6 +295,10 @@ function emptyAlert(){ //아이디, 비밀번호 미입력시 처리
 		</div>
 </div>
 
+<form action="/cmc/kakao" method="post" id="kakaoLogin">
+	<input type="hidden" name="kakaoemail" id="kakaoemail">
+	<input type="hidden" name="kakaonick" id="kakaonick">
+</form>
 
 <%-- include footer --%>
 <%@ include file="../layout/footer.jsp" %>

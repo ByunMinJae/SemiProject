@@ -384,7 +384,11 @@ $(document).ready(function() {
     position: absolute;
     bottom: 8px;
 }
-#h1t{	font-family: 'dalseo'; }	
+#h1t{	font-family: 'dalseo'; }
+#addrText {
+	white-space: normal;
+    width: 324px;
+}
 </style>
 
 <div id="mpuWrap">
@@ -471,7 +475,7 @@ $(document).ready(function() {
 <!-- 현재 주소 -->
 <tr id="currAddr">
 	<td>주소</td>
-	<td><%=mpMain.getAddress() %></td>
+	<td id="addrText"><%=mpMain.getAddress() %></td>
 	<td class="btnChg"  style="margin-left: 111px;"><button id="btnChgAddr">변 경</button></td>
 </tr>
 <!-- 변경 주소 -->

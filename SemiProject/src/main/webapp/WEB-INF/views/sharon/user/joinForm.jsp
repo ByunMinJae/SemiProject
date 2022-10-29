@@ -57,7 +57,25 @@ function validate() {
 		return false; //submit 중단
 	}
 
-
+	if( !validateNICK( $("#nick").val() ) ) { 
+		return false;
+	}	
+	if( !validateBIRTH( $("#birth").val() ) ) { 
+			return false;
+	}
+	if( !validateGENDER( $("#gender").val() ) ) { 
+		return false;
+	}	
+	if( !validateEMAIL( $("#email").val() ) ) { 
+		return false; //submit 중단
+	}
+	if( !validatePHONE( $("#phone").val() ) ) { 
+		return false;
+	}
+	if( !validateADDRESS( $("#postcode").val() ) ) { 
+		return false;
+	}
+	
 	//모든 유효성 검증 성공	
 	return true; //submit 허용하기
 }
@@ -83,67 +101,8 @@ function validateID( id ) {
 	return true;
 }
 
-//1023 아이디중복
 
 
-//----------------------10/20 아이디중복
-/* let idCheck = false;
-
-function useridCheck(){
-	
-	var userid = $("#userid").val();
-	
-	$.ajax({
-		type:"POST",
-		url:"/user/idCheck",
-		data:{userid:userid},
-		contentType:"application/json:charset=utf-8",
-		dataType:"text"
-		
-	}).done(function(result){
-		if(result== 1){
-			$("uid_msg").html("아이디가 중복되었습니다.");
-			idCheck=false;
-			
-		}else{
-			$("uid_msg").html("사용 가능한 아이디입니다.");
-			isChecking=true;
-		}
-	});
-	
-}  */
-
-
-/* $(document).ready(function() {
-	
- 	$("#idCheckbtn").click(function() {
- 		
- 		$.ajax({
- 			type:"POST",
- 			url:"/user/idCheck",
- 			data:{userid:userid},
- //			contentType:"application/json:charset=utf-8",
- 			dataType:"html",
- 			success: function( res ) {
- 				console.log("AJAX 성공")
- 				console.log(res)
- 				
- 				if( $.trim(res) == "true" ) {
- 					console.log('사용 가능한 아이디입니다.')
- 					
- 				if( validateID( $("#userid").val() ) ) {
- 					$("#form").submit();
- 				} else {	
- 					console.log('중복된 아이디입니다.')
- 					$("#uid_msg").html(res);
- 				}
- 			}
- 		}
-	})
-})})
-
- */
-//----아이디중복끝
 
 function validatePW( pw ) {
 	//패스워드를 입력하지 않았을 때
@@ -180,6 +139,50 @@ function validateNAME( name ) {
 	return true;
 }
 
+function validateNICK( nick ) {
+	if( nick == '' ) {
+		$("#nick_msg").html("닉네임을 입력해주세요!")
+		return false;
+	}
+	return true;
+}
+
+function validateBIRTH( birth ) {
+	if( birth == '' ) {
+		$("#birth_msg").html("생년월일을 입력해주세요!")
+		return false;
+	}
+	return true;
+}
+
+function validateGENDER( gender ) {
+	if(gender  == '' ) {
+		$("#gender_msg").html("성별을 선택해주세요!")
+		return false;
+	}
+	return true;
+}
+function validateEMAIL( email ) {
+	if( email == '' ) {
+		$("#email_msg").html("이메일을 입력해주세요!")
+		return false;
+	}
+	return true;
+}
+function validatePHONE( phone ) {
+	if( phone == '' ) {
+		$("#phone_msg").html("전화번호를 입력해주세요!")
+		return false;
+	}
+	return true;
+}
+function validateADDERESS(postcode ) {
+	if( postcode == '' ) {
+		$("#address_msg").html("주소를 입력해주세요!")
+		return false;
+	}
+	return true;
+}
 
 
 //-----------------10/13추가 메시지 삭제가 안되고 그대로 남아있음
@@ -234,7 +237,7 @@ function data() {
 .outer{
 	width:450px;
 	margin: 0 auto;
-	margin-top: 17%;
+	margin-top: 10%;
 	background-color: #f5f6f7;
 }
 
@@ -247,16 +250,17 @@ function data() {
 } 
 
 button,#btnadd { 
-    border: none;
-    border-radius: 10px;
-    font-family: "paybooc-Light", sans-serif;
+   border: none;
+    border-radius: 5px;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
     font-weight: 600;
     cursor: pointer;
+    background-color: #B6E388;
+    font-family: 'GmarketSansMedium';
 }
 body{
 background-color: #f5f6f7; 
-font-family: "paybooc-Light", sans-serif;
+font-family: 'GmarketSansMedium';
 
 }
 
@@ -279,6 +283,7 @@ h1{
     background: #fff;
     box-sizing: border-box;
     vertical-align: top;
+    margin-top:7px;
 }
 
 .int {
@@ -294,11 +299,26 @@ h1{
     z-index: 10;
 }
 
-
+label{
+font-family: 'GmarketSansMedium';
+}
 
 #form{
 margin:0 auto;
 }
+
+#btnjoin{
+margin-left: 50%;
+}
+#idCheckbtn,#btnadd{
+margin-bottom:5px;
+}
+
+h1{
+font-family:'dalseo';
+}
+
+
 </style>
 
 
@@ -375,11 +395,17 @@ margin:0 auto;
 <input type="hidden" name="address" id="addressSubmit">
 
 <span id="address_msg" class="msg"></span><br>
+<!-- 
+<label for="gradeno">등급</label>
+<span class="ps_box int_id">
+<input type="radio" name="gradeno" value="1">일반
+<input type="radio" name="gradeno" value="2">관리자</span>
+<span id="gender_msg" class="msg"></span><br> -->
 
 <!-- 	<button type="button" class="btn btn-primary" id="btnJoin">회원가입</button>
 	<button type="button" class="btn btn-danger" id="btnCancel">취소</button>
  -->
-<button>가입</button>
+<button id="btnjoin">가입</button>
 </form>
 
 </div>

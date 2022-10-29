@@ -71,6 +71,9 @@ $(document).ready(function() {
 </script>
 
 <style type="text/css">
+#wrapper {
+	background-color: #BFDCFB;
+}
 #mpmWrap {
 	width: 1100px;
     height: 597px;
@@ -83,7 +86,7 @@ $(document).ready(function() {
 	width: 40%;
 	height: 665px;
 	float: left;
-	background: #c7f2a482;
+	background: #e0fdc9;
 	position: absolute;
 }
 #userInfo {
@@ -124,7 +127,7 @@ li.info_left {
 	border: 1px solid #ccc;
     border-radius: 20px;
 	text-align: left;
-	background: #fcffb282;
+	background: #fcffbe;
 }
 #userDetail {
 	height: 200px;

@@ -135,7 +135,7 @@ public interface BoardDao {
 	 * @param report - 신고 내용을 담은 객체
 	 * @return int - INSERT REPORT 수행 결과
 	 */
-	public int report(Connection conn, Report report);
+	public int insertreport(Connection conn, Report report);
 
 	
 	/**
