@@ -63,8 +63,8 @@ td {
 .text-center {
 	position: relative;
 	top: 40px;
-	padding-left: 70px;
-	margin-bottom: 50px;
+	padding-left: 100px;
+	margin: 50px;
 } 
 
 .right {
