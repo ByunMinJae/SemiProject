@@ -1,8 +1,10 @@
+<%@page import="minjae.dto.ProductFile"%>
 <%@page import="minjae.dto.Product"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
 <%	Product prod = (Product)request.getAttribute("pordDetail"); %>
+<%	ProductFile prodFile = (ProductFile)request.getAttribute("prodFile"); %>
 
 <%@	include file="../../layout/header.jsp" %>
 
@@ -105,6 +107,9 @@ $(document).ready(function() {
 .btnType:hover {
 	background: #ccc;
 }
+#noMsg {
+	margin: 7px 0px 10px 69px;
+}
 </style>
 
 <div id="detailWrap">
@@ -119,9 +124,15 @@ $(document).ready(function() {
 		<td>가격</td>
 		<td><%=prod.getProdprice() %></td>
 	</tr>
+<%	if(prodFile.getStoredname() == null) { %>
 	<tr>
 		<td colspan="4"><img id="prodImg" alt="" src="/resources/image/<%=prod.getProdimage() %>"></td>
 	</tr>
+<%	} else { %>
+	<tr>
+		<td colspan="4"><img alt="none" src="<%=request.getContextPath() %>/upload/<%=prodFile.getStoredname() %>"></td>
+	</tr>
+<%	} %>
 	<tr>
 		<td colspan="4" style="text-align: left;"><%=prod.getProdcon() %></td>
 	</tr>
@@ -148,8 +159,20 @@ $(document).ready(function() {
 
 <button type="button" id="btnCart" class="btnType">장바구니</button>
 <button type="button" id="btnBuy" class="btnType">구매하기</button>
-
+<p id="noMsg">굿즈는 이벤트성으로 판매하는 상품 특성상 취소, 반품이 어려울 수 있습니다.</p>
 </form>
+
+<!-- 첨부파일 다운로드 -->
+<!-- <div id="file"> -->
+<%-- <%	if( prodFile != null ) { %> --%>
+<%-- <a href="<%=request.getContextPath() %>/upload/<%=prodFile.getStoredname() %>" --%>
+<%--  download="<%=prodFile.getOriginname() %>"> --%>
+<%-- 	<%=prodFile.getOriginname() %> --%>
+<!-- </a> -->
+<%-- <%	} %> --%>
+<!-- </div> -->
+
+
 
 </div>
 

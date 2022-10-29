@@ -9,6 +9,7 @@ import common.JDBCTemplate;
 import minjae.dao.face.GoodsDao;
 import minjae.dao.impl.GoodsDaoImpl;
 import minjae.dto.Product;
+import minjae.dto.ProductFile;
 import minjae.service.face.GoodsService;
 import util.Paging;
 
@@ -130,6 +131,16 @@ public class GoodsServiceImpl implements GoodsService {
 			return 0;
 		}
 		
+	}
+	
+	@Override
+	public ProductFile viewFile(Product pordDetail) {
+		return goodsDao.selectFile(JDBCTemplate.getConnection(), pordDetail);
+	}
+	
+	@Override
+	public List<ProductFile> viewFile(List<Product> goodsList) {
+		return goodsDao.selectFileList(JDBCTemplate.getConnection(), goodsList);
 	}
 	
 }
