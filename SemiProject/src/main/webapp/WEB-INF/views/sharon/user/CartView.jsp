@@ -37,7 +37,7 @@ text-align:center;
 table{
 	border: 1px solid #ccc;
 	border-collapse: collapse;
-	width: 700px;
+	width: 900px;
 	margin: 0 auto;
 	font-family: 'GmarketSansMedium';
 	font-size:15px;
@@ -55,11 +55,11 @@ h2{
 th{
 text-align:center;
 	background-color: #B6E388;
-	height:50px;
+	height:60px;
 }
 
 td{
-height:40px;
+height:60px;
 }
 
 
@@ -67,6 +67,10 @@ height:40px;
 
 margin-bottom: 20%;
 
+}
+
+#btn3{
+height:50px;
 }
 </style>
  
@@ -127,38 +131,42 @@ function fnGo(){
 	<form action="/cart/order" method="post" id="form"></form>
 	<table border="1">
 		<tr>
-			<th style="width: 10%;"><input type="checkbox" value="[i+1]" id="chkall"></th>
-			<th style="width: 10%;">번호</th>
-			<th style="width: 30%;">상품명</th>
-			<th style="width: 20%;">상품번호</th>
-			<th style="width: 10%;">수량</th>
-			<th style="width: 20%;">가격</th>
+			<th style="width: 6%;"><input type="checkbox" value="[i+1]" id="chkall"></th>
+			<th style="width: 7%;">번호</th>
+			<th style="width: 24%;">상품명</th>
+			<th style="width: 16%;">상품번호</th>
+			<th style="width: 17%;">가격</th>
+			<th style="width: 8%;">수량</th>
+			<th style="width: 17%;">합계</th>
 			<!-- <th>회원번호</th> -->
 		</tr>
 
 <%	for(int i=0; i<cartList.size(); i++) { %>
+
 		<tr>
 			<td><input type="checkbox" id="cart_list"name="cart_list"></td>
  			<td id="cartno"><%=(i+1) %></td>	
 			<td><%=cartList.get(i).getProdname()%></td> 
-			<input type="text" hidden="" name="prodname"  id="prodname" value="<%=cartList.get(i).getProdname() %>">
 			<td><%=cartList.get(i).getProdno()%></td>
-			<input type="text" hidden="" name="prodno"  id="prodno" value="<%=cartList.get(i).getProdno() %>">
-			<td><%=cartList.get(i).getCartcount() %></td>
-			<input type="text" hidden="" name="cartcount"  id="cartcount" value="<%=cartList.get(i).getCartcount() %>">
-			<td><%=cartList.get(i).getProdprice()%></td> 
-			<input type="text" hidden="" name="prodprice"  id="prodprice" value="<%=cartList.get(i).getProdprice() %>">
+			<td><%=cartList.get(i).getProdprice()%>원</td> 
+			<td><%=cartList.get(i).getCartcount() %>개</td>
+			<td><%=cartList.get(i).getProdprice()*cartList.get(i).getCartcount()%>원</td> 
 			<%-- <td><%=cartList.get(i).getUserno() %></td> --%>
+			<input type="text" hidden="" name="prodname"  id="prodname" value="<%=cartList.get(i).getProdname() %>">
+			<input type="text" hidden="" name="prodno"  id="prodno" value="<%=cartList.get(i).getProdno() %>">
+			<input type="text" hidden="" name="cartcount"  id="cartcount" value="<%=cartList.get(i).getCartcount() %>">
+			<input type="text" hidden="" name="prodprice"  id="prodprice" value="<%=cartList.get(i).getProdprice() %>">
 			<input type="text" hidden="" name="userno"  id="userno" value="<%=cartList.get(i).getUserno() %>">
 		</tr>
 		<%	} %>
 		<tr>
-			<td colspan= '6' id="btn3">
+			<td colspan= '7' id="btn3">
 				<input type='button' class="Cartbtn" id="paybtn" value='결제하기' onclick='fnPay()'/><!-- onclick='fnPay()' -->
 				<input type='button' class="Cartbtn" value='장바구니 비우기' onclick='fnClear()' />
 				<input type='button' class="Cartbtn" value='쇼핑 계속하기' onclick='fnGo()' />
 			</td>
 			</tr>
+			
 	</table>
 </div>
 </body>
