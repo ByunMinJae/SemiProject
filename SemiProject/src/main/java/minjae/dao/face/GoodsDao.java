@@ -95,12 +95,15 @@ public interface GoodsDao {
 	 * @return ProductFile - 첨부파일 정보
 	 */
 	public ProductFile selectFile(Connection conn, Product pordDetail);
-
+	
+	public List<ProductFile> selectFileCateVal(Connection connection, List<Product> goodsList, Paging paging, String cateVal);
+	
 	public List<ProductFile> selectFileList(Connection conn, List<Product> goodsList, Paging paging);
 
 	public List<ProductFile> viewSearchFileDefualt(Connection connection, List<Product> goodsList, Paging paging, String def);
 
 	public List<ProductFile> viewSearchFileAll(Connection connection, List<Product> goodsList, Paging paging, String search);
+
 
 
 

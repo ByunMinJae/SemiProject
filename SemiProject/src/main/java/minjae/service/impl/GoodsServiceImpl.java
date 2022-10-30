@@ -152,6 +152,11 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 	
 	@Override
+	public List<ProductFile> viewFile(List<Product> goodsList, Paging paging, String cateVal) {
+		return goodsDao.selectFileCateVal(JDBCTemplate.getConnection(), goodsList, paging, cateVal);
+	}
+	
+	@Override
 	public List<ProductFile> viewFile(List<Product> goodsList, Paging paging) {
 		return goodsDao.selectFileList(JDBCTemplate.getConnection(), goodsList, paging);
 	}

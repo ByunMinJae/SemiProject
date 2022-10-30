@@ -71,7 +71,7 @@ public class GoodsListController extends HttpServlet {
 			List<Product> goodsList = goodsService.getGoodsList(paging, cateVal);
 			req.setAttribute("goodsList", goodsList);
 			
-			List<ProductFile> prodFileList = goodsService.viewFile(goodsList, paging);
+			List<ProductFile> prodFileList = goodsService.viewFile(goodsList, paging, cateVal);
 			req.setAttribute("prodFileList", prodFileList);
 			
 			req.getRequestDispatcher("/WEB-INF/views/minjae/goods/goodsList.jsp").forward(req, resp);
