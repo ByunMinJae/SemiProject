@@ -256,36 +256,41 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public List<Report> selectReportBoard(Connection conn, Paging paging) {
 		String sql ="";
-		sql += "SELECT * FROM(";
-		sql += "	    SELECT rownum rnum, B.* FROM(";
-		sql += "	            SELECT";
-		sql += "	                reportno, reportcon, reportdate, userno, boardno ";
-		sql += "	                FROM board_report";
-		sql += "	                ORDER BY reportno DESC";
-		sql += "	                )B";
-		sql += "	                )BOARD";
-		sql += "                WHERE rnum BETWEEN ? AND ?";
+//		sql += "SELECT * FROM(";
+//		sql += "	    SELECT rownum rnum, B.* FROM(";
+//		sql += "	            SELECT";
+//		sql += "	                reportno, reportcon, reportdate, userno, boardno ";
+//		sql += "	                FROM board_report";
+//		sql += "	                ORDER BY reportno DESC";
+//		sql += "	                )B";
+//		sql += "	                )BOARD";
+//		sql += "                WHERE rnum BETWEEN ? AND ?";
+		
+		sql = "SELECT reportno, reportcon, reportdate, userno, boardno FROM board_report";
 		
 		List<Report> reportBoard = new ArrayList<>();
 		
 		try {
-			Report report = new Report();
+			
 			ps=conn.prepareStatement(sql);
 			
-			ps.setInt(1, paging.getStartNo());
-			ps.setInt(2, paging.getEndNo());
+			//ps.setInt(1, paging.getStartNo());
+			//ps.setInt(2, paging.getEndNo());
 			
 			rs=ps.executeQuery();
 			
 			while(rs.next()) {
+				Report report = new Report();
+				
 				report.setReportno(rs.getInt("reportno"));
 				report.setReportcon(rs.getString("reportcon"));
 				report.setReportdate(rs.getDate("reportdate"));
 				report.setUserno(rs.getInt("userno"));
 				report.setBoardno(rs.getInt("boardno"));
+				
+				reportBoard.add(report);
 			}
 			
-			reportBoard.add(report);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

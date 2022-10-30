@@ -18,8 +18,19 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 <style type="text/css">
+@font-face {
+   font-family: 'dalseo';
+   src: url('/resources/css/DalseoHealingBold.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 h1{
 	text-align: center;
+	font-family : 'dalseo';
 }
 th{
 	text-align: center;
@@ -27,10 +38,26 @@ th{
 td{
 	text-align: center;
 }
+table{
+	font-family: 'GmarketSansMedium';
+	border: 1px solid #ccc;
+}
+button{
+	font-family: 'GmarketSansMedium';
+}
 </style>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#goCategory").click(function(){
+		$(location).attr("href", "/manager/board")
+	})
+})
+
+</script>
 </head>
 <body>
 <h1>소모임 게시판 </h1>
+<button id="goCategory">&lt;-카테고리</button>
 <hr>
 
 <table class="table table-striped table-hover">
