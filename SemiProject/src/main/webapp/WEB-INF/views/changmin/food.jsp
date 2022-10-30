@@ -17,7 +17,7 @@
 	font-family: 'dalseo';
 	src: url('/resources/css/DalseoHealingBold.ttf') format('truetype');
 }
-
+ 
 h1 {
 	font-family: 'dalseo';
 }
