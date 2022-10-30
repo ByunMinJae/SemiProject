@@ -9,11 +9,9 @@
 <%@ include file="../layout/header.jsp"%>
 
 <script>
-$(document).ready(function(){
-	$('#cancelButton').click(function(){
-		alert('취소를 원하실 경우 관리자에게 문의해주세요 ﻿( ´•̥̥̥ω•̥̥̥` )\n\n코딩산악회 [ 010-1234-1234 ]');
-	})
-})
+function cancel(){
+	alert('취소를 원하실 경우 관리자에게 문의해주세요 ﻿( ´•̥̥̥ω•̥̥̥` )\n\n코딩산악회 [ 010-1234-1234 ]');
+}
 </script>
 
 
@@ -63,8 +61,8 @@ td {
 .text-center {
 	position: relative;
 	top: 40px;
-	padding-left: 70px;
-	margin-bottom: 50px;
+	padding-left: 100px;
+	margin: 50px;
 } 
 
 .right {
@@ -138,7 +136,7 @@ td {
 				</tr>
 			</table>
 				<div class="right">
-					<p>굿즈는 이벤트성 상품으로, 결제이후 취소가 어려울수 있습니다.<button id="cancelButton">결제취소</button></p>
+					<p>굿즈는 이벤트성 상품으로, 결제이후 취소가 어려울수 있습니다.<button id="cancelButton" onClick="cancel();">결제취소</button></p>
 					
 				</div>
 			<% } %>
