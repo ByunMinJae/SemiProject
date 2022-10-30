@@ -38,15 +38,9 @@ function updateContents() {
 
 <style>
 
-table {
-
-}
-
 #boardcon {
 	width: 700px;
 	min-height: 700px;
-	
-	
 }
 
 

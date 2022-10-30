@@ -349,8 +349,8 @@ public class BoardDaoImpl implements BoardDao {
 				
 				boardFile.setFileno( rs.getInt("fileno") );
 				boardFile.setBoardno( rs.getInt("boardno") );
-				boardFile.setOriginname( rs.getString("originname") );
-				boardFile.setStoredname( rs.getString("storedname") );
+				boardFile.setOriginname( rs.getString("fileoriginname") );
+				boardFile.setStoredname( rs.getString("filestoredname") );
 				boardFile.setFilesize( rs.getInt("filesize") );
 				boardFile.setBoarddate( rs.getDate("boarddate") );
 			}
@@ -366,7 +366,7 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
-	public int update(Connection conn, Board board) {
+	public int update(Connection conn, Board board, String boardtitle, String boardcon) {
 
 		String sql = "";
 		sql += "UPDATE board_info ";
@@ -380,8 +380,8 @@ public class BoardDaoImpl implements BoardDao {
 		try {
 			ps = conn.prepareStatement(sql);
 			
-			ps.setString(1, board.getBoardtitle());
-			ps.setString(2, board.getBoardcon());
+			ps.setString(1, boardtitle);
+			ps.setString(2, boardcon);
 			ps.setInt(3, board.getBoardno());
 			
 			res = ps.executeUpdate();

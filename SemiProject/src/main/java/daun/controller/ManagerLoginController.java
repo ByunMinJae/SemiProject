@@ -38,7 +38,9 @@ public class ManagerLoginController extends HttpServlet {
 		
 		UserInfo userInfo = ManagerLoginService.selectOneUser(userid, userpw);
 		
+		
 		if( userInfo != null ) {
+			
 			
 			//세션 객체
 			HttpSession session = req.getSession();
@@ -46,8 +48,13 @@ public class ManagerLoginController extends HttpServlet {
 			//세션 정보 저장하기
 			session.setAttribute("userno", userInfo.getUserno());
 			
-			req.getRequestDispatcher("/WEB-INF/views/daun/managerLoginSuccess.jsp").forward(req, resp);
-    		resp.sendRedirect("/");
+			if( (int) session.getAttribute("userno") <= 1000 ) { 
+				
+	    		resp.sendRedirect("/manager/board");
+	    		
+			} else {
+				resp.sendRedirect("/main");
+			}
 			
 		} else {
 			req.getRequestDispatcher("/WEB-INF/views/daun/managerLoginFail.jsp").forward(req, resp);
