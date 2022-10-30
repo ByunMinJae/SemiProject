@@ -17,7 +17,7 @@ public class ManagerLoginServiceImpl implements ManagerLoginService {
 		
 		Connection conn = JDBCTemplate.getConnection();
 		
-		UserInfo userInfo = managerLoginDao.selectOneUser(userid, userpw, conn);
+		UserInfo userInfo = managerLoginDao.selectUser(userid, userpw, conn);
 		
 		return userInfo;
 	}

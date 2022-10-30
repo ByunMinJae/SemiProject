@@ -5,15 +5,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	alert("회원정보가 일치하지 않습니다");
+	
+	$(location).attr("href", "/manager/login");
+})
+</script>
 </head>
 <body>
-
-<h1 style="color: red;">로그인 실패</h1>
-<hr>
-
-<h3>ID와 PASSWORD를 다시 확인하세요</h3>
-
-<a href="./login">메인 화면</a>
 
 </body>
 </html>
