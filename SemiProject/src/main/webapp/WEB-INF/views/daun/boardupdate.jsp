@@ -8,6 +8,8 @@
 
 <%	Board updateBoard = (Board) request.getAttribute("updateBoard");  %>
 <%	BoardFile boardFile = (BoardFile) request.getAttribute("boardFile"); %>
+<% User loginUser = (User) request.getAttribute("loginUser"); %>
+
 
 <script type="text/javascript" src="/resources/se2/js/service/HuskyEZCreator.js"></script>
 
@@ -18,10 +20,15 @@ $(document).ready(function() {
 	$("#btnUpdate").click(function() {
 		
 		//작성된 내용을 <textarea>에 적용하기
-		updateContents()
+//		updateContents()
+		console.log($("#boardcon").val());
 
-		$("form").submit();
-	})
+		$("#f").submit();
+		
+		
+	});
+	
+
 	
 	//취소버튼
 	$("#btnCancel").click(function() {
@@ -52,7 +59,7 @@ $(document).ready(function() {
 function updateContents() {
 	
 	//스마트 에디터에 작성된 내용을 #content에 반영한다
-	oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", [])
+	oEditors.getById["boardcon"].exec("UPDATE_CONTENTS_FIELD", [])
 	
 }
 
@@ -78,13 +85,9 @@ td {
 	margin-bottom: 0;
 }
 
-#content {
+#boardcon {
 	width: 700px;
 	min-height: 700px;
-}
-
-.bottom {
-
 }
 
 .btn {
@@ -96,11 +99,12 @@ td {
 <body>
 <h1>글쓰기</h1>
 
-<form action="./update" method="post" enctype="multipart/form-data">
+<!-- <form action="/board/update" method="post" enctype="multipart/form-data"> -->
+<form action="/board/update" method="post" id="f">
 	<table class="table table-bordered">
 		<tr>
-			<td style="width: 10%" class="info">게시판 선택</td>
-			<td style="width: 90%">
+			<td style="width: 12%" class="info">게시판 선택</td>
+			<td style="width: 88%">
 				<select>
 					<option value="category" disabled>게시판 선택</option>
 					<option value="notice">공지사항</option>
@@ -113,38 +117,22 @@ td {
 		</tr>
 		
 		
+		<tr>
+			<td class="info">닉네임</td>
+			<td id="nick" name="nick"><%=loginUser.getNick()%></td>
+		</tr>
 		
-			<tr>
-				<td class="info">아이디</td>
-				<td><%=request.getAttribute("userid") %></td>
-			</tr>
-			<tr>
-				<td class="info">닉네임</td>
-				<td><%=request.getAttribute("nick") %></td>
-			</tr>
-			<tr>
-				<td class="info">제목</td>
-				<td><input type="text" name="title" style="width:100%;" value="<%=updateBoard.getBoardtitle() %>"></td>
-			</tr>
-			<tr>
-				<td class="info" colspan="2">본문</td>
-			</tr>
-			<tr>
-				<td colspan="2"><textarea id="content" name="content" style="width: 100%;"><%=updateBoard.getBoardcon() %></textarea></td>
-			</tr>
+		<tr><td class="info">제목</td>
+			<td><input type="text" id="boardtitle" name="boardtitle" style="width:100%;" value="<%=updateBoard.getBoardtitle() %>"></td>
+		</tr>
+		
+		<tr><td class="info" colspan="2">본문</td></tr>
+		
+		<tr><td colspan="2"><textarea id="boardcon" name="boardcon" style="width: 100%;" value=""><%=updateBoard.getBoardcon() %></textarea></td></tr>
 		</table>
+</form>		
 			
-		<tr>
-			<td>제목</td>
-			<td><input type="text" id="title" name="title" value="<%=updateBoard.getBoardtitle() %>"></td>
-		</tr>
-		
-		<tr>
-			<td>내용</td>
-			<td><textarea id="content" name="data"></textarea></td>
-		</tr>
-	</table>
-
+<%-- <form action="/board/update" method="post" enctype="multipart/form-data">
 	<div id="beforeFile">
 		<%	if( boardFile != null ) { %>
 		<a href="<%=request.getContextPath() %>/upload/<%=boardFile.getStoredname() %>"
@@ -159,24 +147,24 @@ td {
 		새 첨부파일 <input type="file" name="file">
 	</div>
 
-</form>
+</form> --%>
 
 	<div class="text-center">
-		<button id="btnUpdate" class="btn btn-primary">수정</button>
-		<button id="btnCancel" class="btn btn-danger">취소</button>
+		<button id="btnUpdate" class="btn">수정</button> 
+		<button id="btnCancel" class="btn">취소</button>
 	</div>
 
 
 </body>
 
 <script type="text/javascript">
-var oEditors = [];
+/* var oEditors = [];
 nhn.husky.EZCreator.createInIFrame({
 	oAppRef: oEditors,
-	elPlaceHolder: "content", //에디터가 적용될 <textarea>의 id 적기
+	elPlaceHolder: "boardcon", //에디터가 적용될 <textarea>의 id 적기
 	sSkinURI: "/resources/se2/SmartEditor2Skin.html",
 	fCreator: "createSEditor2"
-})
+}) */
 </script>
 
 

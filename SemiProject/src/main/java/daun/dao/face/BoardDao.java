@@ -116,7 +116,7 @@ public interface BoardDao {
 	 * @param board - 수정할 내용을 담은 객체
 	 * @return UPDATE 수행 결과
 	 */
-	public int update(Connection conn, Board board);
+	public int update(Connection conn, Board board, String boardtitle, String boardcon);
 
 	/**
 	 * 게시글에 첨부된 파일 정보 삭제
