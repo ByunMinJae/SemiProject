@@ -26,7 +26,7 @@
 <style type="text/css">
 
 
-li {
+.header li {
 	display: list-item;
 	list-style-type: none;
 }
@@ -201,31 +201,31 @@ li {
 	margin-left: 15px;
 }
 
-p{
+.header p{
 	display: inline-block; 
     margin-top: 29px !important;
     font-size: xx-large; 
     font-weight: bolder; 
 }
 
-form{
+.header form{
 	width:50%;
 	margin: 0 auto;
 }
 
-select[multiple]{
+.header select[multiple]{
 	height: 109px; important!
 }
 
-option{
+.header option{
 	text-align: center;
 }
 
-option:hover {
+.header option:hover {
 	background-color: #ccc;
 }
 
-button {
+.header button {
 	margin-left: 252px;
 }
 
@@ -281,7 +281,7 @@ button {
 						<%if ( session.getAttribute("userno") == null){ %>
 		                <li><a href="/manager/login">상품관리</a></li>
 		                <% } else { %>
-						<li><a href="">상품관리</a></li>
+						<li><a href="/prod/list">상품관리</a></li>
 		                <% } %>
 					</ul>
 						
