@@ -50,6 +50,8 @@ public interface BoardService {
 	 * @param req
 	 * @return
 	 */
+	List<Report> getReportList(Paging paging);
+	
 	Board getboardno(HttpServletRequest req);
 
 	
@@ -57,7 +59,6 @@ public interface BoardService {
 
 	void delete(Board boardno);
 
-	List<Report> getReportList(Paging paging);
 
 	Paging getNoticePaging(HttpServletRequest req);
 

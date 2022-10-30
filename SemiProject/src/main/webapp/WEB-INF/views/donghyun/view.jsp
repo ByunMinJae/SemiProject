@@ -32,15 +32,30 @@ $(document).ready(function(){
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <style type="text/css">
+@font-face {
+   font-family: 'dalseo';
+   src: url('/resources/css/DalseoHealingBold.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 h1{
 	text-align: center;
 	margin-top: 100px;
+	font-family: 'dalseo';
 }
 
 table{
 	margin: 0 auto;
+	 font-family: 'GmarketSansMedium';
 }
 
+button{
+	 font-family: 'GmarketSansMedium';
+}
 .table{
 	width:40%; 
 	margin-top: 100px;
@@ -82,7 +97,10 @@ div{
 	<span>작성일:</span>
 	<span><%= viewBoard.getBoarddate() %></span>
 	
+	
 	<br>
+	<span>회원번호:</span>
+	<span><%= viewBoard.getUserno() %></span>
 
 
 	

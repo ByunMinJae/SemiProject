@@ -306,10 +306,12 @@
 						<% } else { %>
 						<li><a href="/user/join">회원가입</a></li>
 						<% } %>
-						<%if ( session.getAttribute("userno") == null){ %>
+						<%if ( session.getAttribute("userno")==null && session.getAttribute("kakaono") == null){ %>
 		                <li><a href="/cmc/login">로그인</a></li>
-		                <% } else { %>
+		                <% } else if(session.getAttribute("userno")!=null && session.getAttribute("kakaono")==null){ %>
 		                <li><a href="/cmc/logout">로그아웃</a></li>
+		                <% } else if(session.getAttribute("kakaono")!=null && session.getAttribute("userno")==null){ %>
+		                <li><a href="/kakao/logout">로그아웃</a></li>
 		                <% } %>
 					</ul>
 				</div> <!-- .top end -->
