@@ -27,10 +27,10 @@ public class ProdOrdAdDaoImpl implements ProdOrdAdDao {
 		
 		sql += "SELECT * FROM (";
 		sql += "	SELECT rownum rnum, B.* FROM (";
-		sql += "SELECT a.orderafterno, SUBSTR(a.orderdate, 1, 10) orderdate, a.prodname, a.orderprocess,";
-		sql += " (a.amount/b.prodprice) cnt, a.amount FROM user_orderafter a";
-		sql += " 	INNER JOIN product b";
-		sql += " 	ON a.prodname = b.prodname";
+		sql += "		SELECT a.orderafterno, SUBSTR(a.orderdate, 1, 10) orderdate, a.prodname, a.orderprocess,";
+		sql += " 		(a.amount/b.prodprice) cnt, a.amount FROM user_orderafter a";
+		sql += " 		INNER JOIN product b";
+		sql += " 		ON a.prodname = b.prodname";
 		sql += "	) B";
 		sql += " ) PROD";
 		sql += " WHERE rnum BETWEEN ? AND ?";
@@ -136,8 +136,8 @@ public class ProdOrdAdDaoImpl implements ProdOrdAdDao {
 		
 		String sql = "";
 		sql += "SELECT count(*) cnt FROM (";
-		sql += " SELECT a.orderafterno, SUBSTR(a.orderdate, 1, 10) orderdate, a.prodname, a.orderprocess,";
-		sql += " (a.amount/b.prodprice) cnt, a.amount FROM user_orderafter a";
+		sql += " 	SELECT a.orderafterno, SUBSTR(a.orderdate, 1, 10) orderdate, a.prodname, a.orderprocess,";
+		sql += " 	(a.amount/b.prodprice) cnt, a.amount FROM user_orderafter a";
 		sql += " 	INNER JOIN product b";
 		sql += " 	ON a.prodname = b.prodname)";
 		
