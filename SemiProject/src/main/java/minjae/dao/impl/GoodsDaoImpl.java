@@ -39,7 +39,6 @@ public class GoodsDaoImpl implements GoodsDao {
 				prod.setProdcon(rs.getString("prodcon"));
 				prod.setProddate(rs.getDate("proddate"));
 				prod.setProdpop(rs.getInt("prodpop"));
-				prod.setProdimage(rs.getString("prodimage"));
 				
 				list.add(prod);
 				
@@ -357,7 +356,7 @@ public class GoodsDaoImpl implements GoodsDao {
 		sql += "SELECT * FROM (";
 		sql += "	SELECT rownum rnum, B.* FROM (";
 		sql += "		SELECT";
-		sql += "			prodno, prodname, prodprice, prodimage, prodcon, proddate, prodpop";//이미지 있는거
+		sql += "			prodno, prodname, prodprice, prodcon, proddate, prodpop";//이미지 있는거
 		sql += "		FROM product";
 		sql += "		WHERE prodname LIKE ?";
 		sql += "		ORDER BY prodno";
@@ -386,7 +385,6 @@ public class GoodsDaoImpl implements GoodsDao {
 				prod.setProdcon(rs.getString("prodcon"));
 				prod.setProddate(rs.getDate("proddate"));
 				prod.setProdpop(rs.getInt("prodpop"));
-//				prod.setProdimage(rs.getString("prodimage"));
 				
 				//리스트에 결과값 저장하기
 				goodsList.add(prod);
