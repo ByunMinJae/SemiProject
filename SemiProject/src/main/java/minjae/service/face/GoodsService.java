@@ -87,6 +87,8 @@ public interface GoodsService {
 	 * @return ProductFile - 첨부파일 정보 DTO객체
 	 */
 	public List<ProductFile> viewFile(List<Product> goodsList, Paging paging);
+	
+	public List<ProductFile> viewFile(List<Product> goodsList, Paging paging, String cateVal);
 
 	public List<ProductFile> viewSearchFile(List<Product> goodsList, Paging paging, String search);
 

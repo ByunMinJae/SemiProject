@@ -567,6 +567,65 @@ public class GoodsDaoImpl implements GoodsDao {
 	}
 	
 	@Override
+	public List<ProductFile> selectFileCateVal(Connection connection, List<Product> goodsList, Paging paging, String cateVal) {
+		System.out.println("/goods/detail selectFileCateVal() - 시작");
+
+		String sql = "";
+		sql += "SELECT * FROM (";
+		sql += "	SELECT rownum rnum, B.* FROM (";
+		sql += "		SELECT";
+		sql += "		a.fileno, a.prodno, a.originname, a.storedname, a.filesize, a.write_date, b.prodprice, b.prodpop";
+		sql += " 		FROM productfile a";
+		sql += " 		INNER JOIN product b";
+		sql += " 		ON a.prodno = b.prodno";
+		if("prodno".equals(cateVal)) { //기본 순
+			sql += "		ORDER BY b.prodno";
+		} else if("prodprice".equals(cateVal)) { //가격 낮은 순
+			sql += "		ORDER BY b.prodprice";
+		} else if("prodprice DESC".equals(cateVal)) { //가격 높은 순
+			sql += "		ORDER BY b.prodprice DESC";
+		} else if("prodpop DESC".equals(cateVal)) { //판매량 순
+			sql += "		ORDER BY b.prodpop DESC";
+		} 
+		sql += "	) B"; 	
+		sql += " ) PROD";
+		sql += " WHERE rnum BETWEEN ? AND ?";
+		
+		//조회 결과 객체
+		List<ProductFile> productFileList = new ArrayList<>();
+		
+		try {
+			ps = connection.prepareStatement(sql);
+			ps.setInt(1, paging.getStartNo());
+			ps.setInt(2, paging.getEndNo());
+			
+			rs = ps.executeQuery();
+			
+			while( rs.next() ) {
+				ProductFile productFile = new ProductFile();
+				
+				productFile.setFileno( rs.getInt("fileno") );
+				productFile.setProdno( rs.getInt("prodno") );
+				productFile.setOriginname( rs.getString("originname") );
+				productFile.setStoredname( rs.getString("storedname") );
+				productFile.setFilesize( rs.getInt("filesize") );
+				productFile.setWrite_date( rs.getDate("write_date") );
+				
+				productFileList.add(productFile);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rs);
+			JDBCTemplate.close(ps);
+		}
+		
+		System.out.println("/goods/detail selectFileCateVal() - 끝");
+		return productFileList;
+	}
+	
+	@Override
 	public List<ProductFile> selectFileList(Connection conn, List<Product> goodsList, Paging paging) {
 		System.out.println("/goods/detail selectFileList() - 시작");
 
