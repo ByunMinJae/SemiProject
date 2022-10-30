@@ -16,7 +16,7 @@ public interface ManagerLoginDao {
 	 * @param conn
 	 * @return
 	 */
-	public UserInfo selectOneUser(String userid, String userpw, Connection conn);
+	public UserInfo selectUser(String userid, String userpw, Connection conn);
 	
 	
 }

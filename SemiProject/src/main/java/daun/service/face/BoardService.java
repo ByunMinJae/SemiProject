@@ -82,8 +82,11 @@ public interface BoardService {
 	 * 게시글 수정
 	 * 
 	 * @param req - 요청 정보 객체
+	 * @param boardcon 
+	 * @param boardtitle 
+	 * @param board 
 	 */
-	public void update(HttpServletRequest req);
+	public void update(HttpServletRequest req, Board board, String boardtitle, String boardcon);
 
 	/**
 	 * 게시글 신고

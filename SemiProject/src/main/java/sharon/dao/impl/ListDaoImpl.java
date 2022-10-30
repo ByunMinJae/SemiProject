@@ -175,6 +175,7 @@ public class ListDaoImpl implements ListDao {
 					user.setNick( rs.getString("nick") );
 					user.setGender( rs.getString("gender") );
 					user.setAddress( rs.getString("address") );
+					user.setPhone( rs.getString("phone") );
 					user.setBirth( rs.getString("birth") );
 					user.setEmail( rs.getString("email") );
 					user.setJoinday( rs.getDate("joinday") );

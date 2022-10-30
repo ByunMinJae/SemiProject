@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.List;
 
 import minjae.dto.Product;
+import minjae.dto.ProductFile;
 import util.Paging;
 
 public interface GoodsDao {
@@ -85,6 +86,24 @@ public interface GoodsDao {
 	 * @return insert 결과
 	 */
 	public int insertBuyProd(Connection conn, int userno, String buyprodname, int totalamount);
+	
+	/**
+	 *  첨부파일 정보 조회
+	 *  
+	 * @param conn - DB연결 객체
+	 * @param pordDetail - 조회할 상품 번호
+	 * @return ProductFile - 첨부파일 정보
+	 */
+	public ProductFile selectFile(Connection conn, Product pordDetail);
+	
+	public List<ProductFile> selectFileCateVal(Connection connection, List<Product> goodsList, Paging paging, String cateVal);
+	
+	public List<ProductFile> selectFileList(Connection conn, List<Product> goodsList, Paging paging);
+
+	public List<ProductFile> viewSearchFileDefualt(Connection connection, List<Product> goodsList, Paging paging, String def);
+
+	public List<ProductFile> viewSearchFileAll(Connection connection, List<Product> goodsList, Paging paging, String search);
+
 
 
 

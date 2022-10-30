@@ -384,7 +384,11 @@ $(document).ready(function() {
     position: absolute;
     bottom: 8px;
 }
-#h1t{	font-family: 'dalseo'; }	
+#h1t{	font-family: 'dalseo'; }
+#addrText {
+	white-space: normal;
+    width: 324px;
+}
 </style>
 
 <div id="mpuWrap">
@@ -471,7 +475,7 @@ $(document).ready(function() {
 <!-- 현재 주소 -->
 <tr id="currAddr">
 	<td>주소</td>
-	<td><%=mpMain.getAddress() %></td>
+	<td id="addrText"><%=mpMain.getAddress() %></td>
 	<td class="btnChg"  style="margin-left: 111px;"><button id="btnChgAddr">변 경</button></td>
 </tr>
 <!-- 변경 주소 -->
@@ -509,7 +513,7 @@ $(document).ready(function() {
 
 	<p style="font-size: 14px;">회원정보 수정을 위해 본인확인을 해주세요.</p>
 	<label for="pw">비밀번호 : </label>
-	<input type="text" id="pw" name="pw" onFocus="this.value=''; return true;" class="ip">
+	<input type="password" id="pw" name="pw" onFocus="this.value=''; return true;" class="ip">
 	<input type="text"  hidden="">
 	<!-- 확인 메시지 태그 -->
 	<p id="check_msg" style="color: red; font-size: 12px; margin: 3px 0 0 74px;"></p>

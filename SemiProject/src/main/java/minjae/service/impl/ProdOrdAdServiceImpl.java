@@ -50,7 +50,7 @@ public class ProdOrdAdServiceImpl implements ProdOrdAdService {
 		if( param != null && !"".equals(param) ) {
 			curPage = Integer.parseInt(param);
 		}
-		
+		System.out.println(totalCount + " : " + curPage);
 		
 		//Paging객체 생성
 		Paging paging = new Paging(totalCount, curPage, 10, 5);

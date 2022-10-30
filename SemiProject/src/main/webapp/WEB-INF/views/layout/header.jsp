@@ -1,6 +1,7 @@
 <%@page import="donghyun.dto.UserInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@   page errorPage="../../layout/cmcErrorpage.jsp" %>
 
 <!DOCTYPE html>
 <html>
@@ -148,6 +149,8 @@
 	height: 80px;
 } 
 
+
+
 .header-menu .hmenulist ul {
 	display: -webkit-inline-box;
 	font-family: 'dalseo';
@@ -173,6 +176,12 @@
 	display: inline-block;
 	top: 5px;
 	left: 90%;
+}
+
+@media screen and (max-width: 1500px){
+	.header-menu .weather-wrap{
+	display: none;
+	}
 }
 
 .weather-widget p {

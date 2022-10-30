@@ -19,7 +19,7 @@ public class ManagerLogoutController extends HttpServlet {
 		req.getSession().invalidate();
 		
 		//메인화면으로 리다이렉트
-		resp.sendRedirect("/");
+		resp.sendRedirect("/manager/main");
 	}
 			
 

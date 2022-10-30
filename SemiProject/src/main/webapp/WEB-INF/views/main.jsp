@@ -173,6 +173,12 @@
 	left: 90%;
 }
 
+@media screen and (max-width: 1500px){
+	.header-menu .weather-wrap{
+	display: none;
+	}
+}
+
 .weather-widget p {
 	font-family: "돋움", Dotum,'Apple SD Gothic Neo', 'Malgun Gothic', 'Helvetica Neue', Helvetica, sans-serif;
 	z-index: 99;
@@ -493,6 +499,11 @@ html {
 
 .agent {
 	color: #00CC88;
+}
+
+@media screen and (max-width: 1500px){
+.together{
+	display: none;
 }
 
 

@@ -29,6 +29,7 @@ $(document).ready(function() {
 	}) */
 })
 
+
 function deleteboard(){
 	 if (confirm("정말 삭제하시겠습니까?") == true){    //확인
 		   $.ajax({
@@ -123,6 +124,11 @@ img {
 	margin: 0 0 20px 0;
 }
 
+#noticeButton:hover, #freeButton:hover, #foodButton:hover, #gatheringButton:hover, #questionButton:hover {
+  transform: scale(1.1);
+}
+
+
 #writeButton {
 	float: right;
 }
@@ -182,11 +188,11 @@ img {
 			<div class="left">
 	
 				<!-- 게시판 목록 -->		
-				<p><a href="/board/notice"><img src="/resources/image/notice.png"></a></p>
-				<p><a href="/board/free"><img src="/resources/image/free.png"></a></p>
-				<p><a href="/board/food"><img src="/resources/image/food.png"></a></p>
-				<p><a href="/board/gathering"><img src="/resources/image/gathering.png"></a></p>
-				<p><a href="/board/question"><img src="/resources/image/question.png"></a></p>
+				<p><a href="/board/notice"><img src="/resources/image/notice.png" id="noticeButton"></a></p>
+				<p><a href="/board/free"><img src="/resources/image/free.png" id="freeButton"></a></p>
+				<p><a href="/board/food"><img src="/resources/image/food.png" id="foodButton"></a></p>
+				<p><a href="/board/gathering"><img src="/resources/image/gathering.png" id="gatheringButton"></a></p>
+				<p><a href="/board/question"><img src="/resources/image/question.png" id="questionButton"></a></p>
 			
 			</div>
 			
@@ -218,7 +224,13 @@ img {
 	</tr>
 	<tr>
 		<div id="content">
-			<td colspan="4" class="text-left" id="content-detail"><%=viewBoard.getBoardcon() %></td></a>
+
+			<td colspan="4" class="text-left" id="content-detail">
+				<%	if( boardFile != null ) { %>
+				<img src="<%=request.getContextPath() %>/upload/<%=boardFile.getStoredname() %>" onerror="this.style.display='none'" alt='' />
+				<%	} %>
+				<%=viewBoard.getBoardcon() %>
+			</td>
 		</div> 
 	</tr>
 	<tr>
@@ -237,14 +249,22 @@ img {
 	</tr>
 	<% } %> --%>
 		<!-- 첨부파일 -->
+		<tr>
 		<div>
-		<%	if( boardFile != null ) { %>
-		<a href="<%=request.getContextPath() %>/upload/<%=boardFile.getStoredname() %>"
-		 download="<%=boardFile.getOriginname() %>">
-			<%=boardFile.getOriginname() %>
-		</a>
-		<%	} %>
+			<%	if( boardFile != null ) { %>
+			<td colspan="4" class="text-left" id="fileDown">
+				<a href="<%=request.getContextPath() %>/upload/<%=boardFile.getStoredname() %>"
+				   download="<%=boardFile.getOriginname() %>"><%=boardFile.getOriginname() %>
+				</a>
+			</td>
+			<%	} else { %>
+			<tr>
+				<td class="text-left" id="file">없음</td>
+		</tr>
+			<% } %>
 		</div>
+		</tr>
+		
 	</table>
 	<div class="text-center">
 		<button id="btnList" class="btn btn-primary">목록</button>
@@ -252,8 +272,6 @@ img {
 		<button id="btnDelete" class="btn btn-danger" onClick="deleteboard();">삭제</button>
 	</div>
 </div>
-
-	
 	
 
 	

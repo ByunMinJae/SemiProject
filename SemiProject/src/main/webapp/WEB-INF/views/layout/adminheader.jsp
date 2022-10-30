@@ -26,7 +26,7 @@
 <style type="text/css">
 
 
-li {
+.header li {
 	display: list-item;
 	list-style-type: none;
 }
@@ -201,31 +201,31 @@ li {
 	margin-left: 15px;
 }
 
-p{
+.header p{
 	display: inline-block; 
     margin-top: 29px !important;
     font-size: xx-large; 
     font-weight: bolder; 
 }
 
-form{
+.header form{
 	width:50%;
 	margin: 0 auto;
 }
 
-select[multiple]{
+.header select[multiple]{
 	height: 109px; important!
 }
 
-option{
+.header option{
 	text-align: center;
 }
 
-option:hover {
+.header option:hover {
 	background-color: #ccc;
 }
 
-button {
+.header button {
 	margin-left: 252px;
 }
 
@@ -242,20 +242,47 @@ button {
 			<div class="top-wrap">
 				<div class="header-wrap">
 					<div class="top">
-						
+						<ul class="toplist">
+						<%if ( session.getAttribute("userno") == null){ %>
+		                <li><a href="/manager/login">로그인</a></li>
+		                <% } else { %>
+		                <li><a href="/manager/logout">로그아웃</a></li>
+		                <% } %>
+					</ul>
 					</div> <!-- .top end -->
 				</div> <!-- .header-wrap end -->
 			</div> <!-- .top-wrap end -->	
 			<div class="header-wrap">
 				<div class="header-title">
-					<p>ADMIN</p>
+					<p><a href="/manager/main">ADMIN</a></p>
 				</div> <!--.header-title end -->
 				<div class="header-menu">
 					<ul class="hmenulist">
-						<li><a href="/prodOrdAd">주문관리</a></li>
+						<%if ( session.getAttribute("userno") == null){ %>
+		                <li><a href="/manager/login">주문관리</a></li>
+		                <% } else { %>
+						<li><a href="/prodOrdAd/list">주문관리</a></li>
+		                <% } %>
+		                
+						<%if ( session.getAttribute("userno") == null){ %>
+		                <li><a href="/manager/login">게시판관리</a></li>
+		                <% } else { %>
 						<li><a href="/manager/board">게시판관리</a></li>
+		                <% } %>
+		                
+		                
+						<%if ( session.getAttribute("userno") == null){ %>
+		                <li><a href="/manager/login">회원관리</a></li>
+		                <% } else { %>
 						<li><a href="/user/list">회원관리</a></li>
-						<li><a href="">상품관리</a></li>
+		                <% } %>
+		                
+		                
+						<%if ( session.getAttribute("userno") == null){ %>
+		                <li><a href="/manager/login">상품관리</a></li>
+		                <% } else { %>
+						<li><a href="/prod/list">상품관리</a></li>
+		                <% } %>
 					</ul>
 						
 				</div> <!-- .header-menu end -->

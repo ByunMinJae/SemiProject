@@ -77,6 +77,11 @@ img {
 	margin: 0 0 20px 0;
 }
 
+
+#noticeButton:hover, #freeButton:hover, #foodButton:hover, #gatheringButton:hover, #questionButton:hover {
+  transform: scale(1.1);
+}
+
 #writeButton {
 	float: right;
 }
@@ -97,18 +102,18 @@ img {
 	position: relative;
 	top: 50px;
 	left: 150px;
-} 
+}
 </style>
 <div class="myContainer">
 	<form method="get">
 		<div style="min-height: 500px;">
 			<div class="left">
 				<!-- 게시판 목록 -->		
-				<p><a href="/board/notice"><img src="/resources/image/notice.png"></a></p>
-				<p><a href="/board/free"><img src="/resources/image/free.png"></a></p>
-				<p><a href="/board/food"><img src="/resources/image/food.png"></a></p>
-				<p><a href="/board/gathering"><img src="/resources/image/gathering.png"></a></p>
-				<p><a href="/board/question"><img src="/resources/image/question.png"></a></p>
+				<p><a href="/board/notice"><img src="/resources/image/notice.png" id="noticeButton"></a></p>
+				<p><a href="/board/free"><img src="/resources/image/free.png" id="freeButton"></a></p>
+				<p><a href="/board/food"><img src="/resources/image/food.png" id="foodButton"></a></p>
+				<p><a href="/board/gathering"><img src="/resources/image/gathering.png" id="gatheringButton"></a></p>
+				<p><a href="/board/question"><img src="/resources/image/question.png" id="questionButton"></a></p>
 			
 			</div>
 			

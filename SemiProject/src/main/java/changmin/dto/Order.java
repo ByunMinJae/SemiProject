@@ -10,7 +10,6 @@ public class Order {
 	private String buyeremail;
 	private String buyername;
 	private String buyertel;
-	private String tel;
 	private String buyeraddr;
 	private String orderdate;
 	private int orderno;
@@ -23,13 +22,13 @@ public class Order {
 	public String toString() {
 		return "Order [orderafterno=" + orderafterno + ", orderprocess=" + orderprocess + ", paymethod=" + paymethod
 				+ ", merchant_uid=" + merchant_uid + ", prodname=" + prodname + ", amount=" + amount + ", buyeremail="
-				+ buyeremail + ", buyername=" + buyername + ", buyertel=" + buyertel + ", tel=" + tel + ", buyeraddr="
-				+ buyeraddr + ", orderdate=" + orderdate + ", orderno=" + orderno + ", userno=" + userno + "]";
+				+ buyeremail + ", buyername=" + buyername + ", buyertel=" + buyertel + ", buyeraddr=" + buyeraddr
+				+ ", orderdate=" + orderdate + ", orderno=" + orderno + ", userno=" + userno + "]";
 	}
 
 	public Order(int orderafterno, String orderprocess, String paymethod, String merchant_uid, String prodname,
-			int amount, String buyeremail, String buyername, String buyertel, String tel, String buyeraddr,
-			String orderdate, int orderno, int userno) {
+			int amount, String buyeremail, String buyername, String buyertel, String buyeraddr, String orderdate,
+			int orderno, int userno) {
 		super();
 		this.orderafterno = orderafterno;
 		this.orderprocess = orderprocess;
@@ -40,7 +39,6 @@ public class Order {
 		this.buyeremail = buyeremail;
 		this.buyername = buyername;
 		this.buyertel = buyertel;
-		this.tel = tel;
 		this.buyeraddr = buyeraddr;
 		this.orderdate = orderdate;
 		this.orderno = orderno;
@@ -119,14 +117,6 @@ public class Order {
 		this.buyertel = buyertel;
 	}
 
-	public String getTel() {
-		return tel;
-	}
-
-	public void setTel(String tel) {
-		this.tel = tel;
-	}
-
 	public String getBuyeraddr() {
 		return buyeraddr;
 	}
@@ -159,7 +149,6 @@ public class Order {
 		this.userno = userno;
 	}
 
-	
 	
 	
 	

@@ -11,9 +11,15 @@ public class Product {
 	private String prodcon;
 	private Date prodDate;
 	private int prodpop;
+
+	
+	
 	
 	
 	public Product() {}
+
+
+
 
 
 	public Product(int prodno, String prodname, int prodprice, String prodimage, String prodcon, Date prodDate,
@@ -29,6 +35,9 @@ public class Product {
 	}
 
 
+
+
+
 	@Override
 	public String toString() {
 		return "Product [prodno=" + prodno + ", prodname=" + prodname + ", prodprice=" + prodprice + ", prodimage="
@@ -36,9 +45,15 @@ public class Product {
 	}
 
 
+
+
+
 	public int getProdno() {
 		return prodno;
 	}
+
+
+
 
 
 	public void setProdno(int prodno) {
@@ -46,9 +61,15 @@ public class Product {
 	}
 
 
+
+
+
 	public String getProdname() {
 		return prodname;
 	}
+
+
+
 
 
 	public void setProdname(String prodname) {
@@ -56,9 +77,15 @@ public class Product {
 	}
 
 
+
+
+
 	public int getProdprice() {
 		return prodprice;
 	}
+
+
+
 
 
 	public void setProdprice(int prodprice) {
@@ -66,9 +93,15 @@ public class Product {
 	}
 
 
+
+
+
 	public String getProdimage() {
 		return prodimage;
 	}
+
+
+
 
 
 	public void setProdimage(String prodimage) {
@@ -76,9 +109,15 @@ public class Product {
 	}
 
 
+
+
+
 	public String getProdcon() {
 		return prodcon;
 	}
+
+
+
 
 
 	public void setProdcon(String prodcon) {
@@ -86,9 +125,15 @@ public class Product {
 	}
 
 
+
+
+
 	public Date getProdDate() {
 		return prodDate;
 	}
+
+
+
 
 
 	public void setProdDate(Date prodDate) {
@@ -96,14 +141,25 @@ public class Product {
 	}
 
 
+
+
+
 	public int getProdpop() {
 		return prodpop;
 	}
 
 
+
+
+
 	public void setProdpop(int prodpop) {
 		this.prodpop = prodpop;
 	}
+
+
+	
+	
+
 	
 	
 	

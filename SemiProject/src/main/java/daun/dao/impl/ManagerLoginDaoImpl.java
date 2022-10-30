@@ -14,7 +14,7 @@ public class ManagerLoginDaoImpl implements ManagerLoginDao {
 	private ResultSet rs;
 	
 	@Override
-	public UserInfo selectOneUser(String userid, String userpw, Connection conn) {
+	public UserInfo selectUser(String userid, String userpw, Connection conn) {
 		UserInfo userInfo = null;
 		
 		String sql = "SELECT * FROM user_info WHERE userid=? AND userpw=?";

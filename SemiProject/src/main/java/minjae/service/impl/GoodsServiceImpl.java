@@ -9,6 +9,7 @@ import common.JDBCTemplate;
 import minjae.dao.face.GoodsDao;
 import minjae.dao.impl.GoodsDaoImpl;
 import minjae.dto.Product;
+import minjae.dto.ProductFile;
 import minjae.service.face.GoodsService;
 import util.Paging;
 
@@ -100,6 +101,19 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 	
 	@Override
+	public List<ProductFile> viewSearchFile(List<Product> goodsList, Paging paging, String search) {
+		System.out.println("/goods/list viewSearchFile(search)");
+		
+		//로그아웃 하고 세션에 seach가 null일때 아무것도 안나오는 경우 기본값 보여주기로 처리
+		if( search == null ) {
+			String def = "%%";
+			return goodsDao.viewSearchFileDefualt(JDBCTemplate.getConnection(), goodsList, paging, def);
+		} else {
+			return goodsDao.viewSearchFileAll(JDBCTemplate.getConnection(), goodsList, paging, search);
+		}
+	}
+	
+	@Override
 	public Product getProdDetail(int prodno) {
 		System.out.println("/goods/detail getProdDetail() - 시작");
 		
@@ -130,6 +144,21 @@ public class GoodsServiceImpl implements GoodsService {
 			return 0;
 		}
 		
+	}
+	
+	@Override
+	public ProductFile viewFile(Product pordDetail) {
+		return goodsDao.selectFile(JDBCTemplate.getConnection(), pordDetail);
+	}
+	
+	@Override
+	public List<ProductFile> viewFile(List<Product> goodsList, Paging paging, String cateVal) {
+		return goodsDao.selectFileCateVal(JDBCTemplate.getConnection(), goodsList, paging, cateVal);
+	}
+	
+	@Override
+	public List<ProductFile> viewFile(List<Product> goodsList, Paging paging) {
+		return goodsDao.selectFileList(JDBCTemplate.getConnection(), goodsList, paging);
 	}
 	
 }

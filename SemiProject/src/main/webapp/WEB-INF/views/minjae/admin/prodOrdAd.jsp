@@ -4,19 +4,7 @@
     pageEncoding="UTF-8"%>
     
 <%	List<ProdOrdAd> POAIList = (List) request.getAttribute("prodOrdAd"); %>
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-
-<!-- 부트스트랩 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<%@	include file="../../layout/adminheader.jsp" %>
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -80,7 +68,7 @@ function change(i) {
 }
 #tbWrap { 
 	width: 1100px;
-	margin: 200px auto 0;
+	margin: 66px auto 0;
 	font-family: 'GmarketSansMedium';
 }
 #poaTable {
@@ -102,6 +90,18 @@ function change(i) {
 }
 #btn_chg{
     cursor: pointer;
+    width: 48px;
+    height: 27px;
+    position: relative;
+    top: -15px;
+    right: 16px;
+}
+.sel {
+	width: 159px;
+    height: 27px;
+    position: relative;
+    top: 12px;
+    right: 29px;
 }
 #selectWrap {
 	width: 194px;
@@ -153,7 +153,7 @@ function change(i) {
 		<td><%=POAIList.get(i).getProdname() %></td>
 		<td><%=POAIList.get(i).getOrderprocess() %></td>
 		<td id="selectWrap">
-		<select id="selectid<%=i%>">
+		<select id="selectid<%=i%>" class="sel">
 			  <option id="op1" value="none" selected>=== 선택 ===</option>
 			  <option id="op2" value="결제완료">결제 완료</option>
 			  <option id="op3" value="배송완료">배송 완료</option>
@@ -167,14 +167,12 @@ function change(i) {
 	<%	} %>
 </tbody>
 </table>
-<!-- <div id="result"></div> -->
+
 </div>
 
 <jsp:include page="../../layout/paging.jsp"/>
 
-</body>
-</html>
-
+<jsp:include page="../../layout/footer.jsp"/>
 
 
 

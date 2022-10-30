@@ -13,10 +13,10 @@
 <title>회원 목록</title>
 
 <style type="text/css">
-
-/* .outer{
+.outer1{
 margin:0 auto;
-} */
+font-family: 'GmarketSansMedium';
+}
 
 table {
 	border: 1px solid #ccc;
@@ -32,11 +32,11 @@ td,th {
 	padding: 5px 10px;
 }
 .section{
-margin-top: 5%;
+margin-top: 9%;
 font-family:'dalseo';
 }
 
-button,#btnadd { 
+.btn { 
     border: none;
     border-radius: 5px;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
@@ -55,14 +55,17 @@ option,findType{
 	font-family: 'GmarketSansMedium';
 }
 
+h2{
+margin-top: 10%;
+}
 
 
 </style>
 
 </head>
 <body>
-<div class="outer">
-  <h2 style="text-align: center;" class="section"><strong>회원목록조회</strong></h2>
+<div class="outer1">
+  <h2 style="text-align: center;" class="section"><strong>회원목록조회</strong></h2><br>
             <div class="in">
 			<form name="findF" action="./list" class="form-inline">
 		
@@ -73,8 +76,8 @@ option,findType{
 					<option value="2">성별</option>
 					<option value="3">연락처</option>
 				</select>
-				<input type="text" name="findKeyword" placeholder="검색어를 입력하세요" class="form-control mr-2">
-				<button class="btn btn-success">검 색</button>
+				<input type="text" name="findKeyword" placeholder="검색어를 입력하세요" class="form-control">
+				<button class="btn">검 색</button>
 				</form>
 				</div>
             <br>
