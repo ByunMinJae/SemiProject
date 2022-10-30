@@ -5,18 +5,6 @@
     
 <%	List<ProdOrdAd> POAIList = (List) request.getAttribute("prodOrdAd"); %>
 <%@	include file="../../layout/adminheader.jsp" %>
-<!-- <!DOCTYPE html> -->
-<!-- <html> -->
-<!-- <head> -->
-<!-- <meta charset="UTF-8"> -->
-<!-- <title>Insert title here</title> -->
-
-<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script> -->
-
-<!-- 부트스트랩 --> 
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> -->
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> -->
-<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script> -->
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -179,13 +167,11 @@ function change(i) {
 	<%	} %>
 </tbody>
 </table>
-<!-- <div id="result"></div> -->
+
 </div>
 
 <jsp:include page="../../layout/paging.jsp"/>
 
-<!-- </body> -->
-<!-- </html> -->
 <jsp:include page="../../layout/footer.jsp"/>
 
 

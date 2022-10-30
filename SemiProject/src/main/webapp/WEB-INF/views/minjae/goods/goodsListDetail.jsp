@@ -163,14 +163,14 @@ $(document).ready(function() {
 </form>
 
 <!-- 첨부파일 다운로드 -->
-<!-- <div id="file"> -->
-<%-- <%	if( prodFile != null ) { %> --%>
-<%-- <a href="<%=request.getContextPath() %>/upload/<%=prodFile.getStoredname() %>" --%>
-<%--  download="<%=prodFile.getOriginname() %>"> --%>
-<%-- 	<%=prodFile.getOriginname() %> --%>
-<!-- </a> -->
-<%-- <%	} %> --%>
-<!-- </div> -->
+<%-- <div id="file">
+<%	if( prodFile != null ) { %>
+<a href="<%=request.getContextPath() %>/upload/<%=prodFile.getStoredname() %>"
+ download="<%=prodFile.getOriginname() %>">
+	<%=prodFile.getOriginname() %>
+</a>
+<%	} %>
+</div> --%>
 
 
 

@@ -44,6 +44,15 @@ $(document).ready(function() {
 		}
 	})
 	
+	
+	//---------------------------------------------------
+	
+// 	var tmpDate = new Date().getTime();
+	
+// 	for(int i=0; i<prodFile.size(); i++) {
+<%-- 		$(".prodImg").attr("src", "<%=request.getContextPath() %>/upload/<%=prodFile.get(i).getStoredname() %>?" + tmpDate); --%>
+// 	}
+	
 })
 
 </script>
@@ -68,17 +77,17 @@ $(document).ready(function() {
     background: #e0fdc9;
     border: 1px solid #ccc;
 }
-#goodsImg {
+.goodsImg {
 	width: 200px;
 	height: 200px;
 	display: inline-block;
 	margin: 29px 0px 105px 144px;
 	border: 2px solid #a3d99c;
 }
-#goodsImg:hover {
+.goodsImg:hover {
 	border: 2px solid #7dab77;
 }
-#goodsList {
+.goodsList {
 	display: inline-block;
     position: relative;
     top: 195px;
@@ -90,10 +99,10 @@ $(document).ready(function() {
     padding: 0;
     margin: 12px 0 12px 12px;
 }
-#prodImg {
-	width: 200px;
-	height: 200px;
-}
+/* .prodImg { */
+/* 	width: 200px; */
+/* 	height: 200px; */
+/* } */
 .text-center {
 	position: relative;
     bottom: -51px;
@@ -170,14 +179,10 @@ $(document).ready(function() {
 <div id="inner-list">
 <%	if( list.size() > 0 ) { %> 
 <%		for(int i=0; i<list.size(); i++) { %>
-		<a id="goodsImg" href="/goods/detail?prodno=<%=list.get(i).getProdno() %>">
-	<%	if(prodFile.get(i).getStoredname() == null) { %>
-		 	<img id="prodImg" alt="" src="/resources/image/<%=list.get(i).getProdimage() %>">
-	<%	} else { %>
-			<img id="prodImg" alt="none" src="<%=request.getContextPath() %>/upload/<%=prodFile.get(i).getStoredname() %>">
-	<%	} %>
+		<a class="goodsImg" href="/goods/detail?prodno=<%=list.get(i).getProdno() %>">
+			<img class="prodImg" alt="none" src="<%=request.getContextPath() %>/upload/<%=prodFile.get(i).getStoredname() %>" style="width: 200px; height: 200px;"/>
 		</a>
-		<ul id="goodsList">
+		<ul class="goodsList">
 			<li><%=list.get(i).getProdname() %></li>
 			<li><%=list.get(i).getProdprice() %>원</li>
 			<li>판매량 : <%=list.get(i).getProdpop() %></li>

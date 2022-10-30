@@ -96,7 +96,11 @@ public interface GoodsDao {
 	 */
 	public ProductFile selectFile(Connection conn, Product pordDetail);
 
-	public List<ProductFile> selectFileList(Connection conn, List<Product> goodsList);
+	public List<ProductFile> selectFileList(Connection conn, List<Product> goodsList, Paging paging);
+
+	public List<ProductFile> viewSearchFileDefualt(Connection connection, List<Product> goodsList, Paging paging, String def);
+
+	public List<ProductFile> viewSearchFileAll(Connection connection, List<Product> goodsList, Paging paging, String search);
 
 
 
