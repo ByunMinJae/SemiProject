@@ -11,7 +11,7 @@
 
 
 
-<%@ include file="../layout/header.jsp" %>
+<%@ include file="../layout/adminheader.jsp" %>
 
 <!-- 부트스트랩3 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -41,23 +41,6 @@ $(document).ready(function() {
 })
 
 
-$(document).ready(function() {
-	
-
-	
-	//수정 버튼
-	$("#btnUpdate").click(function() {
-		location.href = "./update"
-	})
-
-	//삭제버튼
-	$("#btnDelete").click(function() {
-		location.href = "./delete"	
-		})
-
-})
-
-
 
 </script>
 
@@ -72,8 +55,7 @@ $(document).ready(function() {
 		<th style="width: 40%;">사진</th>
 		<th style="width: 20%;">상품명</th>
 		<th style="width: 10%;">가격</th>
-		<th style="width: 10%;">재고</th>
-		<th style="width: 40%;">기능</th>
+		<th style="width: 10%;">판매량</th>
 	  </tr>
 	  
 	  <%	for(int i=0; i<productList.size(); i++) { %>
@@ -88,10 +70,7 @@ $(document).ready(function() {
 	    
 	    <td><%=productList.get(i).getProdprice() %></td>
 	    <td><%=productList.get(i).getProdpop() %></td>
-	    <td>
-			<button id="btnUpdate" class="btn btn-info">수정</button>
-			<button id="btnDelete" class="btn btn-danger">삭제</button>
-	    </td>
+	   
 	  </tr>
 	  <% } %>
 	  

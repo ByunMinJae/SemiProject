@@ -29,7 +29,6 @@ public class ProductDaoImpl implements ProductDao{
 		//--- SQL 작성 ---
 		String sql = "";
 		sql += "SELECT";
-		//sql += " prodno, prodname, prodprice, prodimage";
 		sql += " prodno, prodname, prodprice";
 		sql += "	, prodcon, prodDate, prodpop";
 		sql += " FROM Product";
@@ -53,7 +52,6 @@ public class ProductDaoImpl implements ProductDao{
 				product.setProdno( rs.getInt("prodno"));
 				product.setProdname( rs.getString("prodname"));
 				product.setProdprice( rs.getInt("prodprice"));
-				//product.setProdimage( rs.getString("prodimage"));
 				
 				product.setProdcon( rs.getString("prodcon"));
 				product.setProdDate( rs.getDate("prodDate"));
@@ -88,7 +86,6 @@ public class ProductDaoImpl implements ProductDao{
 				sql += "SELECT * FROM (";
 				sql += "	SELECT rownum rnum, P.* FROM (";
 				sql += "		SELECT";
-				//sql += "			prodno, prodname, prodprice, prodimage";
 				sql += "			prodno, prodname, prodprice";
 				sql += "			, prodcon, prodDate, prodpop";
 				sql += "		FROM Product";
@@ -115,7 +112,6 @@ public class ProductDaoImpl implements ProductDao{
 				p.setProdno( rs.getInt("prodno")); 
 				p.setProdname( rs.getString("prodname"));
 				p.setProdprice(rs.getInt("prodprice"));
-				//p.setProdimage( rs.getString("prodimage"));
 				
 				p.setProdcon( rs.getString("prodcon"));
 				p.setProdDate( rs.getDate("prodDate"));
@@ -132,7 +128,6 @@ public class ProductDaoImpl implements ProductDao{
 			JDBCTemplate.close(ps);
 		}
 		
-		System.out.println("ProductDao selectAll() - 끝");
 		return productList; //최종 결과 반환
 	}
 
@@ -171,32 +166,12 @@ public class ProductDaoImpl implements ProductDao{
 	//--------------------------------------------------------------------	
 
 
-	/*
-	 * @Override public int updateHit(Connection conn, Product prodno) {
-	 * 
-	 * String sql = ""; sql += "UPDATE product"; sql += "	SET hit = hit + 1"; sql
-	 * += " WHERE prodno = ?";
-	 * 
-	 * int res = 0;
-	 * 
-	 * try { ps = conn.prepareStatement(sql); ps.setInt(1, prodno.getProdno());
-	 * 
-	 * res = ps.executeUpdate();
-	 * 
-	 * } catch (SQLException e) { e.printStackTrace(); } finally {
-	 * JDBCTemplate.close(ps); }
-	 * 
-	 * return res; }
-	 */
-
-
 
 	@Override
 	public Product selectProductByProdno(Connection conn, Product prodno) {
 		
 		String sql = "";
 		sql += "SELECT";
-		//sql += "	prodno, prodname, prodprice, prodimage";
 		sql += "	prodno, prodname, prodprice";
 		sql += "	, prodcon, prodDate, prodpop";
 		sql += " FROM Product";
@@ -216,7 +191,7 @@ public class ProductDaoImpl implements ProductDao{
 				product.setProdno( rs.getInt("prodno") );
 				product.setProdname( rs.getString("prodname"));
 				product.setProdprice( rs.getInt("prodprice"));
-				//product.setProdimage( rs.getString("prodimage"));
+				
 				product.setProdcon( rs.getString("prodcon"));
 				product.setProdDate( rs.getDate("prodDate"));
 				product.setProdpop( rs.getInt("prodpop"));
@@ -240,7 +215,7 @@ public class ProductDaoImpl implements ProductDao{
 		
 		String sql = "";
 		sql += "INSERT INTO product ( prodno, prodname, prodprice, prodcon, prodDate, prodpop )";
-		sql += " VALUES ( ?, ?, ?, ?, sysdate, 0 )";
+		sql += " VALUES (  ?, ?, ?, ?, sysdate, 0 )";
 		
 		int res = 0;
 
@@ -250,10 +225,6 @@ public class ProductDaoImpl implements ProductDao{
 			ps.setInt(1, product.getProdno());
 			ps.setString(2, product.getProdname());
 			ps.setInt(3, product.getProdprice());
-			
-			//ps.setString(3, "cmcpatch1_600.jpg");
-//			ps.setString(3, product.getProdimage());
-			
 			ps.setString(4, product.getProdcon());
 		
 			res = ps.executeUpdate();
@@ -373,30 +344,6 @@ public class ProductDaoImpl implements ProductDao{
 	//--------------------------------------------------------------------	
 
 
-	/*
-	 * @Override public String selectNickByProduct(Connection connection, Product
-	 * viewProduct) {
-	 * 
-	 * String sql = ""; sql += "SELECT usernick FROM member"; sql +=
-	 * " WHERE userid = ?";
-	 * 
-	 * //결과 저장할 변수 String usernick = null;
-	 * 
-	 * try { ps = conn.prepareStatement(sql); ps.setString(1,
-	 * viewBoard.getUserid());
-	 * 
-	 * rs = ps.executeQuery();
-	 * 
-	 * while( rs.next() ) { usernick = rs.getString("usernick"); }
-	 * 
-	 * } catch (SQLException e) { e.printStackTrace(); } finally {
-	 * JDBCTemplate.close(rs); JDBCTemplate.close(ps); }
-	 * 
-	 * return usernick; }
-	 */
-
-
-
 	@Override
 	public int update(Connection conn, Product product) {
 		
@@ -483,7 +430,10 @@ public class ProductDaoImpl implements ProductDao{
 		return res;
 		
 	}
-	}
+	
+	
+	
+}
 
 
 

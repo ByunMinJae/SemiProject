@@ -10,6 +10,7 @@ import util.Paging;
 
 public interface ProductService {
 
+	
 	/**
 	 * 상품 전체 조회
 	 * 
@@ -58,6 +59,7 @@ public interface ProductService {
 
 	//-------------------------------------------------------
 	
+	
 	/**
 	 * 게시글 작성
 	 * 입력한 게시글을 DB에 저장한다
@@ -75,18 +77,8 @@ public interface ProductService {
 	public ProductFile viewFile(Product viewProduct);
 
 	
-
-	
 	//-------------------------------------------------------
 
-	/**
-	 * 전달된 Board객체의 id를 이용하여 nick 조회
-	 * 
-	 * @param viewBoard - 조회할 게시글 정보
-	 * @return String - 게시글 작성자의 닉네임
-	 */
-	//public String getWriteNick(Product viewProduct);
-	
 	
 	/**
 	 * 게시글 수정

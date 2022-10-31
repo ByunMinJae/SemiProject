@@ -2,10 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
       
-    
-    
-<%@ include file="../layout/header.jsp" %>
-
+<%@ include file="../layout/adminheader.jsp" %>
 
 <!-- 스마트 에디터2 설치 -->
 <script type="text/javascript" src="/resources/se2/js/service/HuskyEZCreator.js"></script>
@@ -57,7 +54,7 @@ function updateContents() {
 	<tr><td class="info">상품 번호</td><td><%=session.getAttribute("prodno") %></td></tr>
 	<tr><td class="info">상품 이름</td><td><input type="text" name="prodname" style="width:100%;"></td></tr>
 	<tr><td class="info">가격</td><td><input type="text" name="prodprice" style="width:100%;"></td></tr>
-	<tr><td class="info" colspan="2">성품설명</td></tr>
+	<tr><td class="info" colspan="2">상품설명</td></tr>
 	<tr><td colspan="2"><textarea id="content" name="prodcon" style="width: 100%;"></textarea></td></tr>
 	</table>
 	
