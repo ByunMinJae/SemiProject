@@ -14,9 +14,7 @@ public class ProductFile {
 	
 	
 	
-	public ProductFile() {
-		// TODO Auto-generated constructor stub
-	}
+	public ProductFile() {}
 
 
 

@@ -24,6 +24,7 @@ public class ProdListController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 			
+		
 			System.out.println("get 성공");
 
 			//전달파라미터에서 현재 페이징 객체 계산하기

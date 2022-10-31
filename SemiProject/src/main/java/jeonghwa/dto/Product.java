@@ -7,7 +7,8 @@ public class Product {
 	private int prodno;
 	private String prodname;
 	private int prodprice;
-	private String prodimage;
+	private int prodimage;
+	
 	private String prodcon;
 	private Date prodDate;
 	private int prodpop;
@@ -22,7 +23,7 @@ public class Product {
 
 
 
-	public Product(int prodno, String prodname, int prodprice, String prodimage, String prodcon, Date prodDate,
+	public Product(int prodno, String prodname, int prodprice, int prodimage, String prodcon, Date prodDate,
 			int prodpop) {
 		super();
 		this.prodno = prodno;
@@ -96,7 +97,7 @@ public class Product {
 
 
 
-	public String getProdimage() {
+	public int getProdimage() {
 		return prodimage;
 	}
 
@@ -104,7 +105,7 @@ public class Product {
 
 
 
-	public void setProdimage(String prodimage) {
+	public void setProdimage(int prodimage) {
 		this.prodimage = prodimage;
 	}
 
@@ -157,6 +158,9 @@ public class Product {
 	}
 
 
+
+
+	
 	
 	
 

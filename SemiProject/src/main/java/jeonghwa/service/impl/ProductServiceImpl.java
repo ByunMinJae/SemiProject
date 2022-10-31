@@ -82,7 +82,6 @@ public class ProductServiceImpl implements ProductService{
 
 
 
-
 	@Override
 	public Product getProdno(HttpServletRequest req) {
 
@@ -125,6 +124,7 @@ public class ProductServiceImpl implements ProductService{
 
 
 
+	
 	@Override
 	public void write(HttpServletRequest req) {
 		//multipart/form-data 인코딩 확인
@@ -286,19 +286,12 @@ public class ProductServiceImpl implements ProductService{
 
 
 
+	
 	@Override
 	public ProductFile viewFile(Product viewProduct) {
 		return productDao.selectFile(JDBCTemplate.getConnection(), viewProduct);		
 	}
 
-
-
-	/*
-	 * @Override public String getWriteNick(Product viewProduct) { return
-	 * productDao.selectNickByProduct(JDBCTemplate.getConnection(), viewProduct);
-	 * 
-	 * }
-	 */
 
 
 
@@ -450,6 +443,7 @@ public class ProductServiceImpl implements ProductService{
 		
 	}
 
+	
 
 
 	@Override

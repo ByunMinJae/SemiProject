@@ -5,7 +5,7 @@
 <!-- 서블릿(Controller)이 전달한 데이터 꺼내기 --> 
 <%	Product viewProduct = (Product) request.getAttribute("viewProduct"); %>     
     
-<%@ include file="../layout/header.jsp" %>    
+<%@ include file="../layout/adminheader.jsp" %>
     
 
 
@@ -47,7 +47,7 @@ $(document).ready(function() {
 	<p>상품번호 : <%=viewProduct.getProdno() %></p>
 	<p>상품이름 : <%=viewProduct.getProdname() %></p>
 	<p>가격 : <%=viewProduct.getProdprice() %></p>
-	<p>이미지 : <%=viewProduct.getProdimage() %></p>
+	<p>이미지 : <%-- <%=viewProduct.getProdimage() %> --%></p>
 	
 	<p>상품설명 : <%=viewProduct.getProdcon() %></p>
 	<p>상품등록날짜 : <%=viewProduct.getProdDate() %></p>
