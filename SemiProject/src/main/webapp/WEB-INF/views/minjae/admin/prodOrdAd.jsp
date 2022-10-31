@@ -94,14 +94,15 @@ function change(i) {
     height: 27px;
     position: relative;
     top: -15px;
-    right: 16px;
+    right: -74px;
 }
 .sel {
-	width: 159px;
+	width: 143px;
     height: 27px;
     position: relative;
     top: 12px;
-    right: 29px;
+    right: 28px;
+    margin: 0 52px;
 }
 #selectWrap {
 	width: 194px;
@@ -118,6 +119,16 @@ function change(i) {
 }
 #f {
 	margin: 0 !important;
+}
+p{
+   display: inline-block; 
+    margin-top: 29px !important;
+    font-size: xx-large; 
+    font-weight: bolder; 
+}
+form{
+   width:50%;
+   margin: 0 auto;
 }
 </style>
 </head>
