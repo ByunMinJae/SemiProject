@@ -69,23 +69,6 @@ function deleteCookie(name){
 }
 
 
-function emptyAlert(){ //아이디, 비밀번호 미입력시 처리
-	var id = document.getElementById('userid');
-	var pw = document.getElementById('userpw');
-	
-	if(id.value==""){
-		alert("아이디를 입력하세요!");
-		id.focus();
-		return false;
-		
-	} else if(pw.value==""){
-		alert("비밀번호를 입력하세요!");
-		pw.focus();
-		return false;
-	}
-
-}
-
 </script>
 
 <style type="text/css">
@@ -97,14 +80,15 @@ function emptyAlert(){ //아이디, 비밀번호 미입력시 처리
 
 h1 {
 	font-family: 'GmarketSansMedium';
-	margin-left: 230px;
+	margin: 0 30%;
+	text-align: center;
 
 }
 
 label {
 	font-family: 'GmarketSansMedium';
 	width: 50px;
-	margin-left: 140px;
+	margin-left: 420px;
 }
 
 input {
@@ -117,7 +101,7 @@ input {
 button {
 	width: 300px;
 	height: 50px;
-	margin-left: 140px;
+	margin-left: 420px;
 	border: none;
 	border-radius: 0.5em;
 	font-family: 'GmarketSansMedium';
@@ -146,8 +130,8 @@ button {
 	
 	<h1>로그인</h1>
 	
-	<label>ID <input type="text" name="userid"></label><br>
-	<label>PASS <input type="text" name="userpw"></label><br><br>
+	<label>ID <input type="text" name="userid" id="userid"></label><br>
+	<label>PASS <input type="text" name="userpw" id="userpw"></label><br><br>
 	
 	<button>로그인</button>
 </div>
@@ -164,43 +148,4 @@ button {
 
 </body>
 
-</div>
-<!-- .container-wrap end -->
-</div>
-<!-- .container end -->
-
-
-
-<footer id="footer" class="footer">
-	<div class="footer-wrap">
-		<p class="footerlist-wrap">
-			<span class="footerlist"> <span>(주)코딩산악회</span> <span>세미
-					프로젝트</span> <span>팀원</span> <span>강창민 권정화 김다운 김동현 변민재 이샤론</span>
-			</span> <br> <span class="footerlist"> <span>GIT :</span> <span><a
-					href="https://github.com/ByunMinJae/SemiProject.git" id="git">https://github.com/ByunMinJae/SemiProject.git</a></span>
-			</span> <br> <span class="copyright">
-				COPYRIGHT©codingMountaineeringSociety.ALL RIGHTS RESERVED </span>
-		</p>
-	</div>
-</footer>
-
-
-
-
-
-</div>
-<!-- .wrapper end -->
-
-</body>
-</html>
-
-
-
-
-
-
-
-
-
-
-
+<%@ include file="../layout/footer.jsp" %>

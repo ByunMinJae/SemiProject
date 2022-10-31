@@ -112,8 +112,10 @@
 	margin-top: 30px;
 }
 
-.header-title p {
+.header-title a {
 	position: relative;
+	text-decoration: none;
+	color: black;
 }
 
 .header-title img {

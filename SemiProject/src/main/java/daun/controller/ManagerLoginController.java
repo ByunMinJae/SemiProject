@@ -50,7 +50,7 @@ public class ManagerLoginController extends HttpServlet {
 			
 			if( (int) session.getAttribute("userno") <= 1000 ) { 
 				
-	    		resp.sendRedirect("/manager/board");
+	    		resp.sendRedirect("/manager/main");
 	    		
 			} else {
 				resp.sendRedirect("/main");
