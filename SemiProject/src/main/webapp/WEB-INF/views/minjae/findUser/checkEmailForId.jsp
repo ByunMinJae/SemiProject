@@ -57,7 +57,7 @@ $(document).ready(function() {
 #agreeMsgE {
     position: absolute;
     color: lime;
-    top: 222px;
+    top: 254px;
     right: 62px;
 }
 #checkMark {

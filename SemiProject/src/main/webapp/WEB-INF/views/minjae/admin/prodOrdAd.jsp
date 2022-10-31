@@ -116,6 +116,9 @@ function change(i) {
 .btnCate {
 	cursor: pointer;
 }
+#f {
+	margin: 0 !important;
+}
 </style>
 </head>
 <body>

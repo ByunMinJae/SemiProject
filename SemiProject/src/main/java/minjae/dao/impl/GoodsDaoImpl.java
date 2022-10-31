@@ -633,7 +633,7 @@ public class GoodsDaoImpl implements GoodsDao {
 		sql += "		SELECT";
 		sql += "			fileno, prodno, originname, storedname, filesize, write_date";
 		sql += " 		FROM productfile";
-		sql += " 		ORDER BY fileno";
+		sql += " 		ORDER BY fileno DESC";
 		sql += " 		) B";
 		sql += " 	) PROD";
 		sql += " 	WHERE rnum BETWEEN ? AND ?";

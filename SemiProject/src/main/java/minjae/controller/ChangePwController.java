@@ -13,6 +13,13 @@ public class ChangePwController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	@Override
+	protected void doHead(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		System.out.println("/find/change_pw [GET]");
+		
+		
+	}
+	
+	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("/find/change_pw [POST]");
 		

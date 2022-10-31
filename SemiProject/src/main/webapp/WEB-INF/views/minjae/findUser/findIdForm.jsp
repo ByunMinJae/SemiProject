@@ -171,10 +171,20 @@ select {
 	display: inline-block;
 	margin: 0;
 }
+#box {
+	position: relative;
+    height: 451px;
+    top: -56px;
+    padding-top: 12px;
+    background: #fff;
+    border-radius: 23px;
+}
 </style> 
+
 
 <div class="fuiWrap">
 
+<div id="box">
 <h1>아이디 찾기</h1>
 <hr>
 
@@ -214,8 +224,10 @@ select {
 	<button class="btnReqAuth">인증 요청</button>
 	<div id="resEmail"></div>
 </div>
+</div>
 
 </div><!-- End of .fuiWrap -->
+
 
 <jsp:include page="../../layout/footer.jsp"/>
 <%-- <%@	include file="../../layout/footer.jsp" %> --%>
