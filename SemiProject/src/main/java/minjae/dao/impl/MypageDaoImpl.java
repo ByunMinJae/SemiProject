@@ -115,17 +115,15 @@ public class MypageDaoImpl implements MypageDao {
 		System.out.println("/mypage/main selectOIByDate() - 시작");
 		
 		String sql = "";
-		sql += "SELECT count(DECODE(orderprocess,'배송중', 1)) cnt1";
+		sql += "SELECT count(DECODE(orderprocess,'결제완료', 1)) cnt1";
 		sql += " , count(DECODE(orderprocess,'배송완료', 1)) cnt2";
 		sql += " , count(DECODE(orderprocess,'교환/반품/취소', 1)) cnt3";
 		sql += " FROM";
-		sql += " 	(SELECT a.*, b.payno, c.orderafterno, c.orderprocess FROM user_orderbefore a";
-		sql += " 	INNER JOIN pay b";
-		sql += " 	ON a.orderno = b.orderno";
-		sql += " 	INNER JOIN user_orderafter c";
-		sql += "	ON b.payno = c.payno";
+		sql += " 	(SELECT a.*, b.orderafterno, b.orderprocess FROM user_orderbefore a	";
+		sql += " 	INNER JOIN user_orderafter b";
+		sql += "	ON a.orderno = b.orderno";
 		sql += "	WHERE a.userno = ?";
-		sql += "	AND trunc(b.paydate) BETWEEN to_date(?, 'YY/MM/DD') AND to_date(?, 'YY/MM/DD'))";
+		sql += "	AND SUBSTR(b.orderdate, 1, 10) BETWEEN to_date(?, 'YY/MM/DD') AND to_date(?, 'YY/MM/DD'))";
 
 		MpMainRight mpMR = null;
 		
@@ -301,6 +299,7 @@ public class MypageDaoImpl implements MypageDao {
 		String sql = "";
 		sql += "UPDATE user_info";
 		sql += " SET username = ?";
+		sql += " , userupdate = sysdate";
 		sql += " WHERE userno = ?";
 		
 		int res = 0;
@@ -330,6 +329,7 @@ public class MypageDaoImpl implements MypageDao {
 		String sql = "";
 		sql += "UPDATE user_info";
 		sql += " SET nick = ?";
+		sql += " , userupdate = sysdate";
 		sql += " WHERE userno = ?";
 		
 		int res = 0;
@@ -358,6 +358,7 @@ public class MypageDaoImpl implements MypageDao {
 		String sql = "";
 		sql += "UPDATE user_info";
 		sql += " SET phone = ?";
+		sql += " , userupdate = sysdate";
 		sql += " WHERE userno = ?";
 		
 		int res = 0;
@@ -386,6 +387,7 @@ public class MypageDaoImpl implements MypageDao {
 		String sql = "";
 		sql += "UPDATE user_info";
 		sql += " SET address = ?";
+		sql += " , userupdate = sysdate";
 		sql += " WHERE userno = ?";
 		
 		int res = 0;

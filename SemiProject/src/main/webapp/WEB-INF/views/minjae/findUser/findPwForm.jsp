@@ -91,9 +91,19 @@ $(document).ready(function() {
 	left: 0%; 
 	width: 100%;
 }
+#box {
+	position: relative;
+    height: 451px;
+    top: -56px;
+    padding-top: 12px;
+    background: #fff;
+    border-radius: 23px;
+}
 </style>
 
 <div class="fupWrap">
+
+<div id="box">
 
 <h1>비밀번호 찾기</h1>
 <hr>
@@ -108,6 +118,8 @@ $(document).ready(function() {
 	<input type="text" id="userPhone" name="userPhone" placeholder="휴대전화(-없이)"><br>
 	<button class="btnReqAuth">인증 요청</button>
 	<div id="resSms"></div>
+</div>
+
 </div>
 
 </div><!-- End of .fupWrap -->

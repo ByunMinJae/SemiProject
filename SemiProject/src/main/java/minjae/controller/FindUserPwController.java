@@ -75,7 +75,7 @@ public class FindUserPwController extends HttpServlet {
 			System.out.println("해당 유저의 인증번호 정보 : " + userFind);
 			
 			//인증번호 문자로 발송 (건당 20원 문자까지 테스트할 때만 주석 풀 것)
-//			findUseService.sendSms(user, userFind);
+//			findUserService.sendSms(user, userFind);
 			
 			//전달 속성 설정
 			req.setAttribute("userFind", userFind);
