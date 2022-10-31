@@ -3,7 +3,7 @@
     pageEncoding="UTF-8"%>
 <%	MpMainRight mpMRselect = (MpMainRight)request.getAttribute("mpMR"); %>
 
-<div class="cnt_no" style="right: 455px;"><p><%=mpMRselect.getDelCnt() %></p></div>
-<div class="cnt_no" style="right: 286px;"><p><%=mpMRselect.getDelComCnt() %></p></div>
-<div class="cnt_no" style="right: 120px;"><p><%=mpMRselect.getExchanCnt() %></p></div>
+<div class="cnt_no" style="right: 408px;"><p><%=mpMRselect.getDelCnt() %></p></div>
+<div class="cnt_no" style="right: 239px;"><p><%=mpMRselect.getDelComCnt() %></p></div>
+<div class="cnt_no" style="right: 73px;"><p><%=mpMRselect.getExchanCnt() %></p></div>
 

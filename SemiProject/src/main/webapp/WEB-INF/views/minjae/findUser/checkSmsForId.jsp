@@ -66,7 +66,7 @@ $(document).ready(function() {
 #agreeMsgS {
     position: absolute;
     color: lime;
-    top: 312px;
+    top: 344px;
     right: 62px;
 }
 #checkMark {

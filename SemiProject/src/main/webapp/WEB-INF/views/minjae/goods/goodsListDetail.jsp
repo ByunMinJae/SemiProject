@@ -137,7 +137,7 @@ $(document).ready(function() {
 		<td colspan="4" style="text-align: left;"><%=prod.getProdcon() %></td>
 	</tr>
 	<tr>
-		<td>상품 주문수</td>
+		<td>상품 판매량</td>
 		<td><%=prod.getProdpop() %></td>
 		<td>상품 등록일</td>
 		<td><%=prod.getProddate() %></td>

@@ -62,7 +62,7 @@ $(document).ready(function() {
 #agreeMsgS {
     position: absolute;
     color: lime;
-    top: 208px;
+    top: 240px;
     right: 62px;
 }
 #checkMark {
@@ -86,7 +86,7 @@ $(document).ready(function() {
 
 <button id="btnFindPwBySms">비밀번호 찾기</button>
 
-<!-- 아이디 찾기 버튼 클릭시 넘겨줄 아이디저장 -->
+<!-- 비밀번호 찾기 버튼 클릭시 넘겨줄 아이디저장 -->
 <form action="/find/change_pw" method="post" id="f">
 <input type="hidden" id="hiddenIdForSms" name="id" value="<%=userFind.getId() %>"> 
 </form> 
