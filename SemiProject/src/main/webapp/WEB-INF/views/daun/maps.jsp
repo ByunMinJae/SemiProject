@@ -12,13 +12,13 @@
 }
 
 .bodywrap {
-	margin: 5% 10%;
+	margin: 5% 0;
 }
 
 .bodywrap li {
 	display: list-item;
 	list-style-type: none;
-		font-family: 'GmarketSansMedium';
+	font-family: 'GmarketSansMedium';
 	
 }
 
@@ -27,33 +27,45 @@
 	font-family:  bold 'GmarketSansMedium';
 }
 
+.mh1 {
+	height: 65px;
+}
+
+.mh1 h1 {
+	margin-top: 70px;
+	font-family: 'GmarketSansMedium';
+	font-style: bold;
+
+}
+
 .mtitle {
 	position: relative;
 	width: 100%;
 	margin: 0 auto;
+	padding-left: 69.5%;
 }
 
 .mtitle .m-spot {
 	width: 100%;
 	height: 50px;
 	display: -webkit-inline-box;
-	margin: 20px 0 30px 0;
+	margin: 0px 0 -7px 0;
 }
 
 .mtitle .m-spot li{
 	float: left;
-	margin: 0 10%;
-	font-size: 30px;
+	margin: 0 4px;
+	font-size: 20px;
 }
 
 .m-mountain {
 	position: absolute;
-	left: 20px;
+	left: 115px;
 	
 }
 .m-mountain li {
 	font-size: 30px;
-	margin: 50% 0;
+	margin: 0 0 15% 0;
 }
 
 .m-mountain li a{
@@ -66,15 +78,16 @@
 }
 
 #map {
-	width: 110%;
+	left: 126px;
+    width: 84%;
 	height: 500px;
 }
 
 
 button {
 	border: none;
-	border-radius: 0.5em;
-	padding: 10px 20px 5px 20px;
+	/* border-radius: 0.5em; */
+	padding: 10px 10px px 10px;
 }
 
 #wrapper {
@@ -87,7 +100,7 @@ button {
 }
 
 .container-wrap {
-    height: 1000px;
+    height: 850px;
 }
 
 
@@ -97,7 +110,9 @@ button {
 <body>
 
 <div class="bodywrap">
-	<h1>등산 도우미</h1>
+	<div class="mh1">
+		<h1>등산 도우미</h1>
+	</div>
 	<div class="mtitle">
 		<ul class="m-spot">
 			<li><button id="btn-res">식당</button></li>
@@ -115,7 +130,6 @@ button {
 	</div>
 	<div id="map"></div>
 </div>
-
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2f8d3a73bc0d81f7a11d7714389ee2d2"></script>
 <script>
