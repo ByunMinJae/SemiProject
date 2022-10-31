@@ -332,8 +332,6 @@
 						<ul>
 							<% if( null != session.getAttribute("gradeno") && (int)session.getAttribute("gradeno") ==3){ %>
 							<li><a href="/BoardAccessDenied.jsp">게시판</a></li>
-							<% }else if(session.getAttribute("userno")==null&&session.getAttribute("kakaono")==null){ %>
-							<li><a href="/NeedLogin.jsp">게시판</a></li>
 							<% } else{ %>
 							<li><a href="/board/notice">게시판</a></li>
 							<%} %>
@@ -343,7 +341,7 @@
 							<li><a href="/map">등산 도우미</a></li>
 							<% } %>
 							<% if(session.getAttribute("userno")==null&&session.getAttribute("kakaono")==null){ %>
-							<li><a href="NeedLogin.jsp">굿즈샵</a></li>
+							<li><a href="/NeedLogin.jsp">굿즈샵</a></li>
 							<% }else{ %>
 							<li><a href="/goods/list">굿즈샵</a></li>
 							<% } %>
