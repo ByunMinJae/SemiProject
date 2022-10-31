@@ -46,6 +46,8 @@ public class ManagerBoardController extends HttpServlet {
 		
 		
 		if("notice".equals(category)) {
+			
+			
 			System.out.println("공지사항 검색");
 			
 			Paging paging = boardService.getNoticePaging(req);

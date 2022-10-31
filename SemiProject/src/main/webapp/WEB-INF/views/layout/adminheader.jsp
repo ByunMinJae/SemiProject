@@ -215,6 +215,10 @@
 	margin: 0 auto;
 }
 
+#managerBoardForm{
+	width:50%;
+	margin: 0 auto;
+}
 .header select[multiple]{
 	height: 109px; important!
 }
@@ -223,8 +227,19 @@
 	text-align: center;
 }
 
+#managerBoardOption{
+	text-align: center;
+}
+
+#managerBoardOption:hover{
+	background-color: #ccc;
+}
 .header option:hover {
 	background-color: #ccc;
+}
+
+#managerBoardButton{
+	margin-left: 252px;
 }
 
 .header button {
