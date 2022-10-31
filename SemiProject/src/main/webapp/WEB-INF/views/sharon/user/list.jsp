@@ -2,7 +2,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="../../layout/header.jsp" %>
+<%@ include file="../../layout/adminheader.jsp" %>
     
 <%	List<User> uList = (List) request.getAttribute("userList");%>
 
@@ -13,6 +13,16 @@
 <title>회원 목록</title>
 
 <style type="text/css">
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+	font-family: 'dalseo';
+	src: url('/resources/css/DalseoHealingBold.ttf') format('truetype');
+}
 .outer1{
 margin:0 auto;
 font-family: 'GmarketSansMedium';
@@ -56,7 +66,7 @@ option,findType{
 }
 
 h2{
-margin-top: 10%;
+margin-top: 15%;
 }
 
 
@@ -87,15 +97,15 @@ margin-top: 10%;
 <thead>
 <tr id="list">
 	<th style="width: 8%;">회원번호</th>
-	<th style="width: 8%;">이름</th>
-	<th style="width: 8%;">아이디</th>
+	<th style="width: 6%;">이름</th>
+	<th style="width: 7%;">아이디</th>
 	<th style="width: 7%;">닉네임</th>
 	<th style="width: 6%;">성별</th>
-	<th style="width: 17%;">주소</th>
+	<th style="width: 20%;">주소</th>
 	<th style="width: 11%;">전화번호</th>
 	<th style="width: 12%;">생년월일</th>
 	<th style="width: 13%;">이메일</th>
-	<th style="width: 10%;">가입날짜</th>
+<!-- 	<th style="width: 10%;">가입날짜</th> -->
 <!-- 	<th style="width: 10%;">회원정보수정일</th> -->
 <!-- 	<th style="width: 3%;">등급</th> -->
 </tr>
@@ -120,7 +130,9 @@ margin-top: 10%;
 	<td><%=uList.get(i).getPhone() %></td>
 	<td><%=uList.get(i).getBirth() %></td>
 	<td><%=uList.get(i).getEmail() %></td>
-	<td><%=uList.get(i).getJoinday() %></td>
+<%-- 	<td><%=uList.get(i).getJoinday() %></td> --%>
+	<input type="text" hidden="" value="<%=uList.get(i).getUserpw() %>">
+	<input type="text" hidden="" value="<%=uList.get(i).getJoinday()%>">
 <%-- 	<td><%=uList.get(i).getUserupdate() %></td> --%>
 <%-- 	<td><%=uList.get(i).getGradeno() %></td> --%>
 </tr>

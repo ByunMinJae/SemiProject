@@ -44,6 +44,7 @@ public class ListDaoImpl implements ListDao {
 					user.setUsername( rs.getString("username") );
 					
 					user.setUserid( rs.getString("userid") );
+					user.setUserpw( rs.getString("userpw") );
 					user.setNick( rs.getString("nick") );
 					user.setGender( rs.getString("gender") );
 					user.setAddress( rs.getString("address") );
@@ -172,6 +173,7 @@ public class ListDaoImpl implements ListDao {
 					user.setUsername( rs.getString("username") );
 					
 					user.setUserid( rs.getString("userid") );
+					user.setUserpw( rs.getString("userpw") );
 					user.setNick( rs.getString("nick") );
 					user.setGender( rs.getString("gender") );
 					user.setAddress( rs.getString("address") );
